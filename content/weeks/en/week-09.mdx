@@ -1,0 +1,320 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-09",
+  "week": 9,
+  "locale": "en",
+  "title": "Add a bounded AI feature",
+  "summary": "Frame a narrow model-assisted task, protect private data, require structured output, control cost, and keep the product useful when the model is unavailable.",
+  "prerequisites": [
+    "Complete the required work for week 8."
+  ],
+  "objectives": [
+    "Choose an AI task with a clear non-AI baseline and user benefit.",
+    "Validate structured model output before it reaches application state.",
+    "Implement privacy, budget, timeout, and fallback controls."
+  ],
+  "modules": [
+    {
+      "id": "week-09-module-01",
+      "title": "AI product framing · Prompts and structured output",
+      "lessons": [
+        {
+          "id": "week-09-lesson-01",
+          "title": "AI product framing",
+          "summary": "Separate the user problem from the model. Define an input, allowed output, success examples, unacceptable behavior, and a no-cost workflow before choosing a provider.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Write a bounded task contract.",
+            "Explain when ordinary code is the better solution."
+          ]
+        },
+        {
+          "id": "week-09-lesson-02",
+          "title": "Prompts and structured output",
+          "summary": "Provide necessary context, delimit untrusted input, request a small schema, and parse the response as unknown. Reject extra or missing fields instead of hoping prose stays stable.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Create and validate an output schema.",
+            "Keep instructions separate from user content."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-09-module-02",
+      "title": "Privacy, safety, and cost · Fallbacks and user control",
+      "lessons": [
+        {
+          "id": "week-09-lesson-03",
+          "title": "Privacy, safety, and cost",
+          "summary": "Minimize what leaves the server, never send secrets, state retention assumptions, rate-limit requests, cap tokens, use timeouts, and record cost without logging sensitive prompts.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Complete a data-flow privacy review.",
+            "Set enforceable per-request resource limits."
+          ]
+        },
+        {
+          "id": "week-09-lesson-04",
+          "title": "Fallbacks and user control",
+          "summary": "Let the person review and edit suggestions. Preserve their original work, label model output, handle refusal and malformed results, and provide a useful deterministic alternative.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Recover from timeout and invalid output.",
+            "Avoid presenting generated content as verified fact."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-09-project",
+    "title": "AI-assisted task breakdown",
+    "summary": "Add one optional feature to the tracker that suggests small next steps from a non-sensitive project description. The user must approve every suggested task before saving.",
+    "collaboration": "individual",
+    "estimatedMinutes": 720,
+    "deliverables": [
+      "A documented task contract, structured-output schema, and validation before persistence.",
+      "Rate limit, timeout, cost cap, generic safe errors, and logs that exclude descriptions and credentials.",
+      "An editable review step and a no-cost template fallback that keeps the workflow usable."
+    ],
+    "rubric": {
+      "id": "week-09-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-09-criterion-functionality",
+          "title": "Core behavior",
+          "description": "The required user journey works from a clean start and handles the stated boundary cases.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-09-criterion-quality",
+          "title": "Code quality",
+          "description": "The solution has understandable names and boundaries, focused commits, and no exposed secrets.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-09-criterion-experience",
+          "title": "Learner-facing experience",
+          "description": "The interface is responsive, keyboard-usable, clearly labelled, and explains errors and recovery.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-09-criterion-verification",
+          "title": "Verification evidence",
+          "description": "Tests and documented checks provide repeatable evidence for the most important claims.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-09-criterion-reflection",
+          "title": "Technical reflection",
+          "description": "The README explains decisions, tradeoffs, one challenge, and a concrete next improvement.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "javascript/nodejs/apis",
+      "javascript/nodejs/security",
+      "javascript/react/managing_state_with_reducers_and_context"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "original-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "OWASP LLM prompt injection guidance",
+        "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Add a bounded AI feature
+
+Frame a narrow model-assisted task, protect private data, require structured output, control cost, and keep the product useful when the model is unavailable. This audit source assumes no prior programming experience and supports Windows and macOS. Complete the lessons in order: each one moves from explanation to a concrete example, guided practice, and observable evidence before the weekly project.
+
+<!-- lesson:week-09-lesson-01 -->
+## AI product framing
+
+### Explanation
+
+Separate the user problem from the model. Define an input, allowed output, success examples, unacceptable behavior, and a no-cost workflow before choosing a provider. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```json
+{
+  "input": "Plan a community workshop",
+  "output": ["Choose a date", "List materials"]
+}
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Create the same result with a deterministic template and state the specific user benefit a model would need to add.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Write a bounded task contract. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Explain when ordinary code is the better solution. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-09-lesson-02 -->
+## Prompts and structured output
+
+### Explanation
+
+Provide necessary context, delimit untrusted input, request a small schema, and parse the response as unknown. Reject extra or missing fields instead of hoping prose stays stable. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```ts
+const suggestionSchema = z.object({
+  title: z.string().min(1).max(80),
+  rationale: z.string().max(200),
+  effort: z.enum(["small", "medium"])
+});
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Parse missing, extra, wrong-type, and oversized responses as unknown and reject invalid output before display.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Create and validate an output schema. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Keep instructions separate from user content. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-09-lesson-03 -->
+## Privacy, safety, and cost
+
+### Explanation
+
+Minimize what leaves the server, never send secrets, state retention assumptions, rate-limit requests, cap tokens, use timeouts, and record cost without logging sensitive prompts. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```text
+Browser -> App server -> AI provider
+             limits: 5/min, 800 tokens, 8 s
+             logs: status + cost, no learner text
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Remove every unnecessary field from the flow and show where secrets, rate limits, timeout, and cost caps are enforced.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Complete a data-flow privacy review. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Set enforceable per-request resource limits. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-09-lesson-04 -->
+## Fallbacks and user control
+
+### Explanation
+
+Let the person review and edit suggestions. Preserve their original work, label model output, handle refusal and malformed results, and provide a useful deterministic alternative. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```ts
+try { return await suggest(input); }
+catch { return templateSteps(input); }
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Force timeout, quota, refusal, and malformed data; preserve the original and require approval before saving either result.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Recover from timeout and invalid output. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Avoid presenting generated content as verified fact. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+## Weekly project
+
+Add one optional feature to the tracker that suggests small next steps from a non-sensitive project description. The user must approve every suggested task before saving.
+
+### Deliverables
+
+- A documented task contract, structured-output schema, and validation before persistence.
+- Rate limit, timeout, cost cap, generic safe errors, and logs that exclude descriptions and credentials.
+- An editable review step and a no-cost template fallback that keeps the workflow usable.
+
+Before submitting, open the project from a clean session, complete the primary journey, and connect each rubric criterion to concrete evidence. Never include passwords, tokens, precise locations, or real personal data.

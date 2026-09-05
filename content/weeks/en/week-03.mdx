@@ -1,0 +1,319 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-03",
+  "week": 3,
+  "locale": "en",
+  "title": "Program with JavaScript",
+  "summary": "Learn variables, decisions, loops, functions, arrays, objects, debugging, and tests by turning a plain-language problem into small verifiable steps.",
+  "prerequisites": [
+    "Complete the required work for week 2."
+  ],
+  "objectives": [
+    "Model values with appropriate JavaScript types and data structures.",
+    "Break a problem into pure functions with clear inputs and outputs.",
+    "Use tests and debugger evidence to locate defects."
+  ],
+  "modules": [
+    {
+      "id": "week-03-module-01",
+      "title": "Values and control flow · Functions and scope",
+      "lessons": [
+        {
+          "id": "week-03-lesson-01",
+          "title": "Values and control flow",
+          "summary": "Explore strings, numbers, booleans, null, undefined, comparisons, conditionals, and loops. Trace each change on paper before asking the computer.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Choose strict comparisons and explicit conditions.",
+            "Trace a loop and explain its stopping condition."
+          ]
+        },
+        {
+          "id": "week-03-lesson-02",
+          "title": "Functions and scope",
+          "summary": "Design small functions around one job, name parameters for their meaning, return results instead of depending on global mutation, and distinguish declaration from invocation.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Write functions with clear contracts.",
+            "Explain local scope and avoid accidental globals."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-03-module-02",
+      "title": "Arrays and objects · Debugging and tests",
+      "lessons": [
+        {
+          "id": "week-03-lesson-03",
+          "title": "Arrays and objects",
+          "summary": "Represent ordered collections with arrays and named properties with objects. Combine map, filter, find, and reduce only after writing the desired transformation in words.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Select a data structure that matches the problem.",
+            "Transform a collection without unnecessary mutation."
+          ]
+        },
+        {
+          "id": "week-03-lesson-04",
+          "title": "Debugging and tests",
+          "summary": "Reproduce the problem, form one hypothesis, inspect values, make the smallest change, and add a test that would catch the defect if it returned.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Use breakpoints and console output intentionally.",
+            "Write tests for normal, boundary, and invalid inputs."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-03-project",
+    "title": "Household budget calculator",
+    "summary": "Build a browser-based calculator that accepts income and expense entries, rejects invalid values, groups totals, and explains whether the budget is balanced without storing sensitive data.",
+    "collaboration": "individual",
+    "estimatedMinutes": 720,
+    "deliverables": [
+      "Pure calculation functions with automated tests for normal, empty, decimal, and invalid cases.",
+      "A usable form with inline validation and Mexican-peso formatting.",
+      "A decision log describing data structures, one defect found, and how the test proves the fix."
+    ],
+    "rubric": {
+      "id": "week-03-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-03-criterion-functionality",
+          "title": "Core behavior",
+          "description": "The required user journey works from a clean start and handles the stated boundary cases.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-03-criterion-quality",
+          "title": "Code quality",
+          "description": "The solution has understandable names and boundaries, focused commits, and no exposed secrets.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-03-criterion-experience",
+          "title": "Learner-facing experience",
+          "description": "The interface is responsive, keyboard-usable, clearly labelled, and explains errors and recovery.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-03-criterion-verification",
+          "title": "Verification evidence",
+          "description": "Tests and documented checks provide repeatable evidence for the most important claims.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-03-criterion-reflection",
+          "title": "Technical reflection",
+          "description": "The README explains decisions, tradeoffs, one challenge, and a concrete next improvement.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "foundations/javascript_basics",
+      "foundations/javascript_basics/problem_solving",
+      "foundations/javascript_basics/fundamentals-part-1"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "original-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "MDN JavaScript guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Program with JavaScript
+
+Learn variables, decisions, loops, functions, arrays, objects, debugging, and tests by turning a plain-language problem into small verifiable steps. This audit source assumes no prior programming experience and supports Windows and macOS. Complete the lessons in order: each one moves from explanation to a concrete example, guided practice, and observable evidence before the weekly project.
+
+<!-- lesson:week-03-lesson-01 -->
+## Values and control flow
+
+### Explanation
+
+Explore strings, numbers, booleans, null, undefined, comparisons, conditionals, and loops. Trace each change on paper before asking the computer. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```js
+const amount = 250;
+const isExpense = true;
+const signedAmount = isExpense ? -amount : amount;
+console.log(signedAmount);
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Trace the values before running it, then test zero, a decimal, and a string to see why input normalization matters.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Choose strict comparisons and explicit conditions. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Trace a loop and explain its stopping condition. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-03-lesson-02 -->
+## Functions and scope
+
+### Explanation
+
+Design small functions around one job, name parameters for their meaning, return results instead of depending on global mutation, and distinguish declaration from invocation. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```js
+function balance(income, expenses) {
+  return income - expenses;
+}
+const result = balance(1200, 750);
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Write the function contract, add an invalid-input decision, and confirm that calling it twice with the same values returns the same result.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Write functions with clear contracts. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Explain local scope and avoid accidental globals. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-03-lesson-03 -->
+## Arrays and objects
+
+### Explanation
+
+Represent ordered collections with arrays and named properties with objects. Combine map, filter, find, and reduce only after writing the desired transformation in words. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```js
+const entries = [{ category: "food", amount: 80 }, { category: "travel", amount: 40 }];
+const total = entries.reduce((sum, entry) => sum + entry.amount, 0);
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Filter one category and calculate its total without mutating entries; prove the original array is unchanged.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Select a data structure that matches the problem. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Transform a collection without unnecessary mutation. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-03-lesson-04 -->
+## Debugging and tests
+
+### Explanation
+
+Reproduce the problem, form one hypothesis, inspect values, make the smallest change, and add a test that would catch the defect if it returned. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```js
+test("empty expenses total zero", () => {
+  expect(sumExpenses([])).toBe(0);
+});
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Introduce a defect that returns undefined, observe the failure, repair it, and keep the test as regression evidence.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Use breakpoints and console output intentionally. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Write tests for normal, boundary, and invalid inputs. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+## Weekly project
+
+Build a browser-based calculator that accepts income and expense entries, rejects invalid values, groups totals, and explains whether the budget is balanced without storing sensitive data.
+
+### Deliverables
+
+- Pure calculation functions with automated tests for normal, empty, decimal, and invalid cases.
+- A usable form with inline validation and Mexican-peso formatting.
+- A decision log describing data structures, one defect found, and how the test proves the fix.
+
+Before submitting, open the project from a clean session, complete the primary journey, and connect each rubric criterion to concrete evidence. Never include passwords, tokens, precise locations, or real personal data.

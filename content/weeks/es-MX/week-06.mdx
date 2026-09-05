@@ -1,0 +1,319 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-06",
+  "week": 6,
+  "locale": "es-MX",
+  "title": "Avanza a TypeScript y React",
+  "summary": "Usa tipos para volver visibles tus supuestos y compón interfaces React con componentes accesibles, estado predecible y flujo claro de datos.",
+  "prerequisites": [
+    "Completa el trabajo obligatorio de la semana 5."
+  ],
+  "objectives": [
+    "Modelar datos de dominio con TypeScript y acotar valores desconocidos.",
+    "Crear componentes React reutilizables con props explícitas.",
+    "Administrar estado sin duplicarlo y probar el comportamiento visible."
+  ],
+  "modules": [
+    {
+      "id": "week-06-module-01",
+      "title": "TypeScript como documentación ejecutable · Componentes y JSX",
+      "lessons": [
+        {
+          "id": "week-06-lesson-01",
+          "title": "TypeScript como documentación ejecutable",
+          "summary": "Tipa entradas y salidas, usa uniones para alternativas reales, acota datos desconocidos y deja que el compilador encuentre supuestos en vez de taparlos con any.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Modelar un dominio pequeño sin any inseguro.",
+            "Acotar datos externos antes de utilizarlos."
+          ]
+        },
+        {
+          "id": "week-06-lesson-02",
+          "title": "Componentes y JSX",
+          "summary": "Convierte un boceto en componentes con una responsabilidad. Envía datos mediante props tipadas y conserva HTML semántico dentro del límite del componente.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Extraer componentes por reutilización, no sólo por tamaño.",
+            "Renderizar listas con llaves estables del dominio."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-06-module-02",
+      "title": "Estado y eventos · Pruebas de componentes",
+      "lessons": [
+        {
+          "id": "week-06-lesson-03",
+          "title": "Estado y eventos",
+          "summary": "Guarda el estado mínimo, deriva totales al renderizar, actualiza arreglos sin mutarlos y define quién controla cada formulario.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Evitar estado duplicado o contradictorio.",
+            "Seguir un evento desde el control hasta el resultado."
+          ]
+        },
+        {
+          "id": "week-06-lesson-04",
+          "title": "Pruebas de componentes",
+          "summary": "Prueba mediante roles, nombres y resultados visibles, como lo haría una persona. Cubre una interacción importante y un error de validación.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Consultar componentes por su rol accesible.",
+            "Probar una interacción completa de usuario."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-06-project",
+    "title": "Tablero de recursos comunitarios",
+    "summary": "Crea una app React tipada para explorar y filtrar recursos comunitarios ficticios. Se puede agregar un borrador local sin usar datos reales de contacto.",
+    "collaboration": "individual",
+    "estimatedMinutes": 720,
+    "deliverables": [
+      "Modelos tipados de recurso, categoría y formulario con validación en el límite de entrada.",
+      "Componentes semánticos reutilizables con flujos de filtro, alta, vacío y validación.",
+      "Pruebas de un flujo exitoso y uno inválido, más un README centrado en decisiones."
+    ],
+    "rubric": {
+      "id": "week-06-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-06-criterion-functionality",
+          "title": "Comportamiento principal",
+          "description": "El recorrido requerido funciona desde un inicio limpio y maneja los casos límite indicados.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-06-criterion-quality",
+          "title": "Calidad del código",
+          "description": "La solución tiene nombres y límites comprensibles, commits enfocados y ningún secreto expuesto.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-06-criterion-experience",
+          "title": "Experiencia para la persona",
+          "description": "La interfaz es responsiva, usable con teclado, tiene etiquetas claras y explica errores y recuperación.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-06-criterion-verification",
+          "title": "Evidencia de verificación",
+          "description": "Las pruebas y revisiones documentadas aportan evidencia repetible para las afirmaciones importantes.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-06-criterion-reflection",
+          "title": "Reflexión técnica",
+          "description": "El README explica decisiones, tradeoffs, un reto y una mejora siguiente concreta.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "javascript/typescript",
+      "javascript/react",
+      "javascript/react/states_and_effects"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "translated-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "translator": "AI Builders LATAM Spanish editorial team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "React learning guide",
+        "url": "https://react.dev/learn",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Avanza a TypeScript y React
+
+Usa tipos para volver visibles tus supuestos y compón interfaces React con componentes accesibles, estado predecible y flujo claro de datos. Esta edición está escrita para quien empieza desde cero y puede trabajar en Windows o macOS. Completa las lecciones en orden: cada una incluye explicación, ejemplo, práctica y evidencia antes del proyecto semanal.
+
+<!-- lesson:week-06-lesson-01 -->
+## TypeScript como documentación ejecutable
+
+### Explicación
+
+Tipa entradas y salidas, usa uniones para alternativas reales, acota datos desconocidos y deja que el compilador encuentre supuestos en vez de taparlos con any. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```ts
+type Resource = { id: string; name: string; category: "health" | "education" };
+function isResource(value: unknown): value is Resource {
+  return typeof value === "object" && value !== null && "id" in value;
+}
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Agrega comprobaciones para cada campo y devuelve un resultado legible en vez de usar una aserción de tipo.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Modelar un dominio pequeño sin any inseguro. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Acotar datos externos antes de utilizarlos. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-06-lesson-02 -->
+## Componentes y JSX
+
+### Explicación
+
+Convierte un boceto en componentes con una responsabilidad. Envía datos mediante props tipadas y conserva HTML semántico dentro del límite del componente. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```tsx
+type CardProps = { name: string; category: string };
+export function ResourceCard({ name, category }: CardProps) {
+  return <article><h2>{name}</h2><p>{category}</p></article>;
+}
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Renderiza tres tarjetas usando IDs estables como keys y explica por qué el límite del componente resulta útil.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Extraer componentes por reutilización, no sólo por tamaño. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Renderizar listas con llaves estables del dominio. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-06-lesson-03 -->
+## Estado y eventos
+
+### Explicación
+
+Guarda el estado mínimo, deriva totales al renderizar, actualiza arreglos sin mutarlos y define quién controla cada formulario. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```tsx
+const [query, setQuery] = useState("");
+const visible = resources.filter((item) => item.name.includes(query));
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Elimina cualquier estado visibleResources separado, agrega búsqueda sin distinguir mayúsculas y traza un evento.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Evitar estado duplicado o contradictorio. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Seguir un evento desde el control hasta el resultado. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-06-lesson-04 -->
+## Pruebas de componentes
+
+### Explicación
+
+Prueba mediante roles, nombres y resultados visibles, como lo haría una persona. Cubre una interacción importante y un error de validación. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```tsx
+await user.type(screen.getByLabelText(/buscar/i), "salud");
+expect(screen.getByRole("heading", { name: /clínica/i })).toBeVisible();
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Agrega un envío inválido y afirma el error accesible en vez de inspeccionar el estado interno.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Consultar componentes por su rol accesible. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Probar una interacción completa de usuario. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+## Proyecto semanal
+
+Crea una app React tipada para explorar y filtrar recursos comunitarios ficticios. Se puede agregar un borrador local sin usar datos reales de contacto.
+
+### Entregables
+
+- Modelos tipados de recurso, categoría y formulario con validación en el límite de entrada.
+- Componentes semánticos reutilizables con flujos de filtro, alta, vacío y validación.
+- Pruebas de un flujo exitoso y uno inválido, más un README centrado en decisiones.
+
+Antes de entregar, abre el proyecto desde una sesión limpia, recorre el flujo principal y compara cada criterio de la rúbrica con evidencia concreta. No incluyas contraseñas, tokens, ubicaciones precisas ni datos personales reales.

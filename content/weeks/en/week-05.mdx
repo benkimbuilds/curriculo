@@ -1,0 +1,321 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-05",
+  "week": 5,
+  "locale": "en",
+  "title": "Collaborate on maintainable JavaScript",
+  "summary": "Organize code into modules, test behavior, manage branches, review pull requests, and integrate a shared dashboard without hiding conflicts.",
+  "prerequisites": [
+    "Complete the required work for week 4."
+  ],
+  "objectives": [
+    "Define module boundaries and avoid shared mutable state.",
+    "Write focused unit tests and interpret coverage critically.",
+    "Collaborate through issues, branches, pull requests, and review."
+  ],
+  "modules": [
+    {
+      "id": "week-05-module-01",
+      "title": "Modules and dependency boundaries · Testing behavior",
+      "lessons": [
+        {
+          "id": "week-05-lesson-01",
+          "title": "Modules and dependency boundaries",
+          "summary": "Split code by responsibility, export the smallest useful surface, inject changing dependencies, and keep data transformations independent from rendering.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Draw a dependency map with no circular imports.",
+            "Refactor one large script into testable modules."
+          ]
+        },
+        {
+          "id": "week-05-lesson-02",
+          "title": "Testing behavior",
+          "summary": "Test public behavior rather than implementation details. Use arrange, act, assert; make failures readable; and treat coverage as a map, not a score to game.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Write deterministic tests without shared order.",
+            "Distinguish a useful assertion from a brittle one."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-05-module-02",
+      "title": "Branches and pull requests · Code review and integration",
+      "lessons": [
+        {
+          "id": "week-05-lesson-03",
+          "title": "Branches and pull requests",
+          "summary": "Turn an issue into a small branch, keep commits reviewable, synchronize before conflicts grow, and write a pull request that explains purpose and verification.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Open a focused pull request linked to an issue.",
+            "Resolve a simple merge conflict without discarding work."
+          ]
+        },
+        {
+          "id": "week-05-lesson-04",
+          "title": "Code review and integration",
+          "summary": "Review for correctness, clarity, tests, and user impact. Ask specific questions, separate required fixes from suggestions, and verify the integrated main branch.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Give respectful evidence-based review feedback.",
+            "Run the complete checks after merging."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-05-project",
+    "title": "Shared productivity dashboard",
+    "summary": "In a small team, build a dashboard with independent modules such as tasks, focus timer, and daily notes. Agree on interfaces before dividing the work.",
+    "collaboration": "team",
+    "estimatedMinutes": 720,
+    "deliverables": [
+      "A shared repository with issues, protected main workflow, and at least one reviewed pull request per member.",
+      "Modular JavaScript with unit tests for core behavior and no secrets or personal data.",
+      "An integration report listing conflicts, review changes, final checks, and each member's contribution."
+    ],
+    "rubric": {
+      "id": "week-05-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-05-criterion-functionality",
+          "title": "Core behavior",
+          "description": "The required user journey works from a clean start and handles the stated boundary cases.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-05-criterion-quality",
+          "title": "Code quality",
+          "description": "The solution has understandable names and boundaries, focused commits, and no exposed secrets.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-05-criterion-experience",
+          "title": "Learner-facing experience",
+          "description": "The interface is responsive, keyboard-usable, clearly labelled, and explains errors and recovery.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-05-criterion-verification",
+          "title": "Verification evidence",
+          "description": "Tests and documented checks provide repeatable evidence for the most important claims.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-05-criterion-reflection",
+          "title": "Technical reflection",
+          "description": "The README explains decisions, tradeoffs, one challenge, and a concrete next improvement.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "javascript/organizing_your_javascript_code",
+      "javascript/javascript_in_the_real_world",
+      "foundations/git_basics"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "original-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "GitHub pull request guide",
+        "url": "https://docs.github.com/en/pull-requests/collaborating-with-pull-requests",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Collaborate on maintainable JavaScript
+
+Organize code into modules, test behavior, manage branches, review pull requests, and integrate a shared dashboard without hiding conflicts. This audit source assumes no prior programming experience and supports Windows and macOS. Complete the lessons in order: each one moves from explanation to a concrete example, guided practice, and observable evidence before the weekly project.
+
+<!-- lesson:week-05-lesson-01 -->
+## Modules and dependency boundaries
+
+### Explanation
+
+Split code by responsibility, export the smallest useful surface, inject changing dependencies, and keep data transformations independent from rendering. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```text
+app.js -> task-store.js
+app.js -> task-view.js
+task-view.js -> task-store.js
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Remove the view-to-store dependency by passing data or callbacks, then explain why the new direction is easier to test.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Draw a dependency map with no circular imports. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Refactor one large script into testable modules. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-05-lesson-02 -->
+## Testing behavior
+
+### Explanation
+
+Test public behavior rather than implementation details. Use arrange, act, assert; make failures readable; and treat coverage as a map, not a score to game. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```js
+describe("addTask", () => {
+  it("rejects a blank title", () => {
+    expect(() => addTask("   " )).toThrow("title");
+  });
+});
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Add normal, boundary, and regression cases, and make each test name describe behavior rather than the implementation.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Write deterministic tests without shared order. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Distinguish a useful assertion from a brittle one. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-05-lesson-03 -->
+## Branches and pull requests
+
+### Explanation
+
+Turn an issue into a small branch, keep commits reviewable, synchronize before conflicts grow, and write a pull request that explains purpose and verification. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```bash
+git switch -c feature/focus-timer
+git add src/timer.js tests/timer.test.js
+git commit -m "Keep timer state predictable"
+git push -u origin feature/focus-timer
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Open a focused pull request, request review, revise one point, and verify main after the merge.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Open a focused pull request linked to an issue. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Resolve a simple merge conflict without discarding work. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-05-lesson-04 -->
+## Code review and integration
+
+### Explanation
+
+Review for correctness, clarity, tests, and user impact. Ask specific questions, separate required fixes from suggestions, and verify the integrated main branch. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```text
+Required: timer stops at zero; add a boundary test.
+Question: what owns the interval cleanup?
+Suggestion: rename remainingMs for clarity.
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Review a real change using these three categories and attach evidence to every required change.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Give respectful evidence-based review feedback. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Run the complete checks after merging. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+## Weekly project
+
+In a small team, build a dashboard with independent modules such as tasks, focus timer, and daily notes. Agree on interfaces before dividing the work.
+
+### Deliverables
+
+- A shared repository with issues, protected main workflow, and at least one reviewed pull request per member.
+- Modular JavaScript with unit tests for core behavior and no secrets or personal data.
+- An integration report listing conflicts, review changes, final checks, and each member's contribution.
+
+Before submitting, open the project from a clean session, complete the primary journey, and connect each rubric criterion to concrete evidence. Never include passwords, tokens, precise locations, or real personal data.

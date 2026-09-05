@@ -1,0 +1,321 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-10",
+  "week": 10,
+  "locale": "es-MX",
+  "title": "Sustenta y evalúa un asistente de IA",
+  "summary": "Recupera fuentes aprobadas, adjunta citas, restringe herramientas, crea evaluaciones adversariales y mide calidad, latencia y costo en vez de confiar en una demo.",
+  "prerequisites": [
+    "Completa el trabajo obligatorio de la semana 9."
+  ],
+  "objectives": [
+    "Construir recuperación que conserve identidad y citas de fuentes.",
+    "Restringir herramientas con validación, autorización y privilegio mínimo.",
+    "Evaluar calidad y fallos con un conjunto versionado."
+  ],
+  "modules": [
+    {
+      "id": "week-10-module-01",
+      "title": "Recuperación con procedencia · Herramientas y límites de confianza",
+      "lessons": [
+        {
+          "id": "week-10-lesson-01",
+          "title": "Recuperación con procedencia",
+          "summary": "Divide material aprobado por significado, guarda metadatos, recupera pocos fragmentos relevantes y exige que cada afirmación apunte a una fuente visible.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Conservar título y URL durante la recuperación.",
+            "Distinguir falta de evidencia de una respuesta negativa."
+          ]
+        },
+        {
+          "id": "week-10-lesson-02",
+          "title": "Herramientas y límites de confianza",
+          "summary": "Trata argumentos elegidos por el modelo como no confiables. Usa listas permitidas, valida, autoriza, muestra cambios importantes y limita reintentos.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Dibujar el límite de confianza entre modelo y herramienta.",
+            "Rechazar llamadas no autorizadas o mal formadas."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-10-module-02",
+      "title": "Diseño de evaluaciones · Observabilidad e iteración",
+      "lessons": [
+        {
+          "id": "week-10-lesson-03",
+          "title": "Diseño de evaluaciones",
+          "summary": "Escribe casos normales, extremos, adversariales y de abstención antes de ajustar. Califica citas, tarea, seguridad y formato con criterios repetibles.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Crear un conjunto representativo y versionado.",
+            "Explicar qué no captura cada métrica."
+          ]
+        },
+        {
+          "id": "week-10-lesson-04",
+          "title": "Observabilidad e iteración",
+          "summary": "Registra versiones, latencia, tokens, resultado y errores seguros. Compara cambios con los mismos casos e investiga regresiones antes de liberar.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Medir juntos calidad, latencia y costo estimado.",
+            "Excluir texto sensible de los logs generales."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-10-project",
+    "title": "Asistente de aprendizaje sustentado en fuentes",
+    "summary": "Crea un asistente que responda sólo con notas aprobadas del curso. Debe citar, abstenerse sin evidencia y funcionar aun sin crédito de API.",
+    "collaboration": "individual",
+    "estimatedMinutes": 720,
+    "deliverables": [
+      "Índice con metadatos estables y citas navegables para cada respuesta respaldada.",
+      "Evaluaciones versionadas con casos normales, ambiguos, sin evidencia, de inyección y acción no autorizada.",
+      "Reporte comparativo de citas, abstención, latencia, costo estimado y fallos observados."
+    ],
+    "rubric": {
+      "id": "week-10-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-10-criterion-functionality",
+          "title": "Comportamiento principal",
+          "description": "El recorrido requerido funciona desde un inicio limpio y maneja los casos límite indicados.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-10-criterion-quality",
+          "title": "Calidad del código",
+          "description": "La solución tiene nombres y límites comprensibles, commits enfocados y ningún secreto expuesto.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-10-criterion-experience",
+          "title": "Experiencia para la persona",
+          "description": "La interfaz es responsiva, usable con teclado, tiene etiquetas claras y explica errores y recuperación.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-10-criterion-verification",
+          "title": "Evidencia de verificación",
+          "description": "Las pruebas y revisiones documentadas aportan evidencia repetible para las afirmaciones importantes.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-10-criterion-reflection",
+          "title": "Reflexión técnica",
+          "description": "El README explica decisiones, tradeoffs, un reto y una mejora siguiente concreta.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "javascript/nodejs/apis",
+      "javascript/nodejs/testing",
+      "javascript/nodejs/security"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "translated-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "translator": "AI Builders LATAM Spanish editorial team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "OWASP LLM application risks",
+        "url": "https://genai.owasp.org/llm-top-10/",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Sustenta y evalúa un asistente de IA
+
+Recupera fuentes aprobadas, adjunta citas, restringe herramientas, crea evaluaciones adversariales y mide calidad, latencia y costo en vez de confiar en una demo. Esta edición está escrita para quien empieza desde cero y puede trabajar en Windows o macOS. Completa las lecciones en orden: cada una incluye explicación, ejemplo, práctica y evidencia antes del proyecto semanal.
+
+<!-- lesson:week-10-lesson-01 -->
+## Recuperación con procedencia
+
+### Explicación
+
+Divide material aprobado por significado, guarda metadatos, recupera pocos fragmentos relevantes y exige que cada afirmación apunte a una fuente visible. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```json
+{
+  "chunk": "A commit records a checkpoint...",
+  "sourceId": "git-notes-v1",
+  "url": "https://example.org/git-notes"
+}
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Recupera dos fragmentos conservando la fuente y muestra qué hace el asistente cuando ninguno respalda la pregunta.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Conservar título y URL durante la recuperación. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Distinguir falta de evidencia de una respuesta negativa. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-10-lesson-02 -->
+## Herramientas y límites de confianza
+
+### Explicación
+
+Trata argumentos elegidos por el modelo como no confiables. Usa listas permitidas, valida, autoriza, muestra cambios importantes y limita reintentos. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```json
+{
+  "tool": "readLesson",
+  "arguments": { "lessonId": "week-01-lesson-03" }
+}
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Valida argumentos y acceso; después rechaza una herramienta de escritura inventada y un ID desconocido.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Dibujar el límite de confianza entre modelo y herramienta. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Rechazar llamadas no autorizadas o mal formadas. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-10-lesson-03 -->
+## Diseño de evaluaciones
+
+### Explicación
+
+Escribe casos normales, extremos, adversariales y de abstención antes de ajustar. Califica citas, tarea, seguridad y formato con criterios repetibles. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```text
+case-01 supported fact -> cited answer
+case-02 missing evidence -> abstain
+case-03 injected source -> ignore instruction
+case-04 private source -> deny
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Agrega evidencia esperada y reglas de puntuación; ejecuta los mismos casos dos veces para detectar variación.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Crear un conjunto representativo y versionado. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Explicar qué no captura cada métrica. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-10-lesson-04 -->
+## Observabilidad e iteración
+
+### Explicación
+
+Registra versiones, latencia, tokens, resultado y errores seguros. Compara cambios con los mismos casos e investiga regresiones antes de liberar. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```json
+{ "promptVersion": "p3", "latencyMs": 840, "inputTokens": 620, "result": "supported" }
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Compara dos versiones en respaldo, abstención, latencia y costo sin guardar texto sensible en logs.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Medir juntos calidad, latencia y costo estimado. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Excluir texto sensible de los logs generales. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+## Proyecto semanal
+
+Crea un asistente que responda sólo con notas aprobadas del curso. Debe citar, abstenerse sin evidencia y funcionar aun sin crédito de API.
+
+### Entregables
+
+- Índice con metadatos estables y citas navegables para cada respuesta respaldada.
+- Evaluaciones versionadas con casos normales, ambiguos, sin evidencia, de inyección y acción no autorizada.
+- Reporte comparativo de citas, abstención, latencia, costo estimado y fallos observados.
+
+Antes de entregar, abre el proyecto desde una sesión limpia, recorre el flujo principal y compara cada criterio de la rúbrica con evidencia concreta. No incluyas contraseñas, tokens, ubicaciones precisas ni datos personales reales.

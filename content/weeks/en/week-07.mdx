@@ -1,0 +1,318 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-07",
+  "week": 7,
+  "locale": "en",
+  "title": "Build with the Next.js App Router",
+  "summary": "Create a routed full-stack application, decide deliberately between server and client components, and validate forms on both sides of the network.",
+  "prerequisites": [
+    "Complete the required work for week 6."
+  ],
+  "objectives": [
+    "Organize routes and layouts with the Next.js App Router.",
+    "Choose server or client execution based on data and interaction needs.",
+    "Implement accessible forms with server-side validation."
+  ],
+  "modules": [
+    {
+      "id": "week-07-module-01",
+      "title": "Routes, layouts, and navigation · Server and client boundaries",
+      "lessons": [
+        {
+          "id": "week-07-lesson-01",
+          "title": "Routes, layouts, and navigation",
+          "summary": "Map URLs to user tasks, create nested layouts for shared structure, use links for navigation, and design not-found and error experiences as part of the route tree.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Create a route map before making folders.",
+            "Use navigation that preserves browser expectations."
+          ]
+        },
+        {
+          "id": "week-07-lesson-02",
+          "title": "Server and client boundaries",
+          "summary": "Fetch and render on the server by default. Add a client boundary only where browser state, events, or APIs require it, and pass serializable props across that line.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Explain each client directive in the project.",
+            "Keep secrets and privileged data on the server."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-07-module-02",
+      "title": "Forms and mutations · Rendering and caching",
+      "lessons": [
+        {
+          "id": "week-07-lesson-03",
+          "title": "Forms and mutations",
+          "summary": "Treat form input as untrusted on the server, return field-level problems, preserve safe values, prevent duplicate submission, and show a useful pending state.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Validate the same domain rules at the trusted boundary.",
+            "Build a keyboard-friendly failure and success flow."
+          ]
+        },
+        {
+          "id": "week-07-lesson-04",
+          "title": "Rendering and caching",
+          "summary": "Distinguish request-time, prebuilt, and cached data. Choose freshness from the user's need, then test whether navigation actually shows updated information.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "State the freshness rule for each data view.",
+            "Avoid caching personalized responses publicly."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-07-project",
+    "title": "Opportunity directory",
+    "summary": "Create a full-stack directory of fictional training and volunteering opportunities with browse, detail, search, and create flows. Keep moderation status explicit.",
+    "collaboration": "individual",
+    "estimatedMinutes": 720,
+    "deliverables": [
+      "A route map with server-rendered list and detail pages plus purposeful loading, error, and not-found views.",
+      "An accessible create form with trusted server validation and duplicate-submission protection.",
+      "Tests for domain validation and the main form path, with deployment and architecture notes."
+    ],
+    "rubric": {
+      "id": "week-07-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-07-criterion-functionality",
+          "title": "Core behavior",
+          "description": "The required user journey works from a clean start and handles the stated boundary cases.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-07-criterion-quality",
+          "title": "Code quality",
+          "description": "The solution has understandable names and boundaries, focused commits, and no exposed secrets.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-07-criterion-experience",
+          "title": "Learner-facing experience",
+          "description": "The interface is responsive, keyboard-usable, clearly labelled, and explains errors and recovery.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-07-criterion-verification",
+          "title": "Verification evidence",
+          "description": "Tests and documented checks provide repeatable evidence for the most important claims.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-07-criterion-reflection",
+          "title": "Technical reflection",
+          "description": "The README explains decisions, tradeoffs, one challenge, and a concrete next improvement.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "javascript/nodejs",
+      "javascript/react",
+      "javascript/getting_hired"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "original-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "Next.js App Router guide",
+        "url": "https://nextjs.org/docs/app",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Build with the Next.js App Router
+
+Create a routed full-stack application, decide deliberately between server and client components, and validate forms on both sides of the network. This audit source assumes no prior programming experience and supports Windows and macOS. Complete the lessons in order: each one moves from explanation to a concrete example, guided practice, and observable evidence before the weekly project.
+
+<!-- lesson:week-07-lesson-01 -->
+## Routes, layouts, and navigation
+
+### Explanation
+
+Map URLs to user tasks, create nested layouts for shared structure, use links for navigation, and design not-found and error experiences as part of the route tree. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```text
+/opportunities        browse
+/opportunities/[id]   inspect one
+/opportunities/new    propose one
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Add loading, not-found, and access expectations to each route before creating the matching folders.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Create a route map before making folders. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Use navigation that preserves browser expectations. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-07-lesson-02 -->
+## Server and client boundaries
+
+### Explanation
+
+Fetch and render on the server by default. Add a client boundary only where browser state, events, or APIs require it, and pass serializable props across that line. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```tsx
+export default async function Page() {
+  const opportunities = await listOpportunities();
+  return <OpportunityList items={opportunities} />;
+}
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Keep this on the server, then isolate only the search input as a client component and explain the boundary.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Explain each client directive in the project. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Keep secrets and privileged data on the server. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-07-lesson-03 -->
+## Forms and mutations
+
+### Explanation
+
+Treat form input as untrusted on the server, return field-level problems, preserve safe values, prevent duplicate submission, and show a useful pending state. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```ts
+const parsed = opportunitySchema.safeParse(Object.fromEntries(formData));
+if (!parsed.success) return { errors: parsed.error.flatten().fieldErrors };
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Test blank, overly long, and duplicate input; preserve safe values and make rapid double submission harmless.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Validate the same domain rules at the trusted boundary. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Build a keyboard-friendly failure and success flow. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-07-lesson-04 -->
+## Rendering and caching
+
+### Explanation
+
+Distinguish request-time, prebuilt, and cached data. Choose freshness from the user's need, then test whether navigation actually shows updated information. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```text
+Directory: refresh within 60 seconds
+Detail: refresh after an approved edit
+Private draft: never shared-cache
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Implement one freshness rule, create a record, navigate without hard refresh, and compare observed behavior with the promise.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- State the freshness rule for each data view. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Avoid caching personalized responses publicly. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+## Weekly project
+
+Create a full-stack directory of fictional training and volunteering opportunities with browse, detail, search, and create flows. Keep moderation status explicit.
+
+### Deliverables
+
+- A route map with server-rendered list and detail pages plus purposeful loading, error, and not-found views.
+- An accessible create form with trusted server validation and duplicate-submission protection.
+- Tests for domain validation and the main form path, with deployment and architecture notes.
+
+Before submitting, open the project from a clean session, complete the primary journey, and connect each rubric criterion to concrete evidence. Never include passwords, tokens, precise locations, or real personal data.

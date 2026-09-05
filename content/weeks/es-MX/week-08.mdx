@@ -1,0 +1,320 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-08",
+  "week": 8,
+  "locale": "es-MX",
+  "title": "Persiste y protege datos de la aplicación",
+  "summary": "Diseña un modelo PostgreSQL, evolúcionalo con migraciones, autentica con seguridad, aplica propiedad en servidor y despliega pensando en recuperación.",
+  "prerequisites": [
+    "Completa el trabajo obligatorio de la semana 7."
+  ],
+  "objectives": [
+    "Traducir reglas del dominio en tablas, relaciones y restricciones.",
+    "Implementar autenticación sin confundirla con autorización.",
+    "Desplegar migraciones y aplicación con un camino de recuperación."
+  ],
+  "modules": [
+    {
+      "id": "week-08-module-01",
+      "title": "Modelado relacional · Consultas y migraciones",
+      "lessons": [
+        {
+          "id": "week-08-lesson-01",
+          "title": "Modelado relacional",
+          "summary": "Identifica entidades, IDs estables, relaciones, campos obligatorios, unicidad y comportamiento al borrar. Normaliza hechos repetidos y protege invariantes con restricciones.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Dibujar un diagrama de entidades y relaciones.",
+            "Codificar al menos tres reglas como restricciones."
+          ]
+        },
+        {
+          "id": "week-08-lesson-02",
+          "title": "Consultas y migraciones",
+          "summary": "Usa consultas parametrizadas a través de la capa de datos, examina planes cuando haga falta y escribe migraciones hacia adelante compatibles con datos existentes.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "No construir SQL concatenando entrada de usuario.",
+            "Aplicar y verificar una migración en una base vacía."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-08-module-02",
+      "title": "Autenticación y autorización · Despliegue y operación",
+      "lessons": [
+        {
+          "id": "week-08-lesson-03",
+          "title": "Autenticación y autorización",
+          "summary": "Comprende sesiones, hash de contraseña, verificación, recuperación y cookies. Para cada operación demuestra por separado identidad y permiso.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Distinguir autenticación de autorización.",
+            "Probar denegación de propiedad además del éxito."
+          ]
+        },
+        {
+          "id": "week-08-lesson-04",
+          "title": "Despliegue y operación",
+          "summary": "Guarda secretos fuera de Git, ejecuta migraciones al liberar, publica salud, lee logs estructurados, respalda datos y ensaya rollback.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Desplegar sin registrar secretos.",
+            "Documentar comprobaciones de salud y rollback."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-08-project",
+    "title": "Gestor autenticado de proyectos",
+    "summary": "Construye y despliega un gestor donde personas verificadas administren sólo sus propios proyectos y tareas. Incluye errores recuperables y eliminación simple de datos.",
+    "collaboration": "individual",
+    "estimatedMinutes": 720,
+    "deliverables": [
+      "Esquema PostgreSQL con restricciones y migraciones repetibles probadas desde una base vacía.",
+      "Registro o acceso, sesiones revocables y propiedad aplicada en servidor con pruebas negativas.",
+      "Guía de Railway con variables, salud, migración, respaldo y rollback."
+    ],
+    "rubric": {
+      "id": "week-08-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-08-criterion-functionality",
+          "title": "Comportamiento principal",
+          "description": "El recorrido requerido funciona desde un inicio limpio y maneja los casos límite indicados.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-08-criterion-quality",
+          "title": "Calidad del código",
+          "description": "La solución tiene nombres y límites comprensibles, commits enfocados y ningún secreto expuesto.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-08-criterion-experience",
+          "title": "Experiencia para la persona",
+          "description": "La interfaz es responsiva, usable con teclado, tiene etiquetas claras y explica errores y recuperación.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-08-criterion-verification",
+          "title": "Evidencia de verificación",
+          "description": "Las pruebas y revisiones documentadas aportan evidencia repetible para las afirmaciones importantes.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-08-criterion-reflection",
+          "title": "Reflexión técnica",
+          "description": "El README explica decisiones, tradeoffs, un reto y una mejora siguiente concreta.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "javascript/nodejs/databases",
+      "javascript/nodejs/authentication",
+      "javascript/nodejs/deployment"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "translated-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "translator": "AI Builders LATAM Spanish editorial team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "PostgreSQL tutorial",
+        "url": "https://www.postgresql.org/docs/current/tutorial.html",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Persiste y protege datos de la aplicación
+
+Diseña un modelo PostgreSQL, evolúcionalo con migraciones, autentica con seguridad, aplica propiedad en servidor y despliega pensando en recuperación. Esta edición está escrita para quien empieza desde cero y puede trabajar en Windows o macOS. Completa las lecciones en orden: cada una incluye explicación, ejemplo, práctica y evidencia antes del proyecto semanal.
+
+<!-- lesson:week-08-lesson-01 -->
+## Modelado relacional
+
+### Explicación
+
+Identifica entidades, IDs estables, relaciones, campos obligatorios, unicidad y comportamiento al borrar. Normaliza hechos repetidos y protege invariantes con restricciones. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```sql
+create table projects (
+  id uuid primary key,
+  owner_id uuid not null references users(id),
+  title text not null check (length(title) between 1 and 120)
+);
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Agrega tareas con relación obligatoria y decide explícitamente qué debe pasar al borrar un proyecto.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Dibujar un diagrama de entidades y relaciones. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Codificar al menos tres reglas como restricciones. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-08-lesson-02 -->
+## Consultas y migraciones
+
+### Explicación
+
+Usa consultas parametrizadas a través de la capa de datos, examina planes cuando haga falta y escribe migraciones hacia adelante compatibles con datos existentes. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```sql
+alter table projects add column status text not null default 'active';
+create index projects_owner_idx on projects(owner_id);
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Aplica esto después de insertar filas antiguas, verifica el default y escribe la consulta beneficiada por el índice.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- No construir SQL concatenando entrada de usuario. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Aplicar y verificar una migración en una base vacía. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-08-lesson-03 -->
+## Autenticación y autorización
+
+### Explicación
+
+Comprende sesiones, hash de contraseña, verificación, recuperación y cookies. Para cada operación demuestra por separado identidad y permiso. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```ts
+if (!session) return forbidden();
+const project = await findProject(projectId);
+if (project.ownerId !== session.userId) return forbidden();
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Prueba éxito del propietario y rechazo de otra cuenta en lectura y edición; no confíes en ownerId del body.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Distinguir autenticación de autorización. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Probar denegación de propiedad además del éxito. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-08-lesson-04 -->
+## Despliegue y operación
+
+### Explicación
+
+Guarda secretos fuera de Git, ejecuta migraciones al liberar, publica salud, lee logs estructurados, respalda datos y ensaya rollback. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```text
+release: migrate -> start -> ready
+verify: health -> primary flow -> logs
+recover: stop -> roll forward or rollback -> verify
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Ejecuta la lista en un entorno limpio y registra commit, migración, horas y decisión de recuperación.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Desplegar sin registrar secretos. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Documentar comprobaciones de salud y rollback. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+## Proyecto semanal
+
+Construye y despliega un gestor donde personas verificadas administren sólo sus propios proyectos y tareas. Incluye errores recuperables y eliminación simple de datos.
+
+### Entregables
+
+- Esquema PostgreSQL con restricciones y migraciones repetibles probadas desde una base vacía.
+- Registro o acceso, sesiones revocables y propiedad aplicada en servidor con pruebas negativas.
+- Guía de Railway con variables, salud, migración, respaldo y rollback.
+
+Antes de entregar, abre el proyecto desde una sesión limpia, recorre el flujo principal y compara cada criterio de la rúbrica con evidencia concreta. No incluyas contraseñas, tokens, ubicaciones precisas ni datos personales reales.

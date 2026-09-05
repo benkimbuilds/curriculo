@@ -1,0 +1,321 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-11",
+  "week": 11,
+  "locale": "en",
+  "title": "Discover and build a capstone alpha",
+  "summary": "Find a real but safe local need, validate it with lightweight research, reduce scope, design the system, and deliver one end-to-end vertical slice.",
+  "prerequisites": [
+    "Complete the required work for week 10."
+  ],
+  "objectives": [
+    "Turn research evidence into a precise problem statement.",
+    "Reduce a broad idea to a testable capstone scope.",
+    "Deliver a deployed vertical slice across interface, logic, and data."
+  ],
+  "modules": [
+    {
+      "id": "week-11-module-01",
+      "title": "Problem discovery · Scope and success",
+      "lessons": [
+        {
+          "id": "week-11-lesson-01",
+          "title": "Problem discovery",
+          "summary": "Interview or observe without collecting unnecessary sensitive information. Separate what people said, what you inferred, and what remains unknown; do not start with a favorite technology.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Write evidence notes without identifying participants.",
+            "State a problem without embedding a solution."
+          ]
+        },
+        {
+          "id": "week-11-lesson-02",
+          "title": "Scope and success",
+          "summary": "Choose one primary user and task, list explicit non-goals, define a measurable success signal, and cut features until the risky assumption can be tested in a week.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Create a now, next, later scope.",
+            "Define success that can be observed in a pilot."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-11-module-02",
+      "title": "Architecture and backlog · Vertical-slice delivery",
+      "lessons": [
+        {
+          "id": "week-11-lesson-03",
+          "title": "Architecture and backlog",
+          "summary": "Map routes, components, data, authorization, external services, and failure states. Turn the smallest vertical slice into ordered issues with acceptance checks.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Record key architecture decisions and tradeoffs.",
+            "Order work by dependency and risk."
+          ]
+        },
+        {
+          "id": "week-11-lesson-04",
+          "title": "Vertical-slice delivery",
+          "summary": "Build one thin path through real UI, server rules, persistence, and deployment. Integrate continuously, use feature flags for unfinished work, and demo from a clean account.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Deploy a complete primary path.",
+            "Collect evidence against acceptance checks."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-11-project",
+    "title": "Capstone alpha",
+    "summary": "Design a useful web product around a Mexican community, education, work, environment, culture, or public-service need without requiring sensitive personal or government data.",
+    "collaboration": "individual",
+    "estimatedMinutes": 1080,
+    "deliverables": [
+      "A problem brief with evidence, primary user, non-goals, success signal, risks, and privacy choices.",
+      "An architecture map and prioritized issue backlog linked to acceptance criteria.",
+      "A deployed vertical slice with repository history, core tests, alpha feedback, and next-iteration decisions."
+    ],
+    "rubric": {
+      "id": "week-11-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-11-criterion-functionality",
+          "title": "Core behavior",
+          "description": "The required user journey works from a clean start and handles the stated boundary cases.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-11-criterion-quality",
+          "title": "Code quality",
+          "description": "The solution has understandable names and boundaries, focused commits, and no exposed secrets.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-11-criterion-experience",
+          "title": "Learner-facing experience",
+          "description": "The interface is responsive, keyboard-usable, clearly labelled, and explains errors and recovery.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-11-criterion-verification",
+          "title": "Verification evidence",
+          "description": "Tests and documented checks provide repeatable evidence for the most important claims.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-11-criterion-reflection",
+          "title": "Technical reflection",
+          "description": "The README explains decisions, tradeoffs, one challenge, and a concrete next improvement.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "javascript/getting_hired/building_your_personal_website",
+      "javascript/final_project",
+      "javascript/nodejs/deployment"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "original-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "GitHub issue planning",
+        "url": "https://docs.github.com/en/issues/tracking-your-work-with-issues",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Discover and build a capstone alpha
+
+Find a real but safe local need, validate it with lightweight research, reduce scope, design the system, and deliver one end-to-end vertical slice. This audit source assumes no prior programming experience and supports Windows and macOS. Complete the lessons in order: each one moves from explanation to a concrete example, guided practice, and observable evidence before the weekly project.
+
+<!-- lesson:week-11-lesson-01 -->
+## Problem discovery
+
+### Explanation
+
+Interview or observe without collecting unnecessary sensitive information. Separate what people said, what you inferred, and what remains unknown; do not start with a favorite technology. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```text
+Evidence: three learners lose track of application deadlines.
+Inference: reminders may help.
+Unknown: whether they want email or a checklist.
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Rewrite a technology-first idea as a problem statement, and remove details that could identify interview participants.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Write evidence notes without identifying participants. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- State a problem without embedding a solution. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-11-lesson-02 -->
+## Scope and success
+
+### Explanation
+
+Choose one primary user and task, list explicit non-goals, define a measurable success signal, and cut features until the risky assumption can be tested in a week. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```text
+Now: record an opportunity and deadline
+Next: reminders
+Later: recommendations
+Not now: messaging and payments
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Cut one more feature, name the riskiest assumption, and define an observable alpha success signal.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Create a now, next, later scope. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Define success that can be observed in a pilot. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-11-lesson-03 -->
+## Architecture and backlog
+
+### Explanation
+
+Map routes, components, data, authorization, external services, and failure states. Turn the smallest vertical slice into ordered issues with acceptance checks. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```text
+route -> server rule -> projects table
+  |          |-> authorization
+  |-> form validation
+external email: disabled in alpha
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Add failure states and trust boundaries, then turn the smallest vertical path into ordered issues.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Record key architecture decisions and tradeoffs. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Order work by dependency and risk. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-11-lesson-04 -->
+## Vertical-slice delivery
+
+### Explanation
+
+Build one thin path through real UI, server rules, persistence, and deployment. Integrate continuously, use feature flags for unfinished work, and demo from a clean account. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```text
+issue #1 schema + migration
+issue #2 create form + server validation
+issue #3 owner list + denial test
+issue #4 deploy + smoke check
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Deliver these in dependency order, link each acceptance check to evidence, and demo from a clean account.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Deploy a complete primary path. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Collect evidence against acceptance checks. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+## Weekly project
+
+Design a useful web product around a Mexican community, education, work, environment, culture, or public-service need without requiring sensitive personal or government data.
+
+### Deliverables
+
+- A problem brief with evidence, primary user, non-goals, success signal, risks, and privacy choices.
+- An architecture map and prioritized issue backlog linked to acceptance criteria.
+- A deployed vertical slice with repository history, core tests, alpha feedback, and next-iteration decisions.
+
+Before submitting, open the project from a clean session, complete the primary journey, and connect each rubric criterion to concrete evidence. Never include passwords, tokens, precise locations, or real personal data.

@@ -1,0 +1,319 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-02",
+  "week": 2,
+  "locale": "en",
+  "title": "Design responsive, inclusive pages",
+  "summary": "Use CSS deliberately, make layouts adapt from phones to lab monitors, and check that keyboard and screen-reader users can understand the result.",
+  "prerequisites": [
+    "Complete the required work for week 1."
+  ],
+  "objectives": [
+    "Apply the cascade, box model, and reusable selectors predictably.",
+    "Build responsive layouts with Flexbox, Grid, and fluid sizing.",
+    "Test focus, contrast, labels, and document structure."
+  ],
+  "modules": [
+    {
+      "id": "week-02-module-01",
+      "title": "CSS foundations · Layout systems",
+      "lessons": [
+        {
+          "id": "week-02-lesson-01",
+          "title": "CSS foundations",
+          "summary": "Connect stylesheets, inspect computed styles, and reason through selector specificity, inheritance, units, color, and the box model instead of changing values blindly.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Predict which declaration wins in the cascade.",
+            "Diagnose spacing with browser developer tools."
+          ]
+        },
+        {
+          "id": "week-02-lesson-02",
+          "title": "Layout systems",
+          "summary": "Use normal flow first, Flexbox for one-dimensional alignment, and Grid for two-dimensional regions. Prefer content-driven breakpoints over device lists.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Choose Flexbox or Grid for a stated reason.",
+            "Avoid fixed dimensions that clip real content."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-02-module-02",
+      "title": "Responsive design · Practical accessibility",
+      "lessons": [
+        {
+          "id": "week-02-lesson-03",
+          "title": "Responsive design",
+          "summary": "Start with the smallest useful layout, add media queries when content needs space, and use fluid type, images, and containers that do not create horizontal scrolling.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Test layouts at multiple viewport widths.",
+            "Make images and text scale without hiding information."
+          ]
+        },
+        {
+          "id": "week-02-lesson-04",
+          "title": "Practical accessibility",
+          "summary": "Work through keyboard order, visible focus, headings, labels, alternative text, contrast, reduced motion, and error messages as normal quality checks.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Complete a keyboard-only task flow.",
+            "Record and fix accessibility findings."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-02-project",
+    "title": "Public-service landing page",
+    "summary": "Design a responsive page for a fictional local service such as a library, recycling point, or community workshop. Make the primary action usable without a mouse.",
+    "collaboration": "individual",
+    "estimatedMinutes": 720,
+    "deliverables": [
+      "Responsive layouts at 360, 768, and 1280 CSS pixels without horizontal overflow.",
+      "A complete keyboard path with visible focus and correctly associated form labels.",
+      "A short design note explaining hierarchy, color, typography, and accessibility checks."
+    ],
+    "rubric": {
+      "id": "week-02-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-02-criterion-functionality",
+          "title": "Core behavior",
+          "description": "The required user journey works from a clean start and handles the stated boundary cases.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-02-criterion-quality",
+          "title": "Code quality",
+          "description": "The solution has understandable names and boundaries, focused commits, and no exposed secrets.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-02-criterion-experience",
+          "title": "Learner-facing experience",
+          "description": "The interface is responsive, keyboard-usable, clearly labelled, and explains errors and recovery.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-02-criterion-verification",
+          "title": "Verification evidence",
+          "description": "Tests and documented checks provide repeatable evidence for the most important claims.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-02-criterion-reflection",
+          "title": "Technical reflection",
+          "description": "The README explains decisions, tradeoffs, one challenge, and a concrete next improvement.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "foundations/html_css/css-foundations",
+      "foundations/html_css/flexbox",
+      "intermediate_html_css/grid"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "original-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "MDN CSS first steps",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Design responsive, inclusive pages
+
+Use CSS deliberately, make layouts adapt from phones to lab monitors, and check that keyboard and screen-reader users can understand the result. This audit source assumes no prior programming experience and supports Windows and macOS. Complete the lessons in order: each one moves from explanation to a concrete example, guided practice, and observable evidence before the weekly project.
+
+<!-- lesson:week-02-lesson-01 -->
+## CSS foundations
+
+### Explanation
+
+Connect stylesheets, inspect computed styles, and reason through selector specificity, inheritance, units, color, and the box model instead of changing values blindly. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```css
+.notice { color: navy; }
+main .notice { color: teal; }
+.notice { color: purple; }
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Predict the final color, verify it in computed styles, then make the first rule win without using important.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Predict which declaration wins in the cascade. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Diagnose spacing with browser developer tools. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-02-lesson-02 -->
+## Layout systems
+
+### Explanation
+
+Use normal flow first, Flexbox for one-dimensional alignment, and Grid for two-dimensional regions. Prefer content-driven breakpoints over device lists. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```css
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Add one card with a very long title and explain why the grid wraps without a device-specific breakpoint.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Choose Flexbox or Grid for a stated reason. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Avoid fixed dimensions that clip real content. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-02-lesson-03 -->
+## Responsive design
+
+### Explanation
+
+Start with the smallest useful layout, add media queries when content needs space, and use fluid type, images, and containers that do not create horizontal scrolling. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```css
+.page { width: min(100% - 2rem, 70rem); margin-inline: auto; }
+img { max-width: 100%; height: auto; }
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Test at 320, 768, and 1280 pixels, and note the first width at which the content—not a device name—needs a change.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Test layouts at multiple viewport widths. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Make images and text scale without hiding information. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-02-lesson-04 -->
+## Practical accessibility
+
+### Explanation
+
+Work through keyboard order, visible focus, headings, labels, alternative text, contrast, reduced motion, and error messages as normal quality checks. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```html
+<label for="email">Correo</label>
+<input id="email" name="email" type="email">
+<button>Solicitar información</button>
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Reach every control with the keyboard, add a visible focus style, and write useful alternative text for one informative image.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Complete a keyboard-only task flow. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Record and fix accessibility findings. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+## Weekly project
+
+Design a responsive page for a fictional local service such as a library, recycling point, or community workshop. Make the primary action usable without a mouse.
+
+### Deliverables
+
+- Responsive layouts at 360, 768, and 1280 CSS pixels without horizontal overflow.
+- A complete keyboard path with visible focus and correctly associated form labels.
+- A short design note explaining hierarchy, color, typography, and accessibility checks.
+
+Before submitting, open the project from a clean session, complete the primary journey, and connect each rubric criterion to concrete evidence. Never include passwords, tokens, precise locations, or real personal data.

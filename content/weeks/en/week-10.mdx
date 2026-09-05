@@ -1,0 +1,320 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-10",
+  "week": 10,
+  "locale": "en",
+  "title": "Ground and evaluate an AI assistant",
+  "summary": "Retrieve approved sources, attach citations, constrain tool calls, build adversarial evaluations, and measure quality, latency, and cost instead of trusting a demo.",
+  "prerequisites": [
+    "Complete the required work for week 9."
+  ],
+  "objectives": [
+    "Build a retrieval flow that preserves source identity and citations.",
+    "Constrain tools with validation, authorization, and least privilege.",
+    "Evaluate quality and failure modes with a versioned test set."
+  ],
+  "modules": [
+    {
+      "id": "week-10-module-01",
+      "title": "Retrieval with provenance · Tool use and trust boundaries",
+      "lessons": [
+        {
+          "id": "week-10-lesson-01",
+          "title": "Retrieval with provenance",
+          "summary": "Chunk approved material around meaning, store source metadata, retrieve a small relevant set, and require every factual answer to point back to a source the user can inspect.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Preserve source title and URL through retrieval.",
+            "Distinguish no evidence from a negative answer."
+          ]
+        },
+        {
+          "id": "week-10-lesson-02",
+          "title": "Tool use and trust boundaries",
+          "summary": "Treat model-selected tool arguments as untrusted. Allowlist actions, validate every argument, authorize for the current user, preview consequential changes, and limit retries.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Draw the model and tool trust boundary.",
+            "Reject an unauthorized or malformed tool call."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-10-module-02",
+      "title": "Evaluation design · Observability and iteration",
+      "lessons": [
+        {
+          "id": "week-10-lesson-03",
+          "title": "Evaluation design",
+          "summary": "Write normal, edge, adversarial, and abstention cases before tuning. Score citation support, task completion, safety, and format with repeatable criteria.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Create a versioned representative evaluation set.",
+            "Explain what each metric fails to capture."
+          ]
+        },
+        {
+          "id": "week-10-lesson-04",
+          "title": "Observability and iteration",
+          "summary": "Record model and prompt version, latency, token use, outcome, and safe error categories. Compare changes against the same cases and investigate regressions before rollout.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Measure quality, latency, and estimated cost together.",
+            "Keep sensitive source text out of general logs."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-10-project",
+    "title": "Source-grounded learning assistant",
+    "summary": "Build an assistant that answers questions only from a small approved set of course notes. It must cite sources, abstain when evidence is missing, and remain useful without paid API credit.",
+    "collaboration": "individual",
+    "estimatedMinutes": 720,
+    "deliverables": [
+      "A retrieval index with stable source metadata and clickable citation mapping for every supported answer.",
+      "A versioned evaluation set with normal, ambiguous, missing-evidence, injection, and unauthorized-action cases.",
+      "A comparison report covering citation support, abstention, latency, estimated cost, and observed failures."
+    ],
+    "rubric": {
+      "id": "week-10-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-10-criterion-functionality",
+          "title": "Core behavior",
+          "description": "The required user journey works from a clean start and handles the stated boundary cases.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-10-criterion-quality",
+          "title": "Code quality",
+          "description": "The solution has understandable names and boundaries, focused commits, and no exposed secrets.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-10-criterion-experience",
+          "title": "Learner-facing experience",
+          "description": "The interface is responsive, keyboard-usable, clearly labelled, and explains errors and recovery.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-10-criterion-verification",
+          "title": "Verification evidence",
+          "description": "Tests and documented checks provide repeatable evidence for the most important claims.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-10-criterion-reflection",
+          "title": "Technical reflection",
+          "description": "The README explains decisions, tradeoffs, one challenge, and a concrete next improvement.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "javascript/nodejs/apis",
+      "javascript/nodejs/testing",
+      "javascript/nodejs/security"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "original-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "OWASP LLM application risks",
+        "url": "https://genai.owasp.org/llm-top-10/",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Ground and evaluate an AI assistant
+
+Retrieve approved sources, attach citations, constrain tool calls, build adversarial evaluations, and measure quality, latency, and cost instead of trusting a demo. This audit source assumes no prior programming experience and supports Windows and macOS. Complete the lessons in order: each one moves from explanation to a concrete example, guided practice, and observable evidence before the weekly project.
+
+<!-- lesson:week-10-lesson-01 -->
+## Retrieval with provenance
+
+### Explanation
+
+Chunk approved material around meaning, store source metadata, retrieve a small relevant set, and require every factual answer to point back to a source the user can inspect. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```json
+{
+  "chunk": "A commit records a checkpoint...",
+  "sourceId": "git-notes-v1",
+  "url": "https://example.org/git-notes"
+}
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Retrieve two chunks while preserving source identity, then show what the assistant does when no chunk supports the question.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Preserve source title and URL through retrieval. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Distinguish no evidence from a negative answer. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-10-lesson-02 -->
+## Tool use and trust boundaries
+
+### Explanation
+
+Treat model-selected tool arguments as untrusted. Allowlist actions, validate every argument, authorize for the current user, preview consequential changes, and limit retries. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```json
+{
+  "tool": "readLesson",
+  "arguments": { "lessonId": "week-01-lesson-03" }
+}
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Validate the arguments and current-user access, then reject an invented write tool and an unknown lesson ID.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Draw the model and tool trust boundary. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Reject an unauthorized or malformed tool call. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-10-lesson-03 -->
+## Evaluation design
+
+### Explanation
+
+Write normal, edge, adversarial, and abstention cases before tuning. Score citation support, task completion, safety, and format with repeatable criteria. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```text
+case-01 supported fact -> cited answer
+case-02 missing evidence -> abstain
+case-03 injected source -> ignore instruction
+case-04 private source -> deny
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Add expected evidence and scoring rules, then run the same cases twice to identify nondeterministic behavior.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Create a versioned representative evaluation set. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Explain what each metric fails to capture. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-10-lesson-04 -->
+## Observability and iteration
+
+### Explanation
+
+Record model and prompt version, latency, token use, outcome, and safe error categories. Compare changes against the same cases and investigate regressions before rollout. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```json
+{ "promptVersion": "p3", "latencyMs": 840, "inputTokens": 620, "result": "supported" }
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Compare two versions on support, abstention, latency, and cost while ensuring logs contain no sensitive source text.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Measure quality, latency, and estimated cost together. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Keep sensitive source text out of general logs. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+## Weekly project
+
+Build an assistant that answers questions only from a small approved set of course notes. It must cite sources, abstain when evidence is missing, and remain useful without paid API credit.
+
+### Deliverables
+
+- A retrieval index with stable source metadata and clickable citation mapping for every supported answer.
+- A versioned evaluation set with normal, ambiguous, missing-evidence, injection, and unauthorized-action cases.
+- A comparison report covering citation support, abstention, latency, estimated cost, and observed failures.
+
+Before submitting, open the project from a clean session, complete the primary journey, and connect each rubric criterion to concrete evidence. Never include passwords, tokens, precise locations, or real personal data.

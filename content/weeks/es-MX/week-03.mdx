@@ -1,0 +1,320 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-03",
+  "week": 3,
+  "locale": "es-MX",
+  "title": "Programa con JavaScript",
+  "summary": "Aprende variables, decisiones, ciclos, funciones, arreglos, objetos, depuración y pruebas al convertir problemas cotidianos en pasos pequeños y verificables.",
+  "prerequisites": [
+    "Completa el trabajo obligatorio de la semana 2."
+  ],
+  "objectives": [
+    "Modelar valores con tipos y estructuras de datos apropiados.",
+    "Dividir un problema en funciones puras con entradas y salidas claras.",
+    "Usar pruebas y evidencia del depurador para ubicar defectos."
+  ],
+  "modules": [
+    {
+      "id": "week-03-module-01",
+      "title": "Valores y flujo de control · Funciones y alcance",
+      "lessons": [
+        {
+          "id": "week-03-lesson-01",
+          "title": "Valores y flujo de control",
+          "summary": "Explora strings, números, booleanos, null, undefined, comparaciones, condiciones y ciclos. Traza cada cambio en papel antes de preguntarle a la computadora.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Elegir comparaciones estrictas y condiciones explícitas.",
+            "Trazar un ciclo y explicar cuándo termina."
+          ]
+        },
+        {
+          "id": "week-03-lesson-02",
+          "title": "Funciones y alcance",
+          "summary": "Diseña funciones pequeñas con una sola responsabilidad, nombra parámetros por su significado, devuelve resultados y distingue entre declarar e invocar.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Escribir funciones con contratos claros.",
+            "Explicar el alcance local y evitar variables globales accidentales."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-03-module-02",
+      "title": "Arreglos y objetos · Depuración y pruebas",
+      "lessons": [
+        {
+          "id": "week-03-lesson-03",
+          "title": "Arreglos y objetos",
+          "summary": "Representa colecciones ordenadas con arreglos y propiedades nombradas con objetos. Escribe primero en palabras la transformación que buscas.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Seleccionar la estructura que corresponde al problema.",
+            "Transformar una colección sin mutaciones innecesarias."
+          ]
+        },
+        {
+          "id": "week-03-lesson-04",
+          "title": "Depuración y pruebas",
+          "summary": "Reproduce el problema, formula una hipótesis, inspecciona valores, haz el cambio mínimo y agrega una prueba que detectaría el mismo defecto.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Usar breakpoints y consola con intención.",
+            "Probar entradas normales, límites e inválidas."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-03-project",
+    "title": "Calculadora de presupuesto familiar",
+    "summary": "Crea una calculadora en el navegador que reciba ingresos y gastos, rechace valores inválidos, agrupe totales y explique el balance sin guardar datos sensibles.",
+    "collaboration": "individual",
+    "estimatedMinutes": 720,
+    "deliverables": [
+      "Funciones puras de cálculo con pruebas para casos normales, vacíos, decimales e inválidos.",
+      "Un formulario usable con validación en contexto y formato de pesos mexicanos.",
+      "Una bitácora sobre estructuras elegidas, un defecto encontrado y la prueba que demuestra la corrección."
+    ],
+    "rubric": {
+      "id": "week-03-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-03-criterion-functionality",
+          "title": "Comportamiento principal",
+          "description": "El recorrido requerido funciona desde un inicio limpio y maneja los casos límite indicados.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-03-criterion-quality",
+          "title": "Calidad del código",
+          "description": "La solución tiene nombres y límites comprensibles, commits enfocados y ningún secreto expuesto.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-03-criterion-experience",
+          "title": "Experiencia para la persona",
+          "description": "La interfaz es responsiva, usable con teclado, tiene etiquetas claras y explica errores y recuperación.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-03-criterion-verification",
+          "title": "Evidencia de verificación",
+          "description": "Las pruebas y revisiones documentadas aportan evidencia repetible para las afirmaciones importantes.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-03-criterion-reflection",
+          "title": "Reflexión técnica",
+          "description": "El README explica decisiones, tradeoffs, un reto y una mejora siguiente concreta.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "foundations/javascript_basics",
+      "foundations/javascript_basics/problem_solving",
+      "foundations/javascript_basics/fundamentals-part-1"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "translated-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "translator": "AI Builders LATAM Spanish editorial team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "MDN JavaScript guide",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Programa con JavaScript
+
+Aprende variables, decisiones, ciclos, funciones, arreglos, objetos, depuración y pruebas al convertir problemas cotidianos en pasos pequeños y verificables. Esta edición está escrita para quien empieza desde cero y puede trabajar en Windows o macOS. Completa las lecciones en orden: cada una incluye explicación, ejemplo, práctica y evidencia antes del proyecto semanal.
+
+<!-- lesson:week-03-lesson-01 -->
+## Valores y flujo de control
+
+### Explicación
+
+Explora strings, números, booleanos, null, undefined, comparaciones, condiciones y ciclos. Traza cada cambio en papel antes de preguntarle a la computadora. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```js
+const amount = 250;
+const isExpense = true;
+const signedAmount = isExpense ? -amount : amount;
+console.log(signedAmount);
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Traza los valores antes de ejecutar; prueba cero, un decimal y un string para ver por qué importa normalizar entradas.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Elegir comparaciones estrictas y condiciones explícitas. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Trazar un ciclo y explicar cuándo termina. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-03-lesson-02 -->
+## Funciones y alcance
+
+### Explicación
+
+Diseña funciones pequeñas con una sola responsabilidad, nombra parámetros por su significado, devuelve resultados y distingue entre declarar e invocar. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```js
+function balance(income, expenses) {
+  return income - expenses;
+}
+const result = balance(1200, 750);
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Escribe el contrato, decide qué hacer con entrada inválida y confirma que dos llamadas iguales devuelven lo mismo.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Escribir funciones con contratos claros. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Explicar el alcance local y evitar variables globales accidentales. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-03-lesson-03 -->
+## Arreglos y objetos
+
+### Explicación
+
+Representa colecciones ordenadas con arreglos y propiedades nombradas con objetos. Escribe primero en palabras la transformación que buscas. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```js
+const entries = [{ category: "food", amount: 80 }, { category: "travel", amount: 40 }];
+const total = entries.reduce((sum, entry) => sum + entry.amount, 0);
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Filtra una categoría y calcula su total sin mutar entries; demuestra que el arreglo original no cambió.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Seleccionar la estructura que corresponde al problema. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Transformar una colección sin mutaciones innecesarias. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-03-lesson-04 -->
+## Depuración y pruebas
+
+### Explicación
+
+Reproduce el problema, formula una hipótesis, inspecciona valores, haz el cambio mínimo y agrega una prueba que detectaría el mismo defecto. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```js
+test("empty expenses total zero", () => {
+  expect(sumExpenses([])).toBe(0);
+});
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Introduce un defecto que devuelva undefined, observa el fallo, corrígelo y conserva la prueba como evidencia.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Usar breakpoints y consola con intención. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Probar entradas normales, límites e inválidas. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+## Proyecto semanal
+
+Crea una calculadora en el navegador que reciba ingresos y gastos, rechace valores inválidos, agrupe totales y explique el balance sin guardar datos sensibles.
+
+### Entregables
+
+- Funciones puras de cálculo con pruebas para casos normales, vacíos, decimales e inválidos.
+- Un formulario usable con validación en contexto y formato de pesos mexicanos.
+- Una bitácora sobre estructuras elegidas, un defecto encontrado y la prueba que demuestra la corrección.
+
+Antes de entregar, abre el proyecto desde una sesión limpia, recorre el flujo principal y compara cada criterio de la rúbrica con evidencia concreta. No incluyas contraseñas, tokens, ubicaciones precisas ni datos personales reales.

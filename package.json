@@ -1,0 +1,67 @@
+{
+  "name": "ruta-curriculo",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.22.0 <23"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:load": "node scripts/verify/load-smoke.mjs",
+    "content:validate": "tsx scripts/content/validate.ts",
+    "content:expand": "node scripts/content/expand-lessons.mjs",
+    "content:manifest": "tsx scripts/content/generate-manifest.ts",
+    "content:manifest:check": "tsx scripts/content/generate-manifest.ts --check",
+    "content:links": "tsx scripts/content/check-external-links.ts",
+    "check": "pnpm content:validate && pnpm content:manifest:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx src/db/migrate.ts",
+    "db:seed": "tsx src/db/seed.ts",
+    "db:bootstrap": "pnpm db:migrate && pnpm db:seed",
+    "worker": "tsx src/worker/index.ts"
+  },
+  "dependencies": {
+    "@node-rs/argon2": "2.2.0",
+    "better-auth": "1.7.2",
+    "drizzle-orm": "0.45.2",
+    "gray-matter": "4.0.3",
+    "next": "16.3.4",
+    "nodemailer": "10.0.0",
+    "pg": "8.23.0",
+    "pino": "10.3.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "yaml": "2.9.0",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "22.20.1",
+    "@types/nodemailer": "8.0.1",
+    "@types/pg": "8.23.1",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
+    "@vitest/coverage-v8": "4.1.11",
+    "drizzle-kit": "0.31.10",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.3.4",
+    "tailwindcss": "4.3.3",
+    "tsx": "4.23.13",
+    "typescript": "5.9.3",
+    "vitest": "4.1.11"
+  },
+  "packageManager": "pnpm@10.30.2",
+  "pnpm": {
+    "overrides": {
+      "@esbuild-kit/core-utils>esbuild": "0.25.12"
+    }
+  }
+}

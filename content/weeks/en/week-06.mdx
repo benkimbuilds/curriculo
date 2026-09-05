@@ -1,0 +1,318 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-06",
+  "week": 6,
+  "locale": "en",
+  "title": "Move to TypeScript and React",
+  "summary": "Use types to make assumptions visible and compose React interfaces from accessible components with predictable state and data flow.",
+  "prerequisites": [
+    "Complete the required work for week 5."
+  ],
+  "objectives": [
+    "Model domain data with TypeScript and narrow unknown values.",
+    "Build reusable React components with explicit props.",
+    "Manage state without duplication and test user-visible behavior."
+  ],
+  "modules": [
+    {
+      "id": "week-06-module-01",
+      "title": "TypeScript as executable documentation · Components and JSX",
+      "lessons": [
+        {
+          "id": "week-06-lesson-01",
+          "title": "TypeScript as executable documentation",
+          "summary": "Type function inputs and outputs, use unions for real alternatives, narrow unknown data, and let compiler errors expose unclear assumptions instead of silencing them with any.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Model a small domain without unsafe any.",
+            "Narrow external data before use."
+          ]
+        },
+        {
+          "id": "week-06-lesson-02",
+          "title": "Components and JSX",
+          "summary": "Turn a page sketch into components with one responsibility. Pass data down through typed props and keep semantic HTML inside the component boundary.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Extract components for reuse rather than file size alone.",
+            "Render lists with stable domain keys."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-06-module-02",
+      "title": "State and events · Component tests",
+      "lessons": [
+        {
+          "id": "week-06-lesson-03",
+          "title": "State and events",
+          "summary": "Store the minimum state needed, derive totals during render, update arrays immutably, and keep form ownership explicit. Move state only as high as sharing requires.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Avoid duplicated or contradictory state.",
+            "Trace an event from control to state to output."
+          ]
+        },
+        {
+          "id": "week-06-lesson-04",
+          "title": "Component tests",
+          "summary": "Test through roles, names, and visible results as a learner would. Cover an important interaction and a validation failure rather than snapshots of markup.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Query components by accessible role.",
+            "Test a complete user interaction."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-06-project",
+    "title": "Community resource board",
+    "summary": "Build a typed React app for browsing and filtering fictional community resources. Users can add a local draft entry; no real personal contact data is required.",
+    "collaboration": "individual",
+    "estimatedMinutes": 720,
+    "deliverables": [
+      "Typed resource, category, and form models with validation at the input boundary.",
+      "Reusable semantic components with filter, add, empty, and validation flows.",
+      "Component tests for one successful task and one invalid submission, plus a decision-focused README."
+    ],
+    "rubric": {
+      "id": "week-06-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-06-criterion-functionality",
+          "title": "Core behavior",
+          "description": "The required user journey works from a clean start and handles the stated boundary cases.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-06-criterion-quality",
+          "title": "Code quality",
+          "description": "The solution has understandable names and boundaries, focused commits, and no exposed secrets.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-06-criterion-experience",
+          "title": "Learner-facing experience",
+          "description": "The interface is responsive, keyboard-usable, clearly labelled, and explains errors and recovery.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-06-criterion-verification",
+          "title": "Verification evidence",
+          "description": "Tests and documented checks provide repeatable evidence for the most important claims.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-06-criterion-reflection",
+          "title": "Technical reflection",
+          "description": "The README explains decisions, tradeoffs, one challenge, and a concrete next improvement.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "javascript/typescript",
+      "javascript/react",
+      "javascript/react/states_and_effects"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "original-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "React learning guide",
+        "url": "https://react.dev/learn",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Move to TypeScript and React
+
+Use types to make assumptions visible and compose React interfaces from accessible components with predictable state and data flow. This audit source assumes no prior programming experience and supports Windows and macOS. Complete the lessons in order: each one moves from explanation to a concrete example, guided practice, and observable evidence before the weekly project.
+
+<!-- lesson:week-06-lesson-01 -->
+## TypeScript as executable documentation
+
+### Explanation
+
+Type function inputs and outputs, use unions for real alternatives, narrow unknown data, and let compiler errors expose unclear assumptions instead of silencing them with any. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```ts
+type Resource = { id: string; name: string; category: "health" | "education" };
+function isResource(value: unknown): value is Resource {
+  return typeof value === "object" && value !== null && "id" in value;
+}
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Add checks for every field and return a readable validation result instead of using a type assertion.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Model a small domain without unsafe any. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Narrow external data before use. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-06-lesson-02 -->
+## Components and JSX
+
+### Explanation
+
+Turn a page sketch into components with one responsibility. Pass data down through typed props and keep semantic HTML inside the component boundary. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```tsx
+type CardProps = { name: string; category: string };
+export function ResourceCard({ name, category }: CardProps) {
+  return <article><h2>{name}</h2><p>{category}</p></article>;
+}
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Render three cards from data using stable resource IDs as keys, then explain why the component boundary is useful.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Extract components for reuse rather than file size alone. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Render lists with stable domain keys. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-06-lesson-03 -->
+## State and events
+
+### Explanation
+
+Store the minimum state needed, derive totals during render, update arrays immutably, and keep form ownership explicit. Move state only as high as sharing requires. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```tsx
+const [query, setQuery] = useState("");
+const visible = resources.filter((item) => item.name.includes(query));
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Remove any separate visibleResources state, add case-insensitive search, and trace one input event to the displayed list.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Avoid duplicated or contradictory state. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Trace an event from control to state to output. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-06-lesson-04 -->
+## Component tests
+
+### Explanation
+
+Test through roles, names, and visible results as a learner would. Cover an important interaction and a validation failure rather than snapshots of markup. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```tsx
+await user.type(screen.getByLabelText(/buscar/i), "salud");
+expect(screen.getByRole("heading", { name: /clínica/i })).toBeVisible();
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Add an invalid form submission and assert the accessible error instead of inspecting component state.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Query components by accessible role. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Test a complete user interaction. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+## Weekly project
+
+Build a typed React app for browsing and filtering fictional community resources. Users can add a local draft entry; no real personal contact data is required.
+
+### Deliverables
+
+- Typed resource, category, and form models with validation at the input boundary.
+- Reusable semantic components with filter, add, empty, and validation flows.
+- Component tests for one successful task and one invalid submission, plus a decision-focused README.
+
+Before submitting, open the project from a clean session, complete the primary journey, and connect each rubric criterion to concrete evidence. Never include passwords, tokens, precise locations, or real personal data.

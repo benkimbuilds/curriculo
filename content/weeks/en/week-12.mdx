@@ -1,0 +1,324 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-12",
+  "week": 12,
+  "locale": "en",
+  "title": "Harden, launch, and present the capstone",
+  "summary": "Finish the most valuable scope, test and observe production behavior, improve the portfolio story, and practise a concise technical interview and live demo.",
+  "prerequisites": [
+    "Complete the required work for week 11."
+  ],
+  "objectives": [
+    "Harden the primary user journey for reliability, security, and usability.",
+    "Operate a production deployment with monitoring and recovery notes.",
+    "Present product decisions and engineering evidence clearly."
+  ],
+  "modules": [
+    {
+      "id": "week-12-module-01",
+      "title": "Quality and security pass · Production readiness",
+      "lessons": [
+        {
+          "id": "week-12-lesson-01",
+          "title": "Quality and security pass",
+          "summary": "Test domain rules, authorization denials, keyboard flow, narrow screens, slow networks, and failure recovery. Remove secrets and unused collection before polishing minor features.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Prioritize launch risks with evidence.",
+            "Close high-impact defects or document a safe limitation."
+          ]
+        },
+        {
+          "id": "week-12-lesson-02",
+          "title": "Production readiness",
+          "summary": "Verify migrations, health, logs, rate limits, error reporting, backups, and rollback. Create a launch checklist another person can follow and confirm the deployed commit.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Trace production to an immutable commit.",
+            "Run and record a recovery drill."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-12-module-02",
+      "title": "Portfolio and documentation · Demo and interview practice",
+      "lessons": [
+        {
+          "id": "week-12-lesson-03",
+          "title": "Portfolio and documentation",
+          "summary": "Write for a reviewer who has five minutes: problem, users, constraints, architecture, screenshots, setup, tests, tradeoffs, and what you personally contributed.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Make the repository reproducible from its README.",
+            "Explain one decision and one rejected alternative."
+          ]
+        },
+        {
+          "id": "week-12-lesson-04",
+          "title": "Demo and interview practice",
+          "summary": "Plan a reliable three-minute story, prepare fallback screenshots, answer with situation-action-result evidence, and admit uncertainty while explaining how you would investigate.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Deliver a timed live demo with a fallback.",
+            "Explain code decisions without reading the code aloud."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-12-project",
+    "title": "Production capstone and public demo",
+    "summary": "Ship the capstone's primary journey at a stable HTTPS URL, present it to peers, and publish a portfolio case study. A team is optional, but individual contributions must be explicit.",
+    "collaboration": "optional-team",
+    "estimatedMinutes": 1080,
+    "deliverables": [
+      "A production release with tested primary flow, authorization, validation, responsive and keyboard checks, monitoring, and rollback notes.",
+      "A reproducible repository with tests, architecture, privacy and AI disclosures where relevant, exact deployed commit, and personal contribution record.",
+      "A concise case study, three-minute demo, feedback log, retrospective, and prioritized next steps based on evidence."
+    ],
+    "rubric": {
+      "id": "week-12-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-12-criterion-functionality",
+          "title": "Core behavior",
+          "description": "The required user journey works from a clean start and handles the stated boundary cases.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-12-criterion-quality",
+          "title": "Code quality",
+          "description": "The solution has understandable names and boundaries, focused commits, and no exposed secrets.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-12-criterion-experience",
+          "title": "Learner-facing experience",
+          "description": "The interface is responsive, keyboard-usable, clearly labelled, and explains errors and recovery.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-12-criterion-verification",
+          "title": "Verification evidence",
+          "description": "Tests and documented checks provide repeatable evidence for the most important claims.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-12-criterion-reflection",
+          "title": "Technical reflection",
+          "description": "The README explains decisions, tradeoffs, one challenge, and a concrete next improvement.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "javascript/getting_hired",
+      "javascript/final_project",
+      "javascript/nodejs/deployment"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "original-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "MDN publishing your website",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Your_first_website/Publishing_your_website",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Harden, launch, and present the capstone
+
+Finish the most valuable scope, test and observe production behavior, improve the portfolio story, and practise a concise technical interview and live demo. This audit source assumes no prior programming experience and supports Windows and macOS. Complete the lessons in order: each one moves from explanation to a concrete example, guided practice, and observable evidence before the weekly project.
+
+<!-- lesson:week-12-lesson-01 -->
+## Quality and security pass
+
+### Explanation
+
+Test domain rules, authorization denials, keyboard flow, narrow screens, slow networks, and failure recovery. Remove secrets and unused collection before polishing minor features. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```text
+High: another user can edit a project -> block launch
+Medium: slow empty state -> fix or document
+Low: icon alignment -> defer
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Triage five real findings by impact, likelihood, and recovery; resolve security and data-loss risks before polish.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Prioritize launch risks with evidence. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Close high-impact defects or document a safe limitation. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-12-lesson-02 -->
+## Production readiness
+
+### Explanation
+
+Verify migrations, health, logs, rate limits, error reporting, backups, and rollback. Create a launch checklist another person can follow and confirm the deployed commit. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```text
+commit abc123 -> build -> migration 004 -> deploy
+health 200 -> owner flow pass -> denial pass
+backup created -> rollback rehearsed
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Execute the release rehearsal, replace every placeholder with actual evidence, and have another person follow recovery steps.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Trace production to an immutable commit. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Run and record a recovery drill. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-12-lesson-03 -->
+## Portfolio and documentation
+
+### Explanation
+
+Write for a reviewer who has five minutes: problem, users, constraints, architecture, screenshots, setup, tests, tradeoffs, and what you personally contributed. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```markdown
+# Project name
+Problem and user
+## Run locally
+## Architecture
+## Tests
+## Tradeoffs
+## Deployed commit
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Ask an unfamiliar reviewer to follow the README and repair every place where they must guess.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Make the repository reproducible from its README. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Explain one decision and one rejected alternative. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+<!-- lesson:week-12-lesson-04 -->
+## Demo and interview practice
+
+### Explanation
+
+Plan a reliable three-minute story, prepare fallback screenshots, answer with situation-action-result evidence, and admit uncertainty while explaining how you would investigate. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+
+### Example
+
+Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+
+```text
+0:00 problem and user
+0:30 primary journey
+2:00 engineering decision
+2:35 evidence and learning
+2:55 close
+```
+
+If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+
+### Guided exercise
+
+1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
+2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
+3. Practise once live and once with fallback captures, then answer one tradeoff and one unknown with evidence.
+4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+
+### Checkpoint
+
+- Deliver a timed live demo with a fallback. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Explain code decisions without reading the code aloud. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+<!-- /lesson -->
+
+## Weekly project
+
+Ship the capstone's primary journey at a stable HTTPS URL, present it to peers, and publish a portfolio case study. A team is optional, but individual contributions must be explicit.
+
+### Deliverables
+
+- A production release with tested primary flow, authorization, validation, responsive and keyboard checks, monitoring, and rollback notes.
+- A reproducible repository with tests, architecture, privacy and AI disclosures where relevant, exact deployed commit, and personal contribution record.
+- A concise case study, three-minute demo, feedback log, retrospective, and prioritized next steps based on evidence.
+
+Before submitting, open the project from a clean session, complete the primary journey, and connect each rubric criterion to concrete evidence. Never include passwords, tokens, precise locations, or real personal data.

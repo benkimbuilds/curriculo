@@ -1,0 +1,320 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-02",
+  "week": 2,
+  "locale": "es-MX",
+  "title": "Diseña páginas responsivas e incluyentes",
+  "summary": "Usa CSS con intención, adapta interfaces desde teléfonos hasta monitores del laboratorio y verifica que funcionen con teclado y tecnologías de asistencia.",
+  "prerequisites": [
+    "Completa el trabajo obligatorio de la semana 1."
+  ],
+  "objectives": [
+    "Aplicar cascada, modelo de caja y selectores reutilizables de forma predecible.",
+    "Construir layouts responsivos con Flexbox, Grid y medidas fluidas.",
+    "Revisar foco, contraste, etiquetas y estructura del documento."
+  ],
+  "modules": [
+    {
+      "id": "week-02-module-01",
+      "title": "Fundamentos de CSS · Sistemas de layout",
+      "lessons": [
+        {
+          "id": "week-02-lesson-01",
+          "title": "Fundamentos de CSS",
+          "summary": "Conecta hojas de estilo, inspecciona estilos calculados y razona sobre especificidad, herencia, unidades, color y modelo de caja en vez de cambiar números a ciegas.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Predecir qué declaración gana en la cascada.",
+            "Diagnosticar espacios con las herramientas del navegador."
+          ]
+        },
+        {
+          "id": "week-02-lesson-02",
+          "title": "Sistemas de layout",
+          "summary": "Usa primero el flujo normal, Flexbox para alinear en una dimensión y Grid para regiones de dos dimensiones. Define cortes cuando el contenido los necesite.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Elegir Flexbox o Grid con una razón clara.",
+            "Evitar medidas fijas que corten contenido real."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-02-module-02",
+      "title": "Diseño responsivo · Accesibilidad práctica",
+      "lessons": [
+        {
+          "id": "week-02-lesson-03",
+          "title": "Diseño responsivo",
+          "summary": "Empieza con el ancho menor, agrega media queries cuando falte espacio y usa texto, imágenes y contenedores fluidos sin desplazamiento horizontal.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Probar la interfaz en distintos anchos.",
+            "Escalar imágenes y texto sin ocultar información."
+          ]
+        },
+        {
+          "id": "week-02-lesson-04",
+          "title": "Accesibilidad práctica",
+          "summary": "Revisa orden de teclado, foco visible, encabezados, etiquetas, texto alternativo, contraste, movimiento reducido y mensajes de error como parte de la calidad normal.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Completar el flujo principal usando sólo teclado.",
+            "Registrar y corregir hallazgos de accesibilidad."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-02-project",
+    "title": "Landing de un servicio público",
+    "summary": "Diseña una página responsiva para un servicio local ficticio, como biblioteca, centro de reciclaje o taller comunitario. La acción principal debe funcionar sin mouse.",
+    "collaboration": "individual",
+    "estimatedMinutes": 720,
+    "deliverables": [
+      "Layouts responsivos a 360, 768 y 1280 píxeles CSS sin desbordamiento horizontal.",
+      "Un recorrido completo con teclado, foco visible y etiquetas de formulario asociadas.",
+      "Una nota breve que explique jerarquía, color, tipografía y revisiones de accesibilidad."
+    ],
+    "rubric": {
+      "id": "week-02-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-02-criterion-functionality",
+          "title": "Comportamiento principal",
+          "description": "El recorrido requerido funciona desde un inicio limpio y maneja los casos límite indicados.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-02-criterion-quality",
+          "title": "Calidad del código",
+          "description": "La solución tiene nombres y límites comprensibles, commits enfocados y ningún secreto expuesto.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-02-criterion-experience",
+          "title": "Experiencia para la persona",
+          "description": "La interfaz es responsiva, usable con teclado, tiene etiquetas claras y explica errores y recuperación.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-02-criterion-verification",
+          "title": "Evidencia de verificación",
+          "description": "Las pruebas y revisiones documentadas aportan evidencia repetible para las afirmaciones importantes.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-02-criterion-reflection",
+          "title": "Reflexión técnica",
+          "description": "El README explica decisiones, tradeoffs, un reto y una mejora siguiente concreta.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "foundations/html_css/css-foundations",
+      "foundations/html_css/flexbox",
+      "intermediate_html_css/grid"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "translated-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "translator": "AI Builders LATAM Spanish editorial team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "MDN CSS first steps",
+        "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Diseña páginas responsivas e incluyentes
+
+Usa CSS con intención, adapta interfaces desde teléfonos hasta monitores del laboratorio y verifica que funcionen con teclado y tecnologías de asistencia. Esta edición está escrita para quien empieza desde cero y puede trabajar en Windows o macOS. Completa las lecciones en orden: cada una incluye explicación, ejemplo, práctica y evidencia antes del proyecto semanal.
+
+<!-- lesson:week-02-lesson-01 -->
+## Fundamentos de CSS
+
+### Explicación
+
+Conecta hojas de estilo, inspecciona estilos calculados y razona sobre especificidad, herencia, unidades, color y modelo de caja en vez de cambiar números a ciegas. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```css
+.notice { color: navy; }
+main .notice { color: teal; }
+.notice { color: purple; }
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Predice el color final, verifícalo en estilos calculados y haz que gane la primera regla sin usar important.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Predecir qué declaración gana en la cascada. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Diagnosticar espacios con las herramientas del navegador. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-02-lesson-02 -->
+## Sistemas de layout
+
+### Explicación
+
+Usa primero el flujo normal, Flexbox para alinear en una dimensión y Grid para regiones de dos dimensiones. Define cortes cuando el contenido los necesite. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```css
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Agrega una tarjeta con un título muy largo y explica por qué el grid se ajusta sin un breakpoint por dispositivo.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Elegir Flexbox o Grid con una razón clara. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Evitar medidas fijas que corten contenido real. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-02-lesson-03 -->
+## Diseño responsivo
+
+### Explicación
+
+Empieza con el ancho menor, agrega media queries cuando falte espacio y usa texto, imágenes y contenedores fluidos sin desplazamiento horizontal. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```css
+.page { width: min(100% - 2rem, 70rem); margin-inline: auto; }
+img { max-width: 100%; height: auto; }
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Prueba a 320, 768 y 1280 píxeles y anota cuándo el contenido, no el nombre de un dispositivo, exige un cambio.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Probar la interfaz en distintos anchos. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Escalar imágenes y texto sin ocultar información. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-02-lesson-04 -->
+## Accesibilidad práctica
+
+### Explicación
+
+Revisa orden de teclado, foco visible, encabezados, etiquetas, texto alternativo, contraste, movimiento reducido y mensajes de error como parte de la calidad normal. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```html
+<label for="email">Correo</label>
+<input id="email" name="email" type="email">
+<button>Solicitar información</button>
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Llega a cada control con teclado, agrega foco visible y escribe texto alternativo útil para una imagen informativa.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Completar el flujo principal usando sólo teclado. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Registrar y corregir hallazgos de accesibilidad. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+## Proyecto semanal
+
+Diseña una página responsiva para un servicio local ficticio, como biblioteca, centro de reciclaje o taller comunitario. La acción principal debe funcionar sin mouse.
+
+### Entregables
+
+- Layouts responsivos a 360, 768 y 1280 píxeles CSS sin desbordamiento horizontal.
+- Un recorrido completo con teclado, foco visible y etiquetas de formulario asociadas.
+- Una nota breve que explique jerarquía, color, tipografía y revisiones de accesibilidad.
+
+Antes de entregar, abre el proyecto desde una sesión limpia, recorre el flujo principal y compara cada criterio de la rúbrica con evidencia concreta. No incluyas contraseñas, tokens, ubicaciones precisas ni datos personales reales.

@@ -1,0 +1,321 @@
+---
+{
+  "schemaVersion": 1,
+  "programId": "web-foundations-mx",
+  "contentVersion": "2026.1",
+  "status": "published",
+  "estimatedMinutes": 1800,
+  "platforms": [
+    "windows",
+    "macos"
+  ],
+  "id": "week-09",
+  "week": 9,
+  "locale": "es-MX",
+  "title": "Agrega una función de IA acotada",
+  "summary": "Define una tarea pequeña asistida por un modelo, protege datos privados, exige salida estructurada, controla costo y conserva utilidad si el modelo falla.",
+  "prerequisites": [
+    "Completa el trabajo obligatorio de la semana 8."
+  ],
+  "objectives": [
+    "Elegir una tarea de IA con beneficio y alternativa sin IA claros.",
+    "Validar salida estructurada antes de incorporarla al estado.",
+    "Implementar controles de privacidad, presupuesto, tiempo y fallback."
+  ],
+  "modules": [
+    {
+      "id": "week-09-module-01",
+      "title": "Definición de producto con IA · Prompts y salida estructurada",
+      "lessons": [
+        {
+          "id": "week-09-lesson-01",
+          "title": "Definición de producto con IA",
+          "summary": "Separa el problema del modelo. Define entrada, salida permitida, ejemplos de éxito, conductas inaceptables y un flujo sin costo antes de elegir proveedor.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Escribir un contrato de tarea acotado.",
+            "Explicar cuándo el código tradicional es mejor."
+          ]
+        },
+        {
+          "id": "week-09-lesson-02",
+          "title": "Prompts y salida estructurada",
+          "summary": "Incluye contexto necesario, delimita texto no confiable, solicita un esquema pequeño y analiza la respuesta como desconocida. Rechaza campos incorrectos.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Crear y validar un esquema de salida.",
+            "Separar instrucciones de contenido de usuario."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "week-09-module-02",
+      "title": "Privacidad, seguridad y costo · Fallbacks y control",
+      "lessons": [
+        {
+          "id": "week-09-lesson-03",
+          "title": "Privacidad, seguridad y costo",
+          "summary": "Minimiza lo que sale del servidor, nunca envíes secretos, limita frecuencia, tokens y tiempo, y registra costo sin guardar prompts sensibles.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lesson",
+          "outcomes": [
+            "Completar una revisión de flujo de datos.",
+            "Configurar límites aplicables por solicitud."
+          ]
+        },
+        {
+          "id": "week-09-lesson-04",
+          "title": "Fallbacks y control",
+          "summary": "Permite revisar y editar sugerencias. Conserva el original, etiqueta contenido generado, maneja rechazos y ofrece una alternativa determinista útil.",
+          "estimatedMinutes": 180,
+          "required": true,
+          "kind": "lab",
+          "outcomes": [
+            "Recuperarse de timeout y salida inválida.",
+            "No presentar generación como hecho verificado."
+          ]
+        }
+      ]
+    }
+  ],
+  "project": {
+    "id": "week-09-project",
+    "title": "Desglose de tareas asistido por IA",
+    "summary": "Agrega al gestor una función opcional que sugiera pasos pequeños desde una descripción no sensible. La persona aprueba cada tarea antes de guardarla.",
+    "collaboration": "individual",
+    "estimatedMinutes": 720,
+    "deliverables": [
+      "Contrato de tarea, esquema de salida y validación documentados antes de persistir.",
+      "Límite de frecuencia, tiempo y costo, errores seguros y logs sin descripciones ni credenciales.",
+      "Revisión editable y alternativa sin costo basada en plantilla."
+    ],
+    "rubric": {
+      "id": "week-09-rubric-v1",
+      "version": 1,
+      "passThreshold": 75,
+      "criteria": [
+        {
+          "id": "week-09-criterion-functionality",
+          "title": "Comportamiento principal",
+          "description": "El recorrido requerido funciona desde un inicio limpio y maneja los casos límite indicados.",
+          "type": "machine",
+          "weight": 25,
+          "required": true
+        },
+        {
+          "id": "week-09-criterion-quality",
+          "title": "Calidad del código",
+          "description": "La solución tiene nombres y límites comprensibles, commits enfocados y ningún secreto expuesto.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-09-criterion-experience",
+          "title": "Experiencia para la persona",
+          "description": "La interfaz es responsiva, usable con teclado, tiene etiquetas claras y explica errores y recuperación.",
+          "type": "human",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-09-criterion-verification",
+          "title": "Evidencia de verificación",
+          "description": "Las pruebas y revisiones documentadas aportan evidencia repetible para las afirmaciones importantes.",
+          "type": "machine",
+          "weight": 20,
+          "required": true
+        },
+        {
+          "id": "week-09-criterion-reflection",
+          "title": "Reflexión técnica",
+          "description": "El README explica decisiones, tradeoffs, un reto y una mejora siguiente concreta.",
+          "type": "human",
+          "weight": 15,
+          "required": true
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "adaptedFrom": "The Odin Project",
+    "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
+    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamPaths": [
+      "javascript/nodejs/apis",
+      "javascript/nodejs/security",
+      "javascript/react/managing_state_with_reducers_and_context"
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
+    "adaptationStatus": "translated-adaptation",
+    "editor": "AI Builders LATAM curriculum team",
+    "translator": "AI Builders LATAM Spanish editorial team",
+    "reviewedAt": "2026-09-05",
+    "externalResources": [
+      {
+        "label": "The Odin Project curriculum",
+        "url": "https://www.theodinproject.com/paths",
+        "kind": "upstream"
+      },
+      {
+        "label": "OWASP LLM prompt injection guidance",
+        "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+        "kind": "documentation"
+      }
+    ]
+  }
+}
+---
+
+# Agrega una función de IA acotada
+
+Define una tarea pequeña asistida por un modelo, protege datos privados, exige salida estructurada, controla costo y conserva utilidad si el modelo falla. Esta edición está escrita para quien empieza desde cero y puede trabajar en Windows o macOS. Completa las lecciones en orden: cada una incluye explicación, ejemplo, práctica y evidencia antes del proyecto semanal.
+
+<!-- lesson:week-09-lesson-01 -->
+## Definición de producto con IA
+
+### Explicación
+
+Separa el problema del modelo. Define entrada, salida permitida, ejemplos de éxito, conductas inaceptables y un flujo sin costo antes de elegir proveedor. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```json
+{
+  "input": "Plan a community workshop",
+  "output": ["Choose a date", "List materials"]
+}
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Crea el mismo resultado con una plantilla determinista y define el beneficio específico que debería aportar el modelo.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Escribir un contrato de tarea acotado. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Explicar cuándo el código tradicional es mejor. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-09-lesson-02 -->
+## Prompts y salida estructurada
+
+### Explicación
+
+Incluye contexto necesario, delimita texto no confiable, solicita un esquema pequeño y analiza la respuesta como desconocida. Rechaza campos incorrectos. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```ts
+const suggestionSchema = z.object({
+  title: z.string().min(1).max(80),
+  rationale: z.string().max(200),
+  effort: z.enum(["small", "medium"])
+});
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Analiza respuestas incompletas, extra, con tipo incorrecto o enorme como unknown y recházalas antes de mostrar.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Crear y validar un esquema de salida. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Separar instrucciones de contenido de usuario. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-09-lesson-03 -->
+## Privacidad, seguridad y costo
+
+### Explicación
+
+Minimiza lo que sale del servidor, nunca envíes secretos, limita frecuencia, tokens y tiempo, y registra costo sin guardar prompts sensibles. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```text
+Browser -> App server -> AI provider
+             limits: 5/min, 800 tokens, 8 s
+             logs: status + cost, no learner text
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Elimina campos innecesarios y muestra dónde se aplican secretos, frecuencia, timeout y topes de costo.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Completar una revisión de flujo de datos. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Configurar límites aplicables por solicitud. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+<!-- lesson:week-09-lesson-04 -->
+## Fallbacks y control
+
+### Explicación
+
+Permite revisar y editar sugerencias. Conserva el original, etiqueta contenido generado, maneja rechazos y ofrece una alternativa determinista útil. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+
+### Ejemplo
+
+Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+
+```ts
+try { return await suggest(input); }
+catch { return templateSteps(input); }
+```
+
+Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+
+### Ejercicio guiado
+
+1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
+2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
+3. Fuerza timeout, cuota, rechazo y datos mal formados; conserva el original y exige aprobación antes de guardar.
+4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+
+### Comprobación
+
+- Recuperarse de timeout y salida inválida. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- No presentar generación como hecho verificado. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+<!-- /lesson -->
+
+## Proyecto semanal
+
+Agrega al gestor una función opcional que sugiera pasos pequeños desde una descripción no sensible. La persona aprueba cada tarea antes de guardarla.
+
+### Entregables
+
+- Contrato de tarea, esquema de salida y validación documentados antes de persistir.
+- Límite de frecuencia, tiempo y costo, errores seguros y logs sin descripciones ni credenciales.
+- Revisión editable y alternativa sin costo basada en plantilla.
+
+Antes de entregar, abre el proyecto desde una sesión limpia, recorre el flujo principal y compara cada criterio de la rúbrica con evidencia concreta. No incluyas contraseñas, tokens, ubicaciones precisas ni datos personales reales.
