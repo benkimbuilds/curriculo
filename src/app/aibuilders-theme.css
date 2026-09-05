@@ -100,6 +100,22 @@ body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; 
 .sidebar__nav a:first-child { font-weight: 550; }
 .sidebar__nav a:hover { background: #f4f4f4; color: #111; }
 .sidebar__profile { padding-top: 20px; }
+.sidebar__nav { flex: 1; min-height: 0; overflow-y: auto; padding-bottom: 16px; }
+.sidebar__profile { flex-shrink: 0; }
+.program-navigation__toggle { align-items: center; background: transparent; border: 0; border-radius: 10px; color: #666; display: flex; font-size: 13px; font-weight: 550; gap: 11px; padding: 13px 12px; text-align: left; width: 100%; }
+.program-navigation__toggle:hover, .program-navigation__toggle.is-active { background: #f4f4f4; color: #111; }
+.program-navigation__chevron { margin-left: auto; flex-shrink: 0; transition: transform .15s ease; }
+.program-navigation__toggle[aria-expanded=true] .program-navigation__chevron { transform: rotate(180deg); }
+.program-navigation__weeks { border-left: 1px solid var(--line); list-style: none; margin: 8px 0 12px 20px; padding: 0 0 0 8px; }
+.program-navigation__weeks[hidden] { display: none; }
+.sidebar__nav .program-navigation__weeks a, .mobile-app-header .program-navigation__weeks a { align-items: center; border-radius: 8px; display: flex; gap: 9px; padding: 10px 8px; font-size: 11px; min-height: 40px; }
+.program-navigation__weeks a[aria-current] { background: #ededed; color: #111; }
+.program-navigation__number { color: #777; font-family: var(--mono); font-size: 10px; flex-shrink: 0; }
+.program-navigation__label { display: grid; gap: 3px; min-width: 0; }
+.program-navigation__label > span { font-size: 12px; }
+.program-navigation__label small { color: #777; font-size: 10px; font-weight: 400; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mobile-app-header details nav:has(.program-navigation) { width: min(310px, calc(100vw - 30px)); max-height: calc(100dvh - 90px); overflow-y: auto; }
+.mobile-app-header .account-menu > div { position: static; box-shadow: none; margin-top: 8px; min-width: 0; }
 .page-intro h1, .dashboard-greeting h1, .lesson-header h1, .week-hero h1, .project-header h1 { font-size: clamp(40px, 4.5vw, 58px); font-weight: 400; letter-spacing: 0; line-height: 1.08; text-wrap: balance; }
 .dashboard-greeting { border-color: var(--line); }
 .panel, .continue-card, .week-card, .program-summary, .tip-card, .project-showcase { background: #fff; border: 1px solid var(--line); border-radius: 18px; }

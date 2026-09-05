@@ -105,6 +105,28 @@ test("registration, verification, protected learning, sign-out, and recovery", a
   await page.getByLabel("Contraseña").fill(newPassword);
   await page.getByRole("button", { name: "Entrar" }).click();
   await expect(page).toHaveURL(/dashboard/);
+  const sidebar = page.locator(".sidebar");
+  const programToggle = sidebar.getByRole("button", { name: "Mi programa" });
+  await expect(programToggle).toHaveAttribute("aria-expanded", "false");
+  await programToggle.click();
+  await expect(programToggle).toHaveAttribute("aria-expanded", "true");
+  await expect(sidebar.getByRole("link", { name: /^Semana \d+:/ })).toHaveCount(12);
+  await sidebar.getByRole("link", { name: /^Semana 12:/ }).click();
+  await expect(page).toHaveURL(/\/programa\/semana\/12$/);
+  await expect(sidebar.getByRole("link", { name: /^Semana 12:/ })).toHaveAttribute("aria-current", "location");
+  await sidebar.getByRole("link", { name: "Ver programa completo" }).click();
+  await expect(page).toHaveURL(/\/programa$/);
+  await programToggle.click();
+  await expect(sidebar.getByRole("link", { name: /^Semana 1:/ })).toBeHidden();
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const mobile = page.locator(".mobile-app-header");
+  await mobile.getByLabel("Abrir navegación").click();
+  await mobile.getByRole("link", { name: /^Semana 3:/ }).click();
+  await expect(page).toHaveURL(/\/programa\/semana\/3$/);
+  await mobile.getByLabel("Abrir navegación").click();
+  await expect(mobile.getByRole("link", { name: /^Semana 3:/ })).toHaveAttribute("aria-current", "location");
+  await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto("/programa/semana/1/leccion/week-01-lesson-01");
   await expect(page.getByRole("heading", { level: 1, name: /Tu equipo y la web/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Explicación" })).toBeVisible();
