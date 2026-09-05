@@ -66,7 +66,11 @@ async function main() {
         .where(eq(user.email, environment.BOOTSTRAP_DEVELOPER_ADMIN_EMAIL.toLowerCase()))
         .limit(1);
       if (!administrator?.verified) {
-        throw new Error("Bootstrap developer administrator must already be a verified account");
+        logger.warn(
+          { email: environment.BOOTSTRAP_DEVELOPER_ADMIN_EMAIL },
+          "Bootstrap administrator grant deferred until the account is verified",
+        );
+        return;
       }
       await transaction
         .insert(roleAssignments)
