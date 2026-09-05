@@ -20,7 +20,7 @@ export function PublicFooter() {
       <div className="shell-width public-footer__grid">
         <div><Logo inverse /><p>Currículo gratuito de desarrollo web para México.</p></div>
         <div><strong>Programa</strong><Link href="/#plan-estudios">Plan de estudios</Link><Link href="/galeria">Proyectos</Link><Link href="/registro">Inscripción</Link></div>
-        <div><strong>Licencia</strong><a href="https://github.com/" rel="noreferrer" target="_blank">Código fuente</a><a href="https://www.theodinproject.com/" rel="noreferrer" target="_blank">The Odin Project</a></div>
+        <div><strong>Licencia</strong><a href="https://github.com/benkimbuilds/curriculo" rel="noreferrer" target="_blank">Código fuente</a><a href="https://www.theodinproject.com/" rel="noreferrer" target="_blank">The Odin Project</a></div>
       </div>
       <div className="shell-width public-footer__bottom"><span>Ruta · 2026</span><span>Contenido CC BY-NC-SA 4.0</span></div>
     </footer>
