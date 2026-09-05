@@ -44,6 +44,29 @@ test("public pages fit a phone viewport without dated geographic branding", asyn
   }
 });
 
+test("homepage facts keep readable space on both sides of column dividers", async ({ page }) => {
+  for (const width of [1440, 900, 768, 390]) {
+    await page.setViewportSize({ width, height: 1000 });
+    await page.goto("/");
+    const collisions = await page.locator(".program-facts").evaluate((facts) => {
+      const cells = Array.from(facts.children);
+      return cells.flatMap((cell, index) => {
+        const previous = cells[index - 1];
+        if (!previous) return [];
+        const a = previous.getBoundingClientRect();
+        const b = cell.getBoundingClientRect();
+        if (Math.abs(a.top - b.top) > 1) return [];
+        const label = cell.querySelector("dt")!;
+        const range = document.createRange();
+        range.selectNodeContents(label);
+        const inset = range.getBoundingClientRect().left - b.left;
+        return inset < 16 ? [label.textContent] : [];
+      });
+    });
+    expect(collisions, `Text touches a divider at ${width}px`).toEqual([]);
+  }
+});
+
 test("registration, verification, protected learning, sign-out, and recovery", async ({ page }) => {
   const email = `ruta-e2e-${Date.now()}@example.test`;
   const oldPassword = "ruta-e2e-password-123";
