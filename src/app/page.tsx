@@ -12,7 +12,7 @@ export default function Home() {
       <main className="editorial-home">
         <section className="editorial-hero">
           <div className="shell-width editorial-hero__inner">
-            <p className="editorial-label">Programa abierto · México · 2026</p>
+            <p className="editorial-label">Programa abierto</p>
             <h1>Currículo abierto para aprender desarrollo web.</h1>
             <div className="editorial-hero__summary">
               <p>Un programa gratuito de doce semanas para personas que empiezan desde cero. Se estudia con explicaciones, práctica diaria y un proyecto verificable cada semana.</p>

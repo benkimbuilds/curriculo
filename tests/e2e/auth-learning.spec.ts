@@ -28,6 +28,22 @@ function firstUrl(body: string): string {
   return match[0].replace(/&amp;/g, "&");
 }
 
+test("public pages fit a phone viewport without dated geographic branding", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+
+  for (const route of ["/", "/registro", "/iniciar-sesion", "/recuperar", "/privacidad", "/terminos"]) {
+    await page.goto(route);
+    await expect(page.locator("body")).not.toContainText(/México|2026/);
+    const dimensions = await page.evaluate(() => ({
+      content: document.body.scrollWidth,
+      viewport: document.documentElement.clientWidth,
+    }));
+    expect(dimensions.content, `${route} should not overflow horizontally`).toBeLessThanOrEqual(
+      dimensions.viewport,
+    );
+  }
+});
+
 test("registration, verification, protected learning, sign-out, and recovery", async ({ page }) => {
   const email = `ruta-e2e-${Date.now()}@example.test`;
   const oldPassword = "ruta-e2e-password-123";

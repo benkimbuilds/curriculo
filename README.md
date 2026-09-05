@@ -1,8 +1,8 @@
 # Ruta
 
 Ruta is a free, open-source learning platform and 12-week curriculum for people
-in Mexico learning full-stack web development from zero. The learner experience
-is written in Mexican Spanish; authorized curriculum administrators can switch
+learning full-stack web development from zero. The learner experience is written
+in Spanish; authorized curriculum administrators can switch
 to the English audit edition.
 
 The curriculum adapts the project-based approach and learning sequence of
@@ -207,7 +207,7 @@ pnpm content:manifest
 pnpm content:manifest:check
 ```
 
-Mexican Spanish is the published learner edition. English is the audit/source
+Spanish is the published learner edition. English is the audit/source
 edition available to authorized curriculum administrators.
 
 ## Testing and CI

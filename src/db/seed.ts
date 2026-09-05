@@ -17,10 +17,10 @@ async function main() {
   await db.transaction(async (transaction) => {
     const [organization] = await transaction
       .insert(organizations)
-      .values({ slug: environment.DEFAULT_ORGANIZATION_SLUG, name: "AI Builders México" })
+      .values({ slug: environment.DEFAULT_ORGANIZATION_SLUG, name: "AI Builders" })
       .onConflictDoUpdate({
         target: organizations.slug,
-        set: { name: "AI Builders México", updatedAt: new Date() },
+        set: { name: "AI Builders", updatedAt: new Date() },
       })
       .returning({ id: organizations.id });
     if (!organization) throw new Error("Could not seed organization");

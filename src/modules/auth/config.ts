@@ -15,7 +15,7 @@ import { hashPassword, verifyPassword } from "./password";
 const environment = getEnvironment();
 
 export const auth = betterAuth({
-  appName: "Currículo AI Builders México",
+  appName: "Ruta",
   baseURL: environment.BETTER_AUTH_URL,
   secret: environment.BETTER_AUTH_SECRET,
   trustedOrigins: environment.TRUSTED_ORIGINS.split(",").map((origin) => origin.trim()),
