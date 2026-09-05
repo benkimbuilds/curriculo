@@ -33,6 +33,17 @@ final month.
 
 ## Architecture
 
+### Visual system
+
+Ruta shares the design language of AI Builders LATAM: Instrument Serif headings,
+Geist body text, Geist Mono labels, white surfaces, charcoal actions, subtle gray
+borders, and rounded navigation and cards. `src/app/aibuilders-theme.css` adapts
+the styles from the local `website-lat` project across public, learner, and staff
+screens. `src/app/globals.css` retains structural layouts and responsive behavior.
+Fonts are self-hosted in `public/fonts`, alongside their SIL Open Font licenses.
+
+### Runtime
+
 Ruta is a modular Next.js application with one codebase and two application
 processes. Both processes use the same production Docker image and database.
 
