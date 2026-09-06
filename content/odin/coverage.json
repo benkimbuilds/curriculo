@@ -1,0 +1,70 @@
+{
+  "curriculumCommit": "fc46ee82462f9916889030985640805d29837f74",
+  "orderingCommit": "13ba6b2c4219c7e1ea734369425071bb9acd6f7e",
+  "expectedItems": 197,
+  "mappedItems": 197,
+  "sourceLessons": 162,
+  "sourceProjects": 35,
+  "translatedItems": 156,
+  "adaptedItems": 41,
+  "humanEditorialReview": "not_independently_certified",
+  "scope": "Structural source coverage at the pinned commits; not a guarantee about future upstream changes, external resource availability, or instructional quality.",
+  "courses": [
+    {
+      "id": "foundations",
+      "title": "Foundations",
+      "fixture": "db/fixtures/paths/foundations/seed.rb",
+      "count": 46,
+      "mapped": 46
+    },
+    {
+      "id": "intermediate-html-css",
+      "title": "Intermediate HTML and CSS",
+      "fixture": "db/fixtures/paths/full_stack_javascript/courses/intermediate_html_css.rb",
+      "count": 22,
+      "mapped": 22
+    },
+    {
+      "id": "javascript",
+      "title": "JavaScript",
+      "fixture": "db/fixtures/paths/full_stack_javascript/courses/javascript.rb",
+      "count": 41,
+      "mapped": 41
+    },
+    {
+      "id": "advanced-html-css",
+      "title": "Advanced HTML and CSS",
+      "fixture": "db/fixtures/paths/full_stack_javascript/courses/advanced_html_css.rb",
+      "count": 16,
+      "mapped": 16
+    },
+    {
+      "id": "react",
+      "title": "React",
+      "fixture": "db/fixtures/paths/full_stack_javascript/courses/react.rb",
+      "count": 25,
+      "mapped": 25
+    },
+    {
+      "id": "databases",
+      "title": "Databases",
+      "fixture": "db/fixtures/paths/full_stack_javascript/courses/databases.rb",
+      "count": 3,
+      "mapped": 3
+    },
+    {
+      "id": "node-js",
+      "title": "NodeJS",
+      "fixture": "db/fixtures/paths/full_stack_javascript/courses/node_js.rb",
+      "count": 30,
+      "mapped": 30
+    },
+    {
+      "id": "getting-hired",
+      "title": "Getting Hired",
+      "fixture": "db/fixtures/paths/full_stack_javascript/courses/getting_hired.rb",
+      "count": 14,
+      "mapped": 14
+    }
+  ]
+}

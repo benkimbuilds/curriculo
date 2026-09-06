@@ -1,0 +1,87 @@
+### Introduction
+
+Taking a structured approach to getting hired means starting early and getting some important things out of the way first.
+
+### Lesson overview
+
+This section contains a general overview of topics that you will learn in this lesson.
+
+- You'll learn what you can do to prepare for the job search.
+
+### Get good!
+
+Navigating this process can be a beast but don't let it distract you from building your skills, which ultimately will determine if you get the job or not.  This course assumes you've already made it through the other courses and have accomplished enough in their completion to elevate you to competence.  If not, you've got to ruthlessly address your weak points (even if it's the tricky stuff like algorithms and data structures) in order to be qualified for the kinds of positions you're applying to.
+
+### Craft a narrative
+
+You may be uncomfortable "selling yourself" but that's exactly what you'll have to do.  Luckily, that doesn't mean acting like a used car salesman; it's more subtle than you think.  It really means crafting a story about who you are, how you got to where you are, and why you'll keep growing.  Everyone can tell a story.  So put some effort into crafting a compelling narrative that stitches together your background (especially if you come from a non-traditional background) into a compelling and unavoidable wave of capability and drive.
+
+### Build a portfolio
+
+All along the way, you should keep building things.  The work you've done will be crucial to demonstrating your technical skill and getting hired.  Employers want to see that you can build and ship code and that you make good decisions when confronted with engineering trade-offs.  All of this stems from conversations about your portfolio of work.
+
+The portfolio is also important for another thing that isn't mentioned much -- social proof.  If you've been a part of larger or group projects, that's almost like showing that you've worked somewhere before.  It makes the employer comfortable that other people have worked with you before so they can too.
+
+Speaking of group projects, participating in the open source community is a great way to showcase your skills and collaborate with other developers. If you're looking for your first open source project to contribute to, start with TOP! We're always looking for ways to improve our curriculum, main site, and odin-bot v2, so check out our [repositories on GitHub](https://github.com/TheOdinProject) to get started. While you're at it, check out this [Dev.to article](https://dev.to/opensauced/how-i-got-hired-contributing-to-open-source-projects-546i) to learn you can leverage open source contributions in your job search.
+
+Your portfolio as a developer is GitHub.  You may have a personal website but GitHub is still the authoritative repository of your technical ability.  Ignore it at your peril.
+
+### Clean up your web presence (and have one)
+
+Google yourself in an incognito window (to avoid Google's smart algorithm).  What comes up? Do the links fit into your personal narrative?  Whoever is looking to hire you will certainly Google you.  Make sure that what they find matches what you want them to find.  If you've got a ridiculously common name, you may have a harder time building your web presence but it's also harder to have the *wrong* web presence.
+
+The most important part of your web presence to fix up is your GitHub profile.  Make sure your projects are organized and their README files contain a description and a link to where it is live so anyone looking at the project can quickly see your brilliance.
+
+Next, try to be discoverable.  If we're trying to get in touch with you or find your work on the web, can I?  Do you have a personal website?  Are you on X (formerly known as Twitter)? You don't need to go crazy with social media, but sometimes just having enough of a profile to be a "real" person and give people the opportunity to get in touch with you can go a long way.  
+
+Use LinkedIn if you're not allergic to it.  Again, this is about getting your personal narrative out there in the way YOU choose and not relying on Google to get it right.  LinkedIn is fast replacing the resume anyway.  
+
+Other sites, like Brand Yourself, will describe a bit better how to take on your web presence, but just make sure your narrative is being told the way you want it to.
+
+### Get out in the community and collect information
+
+Find and meet other developers.  That doesn't mean "power networking" but it does mean genuine human connection.  Your network of people DOES matter in a BIG way.  For now, it's probably just for answering questions and harvesting advice but your next job will probably be found through the people you know and some who you meet while you're gathering this advice.  People like giving advice and like investing themselves emotionally in other people with growth curves.
+
+That's best to do in person 1-on-1, where you can ask your dumb questions, but there are plenty of communities as well, e.g. Meetups, Stack Overflow, Quora, local user groups...  Be a part of them and don't be afraid to ask questions.  That's a great way to build relationships.
+
+You'll probably have a million questions but the relevant ones here are about understanding what exactly different jobs *are* and what they're looking for. The easiest way to find out is ask developers what they do.  It's much faster than trolling through blog posts trying to figure out the process.  Buy lunches and coffees if you must.  Set a goal of talking to 5 real human beings about your job search.
+
+Another way to get this information is to check out a whole bunch of job postings.  You'll quickly start seeing similarities between them.  Yeah, it's shit work, but it must be done.  
+
+Another facet of this is related to your web presence -- don't be afraid to produce content like blogging or answering questions on Quora.  They don't need to be explicitly technical, but should showcase your ability to think critically and write well.  Both of these play well with future employers.  
+
+### Assignment
+
+<div class="lesson-content__panel" markdown="1">
+
+1. If you are changing careers, read about [How to Explain Your Career Transition by Dorie Clark](https://web.archive.org/web/20190822194330/https://hbr.org/2013/04/how-to-explain-your-career-tra).
+
+1. Learn why GitHub is so important:  
+
+   - Read [**A Programmer's Portfolio**](https://blog.codinghorror.com/a-programmers-portfolio/), to understand how showing your actual code is more powerful than relying on a resume to prove your skills.  
+   - The article [**The Power of a Programming Portfolio**](http://grokcode.com/58/the-power-of-a-programming-portfolio/) describes how a portfolio can help you stand out.  
+   - According to [**Your GitHub Portfolio**](http://www.forbes.com/sites/anthonykosner/2012/10/20/software-engineers-are-in-demand-and-github-is-how-you-find-them/) from Forbes, GitHub is a central hiring tool that lets employers see your code.  
+
+1. Read articles on how to brand yourself:
+
+    - [Brand Yourself](http://brandyourself.com) helps you... brand... yourself.  Basic services are free.
+    - [Control Your Online Reputation from Monster](https://web.archive.org/web/20201123201302/https://www.monster.com/career-advice/article/control-your-online-reputation) is another good article.
+    - Read about [How Important Is It for a Programmer to Have an Online Presence? on Stack Exchange](http://programmers.stackexchange.com/questions/143673/how-important-is-it-for-a-programmer-to-have-an-online-presence).
+    - Learn [How to Build Your Digital Presence as a Software Developer](https://medium.com/pramp/how-to-build-your-digital-presence-as-a-software-developer-cb61c4c1aab).
+
+1. "How to Win Friends and Influence People" is a classic that relates to business and networking but is applicable to all facets of the social world around you. If you're interested, here's a [summary of the book](https://fs.blog/how-to-win-friends-and-influence-people/ "summary of How to Win Friends and Influence People") that covers all the points we think are important.
+
+</div>
+
+### Knowledge check
+
+The following questions are an opportunity to reflect on key topics in this lesson. If you can't answer a question, click on it to review the material, but keep in mind you are not expected to memorize or master this knowledge.
+
+- [Why is it important to build a portfolio of work as you prepare for your job search?](#build-a-portfolio)
+- [What steps can you take to improve your web presence before potential employers search for you online?](#clean-up-your-web-presence-and-have-one)
+
+### Additional resources
+
+This section contains helpful links to related content. It isn't required, so consider it supplemental.
+
+- It looks like this lesson doesn't have any additional resources yet. Help us expand this section by contributing to our curriculum.

@@ -59,7 +59,7 @@ export default function Home() {
         <section className="editorial-section access-section">
           <div className="shell-width editorial-columns">
             <div><p className="editorial-label">Acceso público</p><h2>El material completo está disponible sin costo.</h2></div>
-            <div className="access-section__copy"><p>Cualquier persona con un correo verificado puede estudiar a su ritmo. Las cohortes facilitadas usan el mismo currículo con calendario y acompañamiento.</p><Link href="/registro">Inscribirme</Link></div>
+            <div className="access-section__copy"><p>Cualquier persona con un correo verificado puede estudiar a su ritmo. Además de la ruta guiada de doce semanas, la biblioteca incluye Fundamentos y Full Stack JavaScript de The Odin Project, adaptados al español y a Next.js. Completar toda la biblioteca requiere tiempo adicional.</p><Link href="/registro">Inscribirme</Link></div>
           </div>
         </section>
       </main>

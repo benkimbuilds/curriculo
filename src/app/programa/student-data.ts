@@ -49,7 +49,7 @@ export async function loadStudentContext(returnTo: string): Promise<StudentConte
   }
   if (!enrollmentWithVersion) throw new Error("No se pudo preparar tu inscripción.");
   const { enrollment, contentVersion } = enrollmentWithVersion;
-  const weeks = listCurriculumWeeks().filter((week) => week.contentVersion === contentVersion);
+  const weeks = listCurriculumWeeks({ includeLibrary: true }).filter((week) => week.contentVersion === contentVersion);
   if (weeks.length === 0) throw new Error("La versión de tu programa ya no está disponible.");
 
   const [progressRows, weekRows, submissionRows, cohortRows] = await Promise.all([

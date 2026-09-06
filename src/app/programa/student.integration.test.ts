@@ -5,6 +5,7 @@ import { db } from "@/db";
 import { enrollments, lessonProgress, programVersions, submissions, user } from "@/db/schema";
 import { createStudentSubmission } from "@/app/proyectos/submission-service";
 import { completeStudentLesson } from "./student-service";
+import { listOdinDocuments } from "@/modules/curriculum/odin";
 
 const integrationTest = process.env.TEST_DATABASE_URL ? it : it.skip;
 
@@ -19,6 +20,21 @@ async function createEnrolledStudent() {
 }
 
 describe("student learning persistence", () => {
+  integrationTest("keeps extension progress available after graduation and scoped to the owner", async () => {
+    const { student, enrollment } = await createEnrolledStudent();
+    const lesson = listOdinDocuments()[0];
+    expect(lesson).toBeDefined();
+    const completedAt = new Date("2026-01-15T12:00:00Z");
+    await db.update(enrollments).set({ status: "completed", completedAt }).where(eq(enrollments.id, enrollment.id));
+    const input = { userId: student.id, enrollmentId: enrollment.id, week: lesson.week, lessonId: lesson.id, contentVersion: "2026.1" };
+    const progress = await completeStudentLesson(input);
+    expect(progress.lessonId).toBe(lesson.id);
+    expect(progress.state).toBe("completed");
+    await expect(completeStudentLesson({ ...input, userId: crypto.randomUUID() })).rejects.toMatchObject({ code: "NOT_FOUND" });
+    const [stored] = await db.select().from(enrollments).where(eq(enrollments.id, enrollment.id));
+    expect(stored.status).toBe("completed");
+    expect(stored.completedAt).toEqual(completedAt);
+  });
   integrationTest("stores version-pinned lesson completion only for an owned enrollment", async () => {
     const { student, enrollment } = await createEnrolledStudent();
     const progress = await completeStudentLesson({ userId: student.id, enrollmentId: enrollment.id, week: 1, lessonId: "week-01-lesson-01", contentVersion: "2026.1" });

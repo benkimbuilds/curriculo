@@ -232,10 +232,15 @@ export type CurriculumLocale = z.infer<typeof curriculumLocaleSchema>;
 export type PublicationState = z.infer<typeof publicationStateSchema>;
 export type CurriculumFrontmatter = z.infer<typeof curriculumFrontmatterSchema>;
 
+export interface LessonListGroup { ordered: boolean; items: { text: string; children: LessonListGroup[] }[] }
+
 export type LessonContentBlock =
   | { type: "heading"; level: 2 | 3; text: string }
   | { type: "paragraph"; text: string }
   | { type: "list"; ordered: boolean; items: string[] }
+  | { type: "table"; headings: string[]; rows: string[][] }
+  | { type: "nested-list"; groups: LessonListGroup[] }
+  | { type: "anchor"; id: string }
   | { type: "code"; language: string; code: string };
 
 export interface CompiledLessonBody {

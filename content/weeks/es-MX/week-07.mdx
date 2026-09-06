@@ -146,17 +146,39 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "javascript/nodejs",
-      "javascript/react",
-      "javascript/getting_hired"
+      "react/class_components/class_based_components.md",
+      "react/class_components/component_lifecycle_methods.md",
+      "react/react_testing/introduction_to_react_testing.md",
+      "react/react_testing/mocking_callbacks_and_components.md",
+      "react/the_react_ecosystem/react_router.md",
+      "react/the_react_ecosystem/fetching_data_in_react.md",
+      "react/the_react_ecosystem/styling_react_applications.md",
+      "react/the_react_ecosystem/project_shopping_cart.md",
+      "react/more_react_concepts/managing_state_with_context_api.md",
+      "react/more_react_concepts/reducing_state.md",
+      "react/more_react_concepts/refs_and_memoization.md",
+      "react/conclusion/conclusion_full_stack_javascript.md",
+      "shared/the_back_end/introduction_to_the_backend_lesson.md",
+      "nodeJS/introduction_to_nodeJS/introduction_what_is_nodeJS.md",
+      "nodeJS/introduction_to_nodeJS/getting_started.md",
+      "nodeJS/introduction_to_nodeJS/debugging_node.md",
+      "nodeJS/introduction_to_nodeJS/project_basic_informational_site.md",
+      "nodeJS/introduction_to_nodeJS/environment_variables.md",
+      "shared/the_back_end/introduction_to_frameworks.md",
+      "nodeJS/express/introduction_to_express.md",
+      "nodeJS/express/routing.md",
+      "nodeJS/express/controllers.md",
+      "nodeJS/express/views.md",
+      "nodeJS/express/project_mini_message_board.md",
+      "nodeJS/express/forms_and_data_handling.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "translated-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
-    "translator": "AI Builders LATAM Spanish editorial team",
+    "editor": "Ruta curriculum adaptation",
+    "translator": "Adaptación al español asistida por IA",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -183,64 +205,88 @@ Crea una aplicación full stack con rutas, decide conscientemente entre componen
 
 ### Explicación
 
-Relaciona URLs con tareas, crea layouts anidados, usa enlaces para navegar e incluye las experiencias de no encontrado y error en el árbol de rutas. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Comienza el directorio de oportunidades con un mapa: colección, detalle y formulario de propuesta. Una URL es un contrato con quien utiliza el sitio. En App Router, una carpeta agrega un segmento, page.tsx renderiza su pantalla y layout.tsx envuelve a sus descendientes. Link conserva navegación normal y permite navegación del framework.
+
+Los parámetros dinámicos de Next actual son promesas: espéralos antes de leer el identificador. Un registro ausente debe producir notFound(), no una página vacía exitosa. Loading y error describen espera y fallas reales; ninguno reemplaza validación del servidor. Lee [páginas y layouts](https://nextjs.org/docs/app/getting-started/layouts-and-pages) antes de ampliar el ejemplo.
 
 ### Ejemplo
-
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
-
-```text
-/opportunities        browse
-/opportunities/[id]   inspect one
-/opportunities/new    propose one
-```
-
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
-
-### Ejercicio guiado
-
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Agrega expectativas de carga, no encontrado y acceso a cada ruta antes de crear sus carpetas.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
-
-### Comprobación
-
-- Crear un mapa de rutas antes de crear carpetas. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Conservar las expectativas normales del navegador. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-<!-- /lesson -->
-
-<!-- lesson:week-07-lesson-02 -->
-## Límites de servidor y cliente
-
-### Explicación
-
-Obtén y representa datos en servidor por defecto. Agrega un límite cliente sólo cuando eventos, estado o APIs del navegador lo requieran. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
-
-### Ejemplo
-
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
 
 ```tsx
-export default async function Page() {
-  const opportunities = await listOpportunities();
-  return <OpportunityList items={opportunities} />;
+// app/opportunities/[id]/page.tsx
+import { notFound } from "next/navigation";
+
+const examples = [{ id: "community-garden", title: "Community garden" }];
+
+export default async function Opportunity({
+  params,
+}: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const opportunity = examples.find(item => item.id === id);
+  if (!opportunity) notFound();
+  return <article><h1>{opportunity.title}</h1></article>;
 }
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
-
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Mantén esto en servidor; aísla sólo la búsqueda como componente cliente y explica ese límite.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Dibuja /opportunities, /opportunities/[id] y /opportunities/new con sus permisos de lectura/escritura.
+2. Crea lista y detalle con datos ficticios y Link; implementa un layout compartido.
+3. Agrega not-found.tsx y solicita un ID desconocido; inspecciona respuesta y pantalla.
+4. Navega con teclado, abre detalle en otra pestaña y usa Atrás. Confirma que la URL identifica el registro.
 
 ### Comprobación
 
-- Explicar cada directiva de cliente del proyecto. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Mantener secretos y datos privilegiados en servidor. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Muestra el archivo correspondiente a cada URL y explica por qué un grupo de rutas no necesita agregar un segmento.
+- Demuestra un detalle válido, uno ausente y el botón Atrás sin perder el contexto.
+<!-- /lesson -->
+
+<!-- lesson:week-07-lesson-02 -->
+## Fronteras entre servidor y cliente
+
+### Explicación
+
+Mantén lectura, credenciales y autorización en el servidor. Agrega una frontera cliente solo para estado, eventos o APIs del navegador. Importar la base en un Client Component mezcla responsabilidades; los marcadores server-only ayudan a detectarlo. Las props que cruzan esa frontera son visibles en el navegador aunque el padre se haya ejecutado en el servidor.
+
+El ejemplo conserva una lista ficticia en la página y pasa únicamente títulos públicos al filtro interactivo. Con datos reales crea una proyección permitida antes de pasarla. No envíes hashes, tokens o datos privados para luego ocultarlos mediante CSS.
+
+### Ejemplo
+
+```tsx
+// app/opportunities/filter.tsx
+"use client";
+import { useState } from "react";
+
+export function Filter({ titles }: { titles: string[] }) {
+  const [query, setQuery] = useState("");
+  return (
+    <section>
+      <label htmlFor="query">Search / Buscar</label>
+      <input id="query" value={query}
+        onChange={event => setQuery(event.target.value)} />
+      <ul>{titles.filter(title =>
+        title.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+      ).map(title => <li key={title}>{title}</li>)}</ul>
+    </section>
+  );
+}
+// app/opportunities/page.tsx
+import { Filter } from "./filter";
+export default function Page() {
+  return <Filter titles={["Community garden", "Library volunteers"]} />;
+}
+```
+
+### Ejercicio guiado
+
+1. Implementa ambos archivos y comprueba el filtro sin convertir toda la página en Client Component.
+2. Agrega un módulo del servidor con campos públicos y privados. Pasa solo campos públicos a Filter.
+3. Busca una marca privada ficticia en HTML y respuestas de red: no debe aparecer.
+4. Explica cómo una colección grande trasladaría la búsqueda a SQL y parámetros de URL en vez de descargar todo.
+
+### Comprobación
+
+- Señala la interacción concreta que justifica use client.
+- Muestra una respuesta de red que pruebe que el campo privado no cruzó la frontera.
 <!-- /lesson -->
 
 <!-- lesson:week-07-lesson-03 -->
@@ -248,30 +294,41 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Considera no confiable cada entrada, devuelve problemas por campo, conserva valores seguros, evita envíos dobles y muestra un estado pendiente útil. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+El atributo required ayuda, pero cualquier cliente puede omitirlo. Cada mutación valida FormData en el servidor y comprueba permisos antes de escribir. Los campos pueden ser cadenas, archivos o estar ausentes: una aserción TypeScript no valida. Extrae solo los campos aceptados.
+
+La acción siguiente es un ejercicio de validación y no afirma guardar la propuesta. Usa useActionState en un Client Component pequeño para mostrar mensaje y estado pendiente. Al agregar persistencia en semana 8, guarda solo valores validados, invalida la lista y redirige tras éxito. Desactivar un botón mejora UX; impedir escrituras duplicadas requiere una restricción o regla de idempotencia.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
-
 ```ts
-const parsed = opportunitySchema.safeParse(Object.fromEntries(formData));
-if (!parsed.success) return { errors: parsed.error.flatten().fieldErrors };
-```
+// app/opportunities/actions.ts
+"use server";
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+export async function validateProposal(
+  _previous: { message: string },
+  formData: FormData,
+) {
+  const value = formData.get("title");
+  if (typeof value !== "string") return { message: "Title must be text / Usa texto" };
+  const title = value.trim();
+  if (title.length < 5 || title.length > 120) {
+    return { message: "Use 5–120 characters / Usa 5–120 caracteres" };
+  }
+  return { message: "Valid, not saved yet / Válido, todavía no guardado" };
+}
+```
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Prueba entrada vacía, demasiado larga y duplicada; conserva valores seguros y neutraliza el doble envío.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Crea un formulario etiquetado y conecta la acción mediante useActionState; muestra el mensaje con aria-live y desactiva envío pendiente.
+2. Envía títulos vacío, corto, válido y de 121 caracteres. Conserva el valor seguro para corregirlo.
+3. Prueba omitiendo restricciones del navegador y confirma que el servidor mantiene las reglas.
+4. Escribe la política futura de duplicados: qué clave identifica el mismo envío y qué responde una repetición.
 
 ### Comprobación
 
-- Validar reglas de dominio en el límite confiable. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Construir flujos de error y éxito usables con teclado. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Demuestra rechazo del servidor aunque se omita validación del navegador.
+- Explica la diferencia entre botón pendiente y protección contra escrituras duplicadas.
 <!-- /lesson -->
 
 <!-- lesson:week-07-lesson-04 -->
@@ -279,31 +336,36 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Distingue datos por solicitud, preconstruidos y almacenados en caché. Decide frescura por necesidad y comprueba que la navegación muestre actualizaciones. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Renderizar produce una interfaz; cachear reutiliza trabajo anterior. Una introducción pública puede preconstruirse, un directorio público puede tolerar un minuto de desfase y un borrador privado requiere permisos de la sesión actual. Ejecutar en el servidor no significa automáticamente consultar datos frescos; recargar tampoco elimina todas las cachés.
+
+El ejemplo consulta una API pública con revalidación de 60 segundos. OPPORTUNITIES_PUBLIC_API debe apuntar a un endpoint JSON público que controles, sin información personalizada. El modo Cache Components agrega otras convenciones: sigue la documentación correspondiente a la configuración real del proyecto.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+```ts
+// lib/public-directory.ts
+import "server-only";
 
-```text
-Directory: refresh within 60 seconds
-Detail: refresh after an approved edit
-Private draft: never shared-cache
+export async function readPublicDirectory() {
+  const url = process.env.OPPORTUNITIES_PUBLIC_API;
+  if (!url) throw new Error("Public API URL is missing");
+  const response = await fetch(url, { next: { revalidate: 60 } });
+  if (!response.ok) throw new Error("Directory request failed");
+  return response.json();
+}
 ```
-
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Implementa una regla, crea un registro, navega sin recarga completa y compara el comportamiento con la promesa.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Escribe reglas de frescura para lista pública, detalle aprobado y borrador privado.
+2. Usa un endpoint público controlado con campo de revisión; consúltalo y actualiza la revisión de origen.
+3. Prueba navegación y solicitudes antes/después del intervalo. La revalidación puede ocurrir al recibir una solicitud; no es un temporizador que garantice actualización inmediata.
+4. Mantén borradores en lecturas privadas sin caché compartida y prueba dos sesiones. Tras edición autorizada invalida la ruta pública afectada con la API de Next correspondiente.
 
 ### Comprobación
 
-- Definir la regla de frescura de cada vista. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- No cachear públicamente respuestas personalizadas. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Muestra revisiones observadas y explica la política de frescura.
+- Prueba que un borrador privado no aparece en la respuesta de otra cuenta, incluida navegación cacheada.
 <!-- /lesson -->
 
 ## Proyecto semanal

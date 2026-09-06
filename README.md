@@ -19,8 +19,11 @@ final month.
 
 - Public email/password registration, required email verification, password
   recovery, revocable database sessions, and automatic self-paced enrollment.
-- Twelve bilingual weeks, 96 localized lessons, 12 milestone projects, weighted
-  rubrics, content provenance, and locale-parity validation.
+- Twelve bilingual guided weeks: 48 distinct lessons (96 localized bodies),
+  12 milestone projects, weighted rubrics, and locale-parity validation.
+- A complete pinned inventory of Foundations and Full Stack JavaScript:
+  197 additional materials (162 lessons and 35 practice projects), with Spanish
+  adaptations, English originals or adapted audit editions, and per-file provenance.
 - Student progress, immutable project attempts, cohort management, role-based
   administration, intervention views, and audit events.
 - A verified-user project gallery and structured peer feedback model. Social
@@ -32,6 +35,35 @@ final month.
   continuous integration, and automatic Railway deployments from `main`.
 
 ## Architecture
+
+### Curriculum coverage
+
+The expanded library is available at `/programa/biblioteca` and within each
+week's extended-study section. Authorized curriculum administrators can inspect
+the item-by-item mapping at `/admin/curriculo/cobertura` and switch a lesson to
+its English audit edition. English audit views do not record learner progress.
+
+The source baseline is curriculum commit
+`fc46ee82462f9916889030985640805d29837f74`; the official course ordering is pinned
+to the Odin application commit `13ba6b2c4219c7e1ea734369425071bb9acd6f7e`.
+`content/odin/inventory.json` records all 197 official entries. The original
+first-party Markdown and ordering fixtures are vendored alongside their licenses.
+
+`pnpm content:odin:check` verifies official course membership/order, original file
+hashes, one mapping per entry, Spanish content, English editions for replacements,
+source-relative depth checks, and generated-manifest freshness. This establishes
+structural coverage of that baseline, not a guarantee of future upstream parity,
+external resource uptime, sentence-for-sentence translation, or independent human
+pedagogical review. Third-party readings remain linked and retain their languages
+and licenses. Ruby/Rails courses and archived material are outside the requested
+scope; Ruby-only reading substitutions are explained in the adaptations.
+
+The guided program and the complete library have separate completion scopes.
+The original 48 required lesson IDs and 12 weekly project IDs remain stable;
+library items can be marked complete without changing graduation requirements.
+Graduates retain access to library progress. Covering all of Odin requires more
+time than the 12-week core schedule. The 35 library projects retain their own
+requirements and self-checks; they are not silently sent to the weekly grader.
 
 ### Visual system
 
@@ -75,6 +107,10 @@ There is no separate Redis or message-broker dependency. Queue claims use
   migrations.
 - `content/weeks/{es-MX,en}` contains the authored curriculum.
 - `src/generated/content-manifest.ts` is generated from the curriculum source.
+- `content/odin` contains the full source inventory, source snapshots, Spanish
+  adaptations, English overrides, and weekly mappings.
+- `src/generated/odin-manifest.ts` and `content/odin/coverage.json` are generated
+  together and checked by CI.
 - `tests/e2e` contains the browser-level registration and learning flow.
 
 ## Production deployment
@@ -216,7 +252,23 @@ After editing curriculum content:
 pnpm content:validate
 pnpm content:manifest
 pnpm content:manifest:check
+pnpm content:odin:build
+pnpm content:odin:check
 ```
+
+For library edits, update the Spanish Markdown file and course mapping; when
+implementation changes, supply an English adapted edition too. Update the
+upstream baseline deliberately using clean checkouts:
+
+```bash
+node scripts/content/sync-odin-inventory.mjs /path/to/curriculum /path/to/theodinproject
+pnpm exec tsx scripts/content/update-core-provenance.ts
+```
+
+New or changed upstream entries must be adapted before the coverage check can
+pass. Do not edit vendored source files to satisfy validation. The previous
+generic lesson-expansion generator has been removed; lesson bodies are authored
+and reviewed as instructional content rather than regenerated from templates.
 
 Spanish is the published learner edition. English is the audit/source
 edition available to authorized curriculum administrators.

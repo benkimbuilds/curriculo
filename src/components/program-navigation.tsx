@@ -28,6 +28,7 @@ export function ProgramNavigation({ weeks }: { weeks: { week: number; title: str
       </button>
       <ul className="program-navigation__weeks" id={id} hidden={!expanded}>
         <li><Link aria-current={pathname === "/programa" ? "page" : undefined} href="/programa">Ver programa completo</Link></li>
+        <li><Link aria-current={pathname === "/programa/biblioteca" ? "page" : undefined} href="/programa/biblioteca">Biblioteca completa de Odin</Link></li>
         {weeks.map(({ week, title }) => (
           <li key={week}>
             <Link

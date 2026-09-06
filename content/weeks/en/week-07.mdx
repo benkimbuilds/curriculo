@@ -146,16 +146,38 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "javascript/nodejs",
-      "javascript/react",
-      "javascript/getting_hired"
+      "react/class_components/class_based_components.md",
+      "react/class_components/component_lifecycle_methods.md",
+      "react/react_testing/introduction_to_react_testing.md",
+      "react/react_testing/mocking_callbacks_and_components.md",
+      "react/the_react_ecosystem/react_router.md",
+      "react/the_react_ecosystem/fetching_data_in_react.md",
+      "react/the_react_ecosystem/styling_react_applications.md",
+      "react/the_react_ecosystem/project_shopping_cart.md",
+      "react/more_react_concepts/managing_state_with_context_api.md",
+      "react/more_react_concepts/reducing_state.md",
+      "react/more_react_concepts/refs_and_memoization.md",
+      "react/conclusion/conclusion_full_stack_javascript.md",
+      "shared/the_back_end/introduction_to_the_backend_lesson.md",
+      "nodeJS/introduction_to_nodeJS/introduction_what_is_nodeJS.md",
+      "nodeJS/introduction_to_nodeJS/getting_started.md",
+      "nodeJS/introduction_to_nodeJS/debugging_node.md",
+      "nodeJS/introduction_to_nodeJS/project_basic_informational_site.md",
+      "nodeJS/introduction_to_nodeJS/environment_variables.md",
+      "shared/the_back_end/introduction_to_frameworks.md",
+      "nodeJS/express/introduction_to_express.md",
+      "nodeJS/express/routing.md",
+      "nodeJS/express/controllers.md",
+      "nodeJS/express/views.md",
+      "nodeJS/express/project_mini_message_board.md",
+      "nodeJS/express/forms_and_data_handling.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "original-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
+    "editor": "Ruta curriculum adaptation",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -182,31 +204,39 @@ Create a routed full-stack application, decide deliberately between server and c
 
 ### Explanation
 
-Map URLs to user tasks, create nested layouts for shared structure, use links for navigation, and design not-found and error experiences as part of the route tree. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Begin the opportunity directory with a route map: collection, one record and a proposal form. A URL is a user-facing contract, not merely a folder name. In App Router, a folder adds a segment, page.tsx renders its screen and layout.tsx wraps descendants. Link preserves normal navigation behavior while enabling framework navigation.
+
+Dynamic parameters in the current Next version are promises. Await them before reading the identifier. A missing record should render notFound(), not an empty success page. Loading and error boundaries describe actual waiting and failure states; neither replaces server validation. Read [pages and layouts](https://nextjs.org/docs/app/getting-started/layouts-and-pages) before extending the example.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+```tsx
+// app/opportunities/[id]/page.tsx
+import { notFound } from "next/navigation";
 
-```text
-/opportunities        browse
-/opportunities/[id]   inspect one
-/opportunities/new    propose one
+const examples = [{ id: "community-garden", title: "Community garden" }];
+
+export default async function Opportunity({
+  params,
+}: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const opportunity = examples.find(item => item.id === id);
+  if (!opportunity) notFound();
+  return <article><h1>{opportunity.title}</h1></article>;
+}
 ```
-
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Add loading, not-found, and access expectations to each route before creating the matching folders.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Draw /opportunities, /opportunities/[id] and /opportunities/new with their intended read/write access.
+2. Create list and detail pages using fictional data and Link; implement a shared section layout.
+3. Add not-found.tsx and request an unknown ID; inspect the response and screen.
+4. Navigate by keyboard, open a detail in a new tab, then use browser Back. Confirm URLs describe the selected record.
 
 ### Checkpoint
 
-- Create a route map before making folders. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Use navigation that preserves browser expectations. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Show the file corresponding to each of the three URLs and explain why a route group need not add a segment.
+- Demonstrate a valid detail, a missing detail and browser Back without losing navigation context.
 <!-- /lesson -->
 
 <!-- lesson:week-07-lesson-02 -->
@@ -214,32 +244,48 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Fetch and render on the server by default. Add a client boundary only where browser state, events, or APIs require it, and pass serializable props across that line. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Keep reading, credentials and authorization on the server. Add a client boundary only for interactions that require state, events or browser APIs. Importing a database module into a Client Component risks exposing privileged logic and is blocked by server-only markers. A component being rendered by a server component does not make its props private: anything sent across the boundary is browser-visible.
+
+The example keeps a fictional list in the page and passes only public titles to an interactive filter. Real records should be projected into an allowed public shape before passing them. Do not pass password hashes, session tokens or hidden moderation data and then hide them with CSS.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
-
 ```tsx
-export default async function Page() {
-  const opportunities = await listOpportunities();
-  return <OpportunityList items={opportunities} />;
+// app/opportunities/filter.tsx
+"use client";
+import { useState } from "react";
+
+export function Filter({ titles }: { titles: string[] }) {
+  const [query, setQuery] = useState("");
+  return (
+    <section>
+      <label htmlFor="query">Search / Buscar</label>
+      <input id="query" value={query}
+        onChange={event => setQuery(event.target.value)} />
+      <ul>{titles.filter(title =>
+        title.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+      ).map(title => <li key={title}>{title}</li>)}</ul>
+    </section>
+  );
+}
+// app/opportunities/page.tsx
+import { Filter } from "./filter";
+export default function Page() {
+  return <Filter titles={["Community garden", "Library volunteers"]} />;
 }
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
-
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Keep this on the server, then isolate only the search input as a client component and explain the boundary.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Implement the two files and verify typing updates the filter without making the page itself a Client Component.
+2. Add a server module that returns records with public and private fields. Pass only public fields into Filter.
+3. Inspect HTML and network payloads for a unique fictional private marker; it must not be present.
+4. Explain how a large searchable dataset would move filtering to SQL and URL query parameters rather than downloading every record.
 
 ### Checkpoint
 
-- Explain each client directive in the project. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Keep secrets and privileged data on the server. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Point to the specific browser interaction that justifies use client.
+- Show a network response proving that your private fixture field never crossed the boundary.
 <!-- /lesson -->
 
 <!-- lesson:week-07-lesson-03 -->
@@ -247,30 +293,41 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Treat form input as untrusted on the server, return field-level problems, preserve safe values, prevent duplicate submission, and show a useful pending state. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+The browser's required attribute helps people, but callers can bypass it. Every mutation must validate FormData on the server and check permissions before writing. FormData fields may be strings, files or absent, so a type assertion is not validation. Extract only fields the operation accepts.
+
+The following action is a validation exercise: it deliberately does not claim to persist a proposal. Use useActionState in a small Client Component to display its returned message and pending status. After adding the storage layer in week 8, save only parsed values, invalidate the list and redirect after success. Preventing double clicks improves UX; preventing duplicate writes requires a database constraint or idempotency rule.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
-
 ```ts
-const parsed = opportunitySchema.safeParse(Object.fromEntries(formData));
-if (!parsed.success) return { errors: parsed.error.flatten().fieldErrors };
-```
+// app/opportunities/actions.ts
+"use server";
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+export async function validateProposal(
+  _previous: { message: string },
+  formData: FormData,
+) {
+  const value = formData.get("title");
+  if (typeof value !== "string") return { message: "Title must be text / Usa texto" };
+  const title = value.trim();
+  if (title.length < 5 || title.length > 120) {
+    return { message: "Use 5–120 characters / Usa 5–120 caracteres" };
+  }
+  return { message: "Valid, not saved yet / Válido, todavía no guardado" };
+}
+```
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Test blank, overly long, and duplicate input; preserve safe values and make rapid double submission harmless.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Create a labelled title form and wire the action through useActionState; render its message with aria-live and disable submit while pending.
+2. Submit blank, short, valid and 121-character titles. Preserve the safe input so correction is easy.
+3. Call the action through a real form while bypassing browser constraints; verify server checks still apply.
+4. Write the future duplicate policy: which key identifies the same submission and what should a repeated request return?
 
 ### Checkpoint
 
-- Validate the same domain rules at the trusted boundary. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Build a keyboard-friendly failure and success flow. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Demonstrate a server rejection despite bypassed browser validation.
+- Explain the difference between a pending button and protection against duplicate database writes.
 <!-- /lesson -->
 
 <!-- lesson:week-07-lesson-04 -->
@@ -278,31 +335,36 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Distinguish request-time, prebuilt, and cached data. Choose freshness from the user's need, then test whether navigation actually shows updated information. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Rendering creates an interface; caching reuses prior work. They are related but distinct. A static public introduction may be built once, a public directory may accept a minute of staleness, and a private draft must be read with the current user's permissions. Never assume that server-side automatically means freshly queried, or that a page reload clears every cache.
+
+This example requests a public API with a 60-second revalidation policy. OPPORTUNITIES_PUBLIC_API must point to a public JSON endpoint you control; its data must not contain personalized records. Next's Cache Components mode introduces additional conventions, so follow the documentation for your project's actual configuration rather than mixing tutorials.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+```ts
+// lib/public-directory.ts
+import "server-only";
 
-```text
-Directory: refresh within 60 seconds
-Detail: refresh after an approved edit
-Private draft: never shared-cache
+export async function readPublicDirectory() {
+  const url = process.env.OPPORTUNITIES_PUBLIC_API;
+  if (!url) throw new Error("Public API URL is missing");
+  const response = await fetch(url, { next: { revalidate: 60 } });
+  if (!response.ok) throw new Error("Directory request failed");
+  return response.json();
+}
 ```
-
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Implement one freshness rule, create a record, navigate without hard refresh, and compare observed behavior with the promise.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Write a freshness table for public list, approved detail and private draft; define acceptable delay and owner.
+2. Use a controlled public endpoint with a revision field. Read through the example and update the source revision.
+3. Test navigation and a new request before/after the interval; record observed revisions. Revalidation may occur on a request and is not a timer guaranteeing immediate freshness.
+4. Use request-time, uncached reads for private drafts and test two sessions. After an authorized edit, invalidate the affected public path using the appropriate Next API.
 
 ### Checkpoint
 
-- State the freshness rule for each data view. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Avoid caching personalized responses publicly. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Show observed old/new revisions and explain the stated freshness policy.
+- Prove that one user's private draft is absent from another user's response, including cached navigation.
 <!-- /lesson -->
 
 ## Weekly project

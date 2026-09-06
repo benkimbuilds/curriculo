@@ -1,4 +1,4 @@
-import { and, eq } from "drizzle-orm";
+import { and, eq, or, sql } from "drizzle-orm";
 
 import { db, type Database } from "@/db";
 import { enrollments, lessonProgress, submissions, weekProgress } from "@/db/schema";
@@ -9,14 +9,14 @@ async function requireOwnedEnrollment(userId: string, enrollmentId: string, data
   const [ownedEnrollment] = await database
     .select({ id: enrollments.id })
     .from(enrollments)
-    .where(and(eq(enrollments.id, enrollmentId), eq(enrollments.userId, userId), eq(enrollments.status, "active")))
+    .where(and(eq(enrollments.id, enrollmentId), eq(enrollments.userId, userId), or(eq(enrollments.status, "active"), eq(enrollments.status, "completed"))))
     .limit(1);
   if (!ownedEnrollment) throw new ResourceNotFoundError("Inscripción activa");
   return ownedEnrollment;
 }
 
 function requireLesson(week: number, lessonId: string, contentVersion?: string) {
-  const curriculumWeek = listCurriculumWeeks().find((item) => item.week === week && (!contentVersion || item.contentVersion === contentVersion));
+  const curriculumWeek = listCurriculumWeeks({ includeLibrary: true }).find((item) => item.week === week && (!contentVersion || item.contentVersion === contentVersion));
   const lesson = curriculumWeek?.modules.flatMap((item) => item.lessons).find(({ id }) => id === lessonId);
   if (!curriculumWeek || !lesson || (contentVersion && curriculumWeek.contentVersion !== contentVersion)) {
     throw new ResourceNotFoundError("Lección publicada");
@@ -53,13 +53,13 @@ export async function syncStudentCompletion(
             ? "attempted" as const
             : "not_started" as const;
     await database.insert(weekProgress).values({ enrollmentId: input.enrollmentId, weekId: week.id, contentVersion: input.contentVersion, state, completedAt: state === "completed" ? now : null })
-      .onConflictDoUpdate({ target: [weekProgress.enrollmentId, weekProgress.weekId, weekProgress.contentVersion], set: { state, completedAt: state === "completed" ? now : null, updatedAt: now } });
+      .onConflictDoUpdate({ target: [weekProgress.enrollmentId, weekProgress.weekId, weekProgress.contentVersion], set: { state, completedAt: state === "completed" ? sql`coalesce(${weekProgress.completedAt}, ${now})` : null, updatedAt: now } });
   }
   const requiredLessonIds = weeks.flatMap((week) => week.modules.flatMap((item) => item.lessons).filter(({ required }) => required).map(({ id }) => id));
   const allLessonsComplete = requiredLessonIds.every((id) => ["completed", "passed"].includes(lessonStates.get(id) ?? ""));
   const allProjectsPassed = weeks.every((week) => submissionRows.some(({ projectId, status }) => projectId === week.project.id && status === "passed"));
   if (allLessonsComplete && allProjectsPassed) {
-    await database.update(enrollments).set({ status: "completed", completedAt: now, updatedAt: now }).where(and(eq(enrollments.id, input.enrollmentId), eq(enrollments.userId, input.userId)));
+    await database.update(enrollments).set({ status: "completed", completedAt: now, updatedAt: now }).where(and(eq(enrollments.id, input.enrollmentId), eq(enrollments.userId, input.userId), eq(enrollments.status, "active")));
   }
   return { allLessonsComplete, allProjectsPassed, completed: allLessonsComplete && allProjectsPassed };
 }

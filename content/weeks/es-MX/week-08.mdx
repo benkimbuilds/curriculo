@@ -146,17 +146,24 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "javascript/nodejs/databases",
-      "javascript/nodejs/authentication",
-      "javascript/nodejs/deployment"
+      "databases/databases/databases.md",
+      "databases/databases/databases_and_sql.md",
+      "databases/databases/project_sql_zoo.md",
+      "nodeJS/express/deployment.md",
+      "nodeJS/express/installing_postgresql.md",
+      "nodeJS/express/using_postgresql.md",
+      "nodeJS/express/project_inventory_application.md",
+      "nodeJS/authentication/authentication_basics.md",
+      "nodeJS/authentication/project_members_only.md",
+      "nodeJS/orms/prisma_orm.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "translated-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
-    "translator": "AI Builders LATAM Spanish editorial team",
+    "editor": "Ruta curriculum adaptation",
+    "translator": "Adaptación al español asistida por IA",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -179,37 +186,43 @@
 Diseña un modelo PostgreSQL, evolúcionalo con migraciones, autentica con seguridad, aplica propiedad en servidor y despliega pensando en recuperación. Esta edición está escrita para quien empieza desde cero y puede trabajar en Windows o macOS. Completa las lecciones en orden: cada una incluye explicación, ejemplo, práctica y evidencia antes del proyecto semanal.
 
 <!-- lesson:week-08-lesson-01 -->
-## Modelado relacional
+## Modelado relacional de datos
 
 ### Explicación
 
-Identifica entidades, IDs estables, relaciones, campos obligatorios, unicidad y comportamiento al borrar. Normaliza hechos repetidos y protege invariantes con restricciones. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Convierte el gestor en entidades y restricciones antes de crear formularios. Un proyecto pertenece a una persona y una tarea a un proyecto. Guarda la relación una vez en vez de repetir el correo en cada tarea. La clave primaria identifica; la foránea conserva referencias. NOT NULL, UNIQUE y CHECK protegen reglas incluso con solicitudes simultáneas.
+
+El ejemplo usa IDs ficticios para estudiar el modelo. En la aplicación completa referencia la clave real de la biblioteca de autenticación, sin crear otra identidad. Define eliminación: RESTRICT impide borrar proyectos con tareas; CASCADE eliminaría dependencias. Ninguna opción es correcta para todos los productos.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
-
 ```sql
-create table projects (
-  id uuid primary key,
-  owner_id uuid not null references users(id),
-  title text not null check (length(title) between 1 and 120)
+CREATE TABLE projects (
+  id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  owner_id TEXT NOT NULL,
+  title TEXT NOT NULL CHECK (char_length(title) BETWEEN 1 AND 120),
+  UNIQUE (owner_id, title)
 );
+CREATE TABLE tasks (
+  id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  project_id INTEGER NOT NULL REFERENCES projects(id) ON DELETE RESTRICT,
+  title TEXT NOT NULL,
+  completed BOOLEAN NOT NULL DEFAULT false
+);
+CREATE INDEX tasks_project_idx ON tasks(project_id);
 ```
-
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Agrega tareas con relación obligatoria y decide explícitamente qué debe pasar al borrar un proyecto.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Dibuja usuarios, proyectos y tareas con cardinalidades y reglas de eliminación.
+2. Aplica el ejemplo solo a una base de práctica e inserta un proyecto con dos tareas.
+3. Prueba título duplicado por propietario, referencia inexistente y eliminación de proyecto ocupado; explica resultados.
+4. Adapta owner_id al esquema real de autenticación y agrega su clave foránea mediante migración. Documenta eliminación o anonimización al borrar una cuenta.
 
 ### Comprobación
 
-- Dibujar un diagrama de entidades y relaciones. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Codificar al menos tres reglas como restricciones. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Demuestra tres reglas protegidas por la base con ejemplos SQL rechazados.
+- Explica por qué unicidad por propietario difiere de unicidad global.
 <!-- /lesson -->
 
 <!-- lesson:week-08-lesson-02 -->
@@ -217,30 +230,43 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Usa consultas parametrizadas a través de la capa de datos, examina planes cuando haga falta y escribe migraciones hacia adelante compatibles con datos existentes. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+La entrada del usuario es dato, nunca código SQL. Los parámetros separan ambas cosas y las condiciones de propietario limitan resultados a la sesión. Buscar solo por ID no basta para un gestor privado. Ordena resultados de forma estable y revisa planes cuando una medición revele problemas.
+
+Las migraciones son cambios ordenados guardados con el código. Prueba desde una base vacía y otra con registros. Agregar una columna obligatoria sin valor puede fallar con datos existentes; ampliar, rellenar y finalmente restringir permite conservarlos. Revertir código no revierte automáticamente esquema ni datos.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
-
-```sql
-alter table projects add column status text not null default 'active';
-create index projects_owner_idx on projects(owner_id);
+```ts
+// In a server data module with a shared pg pool:
+export async function renameProject(
+  pool: import("pg").Pool,
+  projectId: number,
+  ownerId: string,
+  title: string,
+) {
+  const { rows } = await pool.query(
+    "UPDATE projects SET title = $1 WHERE id = $2 AND owner_id = $3 RETURNING id, title",
+    [title, projectId, ownerId],
+  );
+  return rows[0] ?? null;
+}
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+```sql
+ALTER TABLE projects ADD COLUMN archived BOOLEAN NOT NULL DEFAULT false;
+```
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Aplica esto después de insertar filas antiguas, verifica el default y escribe la consulta beneficiada por el índice.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Crea dos propietarios ficticios. Llama renameProject con el ID autenticado, no el recibido en el formulario.
+2. Prueba comillas en el título y confirma que siguen siendo datos. Intenta cambiar un proyecto ajeno: ninguna fila debe modificarse.
+3. Guarda la migración archived, aplícala desde cero y sobre una copia con datos; compara cantidad de filas.
+4. Ejecuta EXPLAIN sobre una lectura frecuente y decide si un índice corresponde a sus filtros reales.
 
 ### Comprobación
 
-- No construir SQL concatenando entrada de usuario. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Aplicar y verificar una migración en una base vacía. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Muestra un título con comillas guardado de forma segura y una actualización ajena sin resultados.
+- Demuestra conservación de filas y creación del esquema desde cero con la misma migración.
 <!-- /lesson -->
 
 <!-- lesson:week-08-lesson-03 -->
@@ -248,31 +274,47 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Comprende sesiones, hash de contraseña, verificación, recuperación y cookies. Para cada operación demuestra por separado identidad y permiso. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Usa una biblioteca mantenida para hashing, sesiones, verificación y recuperación. Completa primero la lección de biblioteca sobre Better Auth; no la sustituyas por una cookie que contenga un ID. Autenticación identifica; autorización comprueba acceso a una operación y recurso.
+
+Cada Server Action y Route Handler es un punto de entrada. Un layout protegido o botón oculto no asegura solicitudes directas. Deriva propietario desde una sesión validada y limita la consulta. Ante denegación no reveles un registro privado ajeno.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
-
 ```ts
-if (!session) return forbidden();
-const project = await findProject(projectId);
-if (project.ownerId !== session.userId) return forbidden();
-```
+// Example Server Action after Better Auth and a shared pool are configured:
+"use server";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+import { pool } from "@/lib/db";
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+export async function archiveProject(form: FormData) {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session?.user.emailVerified) return { error: "Verified session required" };
+  const raw = form.get("projectId");
+  if (typeof raw !== "string" || !/^[1-9]\d*$/.test(raw)) {
+    return { error: "Invalid project" };
+  }
+  const id = Number(raw);
+  if (!Number.isSafeInteger(id)) return { error: "Invalid project" };
+  const { rowCount } = await pool.query(
+    "UPDATE projects SET archived = true WHERE id = $1 AND owner_id = $2",
+    [id, session.user.id],
+  );
+  return rowCount === 1 ? { ok: true } : { error: "Project unavailable" };
+}
+```
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Prueba éxito del propietario y rechazo de otra cuenta en lectura y edición; no confíes en ownerId del body.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Configura integración Next y migraciones oficiales. Crea dos cuentas ficticias, verifícalas e inicia sesiones separadas.
+2. Implementa el ejemplo con el esquema de esta semana y archiva un proyecto propio.
+3. Envía el ID de la segunda cuenta desde la primera: comprueba rechazo y datos intactos.
+4. Cierra sesión y repite. Prueba un enlace de recuperación vencido o reutilizado mediante el flujo del proveedor y documenta el resultado.
 
 ### Comprobación
 
-- Distinguir autenticación de autorización. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Probar denegación de propiedad además del éxito. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Demuestra éxito propio, rechazo por propietario ajeno y rechazo sin sesión en la misma acción.
+- Explica qué problemas distintos resuelven hashing, cookies HttpOnly y filtros de propiedad.
 <!-- /lesson -->
 
 <!-- lesson:week-08-lesson-04 -->
@@ -280,31 +322,42 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Guarda secretos fuera de Git, ejecuta migraciones al liberar, publica salud, lee logs estructurados, respalda datos y ensaya rollback. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Un despliegue termina cuando la aplicación ejecuta su recorrido real de datos. Compilación, proceso vivo y base lista son señales distintas. Guarda secretos en el proveedor, migra antes del código dependiente y prueba acceso, escritura y lectura en el origen público.
+
+Usa servicios web y PostgreSQL de Railway o el alojamiento del laboratorio. No necesitas pagar alojamiento personal para completar localmente. Una base administrada también requiere política de respaldo y prueba de restauración; un respaldo nunca restaurado sigue siendo una suposición.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+```ts
+// app/api/ready/route.ts
+import { pool } from "@/lib/db";
 
-```text
-release: migrate -> start -> ready
-verify: health -> primary flow -> logs
-recover: stop -> roll forward or rollback -> verify
+export async function GET() {
+  try {
+    await pool.query("SELECT 1");
+    return Response.json({ ready: true }, {
+      headers: { "Cache-Control": "no-store" },
+    });
+  } catch {
+    return Response.json({ ready: false }, {
+      status: 503,
+      headers: { "Cache-Control": "no-store" },
+    });
+  }
+}
 ```
-
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Ejecuta la lista en un entorno limpio y registra commit, migración, horas y decisión de recuperación.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Compila producción localmente e inicia con los mismos nombres de variables requeridos en alojamiento.
+2. Despliega aplicación y base, migra, configura origen HTTPS y comprueba /api/ready junto a escritura/lectura autenticadas.
+3. Observa logs sanitizados durante una solicitud inválida. Registra revisión, migración y resultado sin credenciales.
+4. Restaura un respaldo en una base descartable separada y compara registros. Documenta rollback de código y compatibilidad con el esquema actual.
 
 ### Comprobación
 
-- Desplegar sin registrar secretos. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Documentar comprobaciones de salud y rollback. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Muestra revisión desplegada y escritura/lectura reales; una compilación verde no basta.
+- Presenta evidencia de restauración y explica por qué SELECT 1 no demuestra todas las migraciones.
 <!-- /lesson -->
 
 ## Proyecto semanal

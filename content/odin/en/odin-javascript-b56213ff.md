@@ -1,0 +1,59 @@
+# Recursive Methods
+
+## Adaptation note
+
+The Ruby-based knowledge-check reference is replaced with this JavaScript exercise: compare a recursive sumTo(n), whose base case is n===0 and recursive step n + sumTo(n-1), with a for loop using an accumulator. Both perform linear work, but the recursive version keeps pending stack frames. Recursion is not inherently more efficient; prefer the loop when it expresses the problem more clearly and avoids unnecessary stack depth.
+
+### Introduction
+
+Recursion is the idea that a function calls itself. That is all there is to it. It's used to take a big problem and start breaking it down into smaller and smaller pieces ("Divide and Conquer") and continuing to feed their solutions back into the original function until some sort of answer is achieved and the whole chain unwinds.
+
+From the [Wikipedia entry on Divide and Conquer Algorithms](http://en.wikipedia.org/wiki/Divide_and_conquer_algorithm):
+
+> In computer science, divide and conquer (D&C) is an important algorithm design paradigm based on multi-branched recursion. A divide and conquer algorithm works by recursively breaking down a problem into two or more sub-problems of the same (or related) type, until these become simple enough to be solved directly. The solutions to the sub-problems are then combined to give a solution to the original problem.
+
+There's also a right and wrong way to use recursion. The fact is, any problem you can solve recursively, you can also solve using the iterators that you know and love. If you find yourself saying "why didn't I just use a `while` loop here?" then you probably should have. You won't often end up using a recursive solution to a problem, but you should get a feel for when it might be a good idea. Some problems also break down into far too many pieces and totally overwhelm your computer's memory. There's a balance.
+
+In this brief lesson, you'll get a chance to learn more about when and how to use recursion and then in the next project you will get the chance to apply some of that (since it probably won't really stick until you've had a chance to try it).
+
+### Lesson overview
+
+This section contains a general overview of topics that you will learn in this lesson.
+
+- Understand why recursion is a useful technique for solving large problems.
+- Recognize the limitations of using recursive solutions.
+- Identify which types of problems are better solved using loops instead of recursion.
+- Learn what is meant by the concept of "recursive depth".
+- Understand what a "stack overflow" is (the concept, not the website).
+- Learn why stack overflow is relevant to recursive problems.
+
+### Assignment
+
+
+
+1. Read this [intro to recursion](https://javascript.info/recursion). You do *not* need to complete the exercises at the end of the article.
+1. Watch this [explanation of recursion by Web Dev Simplified](https://www.youtube.com/watch?v=6oDQaB2one8).
+1. Watch [5 Simple Steps for Solving Any Recursive Problem](https://www.youtube.com/watch?v=ngCos392W4w).
+1. Watch this [Video on Recursion](https://www.youtube.com/watch?v=mz6tAJMVmfM) from CS50.
+1. Read the ["Implementation Issues" section of the wiki article](http://en.wikipedia.org/wiki/Divide_and_conquer_algorithm#Implementation_issues) to get an overview of some of the limitations of recursion.
+1. Go to [the `computer_science/recursion/` directory of The Odin Project's JavaScript exercises repo](https://github.com/TheOdinProject/javascript-exercises/tree/main/computer_science/recursion) and complete each of the exercises in order. Be sure to review the README for each exercise prior to completing it. If you need to, revisit the repo's README for general instructions on forking, cloning, and using the exercises.
+
+   
+
+   #### Use a debugger!
+
+   It can be rather difficult trying to track what's going on in a recursive function layer by layer, don't put yourself through that! If you haven't already been making use of a debugger when solving some problems (you'll have been missing out on a lot if not!), now is as good a time as any to get familiar with it as it can help make navigating the code flow so much easier.
+
+   
+
+
+
+### Knowledge check
+
+The following questions are an opportunity to reflect on key topics in this lesson. If you can't answer a question, click on it to review the material, but keep in mind you are not expected to memorize or master this knowledge.
+
+- [How would you briefly define a recursive function?](#introduction)
+- Explain when a JavaScript loop is clearer or uses less stack space than recursion.
+- [What are the 2 essential parts in a recursive function?](https://youtu.be/mz6tAJMVmfM?t=193)
+- [Why is "stack overflow" relevant to a recursive problem?](https://en.wikipedia.org/wiki/Divide-and-conquer_algorithm#Stack_size)
+

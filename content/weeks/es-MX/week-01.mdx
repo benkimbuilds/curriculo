@@ -144,17 +144,34 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "foundations/installations",
-      "foundations/git_basics",
-      "foundations/html_css/html-foundations"
+      "foundations/introduction/how_this_course_will_work.md",
+      "foundations/introduction/introduction_to_web_development.md",
+      "foundations/introduction/motivation_and_mindset.md",
+      "foundations/introduction/asking_for_help.md",
+      "foundations/introduction/join_the_odin_community.md",
+      "foundations/installations/how_does_the_web_work.md",
+      "foundations/installations/installations.md",
+      "foundations/installations/text_editors.md",
+      "foundations/installations/command_line_basics.md",
+      "foundations/installations/setting_up_git.md",
+      "git/foundations_git/introduction_to_git.md",
+      "git/foundations_git/git_basics.md",
+      "foundations/html_css/html_foundations/intro_to_html_css.md",
+      "foundations/html_css/html_foundations/elements_and_tags.md",
+      "foundations/html_css/html_foundations/html_boilerplate.md",
+      "foundations/html_css/html_foundations/working_with_text.md",
+      "foundations/html_css/html_foundations/lists.md",
+      "foundations/html_css/html_foundations/links_and_images.md",
+      "git/foundations_git/commit_messages.md",
+      "foundations/html_css/html_foundations/project_recipes.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "translated-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
-    "translator": "AI Builders LATAM Spanish editorial team",
+    "editor": "Ruta curriculum adaptation",
+    "translator": "Adaptación al español asistida por IA",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -181,31 +198,49 @@ Prepara un espacio de trabajo confiable, pierde el miedo a la terminal, publica 
 
 ### Explicación
 
-Ubica el navegador, editor, terminal, archivos y servicios remotos antes de instalar herramientas. Sigue la ruta de PowerShell en Windows o la equivalente en Terminal para macOS. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Una página que ves en el navegador puede venir de un archivo de tu computadora o de un servidor remoto. Antes de instalar herramientas, distingue esas situaciones. El editor modifica archivos; la terminal ejecuta instrucciones; el navegador interpreta HTML, solicita recursos y ejecuta JavaScript; el servidor responde solicitudes. Git registra versiones y GitHub aloja repositorios. Ninguna de esas herramientas reemplaza automáticamente a las demás.
+
+Cuando escribes una dirección HTTPS, el navegador necesita encontrar el servidor. DNS relaciona el nombre del dominio con una dirección; la conexión transporta solicitudes y respuestas en paquetes. El servidor puede entregar HTML y el navegador solicitar después CSS, imágenes y JavaScript. Un buscador es un sitio que ayuda a encontrar otros sitios, no el navegador ni internet completo.
+
+En Windows puedes comenzar los archivos HTML con VS Code y Chrome nativos. Para ejercicios con comandos Unix, usa Ubuntu en WSL2 preparado por el laboratorio. Confirma que la terminal abierta sea Ubuntu antes de copiar comandos Bash. Guarda el repositorio dentro del directorio Linux y abre VS Code conectado a ese entorno. En macOS utiliza Terminal y VS Code directamente. No necesitas cambiar de sistema operativo para aprender los conceptos de esta semana.
+
+Organiza una carpeta de proyectos que puedas localizar sin depender de la lista de archivos recientes. Cada proyecto necesita una carpeta propia; abrirla completa en VS Code permite ver sus relaciones. Evita crear archivos sueltos en Descargas y después moverlos sin revisar rutas. Un archivo llamado index.html.txt sigue siendo texto con otra extensión, aunque el explorador oculte el sufijo final.
+
+Guardar un cambio en el editor sólo actualiza el disco. Actualizar el navegador vuelve a leerlo; publicar en GitHub envía código, y publicar una página requiere además un servicio que lo sirva. Esas operaciones pueden ocurrir en momentos diferentes. Si el sitio parece viejo, primero comprueba qué copia abriste, si guardaste y si la publicación terminó.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Crea este archivo en una carpeta nueva llamada perfil-practica:
 
-```text
-Browser <- index.html <- VS Code
-             ^
-        project folder
+```html
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Mi entorno de práctica</title>
+  </head>
+  <body>
+    <h1>Estoy construyendo mi primera página</h1>
+    <p>Este archivo vive en mi computadora.</p>
+  </body>
+</html>
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+Ábrelo en Chrome y observa la dirección. Una dirección que comienza con file indica una lectura local, no una publicación accesible a cualquier persona. Cambia el título de la pestaña y después el encabezado visible por separado. Cada cambio debe guardarse antes de recargar. Desconectar internet no impide leer ese archivo local, aunque sí podría impedir cargar recursos externos.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Agrega GitHub y el sitio publicado al mapa; después marca qué flechas necesitan conexión a internet.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Dibuja navegador, editor, terminal, carpeta, GitHub y servidor. Une los elementos con flechas y escribe qué información viaja por cada una.
+2. Crea la carpeta y el archivo, guarda y abre en el navegador. Anota la ruta exacta sin publicar tu nombre de usuario o información personal.
+3. Cierra ambas aplicaciones y vuelve a localizar el proyecto desde el explorador. Abre la carpeta completa, no una copia nueva del archivo.
+4. Modifica un texto, observa el resultado antes de guardar, guarda y recarga. Explica cada estado.
+5. Compara tu archivo local con un sitio HTTPS. Señala qué pasos necesitan red y cuáles puedes hacer sin conexión.
 
 ### Comprobación
 
-- Explicar para qué sirve cada herramienta. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Crear y volver a abrir una carpeta de proyecto. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Explica con tus palabras qué hacen editor, terminal, navegador y servidor usando tu propio archivo como ejemplo.
+- Demuestra que puedes cerrar y volver a abrir la misma carpeta, y que sabes distinguir la copia local del sitio publicado.
+- Describe por qué guardar, confirmar en Git y publicar son acciones distintas.
 <!-- /lesson -->
 
 <!-- lesson:week-01-lesson-02 -->
@@ -213,32 +248,53 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Practica cómo saber dónde estás, listar, navegar, crear y pedir ayuda. Piensa en las rutas como direcciones exactas y lee cada comando antes de ejecutarlo. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+La terminal permite escribir instrucciones; el shell interpreta su sintaxis. Cada sesión tiene un directorio de trabajo. Muchos comandos interpretan las rutas desde ahí, por lo que saber dónde estás es el primer paso antes de crear, mover o eliminar. No copies el símbolo del prompt, como dólar o porcentaje: sólo indica que el shell espera una orden.
+
+Una ruta absoluta describe un lugar desde la raíz del sistema. Una ruta relativa comienza en el directorio actual. El punto representa ese directorio y dos puntos representan el padre. Una carpeta no se vuelve un proyecto porque tenga un nombre especial: tú eliges cómo organizar los archivos, y las herramientas operan sobre las rutas que les das.
+
+En PowerShell, Get-Location muestra ubicación, Get-ChildItem lista contenido y Set-Location cambia de carpeta. New-Item crea un archivo o directorio según ItemType. En macOS o Ubuntu de WSL, los equivalentes que usarás son pwd, ls, cd, touch y mkdir. Aunque algunos alias se parecen, no asumas que todos los comandos ni sus opciones son intercambiables.
+
+Un error de ruta no suele requerir reinstalar herramientas. Lee el mensaje, comprueba ubicación y nombre, y usa autocompletar con Tab. Las rutas de Linux distinguen mayúsculas y minúsculas. Si un nombre contiene espacios, rodéalo con comillas para que el shell no lo interprete como varios argumentos.
+
+Los comandos de eliminación pueden saltarse la papelera. Practica sólo en la carpeta creada para esta actividad y confirma su contenido antes de borrar. No uses instrucciones recursivas sobre el directorio personal ni sobre un repositorio con trabajo. Poder escribir un comando poderoso no significa que sea apropiado para resolver una duda de navegación.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+En Windows nativo con PowerShell:
 
 ```powershell
 Get-Location
-New-Item -ItemType Directory practica
-Set-Location practica
+New-Item -ItemType Directory practica-terminal
+Set-Location practica-terminal
+New-Item -ItemType File notas.txt
 Get-ChildItem
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+En macOS o Ubuntu de WSL:
+
+```bash
+pwd
+mkdir practica-terminal
+cd practica-terminal
+touch notas.txt
+ls
+```
+
+Ambos recorridos crean una carpeta, entran y crean un archivo vacío. No ejecutes ambos sobre el mismo lugar sin revisar qué existe. Abre notas.txt en el editor, escribe una frase y guarda. La terminal y el editor ven el mismo archivo si están trabajando en el mismo entorno y ruta.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Repite con comandos de macOS si está disponible y explica la ruta mostrada después de cada paso.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Elige la terminal de tu plataforma y escribe la ubicación inicial. Crea la carpeta de práctica y verifica que aparezca antes de entrar.
+2. Crea notas.txt, escribe desde el editor y vuelve a listar. Abre el archivo para confirmar que contiene la frase guardada.
+3. Crea una subcarpeta y entra en ella. Usa el comando de ubicación, vuelve al padre y describe qué parte de la ruta cambió.
+4. Renombra sólo el archivo de práctica: usa Rename-Item en PowerShell o mv en Bash. Comprueba que el contenido se conserva bajo el nombre nuevo.
+5. Consulta ayuda del comando que quieras usar. Antes de eliminar la práctica, lista el contenido, confirma la ruta y borra únicamente el archivo y después la carpeta vacía mediante las herramientas apropiadas.
 
 ### Comprobación
 
-- Navegar sin perder la ubicación actual. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Reconocer comandos destructivos y detenerte antes de usarlos. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Navega a una carpeta y vuelve a la anterior explicando cada ruta, sin depender de adivinar nombres.
+- Identifica qué comandos son de PowerShell y cuáles de Bash, y explica por qué no los mezclas.
+- Antes de una eliminación, muestra qué evidencia usarías para confirmar el objetivo y detectar un comando demasiado amplio.
 <!-- /lesson -->
 
 <!-- lesson:week-01-lesson-03 -->
@@ -246,32 +302,48 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Usa status, add, commit, log, remote, push y pull en un repositorio pequeño. Un commit es un punto de avance con intención, no una bolsa de cambios al azar. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Git registra versiones de un proyecto en tu computadora. GitHub aloja una copia remota y permite colaborar. Puedes guardar un archivo sin crear un commit, crear un commit sin publicarlo y publicar código sin haber desplegado una página. Aprender a distinguir esos estados evita perder trabajo o pensar que algo ya está visible para otras personas.
+
+El directorio de trabajo contiene los archivos que editas. El área de preparación reúne exactamente los cambios que entrarán al siguiente commit. El repositorio conserva commits y relaciones entre ellos. git add prepara una versión concreta; si editas después, la nueva edición no entra automáticamente. git status muestra en qué estado está cada cambio.
+
+Un commit debe reunir una intención comprensible: por ejemplo añadir navegación o corregir un enlace. Mezclar una corrección con cambios no relacionados hace difícil revisar o revertir. Su mensaje explica el propósito, no sólo dice actualizado. El historial también sirve cuando vuelves después de varios días y ya no recuerdas por qué escribiste una línea.
+
+Revisa el contenido del diff, no sólo los nombres de archivo: un archivo puede contener varias modificaciones con propósitos distintos.
+
+Un remoto tiene un nombre, normalmente origin, y una URL. main es una rama, no un servidor. git push origin main envía commits de esa rama al remoto configurado. git pull obtiene e integra cambios remotos; no es una orden que debas ejecutar a ciegas cuando hay trabajo pendiente o un conflicto. Primero lee el estado y entiende qué versiones difieren.
+
+Configura identidad y autenticación conforme a las lecciones de preparación. En un equipo compartido no dejes llaves privadas, sesiones abiertas o identidad global de otra persona. Usa el correo privado de GitHub si quieres evitar publicar el personal. Nunca añadas contraseñas ni archivos de secretos al repositorio, incluso si planeas borrarlos después: el historial puede conservarlos.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Desde un repositorio de práctica con index.html:
 
 ```bash
 git status
+git diff
 git add index.html
-git commit -m "Explain the profile goal"
+git diff --staged
+git commit -m "Explica la meta del perfil"
 git log --oneline
+git remote -v
+git push origin main
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+Antes de confirmar, compara el diff preparado con el mensaje. Después de push, abre GitHub y verifica el mismo commit. Un árbol limpio sólo indica ausencia de cambios locales pendientes; una rama puede estar limpia y aún tener commits sin publicar.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Cambia un segundo archivo, agrega sólo uno a staging y usa status para demostrar qué entrará al commit.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Crea un repositorio de práctica con README en GitHub y clónalo mediante la conexión configurada. Abre esa carpeta y verifica origin.
+2. Modifica README e index.html con cambios pequeños distintos. Ejecuta status y describe ambos.
+3. Prepara solamente index.html y usa diff --staged para demostrar qué entrará. Crea un commit enfocado; el cambio del README debe seguir pendiente.
+4. Prepara y confirma el README con otro mensaje. Revisa ambos commits y publica.
+5. Abre el repositorio en una sesión del navegador y compara archivos e identificadores con tu historial local. Escribe en el README cómo abrir la página, qué hiciste y qué comprobaste.
 
 ### Comprobación
 
-- Distinguir área de trabajo, staging y repositorio. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Publicar una secuencia de commits enfocados. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Demuestra la diferencia entre trabajo pendiente, preparado, confirmado y publicado usando los dos archivos.
+- Explica qué representan origin y main y cómo sabes que el último commit llegó a GitHub.
+- Muestra dos commits con propósitos distintos y explica por qué su separación ayuda a revisar el proyecto.
 <!-- /lesson -->
 
 <!-- lesson:week-01-lesson-04 -->
@@ -279,34 +351,61 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Convierte un esquema de contenido en encabezados, regiones, enlaces, listas, imágenes y formularios cuya estructura tenga sentido aun sin estilos. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+HTML expresa qué significa el contenido. Un encabezado identifica un tema; una lista agrupa entradas; un enlace lleva a otro recurso; un botón ejecuta una acción. Elegir elementos por su apariencia predeterminada crea estructuras confusas. CSS puede cambiar el tamaño de un título sin que tengas que sustituirlo por un párrafo grande.
+
+El documento comienza con doctype y un elemento html que declara idioma. head contiene metadatos como codificación y título de pestaña. body contiene la página visible. Dentro, header introduce el sitio o una sección, nav agrupa navegación principal, main contiene el contenido central y footer cierra con información relacionada. Una section suele necesitar un encabezado que explique su tema; no es sólo una caja para aplicar estilos.
+
+Los encabezados forman una jerarquía. Usa un h1 para el asunto general de esta página, h2 para secciones y h3 cuando una sección realmente tenga subsecciones. No saltes niveles para obtener un tamaño menor. Imagina leer sólo los encabezados: deberían describir un esquema comprensible.
+
+Los enlaces necesitan un destino href y texto que permita anticiparlo. Una imagen informativa necesita texto alternativo que comunique lo relevante; una decorativa puede tener alt vacío. Las listas usan ul u ol según importe la secuencia y li para cada entrada. Si añades un formulario, relaciona cada etiqueta label con su control mediante for e id; un placeholder que desaparece no sustituye una etiqueta.
+
+La indentación muestra relaciones, pero son las etiquetas las que crean el árbol. Cierra elementos desde el más interior hacia afuera y revisa rutas desde el documento que las utiliza. Los navegadores intentan reparar errores, así que una página que se ve razonable todavía puede tener marcado inválido.
+
+Piensa también en el orden de lectura. Una persona que recorra el documento de principio a fin debe encontrar presentación y proyectos en una secuencia útil. Cambiar tamaños de letra después no corrige un esquema cuyo significado sigue siendo confuso.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
-
 ```html
-<header>
-  <h1>Ana learns the web</h1>
-</header>
-<main>
-  <section><h2>Projects</h2></section>
-</main>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana · Perfil de desarrollo</title>
+  </head>
+  <body>
+    <header>
+      <h1>Ana aprende desarrollo web</h1>
+      <nav aria-label="Principal">
+        <a href="#proyectos">Proyectos</a>
+      </nav>
+    </header>
+    <main>
+      <section id="proyectos">
+        <h2>Proyectos</h2>
+        <ul><li>Mi primer recetario</li></ul>
+      </section>
+    </main>
+    <footer><p>Un espacio para compartir lo que aprendo.</p></footer>
+  </body>
+</html>
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+El enlace apunta al id proyectos dentro de la misma página. El título de pestaña y el h1 cumplen papeles distintos. El texto sigue teniendo una estructura comprensible sin CSS. No publiques teléfono, dirección precisa u otros datos personales sólo para llenar el perfil.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Agrega navegación y footer, conserva un solo h1 y no saltes niveles de encabezado.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Escribe un esquema de tu perfil en texto: presentación, meta, proyectos y enlace a GitHub. Decide qué regiones y encabezados necesita.
+2. Construye el documento completo con contenido propio. Añade una lista de proyectos y navegación que llegue a una sección real.
+3. Recorre los enlaces con Tab y actívalos con Enter. Comprueba el destino y que el texto lo describa.
+4. Valida el documento con el validador HTML del W3C. Corrige el primer error, vuelve a validar y documenta el resultado.
+5. Desactiva estilos si añadiste alguno y pide a otra persona que explique el esquema. Ajusta la estructura si el orden no resulta claro.
 
 ### Comprobación
 
-- Elegir elementos por significado y no por apariencia. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Validar HTML y corregir los errores reportados. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Justifica las etiquetas por su función, incluyendo la diferencia entre enlace y botón.
+- Muestra una jerarquía de encabezados coherente y evidencia de validación sin errores pendientes.
+- Comprueba navegación por teclado y explica qué contenido sigue siendo comprensible sin estilos.
 <!-- /lesson -->
 
 ## Proyecto semanal

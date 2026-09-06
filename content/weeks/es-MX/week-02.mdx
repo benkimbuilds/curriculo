@@ -146,17 +146,58 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "foundations/html_css/css-foundations",
-      "foundations/html_css/flexbox",
-      "intermediate_html_css/grid"
+      "foundations/html_css/css_foundations/intro_to_css.md",
+      "foundations/html_css/css_foundations/the_cascade.md",
+      "foundations/html_css/css_foundations/inspecting_html_and_css.md",
+      "foundations/html_css/css_foundations/the_box_model.md",
+      "foundations/html_css/css_foundations/block_and_inline.md",
+      "foundations/html_css/flexbox/flexbox_intro.md",
+      "foundations/html_css/flexbox/flexbox_growing_and_shrinking.md",
+      "foundations/html_css/flexbox/flexbox_axes.md",
+      "foundations/html_css/flexbox/flexbox_alignment.md",
+      "foundations/html_css/flexbox/project_landing_page.md",
+      "intermediate_html_css/intermediate_html_concepts/introduction.md",
+      "intermediate_html_css/intermediate_html_concepts/svgs.md",
+      "intermediate_html_css/intermediate_html_concepts/tables.md",
+      "intermediate_html_css/intermediate_css_concepts/default_styles.md",
+      "intermediate_html_css/intermediate_css_concepts/css_units.md",
+      "intermediate_html_css/intermediate_css_concepts/more_text_styles.md",
+      "intermediate_html_css/intermediate_css_concepts/more_css_properties.md",
+      "intermediate_html_css/intermediate_css_concepts/advanced_selectors.md",
+      "intermediate_html_css/intermediate_css_concepts/positioning.md",
+      "intermediate_html_css/intermediate_css_concepts/css_functions.md",
+      "intermediate_html_css/intermediate_css_concepts/custom_properties.md",
+      "intermediate_html_css/intermediate_css_concepts/browser_compatibility.md",
+      "intermediate_html_css/intermediate_css_concepts/frameworks_and_preprocessors.md",
+      "intermediate_html_css/forms/form_basics.md",
+      "intermediate_html_css/forms/form_validations.md",
+      "intermediate_html_css/forms/project_sign_up_form.md",
+      "intermediate_html_css/grid/introduction_to_grid.md",
+      "intermediate_html_css/grid/creating_a_grid.md",
+      "intermediate_html_css/grid/positioning_grid_elements.md",
+      "intermediate_html_css/grid/advanced_grid_properties.md",
+      "intermediate_html_css/grid/using_flexbox_and_grid.md",
+      "intermediate_html_css/grid/project_admin_dashboard.md",
+      "advanced_html_css/accessibility/introduction_to_web_accessibility.md",
+      "advanced_html_css/accessibility/the_web_content_accessibility_guidelines_wcag.md",
+      "advanced_html_css/accessibility/semantic_html.md",
+      "advanced_html_css/accessibility/accessible_colors.md",
+      "advanced_html_css/accessibility/keyboard_navigation.md",
+      "advanced_html_css/accessibility/meaningful_text.md",
+      "advanced_html_css/accessibility/wai_aria.md",
+      "advanced_html_css/accessibility/accessibility_auditing.md",
+      "advanced_html_css/responsive_design/introduction_to_responsive_design.md",
+      "advanced_html_css/responsive_design/natural_responsiveness.md",
+      "advanced_html_css/responsive_design/responsive_images.md",
+      "advanced_html_css/responsive_design/media_queries.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "translated-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
-    "translator": "AI Builders LATAM Spanish editorial team",
+    "editor": "Ruta curriculum adaptation",
+    "translator": "Adaptación al español asistida por IA",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -183,31 +224,45 @@ Usa CSS con intención, adapta interfaces desde teléfonos hasta monitores del l
 
 ### Explicación
 
-Conecta hojas de estilo, inspecciona estilos calculados y razona sobre especificidad, herencia, unidades, color y modelo de caja en vez de cambiar números a ciegas. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Una hoja de estilos no se ejecuta de arriba abajo como una secuencia de instrucciones JavaScript. El navegador reúne declaraciones que coinciden con cada elemento y resuelve conflictos mediante la cascada. Entre reglas normales de autor de una misma capa, la especificidad ayuda a decidir cuál gana; si empatan, gana la posterior. La herencia es otro mecanismo: algunas propiedades, como el color del texto, pasan desde un padre cuando el hijo no tiene su propia declaración ganadora.
+
+Considera un párrafo con clase notice dentro de main. Coinciden tanto el selector de clase como el selector que añade main como ancestro. El segundo incluye un componente de tipo adicional y su color gana frente a las dos reglas de clase del ejemplo. Mover una regla menos específica al final no hace que venza automáticamente. Evita responder primero con important: investiga qué regla gana y expresa claramente la relación que necesitas.
+
+Los espacios tienen otro modelo. Cada caja tiene contenido, relleno, borde y margen. El relleno separa el contenido de su borde; el margen separa la caja de sus vecinas. Con content-box, el ancho declarado no incluye relleno ni bordes. Con border-box, sí los incluye. Si un título toca la línea de una tarjeta, normalmente falta relleno interior; aumentar el margen entre tarjetas no corrige esa relación.
+
+Elige unidades según la relación deseada. Un rem sigue la fuente raíz; un em puede seguir la fuente del elemento. Un borde fino puede usar píxeles deliberadamente. No hay una unidad universal: pregunta qué debe crecer cuando crece el texto. Después comprueba las preferencias tipográficas del navegador y el zoom, porque una caja con altura fija todavía puede recortar contenido aunque uses fuentes relativas.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
-
 ```css
+*, *::before, *::after { box-sizing: border-box; }
 .notice { color: navy; }
 main .notice { color: teal; }
 .notice { color: purple; }
+.card {
+  max-width: 36rem;
+  padding: 1.5rem;
+  border: 1px solid #667788;
+  margin-block: 1rem;
+}
+.card p { line-height: 1.5; }
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+Crea un párrafo dentro de una tarjeta dentro de main. Abre DevTools, selecciona el párrafo y revisa Styles y Computed. Las declaraciones tachadas muestran reglas que pierden; el color calculado muestra el resultado. Después inspecciona el diagrama de caja de la tarjeta. Compara borde de contenido, relleno y borde visible en lugar de cambiar números al azar.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Predice el color final, verifícalo en estilos calculados y haz que gane la primera regla sin usar important.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Crea HTML con main, dos tarjetas, encabezados, párrafos y un enlace. Conecta una hoja externa y comprueba que su solicitud carga correctamente.
+2. Aplica el ejemplo y predice el color antes de abrir Computed. Desactiva la regla ganadora y explica cuál gana después y por qué.
+3. Quita el relleno de la tarjeta, observa el texto pegado al borde y restáuralo. Cambia el margen por separado y explica la diferencia visible.
+4. Añade un título largo y aumenta el tamaño de texto del navegador. Sustituye cualquier altura fija que recorte contenido por altura natural o un mínimo justificado.
+5. Lee la [guía de cascada de MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance) y la [guía del modelo de caja](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model). Registra una regla inspeccionada y una corrección de espacio medida.
 
 ### Comprobación
 
-- Predecir qué declaración gana en la cascada. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Diagnosticar espacios con las herramientas del navegador. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Explica por qué gana teal y muestra las declaraciones competidoras en DevTools.
+- Identifica contenido, relleno, borde y margen, y demuestra qué cambio separa el texto de la línea.
+- Muestra que el texto largo sigue visible al aumentar la fuente.
 <!-- /lesson -->
 
 <!-- lesson:week-02-lesson-02 -->
@@ -215,33 +270,45 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Usa primero el flujo normal, Flexbox para alinear en una dimensión y Grid para regiones de dos dimensiones. Define cortes cuando el contenido los necesite. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Empieza con el flujo normal del documento. Encabezados y párrafos ya se apilan y el texto cambia de línea dentro del espacio disponible. No necesitas un sistema especial de colocación para cada elemento. Introduce Flexbox cuando un grupo requiera comportamiento coordinado sobre un eje principal y Grid cuando filas y columnas deban compartir una estructura.
+
+Una fila de acciones es un buen caso de Flexbox. Cada botón tiene un tamaño natural por su contenido; el grupo puede alinear elementos, mantener huecos y cambiar de línea cuando ya no caben. El eje principal depende de flex-direction. Justify-content distribuye sobre ese eje y align-items actúa sobre el transversal. Si cambias la dirección, no supongas que la misma propiedad siempre significa alineación horizontal.
+
+Una galería de proyectos es un buen caso de Grid. El contenedor define pistas de columna y sus hijos directos ocupan celdas. Repeat con auto-fit y minmax permite decidir cuántas columnas legibles caben sin identificar un teléfono concreto. Un máximo de una fracción reparte el espacio restante. El mínimo también debe caber: imponer dieciséis rem sin considerar un contenedor más pequeño puede producir desbordamiento.
+
+Ambas herramientas se complementan. Una tarjeta puede ser hija Grid en la galería y contener una fila Flex para sus acciones. Son relaciones de niveles distintos. Poner display flex sobre la tarjeta no modifica las columnas de la galería exterior. Identifica primero el padre responsable de distribuir los elementos que quieres cambiar.
+
+El contenido introduce restricciones. Una URL larga, una imagen grande o una etiqueta que no puede partirse pueden imponer mínimos que resisten reducirse. Inspecciona al hijo responsable en lugar de ocultar el desbordamiento de toda la página. Usa un ancho mínimo cero cuando corresponda permitir reducción y una regla de partición para texto largo. Conserva un orden HTML lógico aunque Grid permita mover visualmente una tarjeta a otra región.
 
 ### Ejemplo
-
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
 
 ```css
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1.5rem;
 }
+.card { min-width: 0; padding: 1.5rem; border: 1px solid #9aa7b0; }
+.card h2 { overflow-wrap: anywhere; }
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+.actions a { padding: .75rem 1rem; }
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+El gap de la galería separa tarjetas; el padding de cada tarjeta separa texto y borde. El gap de las acciones separa controles. Aumentar la primera separación no arregla el texto apretado dentro de la tarjeta. Activa la superposición Grid para ver pistas y usa el modelo de caja para inspeccionar relleno.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Agrega una tarjeta con un título muy largo y explica por qué el grid se ajusta sin un breakpoint por dispositivo.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Construye seis tarjetas con título, descripción y dos enlaces reales. Mantén el marcado en el orden de lectura previsto.
+2. Aplica el ejemplo e inspecciona las pistas. Reduce el padre hasta perder una columna y explica qué mínimo y huecos causaron el cambio.
+3. Sustituye un título por una URL larga y una descripción por varios párrafos. Comprueba que las tarjetas crecen verticalmente sin recortar.
+4. Añade una tercera acción con etiqueta larga. Observa cómo Flexbox acomoda acciones independientemente de las columnas Grid.
+5. Compara [Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) y [fundamentos de Flexbox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox). Escribe una razón para cada sistema usado.
 
 ### Comprobación
 
-- Elegir Flexbox o Grid con una razón clara. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Evitar medidas fijas que corten contenido real. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Identifica qué contenedor controla la galería y cuál controla los botones.
+- Demuestra una tarjeta adicional y un título largo sin añadir reglas por dispositivo.
+- Explica por qué gap, padding y altura fija no son soluciones intercambiables.
 <!-- /lesson -->
 
 <!-- lesson:week-02-lesson-03 -->
@@ -249,30 +316,48 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Empieza con el ancho menor, agrega media queries cuando falte espacio y usa texto, imágenes y contenedores fluidos sin desplazamiento horizontal. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Una implementación responsiva conserva una interfaz utilizable cuando cambia el espacio disponible. Una página puede verse correcta en un teléfono y en escritorio, pero fallar en anchos intermedios. Prueba un rango continuo y varía también el contenido. El zoom y el texto aumentado cambian cuánto espacio efectivo tiene cada región.
+
+Empieza con una distribución estrecha que funcione en el flujo normal. Deja crecer los contenedores hasta un máximo legible y céntralos, en lugar de extender párrafos por toda una pantalla muy ancha. Las imágenes deben tener ancho máximo flexible y altura automática para conservar proporción. Si una fotografía necesita llenar un marco, utiliza object-fit deliberadamente y revisa que el recorte no elimine al sujeto.
+
+Una consulta de medios aplica declaraciones cuando el viewport cumple una condición. No añade especificidad ni anula automáticamente la cascada. Elige el punto de cambio cuando el contenido necesita otra distribución, no porque una lista de dispositivos diga que las tabletas empiezan en cierto número. Una barra lateral puede pasar encima del artículo cuando ya no caben ambos. Una fila pequeña de acciones quizá sólo necesita cambiar de línea y ninguna consulta.
+
+La etiqueta viewport indica al navegador móvil que utilice el ancho disponible en píxeles CSS en lugar de reducir una página artificialmente amplia. Establece una escala inicial; no debe impedir que la persona amplíe. Algunas herramientas ya generan esta etiqueta: inspecciona el documento resultante antes de duplicarla.
+
+Los formularios revelan errores responsivos rápidamente. Una etiqueta puede ocupar dos líneas, un error puede ser largo y el teclado virtual reduce el área visible. Coloca etiquetas arriba de campos cuando eso evita columnas apretadas, permite que los controles llenen su contenedor y evita alturas fijas en errores. No elimines instrucciones en móvil sólo para que una captura parezca ordenada.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
 
 ```css
 .page { width: min(100% - 2rem, 70rem); margin-inline: auto; }
 img { max-width: 100%; height: auto; }
+.content { display: grid; gap: 2rem; }
+input, textarea, select { max-width: 100%; font: inherit; }
+@media (min-width: 52rem) {
+  .content { grid-template-columns: minmax(0, 2fr) minmax(14rem, 1fr); }
+}
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+Debajo del punto de cambio, las regiones se apilan siguiendo el HTML. Encima, forman una columna principal y otra secundaria. El mínimo lateral es una decisión consciente: comprueba que la columna principal aún tenga espacio suficiente en el instante exacto en que se activa la distribución.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Prueba a 320, 768 y 1280 píxeles y anota cuándo el contenido, no el nombre de un dispositivo, exige un cambio.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Añade a tu galería una introducción, una imagen grande y un formulario breve para pedir información, con etiquetas visibles.
+2. Prueba a 320, 360, 768 y 1280 píxeles CSS. Después cambia lentamente entre esos anchos y anota dónde empieza a apretarse el contenido.
+3. Añade una consulta sólo para un cambio estructural necesario. Prueba justo debajo, en el punto exacto y justo encima.
+4. Aumenta zoom al 200%, introduce un correo ficticio largo y muestra un error de varias líneas. Comprueba que nada desaparece detrás de cajas fijas.
+5. Si hay desplazamiento horizontal, identifica el elemento responsable y corrige ancho, mínimo o partición. No encubras el problema con overflow hidden en el documento.
+6. Sigue la [introducción responsiva de MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design) y el [modo de dispositivo de Chrome](https://developer.chrome.com/docs/devtools/device-mode/). Guarda capturas y explica qué condición justificó el breakpoint.
 
 ### Comprobación
 
-- Probar la interfaz en distintos anchos. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Escalar imágenes y texto sin ocultar información. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Muestra el mismo contenido en anchos estrechos, intermedios y amplios sin pérdida de información.
+- Explica por qué existe el punto de cambio y demuestra su comportamiento cercano.
+- Comprueba proporciones de imágenes y uso del formulario con texto aumentado.
 <!-- /lesson -->
 
 <!-- lesson:week-02-lesson-04 -->
@@ -280,31 +365,51 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Revisa orden de teclado, foco visible, encabezados, etiquetas, texto alternativo, contraste, movimiento reducido y mensajes de error como parte de la calidad normal. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+La accesibilidad forma parte de poder completar una tarea. Para esta semana, revisa un recorrido concreto: encontrar el servicio, entender sus condiciones, introducir una solicitud y reconocer el resultado o error. Una página visualmente pulida que no puede operarse con teclado no ha completado ese recorrido para todas las personas.
+
+Usa HTML semántico antes de añadir ARIA. Un botón realiza una acción; un enlace con href navega. Un div con apariencia de botón no recibe automáticamente foco, activación con Enter o Espacio ni anuncio de su función. Los encabezados describen jerarquía y main y nav identifican regiones importantes. Elige niveles de encabezado por estructura y cambia su apariencia con CSS.
+
+Cada entrada necesita una etiqueta significativa. El valor for de la etiqueta debe coincidir con un id único. Name cumple otra función: identifica el dato enviado. Usa email para correo, tel para teléfono y texto para identificadores que no son cantidades. Un placeholder es una pista que desaparece y no sustituye una etiqueta persistente.
+
+Explica restricciones antes de enviar. Required, minlength y la validación por tipo ofrecen una primera capa útil, pero las comprobaciones del navegador no protegen al servidor. Un formulario de demostración no debe fingir que crea una cuenta real. Cuando aparezca un error, identifica el campo y cómo corregirlo conservando lo que la persona ya escribió. Asocia instrucciones adicionales mediante aria-describedby cuando corresponda.
+
+Quien navega con teclado necesita foco visible y orden comprensible. Tab y Shift+Tab deben seguir lógicamente el documento; Enter y Espacio deben activar controles nativos según corresponda. Los paneles cerrados no deben contener paradas de foco invisibles. Conserva el indicador del navegador o reemplázalo por uno claro, y comprueba que bordes o reglas de overflow no lo recorten.
+
+Colores e imágenes también comunican información. Comprueba contraste entre texto y fondo, distingue enlaces con algo más que color y escribe alternativas según la función de cada imagen. Las decorativas pueden tener alt vacío. Si añades movimiento, ofrece una alternativa de movimiento reducido que mantenga disponible la información.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
-
 ```html
-<label for="email">Correo</label>
-<input id="email" name="email" type="email">
-<button>Solicitar información</button>
+<form action="/solicitud" method="post">
+  <label for="correo">Correo (obligatorio)</label>
+  <p id="correo-ayuda">Usaremos esta dirección para responder sobre el taller.</p>
+  <input id="correo" name="correo" type="email" required
+         autocomplete="email" aria-describedby="correo-ayuda">
+  <button type="submit">Solicitar información del taller</button>
+</form>
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+```css
+:focus-visible { outline: 3px solid #155b9e; outline-offset: 3px; }
+label, input { display: block; }
+input { width: 100%; padding: .75rem; margin-block: .5rem 1rem; }
+```
+
+La ruta es ilustrativa: conecta un manejador real o identifica claramente la página como demostración. Inspecciona nombre y descripción accesibles del campo; después pulsa la etiqueta para comprobar que el foco llega a la entrada.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Llega a cada control con teclado, agrega foco visible y escribe texto alternativo útil para una imagen informativa.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Completa toda la página sólo con Tab, Shift+Tab, Enter y Espacio. Registra la primera parada ausente o confusa.
+2. Revisa el orden de encabezados y reemplaza contenedores genéricos interactivos por elementos nativos adecuados.
+3. Prueba datos vacíos e inválidos y corrígelos. Comprueba mensajes útiles y conservación de otros valores.
+4. Verifica colores con [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) y revisa imágenes con su [guía de texto alternativo](https://webaim.org/techniques/alttext).
+5. Ejecuta una auditoría de accesibilidad del navegador, corrige hallazgos pertinentes y repite el recorrido manual. Si está disponible, prueba NVDA en Windows o VoiceOver en macOS.
 
 ### Comprobación
 
-- Completar el flujo principal usando sólo teclado. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Registrar y corregir hallazgos de accesibilidad. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Demuestra el recorrido principal sin ratón, incluida recuperación de errores.
+- Muestra una etiqueta asociada, foco visible y una alternativa de imagen significativa.
+- Distingue lo que comprobó la auditoría automática de lo que verificaste manualmente.
 <!-- /lesson -->
 
 ## Proyecto semanal

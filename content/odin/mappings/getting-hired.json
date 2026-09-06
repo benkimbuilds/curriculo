@@ -1,0 +1,100 @@
+[
+  {
+    "id": "odin-getting-hired-f5e4f7ab",
+    "titleEs": "Cómo funciona este curso",
+    "week": 11,
+    "estimatedMinutes": 30,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-getting-hired-7ef83dac",
+    "titleEs": "Construye una red profesional",
+    "week": 11,
+    "estimatedMinutes": 120,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-getting-hired-ce1856f8",
+    "titleEs": "Una estrategia para conseguir empleo",
+    "week": 11,
+    "estimatedMinutes": 60,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-getting-hired-092fb96c",
+    "titleEs": "La búsqueda empieza contigo",
+    "week": 11,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-getting-hired-c93d5c3a",
+    "titleEs": "Qué buscan las empresas",
+    "week": 11,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-getting-hired-0ae67a52",
+    "titleEs": "Cómo prepararte para buscar empleo",
+    "week": 11,
+    "estimatedMinutes": 120,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-getting-hired-9e9f98a7",
+    "titleEs": "Proyecto: construye tu sitio personal",
+    "week": 11,
+    "estimatedMinutes": 360,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-getting-hired-050fda7c",
+    "titleEs": "Reúne oportunidades de empleo",
+    "week": 12,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-getting-hired-5e780427",
+    "titleEs": "Evalúa y prioriza las oportunidades",
+    "week": 12,
+    "estimatedMinutes": 60,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-getting-hired-029f508f",
+    "titleEs": "Proyecto: construye tu currículum",
+    "week": 12,
+    "estimatedMinutes": 180,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-getting-hired-bc297492",
+    "titleEs": "Presenta candidaturas a puestos de desarrollo web",
+    "week": 12,
+    "estimatedMinutes": 120,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-getting-hired-6b2a0178",
+    "titleEs": "Prepárate para las entrevistas",
+    "week": 12,
+    "estimatedMinutes": 240,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-getting-hired-4f246886",
+    "titleEs": "Cómo manejar una oferta de empleo",
+    "week": 12,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-getting-hired-de2fbbc0",
+    "titleEs": "Conclusión",
+    "week": 12,
+    "estimatedMinutes": 15,
+    "treatment": "translation"
+  }
+]

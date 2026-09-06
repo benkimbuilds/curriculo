@@ -146,17 +146,30 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "javascript/typescript",
-      "javascript/react",
-      "javascript/react/states_and_effects"
+      "advanced_html_css/animation/transforms.md",
+      "advanced_html_css/animation/transitions.md",
+      "advanced_html_css/animation/keyframes.md",
+      "react/introduction/how_this_course_will_work.md",
+      "react/introduction/introduction_to_react.md",
+      "react/introduction/setting_up_a_react_environment.md",
+      "react/getting_started_with_react/react_components.md",
+      "react/getting_started_with_react/what_is_jsx.md",
+      "react/getting_started_with_react/passing_data_between_components.md",
+      "react/getting_started_with_react/rendering_techniques.md",
+      "react/getting_started_with_react/keys_in_react.md",
+      "react/states_and_effects/introduction_to_state.md",
+      "react/states_and_effects/more_on_state.md",
+      "react/states_and_effects/project_cv_application.md",
+      "react/states_and_effects/how_to_deal_with_side_effects.md",
+      "react/states_and_effects/project_memory_card.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "translated-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
-    "translator": "AI Builders LATAM Spanish editorial team",
+    "editor": "Ruta curriculum adaptation",
+    "translator": "Adaptación al español asistida por IA",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -183,32 +196,48 @@ Usa tipos para volver visibles tus supuestos y compón interfaces React con comp
 
 ### Explicación
 
-Tipa entradas y salidas, usa uniones para alternativas reales, acota datos desconocidos y deja que el compilador encuentre supuestos en vez de taparlos con any. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+TypeScript comprueba supuestos antes de ejecutar JavaScript. Un tipo describe los valores esperados, pero no convierte una respuesta de red en un registro válido. Si el servidor envía un número donde esperabas un nombre, el navegador recibe ese número. Distinguir entre comprobación de compilación y validación durante ejecución es la habilidad central de esta lección.
+
+Modela el directorio semanal con ID, nombre y categoría. Una unión como `"health" | "education"` expresa las alternativas permitidas mejor que `string`. Una función que recibe esa unión no acepta accidentalmente `"heath"` sin que el compilador avise. No uses `any` para silenciar esa información. Usa `unknown` cuando todavía no conoces la forma de un dato: necesitas acotarlo antes de leer sus propiedades o llamar métodos.
+
+Acotar consiste en condiciones normales de JavaScript. Comprueba que el valor sea un objeto, descarta `null`, verifica las propiedades requeridas y revisa tipo y valores permitidos de cada una. Verificar solamente que existe un ID no demuestra que también haya nombre y categoría válidos. Un predicado de tipo es una promesa al compilador; si está incompleto puede fabricar confianza falsa.
+
+Cuando la interfaz necesita explicar un fallo, devuelve un resultado de validación. Una unión discriminada permite comprobar un campo y acceder después al recurso validado o al mensaje de error. Así éxito y fallo son situaciones diferentes, en lugar de un objeto donde `resource` y `error` podrían faltar simultáneamente. Los tipos deben representar posibilidades reales del dominio, incluidos sus errores.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Guarda este ejemplo en un módulo TypeScript y ejecútalo con objetos válidos e inválidos. El recurso devuelto se construye con campos comprobados: propiedades adicionales de la entrada no pasan automáticamente a ser datos confiables.
 
 ```ts
 type Resource = { id: string; name: string; category: "health" | "education" };
-function isResource(value: unknown): value is Resource {
-  return typeof value === "object" && value !== null && "id" in value;
+type ParseResult = { ok: true; resource: Resource } | { ok: false; error: string };
+function parseResource(value: unknown): ParseResult {
+  if (typeof value !== "object" || value === null) return { ok: false, error: "Se esperaba un objeto" };
+  if (!("id" in value) || typeof value.id !== "string" || !value.id.trim()) return { ok: false, error: "Falta el ID" };
+  if (!("name" in value) || typeof value.name !== "string" || !value.name.trim()) return { ok: false, error: "Falta el nombre" };
+  if (!("category" in value) || (value.category !== "health" && value.category !== "education")) return { ok: false, error: "Categoría desconocida" };
+  return { ok: true, resource: { id: value.id, name: value.name.trim(), category: value.category } };
 }
+const result = parseResource({ id: "r1", name: " Biblioteca ", category: "education" });
+if (result.ok) console.log(result.resource.name);
+else console.error(result.error);
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+El campo `ok` acota el resultado para quien llama la función. En la rama exitosa existe `resource`; en la otra existe `error`. Intenta acceder al recurso antes de comprobarlo y lee la objeción del compilador. No la resuelvas con `as Resource`: una aserción modifica lo que TypeScript cree sin validar el dato real. Del mismo modo, declara un campo opcional únicamente cuando la aplicación puede funcionar sin él.
+
+Usa inferencia para valores locales evidentes y tipos explícitos en límites importantes: parámetros exportados, registros del dominio y props. Ejecuta la comprobación de tipos después de cada cambio, y luego ejecuta también el programa. Una compilación correcta no prueba la validación, una petición de red ni una interacción. Ambos tipos de evidencia son necesarios para localizar un defecto.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Agrega comprobaciones para cada campo y devuelve un resultado legible en vez de usar una aserción de tipo.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Define los tipos y predice resultados para `null`, un objeto vacío, una categoría mal escrita y un recurso válido.
+2. Ejecuta cada caso. Comprueba que un objeto con solamente ID y un nombre compuesto de espacios se rechacen.
+3. Agrega una descripción opcional con longitud máxima documentada. Decide qué significa que falte y rechaza un valor presente que sea inválido.
+4. Construye una tabla de entradas y resultados esperados. Explica qué falla durante compilación y qué exige validación durante ejecución.
 
 ### Comprobación
 
-- Modelar un dominio pequeño sin any inseguro. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Acotar datos externos antes de utilizarlos. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Demuestra que una categoría mal escrita en código tipado produce un error del compilador, mientras una entrada externa incorrecta devuelve un mensaje legible.
+- Explica por qué comprobar solo el ID o escribir `as Resource` no establece un recurso válido. Muestra tres entradas malformadas rechazadas.
 <!-- /lesson -->
 
 <!-- lesson:week-06-lesson-02 -->
@@ -216,32 +245,47 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Convierte un boceto en componentes con una responsabilidad. Envía datos mediante props tipadas y conserva HTML semántico dentro del límite del componente. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Un componente React describe una parte de la interfaz a partir de sus entradas. Comienza con un boceto: el directorio tiene encabezado, filtros, lista y formulario para agregar un borrador. Esas responsabilidades sugieren componentes útiles. Un límite debe facilitar reutilización o flujo de datos; crear un archivo para cada span no mejora automáticamente el diseño.
+
+Las props transportan datos del padre al hijo. Un objeto tipado declara ese contrato: el padre entrega un recurso con categoría compatible y el hijo puede leerlo sin inventar valores predeterminados que oculten información faltante. Las props son entradas de solo lectura. Si un hijo necesita solicitar una acción, recibe un callback en vez de modificar directamente los datos del padre.
+
+JSX es una extensión de JavaScript, no una cadena HTML. Requiere una expresión raíz, etiquetas cerradas explícitamente y propiedades como `className` o `htmlFor`. Usa fragmentos cuando agrupar hermanos no deba crear una caja de layout. Coloca valores dinámicos entre llaves y utiliza expresiones de JavaScript para derivarlos. Un objeto completo no es contenido visible útil; muestra sus campos.
+
+Conserva HTML semántico dentro de los componentes. Una tarjeta puede ser un artículo con encabezado; una colección puede ser una lista. Su forma visual no determina que el contenedor deba ser un botón. Si un título navega, usa un enlace; si realiza una acción, un botón. Estas decisiones definen comportamiento de teclado y nombres accesibles antes de aplicar CSS.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+La lista controla la iteración y la tarjeta controla la presentación. Ambas utilizan el mismo contrato de datos. La key corresponde al elemento devuelto directamente por `map`.
 
 ```tsx
-type CardProps = { name: string; category: string };
-export function ResourceCard({ name, category }: CardProps) {
-  return <article><h2>{name}</h2><p>{category}</p></article>;
+type Resource = { id: string; name: string; category: "health" | "education" };
+const categoryLabels = { health: "Salud", education: "Educación" };
+export function ResourceCard({ resource }: { resource: Resource }) {
+  return <article><h2>{resource.name}</h2><p>{categoryLabels[resource.category]}</p></article>;
+}
+export function ResourceList({ resources }: { resources: Resource[] }) {
+  if (resources.length === 0) return <p>No hay recursos para estos filtros.</p>;
+  return <ul>{resources.map(resource => <li key={resource.id}><ResourceCard resource={resource} /></li>)}</ul>;
 }
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+Las keys identifican registros al insertar, eliminar y reordenar. Usar índices puede asociar el estado de una fila con otro registro. Generar una key aleatoria durante render comunica que cada fila es nueva. Genera IDs al crear registros y consérvalos con sus datos. La key es interna de React; si el hijo necesita un ID, debe recibirlo también como parte de sus props.
+
+Renderiza primero dos recursos y después ninguno. El mensaje vacío es una situación intencional, no un diseño roto. Agrega un recurso sin cambiar la tarjeta: demuestra para qué sirven props e iteración. Luego cambia la etiqueta de categoría en un solo sitio y observa cómo todas las tarjetas usan la misma traducción. No confundas etiquetas visibles con identificadores estables que utiliza la lógica.
+
+En Next.js una tarjeta puramente presentacional puede permanecer en servidor. Agregar estado o manejadores del navegador requiere una frontera cliente apropiada, no convertir toda la aplicación en código cliente. Esta lección se concentra en contratos; el módulo de rutas explica cómo componerlos con páginas y layouts. Observa también que extraer un componente no agrega una etiqueta HTML con ese nombre: React muestra los elementos que devuelve su función.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Renderiza tres tarjetas usando IDs estables como keys y explica por qué el límite del componente resulta útil.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Dibuja el directorio e identifica componentes por responsabilidad. Escribe sus entradas antes del marcado.
+2. Renderiza tres recursos ficticios con IDs estables y encabezados semánticos. Inspecciona el DOM resultante.
+3. Reordena y elimina registros, después muestra una lista vacía. Confirma el mensaje y la ausencia de warnings de keys.
+4. Agrega un callback para solicitar seleccionar un recurso. Demuestra que se ejecuta después del evento y no durante render.
 
 ### Comprobación
 
-- Extraer componentes por reutilización, no sólo por tamaño. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Renderizar listas con llaves estables del dominio. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Explica la responsabilidad de cada componente y muestra otro conjunto de datos sin duplicar su marcado.
+- Demuestra identidad estable después de reordenar y explica por qué una key no es una prop normal disponible para el hijo.
 <!-- /lesson -->
 
 <!-- lesson:week-06-lesson-03 -->
@@ -249,30 +293,56 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Guarda el estado mínimo, deriva totales al renderizar, actualiza arreglos sin mutarlos y define quién controla cada formulario. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+El estado conserva información entre renderizados. En el directorio, el texto de búsqueda cambia al escribir y la colección cambia al agregar borradores. La lista filtrada se calcula a partir de esos hechos; no debe ser un tercer estado actualizado por separado. De otro modo, agregar un recurso o borrar un filtro podría dejar lista y conteo inconsistentes.
+
+Un setter solicita otro render, pero no reemplaza la variable local del manejador en ejecución. Considera esa variable una instantánea: un log inmediatamente después del setter todavía ve el valor del render actual. Si el siguiente valor depende del anterior, usa un actualizador funcional para combinar correctamente varias actualizaciones pendientes. Los actualizadores deben ser puros; crea IDs antes de llamarlos y entrega esos valores a la actualización.
+
+React controla un input mediante `value` y `onChange`. Inicializa texto con una cadena vacía y actualízalo desde el evento. Un input controlado sin manejador queda esencialmente de solo lectura. Cuando varios componentes necesitan el mismo valor, mueve su propiedad al ancestro común más cercano que resulte útil y pasa datos y callbacks hacia abajo. No sincronices copias de hermanos con efectos.
+
+Objetos y arreglos de estado son instantáneas inmutables. Crea otro arreglo al agregar o quitar registros y copia cada registro que cambie. Un spread solo copia un nivel. Así los renders anteriores conservan significado y la comparación de identidad detecta el cambio. Modificar con `push` y devolver el mismo arreglo puede dejar la interfaz desactualizada.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Este componente deriva resultados y conteo de un solo estado de búsqueda. Trata la ausencia de coincidencias como una situación normal de la interfaz.
 
 ```tsx
-const [query, setQuery] = useState("");
-const visible = resources.filter((item) => item.name.includes(query));
+"use client";
+import { useState } from "react";
+type Resource = { id: string; name: string };
+export function Directory({ initialResources }: { initialResources: Resource[] }) {
+  const [resources, setResources] = useState(initialResources);
+  const [query, setQuery] = useState("");
+  const visible = resources.filter(item => item.name.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()));
+  function addDraft() {
+    const draft = { id: crypto.randomUUID(), name: "Biblioteca comunitaria" };
+    setResources(previous => [...previous, draft]);
+  }
+  return <section>
+    <label>Buscar<input value={query} onChange={event => setQuery(event.target.value)} /></label>
+    <p>{visible.length} resultados</p>
+    <button onClick={addDraft}>Agregar borrador de ejemplo</button>
+    {visible.length === 0 ? <p>No hay coincidencias.</p> : <ul>{visible.map(item => <li key={item.id}>{item.name}</li>)}</ul>}
+  </section>;
+}
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+Sigue una pulsación: el navegador produce un cambio, el manejador lee su valor, el setter programa render, el filtro usa la consulta nueva y React confirma lista y conteo. No necesitas un efecto porque no estás sincronizando nada externo. Agregar un borrador sigue el mismo recorrido con un arreglo nuevo. Si no coincide con la búsqueda actual, permanece oculto correctamente hasta cambiar el filtro.
+
+La inicialización se utiliza cuando se monta la instancia. Cambiar después `initialResources` no reemplaza automáticamente el estado local. Decide si el componente posee una copia editable o debe mostrar directamente props entrantes; mezclar ambos modelos silenciosamente genera reinicios sorpresivos. Este ejemplo posee una colección local y no la conserva después de recargar.
+
+Al introducir el formulario real, separa su texto provisional de un recurso validado. Un envío inválido debe mostrar un error y preservar el borrador para corregirlo. Un envío correcto agrega exactamente un registro y limpia los campos correspondientes. Esas transiciones observables serán la base de las pruebas de la siguiente lección. Antes de escribirlas, comprueba a mano qué sucede cuando agregas algo que no coincide con el filtro activo.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Elimina cualquier estado visibleResources separado, agrega búsqueda sin distinguir mayúsculas y traza un evento.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Ejecuta tres recursos, escribe una consulta válida, bórrala y prueba otra sin resultados. Predice cada conteo.
+2. Agrega un filtro por categoría sin crear otro estado de resultados. Deriva ambos filtros desde la misma colección.
+3. Implementa eliminación con `filter` y edición con `map`, conservando IDs y registros que no cambian.
+4. Agrega un formulario validado y explica sus transiciones de éxito y fallo. Confirma que fallar no elimina el texto escrito.
 
 ### Comprobación
 
-- Evitar estado duplicado o contradictorio. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Seguir un evento desde el control hasta el resultado. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Demuestra que agregar o quitar un registro actualiza lista y conteo sin efectos de sincronización.
+- Sigue un evento durante render y explica por qué el setter no cambia inmediatamente la instantánea del manejador actual.
 <!-- /lesson -->
 
 <!-- lesson:week-06-lesson-04 -->
@@ -280,30 +350,57 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Prueba mediante roles, nombres y resultados visibles, como lo haría una persona. Cubre una interacción importante y un error de validación. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Una prueba útil describe algo que una persona puede lograr: buscar un recurso, agregar un borrador válido o recuperarse de datos incorrectos. Debe seguir pasando al renombrar variables internas o dividir componentes sin cambiar comportamiento. Inspeccionar estado privado vuelve difícil refactorizar y puede omitir controles que no funcionan.
+
+React Testing Library renderiza componentes en un DOM de prueba. Vitest ejecuta y verifica; jsdom simula el DOM; jest-dom agrega afirmaciones legibles; user-event simula secuencias de interacción. No es un navegador visual: no garantiza espaciado correcto ni toda la navegación. Revisa layout y recorridos completos con un navegador real.
+
+Consulta por rol y nombre accesible cuando sea posible. Un input se encuentra por su etiqueta y un botón por su propósito visible. Así una etiqueta faltante provoca un fallo útil, en lugar de ignorarse mediante un selector CSS. `getBy` espera un elemento ahora, `queryBy` permite comprobar ausencia y `findBy` espera su aparición asíncrona. Elige según comportamiento, no para ocultar una prueba inestable.
+
+Cada prueba prepara datos y componente, actúa mediante una interacción y comprueba el resultado. Crea `userEvent.setup()` dentro de la prueba antes de renderizar, y espera sus acciones con `await`. Asegura limpieza de RTL después de cada prueba. Si el ejecutor no expone hooks globales para limpieza automática, registra explícitamente `afterEach(cleanup)` en setup.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+El ejemplo utiliza Directory de la lección anterior. Sus datos hacen significativa tanto la afirmación positiva como la negativa: la biblioteca existe antes de filtrar y desaparece después.
 
 ```tsx
-await user.type(screen.getByLabelText(/buscar/i), "salud");
-expect(screen.getByRole("heading", { name: /clínica/i })).toBeVisible();
+import { it, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { Directory } from "./Directory";
+
+it("filtra recursos y los restaura al borrar", async () => {
+  const user = userEvent.setup();
+  render(<Directory initialResources={[
+    { id: "clinic", name: "Clínica comunitaria" },
+    { id: "library", name: "Biblioteca" },
+  ]} />);
+  const search = screen.getByRole("textbox", { name: "Buscar" });
+  await user.type(search, "CLÍNICA");
+  expect(screen.getByText("Clínica comunitaria")).toBeVisible();
+  expect(screen.queryByText("Biblioteca")).not.toBeInTheDocument();
+  expect(screen.getByText("1 resultados")).toBeVisible();
+  await user.clear(search);
+  expect(screen.getByText("Biblioteca")).toBeVisible();
+});
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+La prueba revisa mayúsculas y recuperación, no solamente que exista un input. Si lo reemplazas por un campo que no hace nada, falla. Si renombras `query`, sigue pasando. Esa es la diferencia entre un contrato de comportamiento y un espejo de la implementación.
+
+Para el formulario de alta, envía espacios y comprueba que aparece un error legible, no se agrega un recurso y el borrador permanece disponible. Corrige el valor y envía exitosamente. No hagas una petición real salvo que estés verificando intencionalmente esa integración; simula la respuesta externa en su límite cuando corresponda. Un callback simulado comprueba lo que solicitó el componente, pero no demuestra que el servidor real persista un registro.
+
+Los snapshots comparan marcado serializado con una versión guardada. Pueden ser útiles para una salida pequeña y estable, pero no ejercitan clics ni validan reglas. Actualizarlos sin revisar puede aprobar una regresión. Conserva mensajes específicos que expliquen la tarea rota y lee el DOM renderizado cuando falle una consulta antes de debilitar la afirmación. Si la interfaz cambia de una lista a otra estructura semántica válida, evalúa el contrato observable antes de concluir que todo fallo indica un defecto del producto.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Agrega un envío inválido y afirma el error accesible en vez de inspeccionar el estado interno.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Configura Vitest y RTL en el proyecto, incluidos jsdom, matchers de jest-dom y limpieza. Ejecuta primero una prueba mínima de render.
+2. Implementa búsqueda y borrado; elimina temporalmente la normalización de mayúsculas y confirma que la prueba detecta el defecto antes de restaurarla.
+3. Agrega pruebas de envío inválido y correcto mediante etiquetas y botones, comprobando mensajes y recursos resultantes.
+4. Ejecuta la suite y revisa el mismo recorrido manualmente a un ancho pequeño. Registra qué demuestra cada verificación.
 
 ### Comprobación
 
-- Consultar componentes por su rol accesible. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Probar una interacción completa de usuario. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Muestra una búsqueda con recuperación que pasa, y demuestra que un filtro roto deliberadamente hace fallar su prueba.
+- Muestra una validación que preserva datos escritos y explica por qué un snapshot solo no demuestra ese comportamiento.
 <!-- /lesson -->
 
 ## Proyecto semanal

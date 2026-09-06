@@ -3,6 +3,7 @@ import { AppShell } from "@/components/app-shell";
 import { ArrowRight, Check, Clock, GitBranch } from "@/components/icons";
 import { PageIntro, ProgressBar, StatusPill } from "@/components/ui";
 import { getStudentProgressSummary, isLessonComplete, loadStudentContext } from "./student-data";
+import { listOdinDocuments } from "@/modules/curriculum/odin";
 
 const colors = ["yellow", "clay", "blue", "green", "violet"] as const;
 
@@ -14,12 +15,13 @@ export default async function ProgramPage() {
     <AppShell userName={context.user.name}>
       <div className="app-content">
         <PageIntro description="Doce semanas para pasar de cero a construir aplicaciones web completas. Avanza a tu ritmo: aquí no hay fechas límite." eyebrow="Tu mapa de aprendizaje" title="Mi programa" />
+        <section className="panel curriculum-scope"><h2>Una ruta guiada y el currículo completo</h2><p>El avance del programa mide las lecciones y los doce proyectos de la ruta guiada. La biblioteca reúne además {listOdinDocuments().length} lecciones y proyectos de Fundamentos y Full Stack JavaScript de The Odin Project, con adaptación a Next.js. Completar toda la biblioteca requiere tiempo adicional: doce semanas no equivalen a dominar todo el material.</p><Link className="button button--ghost" href="/programa/biblioteca">Explorar el currículo completo <ArrowRight /></Link></section>
         <div className="program-summary"><div><strong>{summary.percent}%</strong><span>del programa</span></div><ProgressBar value={summary.percent} /><div><strong>{summary.completedLessons}</strong><span>lecciones completas</span></div><div><strong>{submittedProjectIds.size}</strong><span>proyectos entregados</span></div></div>
         <div className="weeks-grid">
           {context.weeks.map((week) => {
             const current = week.week === summary.currentWeek?.week;
             const color = colors[(week.week - 1) % colors.length];
-            const lessons = week.modules.flatMap((module) => module.lessons);
+            const lessons = week.modules.flatMap((module) => module.lessons).filter((lesson) => lesson.required);
             const completeCount = lessons.filter((lesson) => isLessonComplete(summary.lessonState.get(lesson.id))).length;
             const projectSubmitted = submittedProjectIds.has(week.project.id);
             return (

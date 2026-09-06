@@ -1,0 +1,24 @@
+[
+  {
+    "id": "odin-databases-567f9db4",
+    "titleEs": "Bases de datos",
+    "week": 8,
+    "estimatedMinutes": 180,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-databases-60439aa4",
+    "titleEs": "Bases de datos y SQL",
+    "week": 8,
+    "estimatedMinutes": 360,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-databases-a4baeee4",
+    "titleEs": "Proyecto: SQL Zoo",
+    "week": 8,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  }
+]
+

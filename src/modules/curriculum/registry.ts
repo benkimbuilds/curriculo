@@ -1,11 +1,13 @@
 import { contentManifest } from "@/generated/content-manifest";
 import type { CurriculumDocument, CurriculumLocale } from "./schema";
+import { withOdinLibrary } from "./odin";
 
 const manifest: readonly CurriculumDocument[] = contentManifest;
 
 export interface CurriculumRegistryOptions {
   locale?: CurriculumLocale;
   includeUnpublished?: boolean;
+  includeLibrary?: boolean;
 }
 
 export interface CurriculumLesson {
@@ -32,7 +34,8 @@ export function listCurriculumWeeks(options: CurriculumRegistryOptions = {}): Cu
     .filter((document) => document.locale === locale)
     .filter((document) => options.includeUnpublished || document.status === "published")
     .slice()
-    .sort((left, right) => left.week - right.week);
+    .sort((left, right) => left.week - right.week)
+    .map((week) => options.includeLibrary ? withOdinLibrary(week) : week);
 }
 
 export function getCurriculumWeek(

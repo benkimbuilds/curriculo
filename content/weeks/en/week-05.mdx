@@ -146,16 +146,36 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "javascript/organizing_your_javascript_code",
-      "javascript/javascript_in_the_real_world",
-      "foundations/git_basics"
+      "javascript/introduction/how_this_course_will_work.md",
+      "javascript/organizing_your_javascript_code/organizing_code_with_objects.md",
+      "javascript/organizing_your_javascript_code/object_constructors.md",
+      "javascript/organizing_your_javascript_code/project_library.md",
+      "javascript/organizing_your_javascript_code/factory_functions_and_module_pattern.md",
+      "javascript/organizing_your_javascript_code/project_tic_tac_toe.md",
+      "javascript/organizing_your_javascript_code/classes.md",
+      "javascript/organizing_your_javascript_code/es6_modules.md",
+      "javascript/organizing_your_javascript_code/npm.md",
+      "javascript/organizing_your_javascript_code/webpack.md",
+      "javascript/organizing_your_javascript_code/project_restaurant_page.md",
+      "javascript/organizing_your_javascript_code/revisiting_webpack.md",
+      "javascript/organizing_your_javascript_code/json.md",
+      "javascript/organizing_your_javascript_code/oop_principles.md",
+      "javascript/organizing_your_javascript_code/project_todo_list.md",
+      "javascript/testing_javascript/testing_basics.md",
+      "javascript/testing_javascript/project_testing_practice.md",
+      "javascript/testing_javascript/more_testing.md",
+      "git/intermediate_git/a_deeper_look_at_git.md",
+      "git/intermediate_git/working_with_remotes.md",
+      "git/intermediate_git/using_git_in_the_real_world.md",
+      "javascript/finishing_up_with_javascript/project_battleship.md",
+      "javascript/finishing_up_with_javascript/conclusion.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "original-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
+    "editor": "Ruta curriculum adaptation",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -182,31 +202,72 @@ Organize code into modules, test behavior, manage branches, review pull requests
 
 ### Explanation
 
-Split code by responsibility, export the smallest useful surface, inject changing dependencies, and keep data transformations independent from rendering. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+A module owns a responsibility and exports a small contract. For the shared dashboard, separate task rules, rendering, persistence and startup. The task module should accept data and return results without querying the DOM; the view should render the data it receives instead of reaching into storage. The startup module connects those pieces.
+
+Draw the imports before writing code. A simple direction is app → tasks and app → view. If tasks imports view and view imports tasks, both now depend on each other's initialization and internal decisions. Pass a callback to the view instead: the app can respond to a user action, update tasks, save and render. This keeps the rule testable in Node and lets a different interface reuse it.
+
+ES modules have their own scope. Exporting does not put a value on the global object: consumers explicitly import it. Objects remain mutable even when declared with const. Returning a reference to internal state allows callers to bypass your operations; return copies where the contract requires isolation.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+Create these files in a practice project with `"type": "module"` in package.json:
 
-```text
-app.js -> task-store.js
-app.js -> task-view.js
-task-view.js -> task-store.js
+```js
+// tasks.js
+export function addTask(tasks, title, id) {
+  const cleanTitle = title.trim();
+  if (!cleanTitle) throw new Error("A title is required");
+  if (tasks.some((task) => task.id === id)) throw new Error("Duplicate id");
+  return [...tasks, { id, title: cleanTitle, done: false }];
+}
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+```js
+// view.js
+export function renderTasks(container, tasks) {
+  const rows = tasks.map((task) => {
+    const item = document.createElement("li");
+    item.textContent = task.title;
+    return item;
+  });
+  container.replaceChildren(...rows);
+}
+```
+
+```js
+// app.js (load this file with a type="module" script)
+import { addTask } from "./tasks.js";
+import { renderTasks } from "./view.js";
+let tasks = [];
+const form = document.querySelector("#new-task");
+const title = document.querySelector("#title");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  try {
+    tasks = addTask(tasks, title.value, crypto.randomUUID());
+    renderTasks(document.querySelector("#tasks"), tasks);
+    form.reset();
+  } catch (error) {
+    document.querySelector("#error").textContent = error.message;
+  }
+});
+```
+
+The HTML needs a form with that ID, a labelled title input, a submit button, a list `#tasks`, and a message `#error`. Serve it over localhost. Generating the ID happens at the boundary; tests can supply a fixed ID. The pure operation creates a new array and leaves the input array unchanged.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Remove the view-to-store dependency by passing data or callbacks, then explain why the new direction is easier to test.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Build the example and draw every import. Add two tasks and confirm that rerendering does not duplicate rows.
+2. Add a pure `toggleTask(tasks, id)` operation. Specify whether a missing ID throws or leaves the array unchanged, then keep that contract consistent.
+3. Add a persistence adapter with `load()` and `save(tasks)`. Call it from app, not from tasks or view. Handle malformed JSON and unavailable storage with an explicit message.
+4. Replace the DOM view with a console renderer in a separate entry file. Demonstrate the same add/toggle rules without a browser.
+5. Document exported functions, arguments, return values and errors so another teammate can implement a consumer independently.
 
 ### Checkpoint
 
-- Draw a dependency map with no circular imports. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Refactor one large script into testable modules. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- A Node script adds and toggles tasks without importing a DOM or storage module.
+- Adding a task does not modify the input array, and blank titles are rejected before a new state is returned.
+- The dependency diagram has no circular imports; replacing the view requires no edits to task rules.
 <!-- /lesson -->
 
 <!-- lesson:week-05-lesson-02 -->
@@ -214,33 +275,53 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Test public behavior rather than implementation details. Use arrange, act, assert; make failures readable; and treat coverage as a map, not a score to game. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+A useful test specifies an observable contract. Arrange the input, act through the public function, and assert the result. Use independent data for each case so that order does not decide whether the suite passes. Test a normal operation, a boundary and a regression that represents a plausible bug.
+
+The tasks function is deterministic because its changing dependency, an ID, is provided as an argument. A test does not need a real clock, network request or random number. Keep those dependencies in adapters and test their integration separately. Mocking every internal function would make the suite depend on the implementation rather than behavior.
+
+Use the project's configured runner. For this standalone exercise, Node's built-in test runner is sufficient and requires no package installation. Save tests as .test.js, use ES modules and run `node --test`.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
-
 ```js
-describe("addTask", () => {
-  it("rejects a blank title", () => {
-    expect(() => addTask("   " )).toThrow("title");
-  });
+// tasks.test.js
+import test from "node:test";
+import assert from "node:assert/strict";
+import { addTask } from "./tasks.js";
+
+test("adds a trimmed, incomplete task without mutating its input", () => {
+  const before = [{ id: "first", title: "Read", done: true }];
+  const after = addTask(before, "  Practice  ", "second");
+  assert.deepEqual(after[1], { id: "second", title: "Practice", done: false });
+  assert.equal(before.length, 1);
+  assert.notEqual(after, before);
+});
+
+test("rejects a title containing only spaces", () => {
+  assert.throws(() => addTask([], "   ", "second"), /title/i);
+});
+
+test("rejects an ID already present", () => {
+  const before = [{ id: "first", title: "Read", done: false }];
+  assert.throws(() => addTask(before, "Another", "first"), /duplicate/i);
 });
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+The first case checks the returned task and the previous state's preservation. It does not inspect how many loops or helpers the implementation uses. Change `trim()` temporarily to an unchanged title and confirm that the relevant assertion fails; restore it afterward.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Add normal, boundary, and regression cases, and make each test name describe behavior rather than the implementation.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Run the tests, deliberately introduce the trimming bug, and record the failure that detects it. Restore the implementation and run again.
+2. Write tests for toggleTask: false becomes true, true becomes false, unrelated tasks are preserved, and the missing-ID contract is respected.
+3. Add a regression for a duplicate ID after deleting and adding tasks; a stable identifier must not accidentally refer to a different task.
+4. Run individual files and the whole suite. Verify that no test needs a preceding case to create its data.
+5. Review coverage if your runner provides it, but identify behavior missing from assertions rather than writing tests merely to execute lines.
 
 ### Checkpoint
 
-- Write deterministic tests without shared order. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Distinguish a useful assertion from a brittle one. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- A deliberately broken implementation fails for the expected behavior, not an import or setup error.
+- Tests pass independently and together, without browser, network, clock or shared mutable fixtures.
+- A teammate can understand the contract from test names and assertions without reading private helpers.
 <!-- /lesson -->
 
 <!-- lesson:week-05-lesson-03 -->
@@ -248,32 +329,42 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Turn an issue into a small branch, keep commits reviewable, synchronize before conflicts grow, and write a pull request that explains purpose and verification. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+An issue describes a small problem and acceptance criteria; a branch holds the proposed solution; a pull request exposes its difference for review. Keep main usable and agree on module interfaces before dividing dashboard work. One branch per focused change makes integration and rollback easier.
+
+Before switching branches, inspect git status and preserve any work already in progress. Fetch updates so you know the current remote state. A normal merge brings another branch's commits into yours; it does not automatically choose the correct behavior when both changed the same contract.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+Run this workflow in your team's exercise repository after confirming the current work is committed:
 
 ```bash
-git switch -c feature/focus-timer
-git add src/timer.js tests/timer.test.js
-git commit -m "Keep timer state predictable"
-git push -u origin feature/focus-timer
+git switch main
+git pull --ff-only
+git switch -c feature/task-toggle
+git status
+git add src/tasks.js tests/tasks.test.js
+git diff --cached
+git commit -m "Let learners complete a task without losing other entries"
+git push -u origin feature/task-toggle
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+Replace paths with actual files. The staged diff must contain only your intended change. If pull refuses to fast-forward, inspect the graph and resolve divergence; do not force a reset to make the message disappear.
+
+A PR description can be: “The dashboard can now toggle a task by stable ID. Missing IDs are rejected. Verified both state transitions, preservation of unrelated tasks and the empty-list case with node --test.” Link the issue, name any interface change and request a teammate's review.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Open a focused pull request, request review, revise one point, and verify main after the merge.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Write an issue for toggleTask with normal, invalid and repeated-toggle cases. Agree on its signature before two people edit consumers.
+2. Create a branch, implement it with tests and open a PR in your team's own repository. Inspect its file list and remove accidental generated files.
+3. Practice a conflict in a disposable branch by changing the same sample sentence on two branches. Merge, read both versions, preserve the intended meaning, stage the resolution and finish the merge.
+4. If your base changed while you worked, fetch and merge it into your feature branch; rerun checks before asking for final review.
+5. Merge through the agreed repository workflow, update local main and verify the integrated result.
 
 ### Checkpoint
 
-- Open a focused pull request linked to an issue. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Resolve a simple merge conflict without discarding work. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- The PR links a concrete issue and includes scope, behavior and reproducible verification.
+- You can explain both sides of the practice conflict and why your resolution preserves them.
+- Local main includes the merged change, and the complete checks pass there.
 <!-- /lesson -->
 
 <!-- lesson:week-05-lesson-04 -->
@@ -281,31 +372,44 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Review for correctness, clarity, tests, and user impact. Ask specific questions, separate required fixes from suggestions, and verify the integrated main branch. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Review asks whether a change solves its stated problem without breaking existing contracts. Read the issue first, then the public interface, behavior, tests and error handling. Run a small reproduction where the evidence matters. Separate a required correctness fix from a question or optional naming suggestion.
+
+For the dashboard, inspect interactions between modules: does storage keep completed tasks, does rerendering add duplicate listeners, does a timer stop when a view is removed? A green unit test does not prove that the modules are wired together. Integration checks should follow a user's sequence across boundaries.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+A timer boundary can be tested without waiting for real time:
 
-```text
-Required: timer stops at zero; add a boundary test.
-Question: what owns the interval cleanup?
-Suggestion: rename remainingMs for clarity.
+```js
+export function remainingMs(deadlineMs, nowMs) {
+  return Math.max(0, deadlineMs - nowMs);
+}
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+```js
+import test from "node:test";
+import assert from "node:assert/strict";
+import { remainingMs } from "./timer.js";
+test("never shows negative time after the deadline", () => {
+  assert.equal(remainingMs(5000, 7000), 0);
+});
+```
+
+A useful review comment is: “Required: after the deadline, the display becomes -2 seconds. Reproduce with deadline=5000 and now=7000; clamp the remaining value at zero and add that regression.” A question is: “Which module clears the interval when the user switches views?” An optional suggestion is: “Consider naming this value remainingMs so its unit is explicit.”
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Review a real change using these three categories and attach evidence to every required change.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Review a teammate's focused PR against its acceptance criteria. Run the documented checks and reproduce one edge case yourself.
+2. Leave at least one specific observation backed by a file, input or user action. Mark optional suggestions as optional; do not invent a defect just to leave a comment.
+3. Have the author address a real finding or explain why the current contract is correct. Recheck the changed behavior after revision.
+4. Integrate tasks, timer and notes on main. Add a task, toggle it, change views, save a note and reload; verify persistence and that the timer has one active interval at most.
+5. Write an integration report with commit, commands/results, conflicts resolved and remaining known limits.
 
 ### Checkpoint
 
-- Give respectful evidence-based review feedback. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Run the complete checks after merging. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Review feedback identifies an observable consequence and a way to reproduce it.
+- The integrated main branch passes checks and the cross-module user sequence, not only each author's isolated branch.
+- The report names any untested behavior rather than claiming all cases were covered.
 <!-- /lesson -->
 
 ## Weekly project

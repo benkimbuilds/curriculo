@@ -146,16 +146,27 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "foundations/javascript_basics/dom_manipulation_and_events",
-      "javascript/asynchronous_javascript_apis",
-      "javascript/organizing_your_javascript_code"
+      "foundations/javascript_basics/loops_and_arrays.md",
+      "foundations/javascript_basics/DOM_manipulation_and_events.md",
+      "foundations/javascript_basics/revisiting_rock_paper_scissors.md",
+      "foundations/javascript_basics/project_etch_a_sketch.md",
+      "foundations/javascript_basics/object_basics.md",
+      "foundations/javascript_basics/project_calculator.md",
+      "foundations/tying_it_all_together/conclusion.md",
+      "javascript/javascript_in_the_real_world/linting.md",
+      "javascript/javascript_in_the_real_world/form_validation_with_javascript.md",
+      "javascript/javascript_in_the_real_world/ecmascript.md",
+      "javascript/asynchronous_javascript_and_apis/asynchronous_code.md",
+      "javascript/asynchronous_javascript_and_apis/working_with_apis.md",
+      "javascript/asynchronous_javascript_and_apis/async_and_await.md",
+      "javascript/asynchronous_javascript_and_apis/project_weather_app.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "original-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
+    "editor": "Ruta curriculum adaptation",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -182,33 +193,63 @@ Connect JavaScript to the document, manage user events, persist small preference
 
 ### Explanation
 
-Query stable elements, listen for intentional events, update only the affected region, and use event delegation when repeated controls share behavior. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+The browser parses HTML into the Document Object Model, or DOM: a tree of elements that JavaScript can inspect and update. A variable holding an element is a reference to that node, not a copy of its markup. document.querySelector returns the first match or null. Choose stable identifiers for behavior instead of depending on a visual position such as the third child.
+
+An event describes something that happened, such as a click or form submission. addEventListener registers a callback; the browser calls it later. Pass the function rather than calling it during registration. The event object describes the target and provides methods such as preventDefault. A button in a form submits by default, so explicitly use type="button" for a control that should not submit.
+
+Many events bubble from the original target through its ancestors. Event delegation attaches one listener to a stable parent and finds the relevant child control. This is useful when rows are added after the listener is registered. The click target could be an icon inside a button, so closest is more robust than assuming target is the button itself.
+
+Treat user text as text. Setting textContent or appending a text node displays characters; assigning untrusted text to innerHTML can interpret markup. Render from your data deliberately, and update a small affected region so focus and other state remain predictable.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+Save this as a complete HTML file and open it in a browser. The script comes after the elements, so they exist when queried.
 
-```js
-const list = document.querySelector("[data-list]");
-list.addEventListener("click", (event) => {
-  const button = event.target.closest("button");
-  if (button) button.closest("li").remove();
-});
-```
+~~~html
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Expense list</title>
+<h1>Expenses</h1>
+<ul id="expenses"></ul>
+<p id="status" role="status"></p>
+<script>
+  const list = document.querySelector("#expenses");
+  const status = document.querySelector("#status");
+  const row = document.createElement("li");
+  row.append(document.createTextNode("Bus — 20 "));
+  const remove = document.createElement("button");
+  remove.type = "button";
+  remove.dataset.action = "remove";
+  remove.textContent = "Remove bus expense";
+  row.append(remove);
+  list.append(row);
+  list.addEventListener("click", event => {
+    if (!(event.target instanceof Element)) return;
+    const button = event.target.closest('[data-action="remove"]');
+    if (!button || !list.contains(button)) return;
+    button.closest("li").remove();
+    status.textContent = "Expense removed";
+  });
+</script>
+</html>
+~~~
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+The listener remains on the list after the row disappears. For a real budget, delete the corresponding data record too; removing a DOM node alone does not update stored data.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Add list items after the listener is registered and verify the same delegated handler works for new buttons.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Inspect the generated li and button in developer tools. Identify which lines created each node.
+2. Add a second row after listener registration. Verify its remove control works through delegation.
+3. Put a span inside the button and click that text. Explain why closest still finds the control.
+4. Display a string containing an HTML strong tag with textContent. Confirm the tags remain visible text instead of making the content bold.
+5. Decide where keyboard focus should go when a focused row is deleted; implement and test that choice.
 
 ### Checkpoint
 
-- Connect events without inline JavaScript. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Preserve focus after dynamic updates. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Both initial and later-added rows can be removed without one listener per row.
+- User text is rendered literally, and removal updates a visible status message.
+- You can explain the difference between DOM state and the application's data.
 <!-- /lesson -->
 
 <!-- lesson:week-04-lesson-02 -->
@@ -216,31 +257,58 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Read FormData, normalize values, validate close to the input, and use localStorage only for small non-sensitive preferences that can be deleted. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+A form is a structured input boundary. Give each control a label, id, and name; FormData uses names to collect submitted values. Text input values arrive as strings even when a control uses type="number". Normalize and validate them before your calculation function receives them.
+
+Native constraints such as required provide immediate feedback, but your JavaScript and eventual server still need their own rules. Decide what empty text, whitespace, decimals, negative values, and very large amounts mean. For money in this exercise, accept up to two decimal places and convert to integer cents. Reject other formats with a useful message instead of guessing the user's intention.
+
+localStorage stores strings under keys for one browser origin. JSON.stringify turns a value into text; JSON.parse reconstructs a value but does not prove it has the shape you expect. Storage can be unavailable, full, or manually edited, so reads and writes need recovery. It persists beyond refresh and may be shared by people using the same browser profile. Store only non-sensitive practice data and provide deletion.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+Add a form with id "expense-form", a labelled input named "amount", a submit button, and a paragraph with id "feedback". Connect this script after the HTML.
 
-```js
-const data = new FormData(form);
-const query = String(data.get("query") ?? "").trim();
-const errors = query ? {} : { query: "Write a search term" };
-```
+~~~js
+function parseCents(raw) {
+  const text = raw.trim();
+  if (!/^\d+(\.\d{1,2})?$/.test(text)) {
+    throw new Error("Use a nonnegative amount with up to two decimals");
+  }
+  const cents = Math.round(Number(text) * 100);
+  if (!Number.isSafeInteger(cents) || cents > 100000000) {
+    throw new Error("Amount is too large");
+  }
+  return cents;
+}
+const form = document.querySelector("#expense-form");
+const feedback = document.querySelector("#feedback");
+form.addEventListener("submit", event => {
+  event.preventDefault();
+  try {
+    const data = new FormData(form);
+    const cents = parseCents(String(data.get("amount") ?? ""));
+    localStorage.setItem("budget-demo:v1", JSON.stringify({ cents }));
+    feedback.textContent = "Saved on this device only";
+  } catch (error) {
+    feedback.textContent = error.message;
+  }
+});
+~~~
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+The regular expression accepts digits with an optional decimal part of one or two digits. It deliberately rejects comma separators, currency symbols, exponent notation, and negative signs. Explain that format next to the field. The upper bound is an exercise policy, not a universal financial rule. A failed write leaves the user's input intact.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Render the error beside the field, focus it after submission, and save only a harmless display preference.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Build the labelled form and run the handler. Test 0, 12.50, blank text, -1, 1.234, and 1e3.
+2. Reload and read the saved key in a try/catch. Parse it and verify cents is a bounded nonnegative integer before using it.
+3. Manually corrupt the storage value in developer tools. Show a recovery message and discard the invalid record.
+4. Add a "Delete local data" button that removes this key only. Avoid clearing unrelated storage.
+5. Try blocked storage and confirm the form explains failure without pretending it saved.
 
 ### Checkpoint
 
-- Separate validation from DOM updates. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Explain what must never enter localStorage. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- 12.50 becomes 1250 cents; invalid formats never reach your calculator.
+- Corrupt stored JSON does not crash the page.
+- A user can delete the practice data and understand that it is local to this browser.
 <!-- /lesson -->
 
 <!-- lesson:week-04-lesson-03 -->
@@ -248,31 +316,57 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Follow asynchronous work from request through response parsing. Check HTTP status, set timeouts, catch failures, and avoid assuming every JSON shape is trustworthy. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Network work finishes later than the line that starts it. A Promise represents a pending result that will either fulfill or reject. async marks a function whose return value is a promise; await pauses that function until a promise settles, without blocking all browser interaction.
+
+fetch returns a promise for a Response. It rejects on some network failures, but a 404 or 500 response usually still fulfills. Check response.ok before parsing. response.json is another asynchronous operation and can fail if the body is not valid JSON. Valid JSON can still have the wrong structure, so validate fields before rendering them.
+
+A request can hang or become irrelevant when a user starts another search. AbortController lets you cancel it by passing a signal. A timeout limits waiting; cancellation is a separate outcome from “no results.” Always clear timers in finally so success and failure both release resources.
+
+For a free, controlled exercise, serve a local JSON file from your existing development server. Put catalog.json in the public directory with an array such as [{"id":"bus","name":"Bus"}]. Visit /catalog.json directly first. Opening a page through file:// can have different fetching restrictions, so use the HTTP development server already configured.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+~~~js
+async function loadCatalog() {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 5000);
+  try {
+    const response = await fetch("/catalog.json", {
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    const value = await response.json();
+    if (!Array.isArray(value) || !value.every(item =>
+      item && typeof item.id === "string" &&
+      typeof item.name === "string"
+    )) {
+      throw new Error("Invalid catalog");
+    }
+    return value;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+loadCatalog()
+  .then(items => console.log(items))
+  .catch(error => console.error("Catalog unavailable:", error.message));
+~~~
 
-```js
-const response = await fetch(url, { signal });
-if (!response.ok) throw new Error(`HTTP ${response.status}`);
-const payload = await response.json();
-```
-
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+The then callback receives the fulfilled array. The catch callback handles network errors, HTTP errors you created, parsing failures, and validation failures. A real interface should show an appropriate message and retry control instead of only writing to the console. Do not render response text as HTML.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Use a sample response missing a required field and prevent it from reaching the rendering function.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Create catalog.json, confirm it loads directly, and run the function. Explain both await expressions.
+2. Request a nonexistent path and confirm the HTTP status becomes an error.
+3. Replace the file temporarily with malformed JSON, then valid JSON of the wrong shape. Confirm both failures are handled.
+4. Use network throttling or offline mode in developer tools. Observe waiting, cancellation, and failure.
+5. Restore the valid file and retry without refreshing the whole page.
 
 ### Checkpoint
 
-- Use async and await with explicit error handling. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Validate the fields used from an API response. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- You distinguish network rejection, non-success HTTP, malformed JSON, and invalid data.
+- The timer is cleared even when parsing fails.
+- The valid local catalog loads with no external API account or paid service.
 <!-- /lesson -->
 
 <!-- lesson:week-04-lesson-04 -->
@@ -280,33 +374,52 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Sketch the loading, empty, partial, success, stale, and error views before coding. Provide a retry and keep earlier useful data when appropriate. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+An interface is more than its successful screenshot. Before a request completes it may be idle or loading; afterward it may have results, an empty collection, or an error. If earlier results remain visible while refreshing, they are stale until the new request succeeds. A partial result should be labelled if the server intentionally returns incomplete data.
+
+Represent these states explicitly instead of scattering unrelated booleans. isLoading, hasError, and hasResults can accidentally all become true with contradictory views. A state value plus associated data makes the allowed combinations easier to inspect. You still need a transition policy: starting a refresh can preserve earlier useful data, while a first-load failure has none to preserve.
+
+An empty result means the request succeeded and found no entries. It is different from a failure to reach the server. Tell users what happened and what they can do next. Keep form input when retrying. Do not erase work because an unrelated network call failed.
+
+Asynchronous responses can arrive out of order. If search A starts, then search B starts, A might finish last. Without protection, old data can overwrite the current choice. Cancel older requests or use a request sequence and ignore completions that are no longer current.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+Use the loadCatalog function from the previous lesson. Provide a status paragraph, results list, and a Retry button. The render function updates those elements using textContent.
 
-```js
-const states = {
-  loading: { message: "Loading…" },
-  empty: { message: "No results" },
-  error: { message: "Try again" }
-};
-```
+~~~js
+let currentRequest = 0;
+let state = { status: "idle", items: [], error: null };
+async function refresh() {
+  const request = ++currentRequest;
+  state = { ...state, status: "loading", error: null };
+  render(state);
+  try {
+    const items = await loadCatalog();
+    if (request !== currentRequest) return;
+    state = { status: items.length ? "success" : "empty", items, error: null };
+  } catch {
+    if (request !== currentRequest) return;
+    state = { ...state, status: "error", error: "Could not refresh" };
+  }
+  render(state);
+}
+~~~
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+The sequence check protects both success and failure paths. It ignores an old response but does not stop its network work; cancellation is a separate improvement. render should label existing items as previously loaded while status is loading or error, disable only controls that truly cannot be used, and make retry possible after a failure.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Create controls that force every state, then replace the generic error with a message that explains a realistic recovery action.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Draw idle, loading, success, empty, and error screens. Include the exact message and available action for each.
+2. Implement render with a status region and list. Use text nodes, not untrusted HTML.
+3. Return an empty array and then throw an error from a temporary test loader. Verify the screens are different.
+4. Make the first request resolve later than a second request with different data. Confirm only the newer result appears.
+5. Test a failed refresh after success. Keep old results, label them, and make Retry work.
 
 ### Checkpoint
 
-- Render each state from controlled sample data. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Write a useful recovery message instead of a generic error. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Every state has a deliberate message and a reasonable next action.
+- An older response cannot overwrite a newer result or its error state.
+- A failed refresh preserves input and useful previous data without presenting it as newly fetched.
 <!-- /lesson -->
 
 ## Weekly project

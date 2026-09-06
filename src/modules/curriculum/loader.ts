@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { parse as parseYaml } from "yaml";
-import { compileLessonMarkdown } from "./compiler";
+import { compileLessonMarkdown, normalizeCodeFences } from "./compiler";
 import {
   CURRICULUM_LOCALES,
   curriculumFrontmatterSchema,
@@ -24,8 +24,9 @@ function collectMdxFiles(directory: string): string[] {
 }
 
 function validateBody(body: string, file: string): CurriculumValidationIssue[] {
+  body = normalizeCodeFences(body);
   const issues: CurriculumValidationIssue[] = [];
-  const proseOnly = body.replace(/```[\s\S]*?```/g, "");
+  const proseOnly = body.replace(/```[\s\S]*?```/g, "").replace(/`[^`\n]+`/g, "");
   if (body.trim().length < 500) {
     issues.push({ file, message: "lesson body must contain at least 500 substantive characters" });
   }
@@ -76,7 +77,7 @@ function extractLessonBodies(
 
   for (const match of matches) {
     const lessonId = match[1];
-    const markdown = match[2].trim();
+    const markdown = normalizeCodeFences(match[2].trim());
     try {
       const compiled = compileLessonMarkdown(lessonId, markdown);
       lessonBodies[lessonId] = compiled;

@@ -146,17 +146,37 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "javascript/organizing_your_javascript_code",
-      "javascript/javascript_in_the_real_world",
-      "foundations/git_basics"
+      "javascript/introduction/how_this_course_will_work.md",
+      "javascript/organizing_your_javascript_code/organizing_code_with_objects.md",
+      "javascript/organizing_your_javascript_code/object_constructors.md",
+      "javascript/organizing_your_javascript_code/project_library.md",
+      "javascript/organizing_your_javascript_code/factory_functions_and_module_pattern.md",
+      "javascript/organizing_your_javascript_code/project_tic_tac_toe.md",
+      "javascript/organizing_your_javascript_code/classes.md",
+      "javascript/organizing_your_javascript_code/es6_modules.md",
+      "javascript/organizing_your_javascript_code/npm.md",
+      "javascript/organizing_your_javascript_code/webpack.md",
+      "javascript/organizing_your_javascript_code/project_restaurant_page.md",
+      "javascript/organizing_your_javascript_code/revisiting_webpack.md",
+      "javascript/organizing_your_javascript_code/json.md",
+      "javascript/organizing_your_javascript_code/oop_principles.md",
+      "javascript/organizing_your_javascript_code/project_todo_list.md",
+      "javascript/testing_javascript/testing_basics.md",
+      "javascript/testing_javascript/project_testing_practice.md",
+      "javascript/testing_javascript/more_testing.md",
+      "git/intermediate_git/a_deeper_look_at_git.md",
+      "git/intermediate_git/working_with_remotes.md",
+      "git/intermediate_git/using_git_in_the_real_world.md",
+      "javascript/finishing_up_with_javascript/project_battleship.md",
+      "javascript/finishing_up_with_javascript/conclusion.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "translated-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
-    "translator": "AI Builders LATAM Spanish editorial team",
+    "editor": "Ruta curriculum adaptation",
+    "translator": "Adaptación al español asistida por IA",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -179,69 +199,128 @@
 Organiza código en módulos, prueba el comportamiento, administra ramas, revisa pull requests e integra un tablero compartido sin esconder conflictos. Esta edición está escrita para quien empieza desde cero y puede trabajar en Windows o macOS. Completa las lecciones en orden: cada una incluye explicación, ejemplo, práctica y evidencia antes del proyecto semanal.
 
 <!-- lesson:week-05-lesson-01 -->
-## Módulos y dependencias
+## Módulos y límites de dependencias
 
 ### Explicación
 
-Divide por responsabilidad, exporta la superficie mínima, inyecta dependencias variables y separa transformaciones de datos de la representación visual. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Un módulo posee una responsabilidad y exporta un contrato pequeño. Para el tablero compartido, separa reglas de tareas, presentación, almacenamiento e inicio. Las reglas reciben datos y devuelven resultados sin consultar el DOM; la vista muestra los datos recibidos sin entrar directamente al almacenamiento. El módulo de inicio conecta ambas partes.
+
+Dibuja las importaciones antes de programar. Una dirección sencilla es app → tasks y app → view. Si tasks importa view y view importa tasks, ambas unidades dependen de detalles e inicialización de la otra. Pasa callbacks para comunicar acciones: app puede actualizar tareas, guardar y renderizar. Así el núcleo funciona también en Node y con otra interfaz.
+
+Cada módulo ES tiene alcance propio. Exportar no crea una variable global: el consumidor importa explícitamente. Const no hace inmutables los objetos. Si devuelves una referencia interna, otra parte puede saltarse tus operaciones; devuelve copias cuando el contrato requiera aislamiento.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
-
-```text
-app.js -> task-store.js
-app.js -> task-view.js
-task-view.js -> task-store.js
-```
-
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
-
-### Ejercicio guiado
-
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Elimina la dependencia de view hacia store pasando datos o callbacks y explica por qué ahora es más fácil probar.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
-
-### Comprobación
-
-- Dibujar un mapa sin importaciones circulares. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Separar un script grande en módulos comprobables. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-<!-- /lesson -->
-
-<!-- lesson:week-05-lesson-02 -->
-## Pruebas de comportamiento
-
-### Explicación
-
-Prueba el contrato público y no detalles internos. Ordena preparación, acción y afirmación; haz legibles los fallos; no juegues con el porcentaje de cobertura. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
-
-### Ejemplo
-
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Crea estos archivos en una práctica con `"type": "module"` en package.json:
 
 ```js
-describe("addTask", () => {
-  it("rejects a blank title", () => {
-    expect(() => addTask("   " )).toThrow("title");
+// tasks.js
+export function addTask(tasks, title, id) {
+  const cleanTitle = title.trim();
+  if (!cleanTitle) throw new Error("Se requiere un título");
+  if (tasks.some((task) => task.id === id)) throw new Error("ID duplicado");
+  return [...tasks, { id, title: cleanTitle, done: false }];
+}
+```
+
+```js
+// view.js
+export function renderTasks(container, tasks) {
+  const rows = tasks.map((task) => {
+    const item = document.createElement("li");
+    item.textContent = task.title;
+    return item;
   });
+  container.replaceChildren(...rows);
+}
+```
+
+```js
+// app.js: carga este archivo mediante un script type="module"
+import { addTask } from "./tasks.js";
+import { renderTasks } from "./view.js";
+let tasks = [];
+const form = document.querySelector("#new-task");
+const title = document.querySelector("#title");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  try {
+    tasks = addTask(tasks, title.value, crypto.randomUUID());
+    renderTasks(document.querySelector("#tasks"), tasks);
+    form.reset();
+  } catch (error) {
+    document.querySelector("#error").textContent = error.message;
+  }
 });
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+El HTML necesita ese formulario, un input title etiquetado, botón de envío, lista #tasks y mensaje #error. Sírvelo en localhost. Generar el ID ocurre en el límite; una prueba puede proporcionar un ID fijo. La operación pura crea un arreglo nuevo y conserva el original.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Agrega casos normal, límite y de regresión; nombra cada prueba por comportamiento y no por implementación.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Construye el ejemplo y dibuja todas las importaciones. Agrega dos tareas y confirma que renderizar de nuevo no duplica filas.
+2. Agrega una operación pura `toggleTask(tasks, id)`. Decide si un ID ausente lanza error o conserva el arreglo y mantén ese contrato.
+3. Añade un adaptador de almacenamiento con load y save(tasks), llamado desde app. Gestiona JSON inválido y almacenamiento no disponible con mensajes explícitos.
+4. Crea otra entrada que utilice un renderizador de consola y demuestre las mismas reglas sin navegador.
+5. Documenta funciones exportadas, argumentos, resultados y errores para que otra persona construya un consumidor.
 
 ### Comprobación
 
-- Escribir pruebas deterministas sin orden compartido. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Distinguir una afirmación útil de una frágil. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Un script Node agrega y alterna tareas sin importar DOM ni almacenamiento.
+- Agregar no modifica el arreglo original; un título vacío se rechaza antes de producir otro estado.
+- El diagrama no contiene ciclos y sustituir la vista no requiere editar las reglas.
+<!-- /lesson -->
+
+<!-- lesson:week-05-lesson-02 -->
+## Probar comportamiento
+
+### Explicación
+
+Una prueba útil especifica un contrato observable. Prepara una entrada, actúa mediante la función pública y comprueba el resultado. Crea datos independientes por caso para que el orden no decida si pasan. Incluye una operación normal, un límite y una regresión que represente un fallo plausible.
+
+La función de tareas es determinista porque recibe el ID. La prueba no necesita reloj, red ni aleatoriedad reales. Conserva esas dependencias en adaptadores y verifica su integración aparte. Mockear cada función interna haría que la suite dependiera de la implementación y no del comportamiento.
+
+Usa el runner configurado en tu proyecto. Para esta práctica independiente basta el incorporado en Node, sin instalar paquetes. Guarda archivos .test.js con módulos ES y ejecuta `node --test`.
+
+### Ejemplo
+
+```js
+// tasks.test.js
+import test from "node:test";
+import assert from "node:assert/strict";
+import { addTask } from "./tasks.js";
+
+test("agrega una tarea normalizada sin mutar la entrada", () => {
+  const before = [{ id: "first", title: "Leer", done: true }];
+  const after = addTask(before, "  Practicar  ", "second");
+  assert.deepEqual(after[1], { id: "second", title: "Practicar", done: false });
+  assert.equal(before.length, 1);
+  assert.notEqual(after, before);
+});
+test("rechaza un título de puros espacios", () => {
+  assert.throws(() => addTask([], "   ", "second"), /título/i);
+});
+test("rechaza una identidad existente", () => {
+  const before = [{ id: "first", title: "Leer", done: false }];
+  assert.throws(() => addTask(before, "Otra", "first"), /duplicado/i);
+});
+```
+
+El primer caso comprueba tarea devuelta y conservación del estado anterior, no cuántos ciclos o helpers utiliza la función. Quita temporalmente trim y confirma que falla la aserción pertinente; restáuralo después.
+
+### Ejercicio guiado
+
+1. Ejecuta la suite, introduce el error de normalización y registra el fallo que lo detecta. Restaura la implementación.
+2. Escribe pruebas de toggleTask: false a true, true a false, otras tareas intactas y contrato del ID ausente.
+3. Agrega una regresión para identidad duplicada después de borrar y agregar: un identificador estable no debe señalar accidentalmente otra tarea.
+4. Ejecuta archivos por separado y la suite completa. Ningún caso debe necesitar que otro prepare sus datos.
+5. Si consultas cobertura, identifica comportamientos sin aserciones en vez de escribir pruebas solo para ejecutar líneas.
+
+### Comprobación
+
+- Una implementación rota deliberadamente falla por la conducta esperada, no por configuración.
+- Los casos pasan solos y juntos sin navegador, red, reloj ni fixtures mutables compartidos.
+- Otra persona comprende el contrato leyendo nombres y aserciones, sin conocer helpers privados.
 <!-- /lesson -->
 
 <!-- lesson:week-05-lesson-03 -->
@@ -249,64 +328,87 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Convierte un issue en una rama pequeña, conserva commits revisables, sincroniza pronto y explica propósito y verificación en cada pull request. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Un issue define un problema pequeño y criterios de aceptación; una rama contiene la propuesta; una pull request muestra el cambio para revisión. Mantén main utilizable y acuerda interfaces antes de repartir el tablero. Una rama por cambio enfocado facilita integrar y revertir.
+
+Antes de cambiar ramas, inspecciona git status y conserva trabajo existente. Obtén actualizaciones para conocer el remoto. Una fusión incorpora commits, pero no decide por ti el comportamiento correcto cuando dos personas cambiaron el mismo contrato.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+En el repositorio del equipo, con el trabajo actual confirmado:
 
 ```bash
-git switch -c feature/focus-timer
-git add src/timer.js tests/timer.test.js
-git commit -m "Keep timer state predictable"
-git push -u origin feature/focus-timer
+git switch main
+git pull --ff-only
+git switch -c feature/task-toggle
+git status
+git add src/tasks.js tests/tasks.test.js
+git diff --cached
+git commit -m "Permitir completar una tarea sin perder otras entradas"
+git push -u origin feature/task-toggle
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+Sustituye rutas por las reales. El diff preparado debe contener únicamente tu cambio. Si pull rechaza el avance directo, inspecciona el gráfico y resuelve la divergencia; no fuerces un reset para desaparecer el mensaje.
+
+Una descripción útil: “El tablero permite alternar una tarea por ID estable. Rechaza IDs ausentes. Verifiqué ambos cambios de estado, conservación de otras tareas y lista vacía con node --test”. Enlaza el issue, nombra cambios de interfaz y solicita revisión.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Abre un pull request enfocado, solicita revisión, atiende un punto y verifica main después del merge.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Escribe un issue para toggleTask con caso normal, inválido y alternancia repetida. Acuerda la firma antes de que alguien modifique consumidores.
+2. Crea rama, implementa y abre PR en el repositorio propio del equipo. Revisa su lista de archivos y quita generados accidentales.
+3. Practica un conflicto en ramas desechables cambiando la misma oración. Fusiona, lee ambas versiones, conserva la intención, prepara la resolución y termina la fusión.
+4. Si cambió la base, obtén y fusiona esa base en tu rama; vuelve a verificar antes de la revisión final.
+5. Integra mediante el flujo acordado, actualiza main local y comprueba el resultado conjunto.
 
 ### Comprobación
 
-- Abrir un pull request enfocado y vinculado a un issue. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Resolver un conflicto sencillo sin borrar trabajo. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- La PR enlaza un issue concreto e incluye alcance, comportamiento y verificación reproducible.
+- Puedes explicar ambos lados del conflicto y la razón de la resolución.
+- Main local incluye el cambio y pasa todas las comprobaciones.
 <!-- /lesson -->
 
 <!-- lesson:week-05-lesson-04 -->
-## Revisión e integración
+## Revisión e integración de código
 
 ### Explicación
 
-Revisa corrección, claridad, pruebas e impacto. Haz preguntas específicas, distingue correcciones de sugerencias y verifica la rama principal integrada. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+La revisión comprueba si un cambio resuelve el problema indicado sin romper contratos. Lee primero el issue y después la interfaz pública, comportamiento, pruebas y errores. Ejecuta una reproducción pequeña donde haga falta evidencia. Separa un defecto obligatorio de una pregunta o sugerencia opcional de nombres.
+
+En el tablero, observa relaciones entre módulos: ¿el almacenamiento conserva completadas?, ¿renderizar duplica listeners?, ¿el temporizador se detiene al retirar una vista? Una prueba unitaria verde no demuestra que los módulos estén conectados correctamente. Verifica una secuencia de usuario que cruce sus límites.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Puedes comprobar un límite temporal sin esperar tiempo real:
 
-```text
-Required: timer stops at zero; add a boundary test.
-Question: what owns the interval cleanup?
-Suggestion: rename remainingMs for clarity.
+```js
+export function remainingMs(deadlineMs, nowMs) {
+  return Math.max(0, deadlineMs - nowMs);
+}
 ```
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+```js
+import test from "node:test";
+import assert from "node:assert/strict";
+import { remainingMs } from "./timer.js";
+test("no muestra tiempo negativo después del límite", () => {
+  assert.equal(remainingMs(5000, 7000), 0);
+});
+```
+
+Comentario útil: “Obligatorio: después del límite aparecen -2 segundos. Reproduce con deadline=5000 y now=7000; limita el resultado a cero y agrega esa regresión”. Pregunta: “¿Qué módulo cancela el intervalo al cambiar de vista?”. Sugerencia: “Podríamos llamar remainingMs a este valor para hacer explícita su unidad”.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Revisa un cambio real con estas tres categorías y agrega evidencia a cada corrección obligatoria.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Revisa una PR de otra persona contra sus criterios. Ejecuta sus comandos y reproduce un límite por tu cuenta.
+2. Deja una observación específica con archivo, entrada o acción. Marca sugerencias como opcionales y no inventes defectos para comentar.
+3. La persona autora atiende un hallazgo real o explica por qué el contrato actual es correcto. Revisa de nuevo después del cambio.
+4. Integra tareas, temporizador y notas en main. Agrega, completa, cambia de vista, guarda una nota y recarga; comprueba persistencia y un solo intervalo activo como máximo.
+5. Escribe un reporte con commit, comandos/resultados, conflictos resueltos y límites conocidos.
 
 ### Comprobación
 
-- Dar retroalimentación respetuosa basada en evidencia. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Ejecutar todas las revisiones después de integrar. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- La retroalimentación identifica una consecuencia observable y cómo reproducirla.
+- Main integrado pasa pruebas y la secuencia entre módulos, no solo cada rama aislada.
+- El reporte nombra conductas sin verificar en vez de afirmar cobertura total.
 <!-- /lesson -->
 
 ## Proyecto semanal

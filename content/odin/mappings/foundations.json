@@ -1,0 +1,324 @@
+[
+  {
+    "id": "odin-foundations-73a47505",
+    "titleEs": "Cómo funciona este curso",
+    "week": 1,
+    "estimatedMinutes": 45,
+    "treatment": "platform-adaptation"
+  },
+  {
+    "id": "odin-foundations-9db1e5c7",
+    "titleEs": "Introducción al desarrollo web",
+    "week": 1,
+    "estimatedMinutes": 45,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-276366c4",
+    "titleEs": "Motivación y mentalidad",
+    "week": 1,
+    "estimatedMinutes": 45,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-ca37f3e5",
+    "titleEs": "Cómo pedir ayuda",
+    "week": 1,
+    "estimatedMinutes": 45,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-d950a6fe",
+    "titleEs": "Participa en la comunidad de Odin",
+    "week": 1,
+    "estimatedMinutes": 45,
+    "treatment": "platform-adaptation"
+  },
+  {
+    "id": "odin-foundations-1218a4a0",
+    "titleEs": "¿Cómo funciona la web?",
+    "week": 1,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-93dbf0e1",
+    "titleEs": "Prepara tu entorno de desarrollo",
+    "week": 1,
+    "estimatedMinutes": 90,
+    "treatment": "platform-adaptation"
+  },
+  {
+    "id": "odin-foundations-e65a3229",
+    "titleEs": "Editores de texto",
+    "week": 1,
+    "estimatedMinutes": 90,
+    "treatment": "platform-adaptation"
+  },
+  {
+    "id": "odin-foundations-3136c43f",
+    "titleEs": "Fundamentos de la línea de comandos",
+    "week": 1,
+    "estimatedMinutes": 90,
+    "treatment": "platform-adaptation"
+  },
+  {
+    "id": "odin-foundations-8a13a21d",
+    "titleEs": "Configura Git y GitHub",
+    "week": 1,
+    "estimatedMinutes": 90,
+    "treatment": "platform-adaptation"
+  },
+  {
+    "id": "odin-foundations-12ba3e27",
+    "titleEs": "Introducción a Git",
+    "week": 1,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-e48795b0",
+    "titleEs": "Flujo básico de Git",
+    "week": 1,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-1e460bf6",
+    "titleEs": "Introducción a HTML y CSS",
+    "week": 1,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-6251a290",
+    "titleEs": "Elementos y etiquetas",
+    "week": 1,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-0fb0fe12",
+    "titleEs": "Estructura básica de un documento HTML",
+    "week": 1,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-7fe0b84f",
+    "titleEs": "Trabaja con texto en HTML",
+    "week": 1,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-03c91e37",
+    "titleEs": "Listas",
+    "week": 1,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-01ce2c65",
+    "titleEs": "Enlaces e imágenes",
+    "week": 1,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-b52ad3a2",
+    "titleEs": "Mensajes de commit",
+    "week": 1,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-3c8ad955",
+    "titleEs": "Proyecto: recetario",
+    "week": 1,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-62411617",
+    "titleEs": "Introducción a CSS",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-01b246d0",
+    "titleEs": "La cascada",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-d1741ff8",
+    "titleEs": "Inspecciona HTML y CSS",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-4a558775",
+    "titleEs": "El modelo de caja",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-25874e5c",
+    "titleEs": "Bloques y elementos en línea",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-41a157af",
+    "titleEs": "Introducción a flexbox",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-53439274",
+    "titleEs": "Crecimiento y reducción en flexbox",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-14fa890f",
+    "titleEs": "Ejes de flexbox",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-8036389c",
+    "titleEs": "Alineación en flexbox",
+    "week": 2,
+    "estimatedMinutes": 240,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-22e0c585",
+    "titleEs": "Proyecto: página de presentación",
+    "week": 2,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-94b3cc9b",
+    "titleEs": "Variables y operadores",
+    "week": 3,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-cb20c3d0",
+    "titleEs": "Instala Node.js",
+    "week": 3,
+    "estimatedMinutes": 90,
+    "treatment": "platform-adaptation"
+  },
+  {
+    "id": "odin-foundations-06069c6b",
+    "titleEs": "Tipos de datos y condicionales",
+    "week": 3,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-60494609",
+    "titleEs": "Herramientas de desarrollo para JavaScript",
+    "week": 3,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-a5836067",
+    "titleEs": "Fundamentos de funciones",
+    "week": 3,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-c7d096d3",
+    "titleEs": "Resolución de problemas",
+    "week": 3,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-60cda1f9",
+    "titleEs": "Comprende los errores",
+    "week": 3,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-5cc2b83d",
+    "titleEs": "Proyecto: piedra, papel o tijeras",
+    "week": 3,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-e341018d",
+    "titleEs": "Código legible",
+    "week": 3,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-336b3336",
+    "titleEs": "Bucles y arreglos",
+    "week": 4,
+    "estimatedMinutes": 180,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-9c8fa0eb",
+    "titleEs": "Manipulación del DOM y eventos",
+    "week": 4,
+    "estimatedMinutes": 180,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-7ff13edf",
+    "titleEs": "Añade interfaz a piedra, papel o tijeras",
+    "week": 4,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-fa9a5eea",
+    "titleEs": "Proyecto: tablero de dibujo",
+    "week": 4,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-d85b729e",
+    "titleEs": "Fundamentos de objetos",
+    "week": 4,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-2aa09e04",
+    "titleEs": "Proyecto: calculadora",
+    "week": 4,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-foundations-01f33d4a",
+    "titleEs": "Continúa después de Fundamentos",
+    "week": 4,
+    "estimatedMinutes": 90,
+    "treatment": "platform-adaptation"
+  }
+]

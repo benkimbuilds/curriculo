@@ -146,16 +146,27 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "javascript/getting_hired/building_your_personal_website",
-      "javascript/final_project",
-      "javascript/nodejs/deployment"
+      "nodeJS/orms/project_file_uploader.md",
+      "nodeJS/apis/api_basics.md",
+      "nodeJS/apis/api_security.md",
+      "nodeJS/apis/project_blog_api.md",
+      "nodeJS/testing_express/testing_routes_and_controllers.md",
+      "nodeJS/testing_express/testing_database_operations.md",
+      "react/react_and_the_backend/project_wheres_waldo_a_photo_tagging_app.md",
+      "getting_hired/preparing_for_job_search/how_this_course_will_work.md",
+      "getting_hired/preparing_for_job_search/professional_networking.md",
+      "getting_hired/preparing_for_job_search/strategy.md",
+      "getting_hired/preparing_for_job_search/starts_with_you.md",
+      "getting_hired/preparing_for_job_search/what_companies_want.md",
+      "getting_hired/preparing_for_job_search/what_you_can_do_to_prepare.md",
+      "getting_hired/preparing_for_job_search/project_portfolio.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "original-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
+    "editor": "Ruta curriculum adaptation",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -182,31 +193,44 @@ Find a real but safe local need, validate it with lightweight research, reduce s
 
 ### Explanation
 
-Interview or observe without collecting unnecessary sensitive information. Separate what people said, what you inferred, and what remains unknown; do not start with a favorite technology. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Problem discovery asks what people are trying to accomplish and where their current process fails. It happens before choosing features. For your final project, start with a small everyday workflow you can observe safely, such as reserving shared equipment or tracking community-library loans. Avoid collecting private records just to make a demonstration realistic.
+
+An interview should explore recent behavior rather than invite agreement with your idea. “Would you use an AI dashboard?” encourages speculation and politeness. “Tell me about the last time you tried to borrow an item” reveals steps, delays, workarounds, and decisions. Ask what happened next, what information was missing, and how the person knew they were finished.
+
+Explain the purpose and ask permission before taking notes or recording. You usually need notes, not recordings. Use a pseudonym or participant number, avoid unnecessary identifying details, and let the person decline questions. Observation can reveal a mismatch between the described process and the actual steps, but never access accounts or documents without permission.
+
+Separate evidence from inference. A quote is what someone said; an observation is what you saw; an interpretation is your proposed explanation. A single conversation suggests a hypothesis, not a proven market need. Look for recurring patterns, contradictions, and cases where the existing method works well.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+Suppose a volunteer says, “I asked three people whether the projector was free and still arrived after someone took it.” Your evidence note might be:
 
-```text
-Evidence: three learners lose track of application deadlines.
-Inference: reminders may help.
-Unknown: whether they want email or a checklist.
-```
+~~~text
+Observation: availability was checked through three separate messages.
+Participant statement: they arrived after the item had already been taken.
+Interpretation: the group lacks one current availability record.
+Unknown: whether reservations or checkout delays caused the conflict.
+Next question: walk me through how the item was marked as taken.
+Possible outcome: a borrower can confirm availability before traveling.
+~~~
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+Do not jump directly to a calendar or chatbot. The problem might be that updates happen late, in which case a complex reservation screen would preserve the same uncertainty. Investigate who changes availability, when, and what happens without internet.
+
+A useful problem statement identifies person, situation, obstacle, and consequence. “A volunteer borrowing shared equipment cannot reliably tell whether an item is available before leaving home, causing wasted trips” is testable. “We need a modern platform” is a proposed solution without evidence.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Rewrite a technology-first idea as a problem statement, and remove details that could identify interview participants.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Choose one workflow and write five neutral questions about the last real occurrence.
+2. Conduct two short conversations or a consented observation. If no participant is available, use a clearly labelled hypothetical scenario and do not claim user validation.
+3. Sort notes into observations, quotes, interpretations, and unknowns. Remove unnecessary personal information.
+4. Write one problem statement and identify evidence that might contradict it.
+5. Share the statement with a participant or peer and check whether it describes the problem accurately.
 
 ### Checkpoint
 
-- Write evidence notes without identifying participants. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- State a problem without embedding a solution. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- You can trace the problem statement to specific evidence instead of a preferred technology.
+- Assumptions and hypothetical material are visibly labelled.
+- Your next investigation targets an uncertainty whose answer could change the project scope.
 <!-- /lesson -->
 
 <!-- lesson:week-11-lesson-02 -->
@@ -214,32 +238,45 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Choose one primary user and task, list explicit non-goals, define a measurable success signal, and cut features until the risky assumption can be tested in a week. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Scope turns a problem into a small promise you can deliver and test. Choose one primary person and one task. A final project can demonstrate strong engineering without containing every feature of a commercial product. The important question is whether the complete main journey works under explicit constraints.
+
+Write an outcome, then identify the smallest behavior that could produce it. For equipment borrowing, the outcome may be fewer wasted trips; the first behavior may be seeing current availability and recording a checkout. Recommendation engines, chat, payments, and detailed analytics can be explicit non-goals.
+
+Define success with a denominator and a context. “Users like it” cannot be checked. “Four of five practice participants can find an available item and record a checkout within two minutes without help” is observable, but five participants do not prove the product works for everyone. Choose a small test suitable for the project and report its limits honestly.
+
+Acceptance criteria describe behavior, not implementation choices. Include normal flow, invalid input, missing data, authorization, and recovery. A criterion such as “uses Next.js” does not tell a reviewer whether borrowing works. Technology can be a project constraint; the acceptance test should still express the user and domain rule.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+~~~text
+Primary user: a signed-in equipment borrower.
+Task: find an available item and record one checkout.
+Success test: complete the task without assistance using seeded practice data.
+Rules:
+- An unavailable item cannot be checked out.
+- Two simultaneous requests cannot both borrow the same item.
+- A borrower can view their own loan, not another person's private history.
+- Failed submission preserves the selected item and explains recovery.
+Non-goals: payments, delivery, recommendation models, public messaging.
+~~~
 
-```text
-Now: record an opportunity and deadline
-Next: reminders
-Later: recommendations
-Not now: messaging and payments
-```
+The concurrency rule is easy to miss in a sketch. A disabled button is insufficient because two browsers can submit at once. The eventual data operation must enforce availability atomically. Discovering that risk now helps you spend time on the correct thin slice rather than adding decorative screens.
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+Estimate work in small tasks and leave time for integration, tests, and deployment. If the main slice exceeds available time, remove optional branches. Do not remove the authorization or consistency rule that makes the main behavior trustworthy. A smaller safe workflow is a clearer learning result than a large demo that only works with prepared data.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Cut one more feature, name the riskiest assumption, and define an observable alpha success signal.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Write your primary user, task, and outcome in three sentences.
+2. List ten possible features, then identify the smallest set needed for one end-to-end journey. Put the rest in non-goals.
+3. Write six acceptance criteria, including one invalid action, one unauthorized action, and one failure recovery.
+4. Create a five-step manual success test with starting data and a pass condition.
+5. Ask a peer to challenge the scope and identify the riskiest assumption. Cut or clarify work accordingly.
 
 ### Checkpoint
 
-- Create a now, next, later scope. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Define success that can be observed in a pilot. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- A reviewer can tell whether the main task passed without judging visual taste.
+- Non-goals explain what is deliberately absent.
+- The plan includes error and concurrency behavior rather than only the successful path.
 <!-- /lesson -->
 
 <!-- lesson:week-11-lesson-03 -->
@@ -247,32 +284,48 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Map routes, components, data, authorization, external services, and failure states. Turn the smallest vertical slice into ordered issues with acceptance checks. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Architecture describes where responsibilities live and how data crosses boundaries. Begin with the main journey from the scope exercise. Map the browser screen, server operation, validation, authorization, database change, and returned state. A diagram is useful only if it answers who is responsible for each rule.
+
+In a Next.js application, browser components handle interaction but cannot be trusted to enforce permissions. Server operations load the session, validate input, and call domain logic. The database enforces constraints that must hold under concurrency. External email or AI adapters sit behind a small interface with timeouts and explicit failures.
+
+Model records around real concepts. An item has identity and availability-related state; a loan connects an item to a borrower and records checkout and return. Avoid duplicating derived facts in many places without a synchronization rule. If availability comes from active loans, define exactly how an active loan is represented.
+
+A backlog should describe vertical behavior, not isolated layers. “Build all database tables” can leave nothing demonstrable for days. “Borrow one seeded item from the real screen and show it in my loans” crosses the essential layers and exposes integration problems early. Order tasks by dependency and risk.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+A PostgreSQL constraint can prevent two active loans for one item. This migration fragment assumes users and items already exist; adapt column types to their actual primary keys.
 
-```text
-route -> server rule -> projects table
-  |          |-> authorization
-  |-> form validation
-external email: disabled in alpha
-```
+~~~sql
+CREATE TABLE loans (
+  id uuid PRIMARY KEY,
+  item_id uuid NOT NULL REFERENCES items(id),
+  borrower_id text NOT NULL REFERENCES users(id),
+  checked_out_at timestamptz NOT NULL DEFAULT now(),
+  returned_at timestamptz,
+  CHECK (returned_at IS NULL OR returned_at >= checked_out_at)
+);
+CREATE UNIQUE INDEX one_active_loan_per_item
+  ON loans (item_id) WHERE returned_at IS NULL;
+~~~
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+The partial unique index applies only to active rows. A return sets returned_at, allowing a future loan while preserving history. Your server must also check that the item is borrowable and that the current session may perform the action. Handle a unique-constraint conflict as “item no longer available,” not a generic crash. Do not trust a borrower_id sent by the browser.
+
+Break the first slice into ordered issues: create reviewed migration and seed; implement authorized checkout with conflict handling; connect one screen; test own-versus-other access and simultaneous checkout; deploy and smoke-test. Each issue needs an observable acceptance condition.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Add failure states and trust boundaries, then turn the smallest vertical path into ordered issues.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Draw the actual request path and mark every trust boundary.
+2. List entities, primary keys, relationships, and invariants. Identify one rule the database must enforce.
+3. Write a migration in your project using its real table names and types. Apply it only to a disposable database first.
+4. Create five ordered backlog items that finish one journey, including tests and deployment.
+5. Review failure states for database unavailability, duplicate action, and expired session.
 
 ### Checkpoint
 
-- Record key architecture decisions and tradeoffs. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Order work by dependency and risk. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Every business rule has an owner: UI feedback, server policy, or database constraint.
+- A second active loan for one item is rejected even from another browser.
+- The backlog produces one demonstrable journey before expanding to secondary features.
 <!-- /lesson -->
 
 <!-- lesson:week-11-lesson-04 -->
@@ -280,32 +333,46 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Build one thin path through real UI, server rules, persistence, and deployment. Integrate continuously, use feature flags for unfinished work, and demo from a clean account. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+A vertical slice is a thin working path through the real interface, server, persistence, and deployed application. Its purpose is to expose assumptions early: field names, error handling, session behavior, and database constraints often fail at the connections between layers.
+
+Build the smallest successful path first, then its important failures. For the loan project, seed one item, show it, submit a checkout, persist the record, and display it to the same user after refresh. A local JavaScript array that resets on reload is a prototype, not proof of persistence. A mocked server is useful for UI work but must be replaced before claiming the slice works end to end.
+
+Keep changes small and integrate frequently. Use focused commits describing why a change is needed. Review diffs for secrets, accidental generated files, and assumptions. A feature flag can hide unfinished UI, but hiding a button does not secure its server endpoint; authorization remains mandatory.
+
+Delivery includes a clean-start test. Your own browser may contain cookies, cached data, or local configuration that another user lacks. Clone or start from documented commands, use a new test account and synthetic data, and verify the same journey without manual database intervention.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+Use this trace as a debugging record for one checkout:
 
-```text
-issue #1 schema + migration
-issue #2 create form + server validation
-issue #3 owner list + denial test
-issue #4 deploy + smoke check
-```
+~~~text
+Browser: POST checkout with itemId only.
+Server: authenticated session supplies borrowerId.
+Validation: itemId has the expected format.
+Policy: account can borrow this item.
+Database: insert one active loan; conflict becomes a recoverable response.
+Response: return loan id and safe display data.
+Browser: show confirmation and refresh the current loan list.
+Reload: the persisted loan is still visible to its owner.
+~~~
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+If the browser reports success but the loan disappears after refresh, investigate the persistence boundary. If a second click creates another record, investigate idempotency or the domain uniqueness rule. If a different account sees the loan, investigate authorization on the read path, not just the write path.
+
+A good demo shows evidence at each relevant boundary without exposing secrets. Record request status, the safe returned identifier, and the visible persisted result. Avoid screenshots of connection strings or real personal records.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Deliver these in dependency order, link each acceptance check to evidence, and demo from a clean account.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Implement the trace with one seeded item and one test account. Avoid adding secondary pages until it works.
+2. Refresh, sign out, and sign back in. Confirm persistence and ownership.
+3. Submit twice and from two test accounts nearly simultaneously. Verify the domain permits only the intended active loan.
+4. Force a database or network failure in your local test environment. Preserve input and show a recovery action.
+5. Deploy through the project workflow, run the same test on the deployed origin, and record the deployed commit and result.
 
 ### Checkpoint
 
-- Deploy a complete primary path. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Collect evidence against acceptance checks. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- The full journey works after refresh from a clean test account.
+- Duplicate and concurrent submissions cannot violate the main invariant.
+- The deployment evidence identifies a real running version, while mocks and local-only checks are labelled honestly.
 <!-- /lesson -->
 
 ## Weekly project

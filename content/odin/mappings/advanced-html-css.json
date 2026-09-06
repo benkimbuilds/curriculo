@@ -1,0 +1,114 @@
+[
+  {
+    "id": "odin-advanced-html-css-bdd2e3ef",
+    "titleEs": "Transformaciones",
+    "week": 6,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-aec495c8",
+    "titleEs": "Transiciones",
+    "week": 6,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-b57040da",
+    "titleEs": "Animaciones con fotogramas clave",
+    "week": 6,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-77a24bd6",
+    "titleEs": "Introducción a la accesibilidad web",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-b2e7a279",
+    "titleEs": "Pautas de Accesibilidad para el Contenido Web",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-44c955e2",
+    "titleEs": "HTML semántico",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-cf510d74",
+    "titleEs": "Colores accesibles",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-cb8acac5",
+    "titleEs": "Navegación con teclado",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-4d038307",
+    "titleEs": "Texto con significado",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-40aeff0e",
+    "titleEs": "WAI-ARIA",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-ccb3b2ef",
+    "titleEs": "Auditoría de accesibilidad",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-5af1f6bf",
+    "titleEs": "Introducción al diseño adaptable",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-b86ae699",
+    "titleEs": "Flexibilidad natural del diseño",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-b34f989f",
+    "titleEs": "Imágenes adaptables",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-61698363",
+    "titleEs": "Consultas de medios y contenedores",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-advanced-html-css-d99b0c9d",
+    "titleEs": "Proyecto: página de presentación adaptable",
+    "week": 12,
+    "estimatedMinutes": 600,
+    "treatment": "translation"
+  }
+]

@@ -144,16 +144,33 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "foundations/installations",
-      "foundations/git_basics",
-      "foundations/html_css/html-foundations"
+      "foundations/introduction/how_this_course_will_work.md",
+      "foundations/introduction/introduction_to_web_development.md",
+      "foundations/introduction/motivation_and_mindset.md",
+      "foundations/introduction/asking_for_help.md",
+      "foundations/introduction/join_the_odin_community.md",
+      "foundations/installations/how_does_the_web_work.md",
+      "foundations/installations/installations.md",
+      "foundations/installations/text_editors.md",
+      "foundations/installations/command_line_basics.md",
+      "foundations/installations/setting_up_git.md",
+      "git/foundations_git/introduction_to_git.md",
+      "git/foundations_git/git_basics.md",
+      "foundations/html_css/html_foundations/intro_to_html_css.md",
+      "foundations/html_css/html_foundations/elements_and_tags.md",
+      "foundations/html_css/html_foundations/html_boilerplate.md",
+      "foundations/html_css/html_foundations/working_with_text.md",
+      "foundations/html_css/html_foundations/lists.md",
+      "foundations/html_css/html_foundations/links_and_images.md",
+      "git/foundations_git/commit_messages.md",
+      "foundations/html_css/html_foundations/project_recipes.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "original-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
+    "editor": "Ruta curriculum adaptation",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -176,68 +193,109 @@
 Set up a dependable workspace, learn the terminal without fear, publish with Git, and build a semantic personal profile from scratch. This audit source assumes no prior programming experience and supports Windows and macOS. Complete the lessons in order: each one moves from explanation to a concrete example, guided practice, and observable evidence before the weekly project.
 
 <!-- lesson:week-01-lesson-01 -->
-## Your workstation and the web
+## Your computer and the web
 
 ### Explanation
 
-Map the browser, editor, terminal, files, and remote services before installing tools. Follow the Windows PowerShell path or the matching macOS Terminal path and learn where projects belong. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+A page in your browser may come from a file on your computer or from a remote server. Distinguish those situations before installing tools. The editor changes files, the terminal runs commands, the browser interprets HTML and executes JavaScript, and the server answers requests. Git records versions; GitHub hosts repositories. These tools cooperate but do not automatically replace one another.
+
+When you enter an HTTPS address, the browser needs to locate the server. DNS associates a domain with an address. Requests and responses travel over networks in packets. After receiving HTML, the browser may request CSS, images and JavaScript. A search engine is a website that helps locate other sites; it is not the browser or the whole internet.
+
+On Windows you can begin HTML exercises with native VS Code and Chrome. For Unix command exercises use the Ubuntu WSL2 environment prepared by the lab. Confirm that the terminal is Ubuntu before copying Bash commands, store repositories in the Linux home directory, and open VS Code connected to that environment. On macOS use Terminal and VS Code directly. Understanding the concepts does not require replacing your operating system.
+
+Choose a project directory you can find without relying on a recent-files menu. Give each project its own folder and open the whole folder in VS Code. Avoid leaving related files scattered through Downloads and moving them without checking paths. A file named index.html.txt is not the same filename as index.html, even if your file manager hides extensions.
+
+Saving only updates the file on disk. Refreshing asks the browser to read it again. Pushing to GitHub sends code, while publishing a website additionally requires a service that serves it. These actions can happen at different times. If a page looks outdated, first check which copy you opened, whether you saved, and whether deployment finished.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+Create this file inside a new profile-practice folder:
 
-```text
-Browser <- index.html <- VS Code
-             ^
-        project folder
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>My practice environment</title>
+  </head>
+  <body>
+    <h1>I am building my first page</h1>
+    <p>This file lives on my computer.</p>
+  </body>
+</html>
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+Open it in Chrome and inspect the address. A file address means you are reading a local file, not a public deployment. Change the tab title and visible heading separately, saving before refreshing. Disconnecting from the internet does not stop the browser from reading this local file, though external images or styles would still need a connection.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Add GitHub and the deployed site to the map, then mark which arrows need a network connection.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Draw the browser, editor, terminal, project folder, GitHub and server. Connect them and label what information moves along each connection.
+2. Create, save and open the file. Record its location privately; do not publish personal details embedded in your username or directory names.
+3. Close both applications and find the same project again through the file manager. Open the whole folder instead of making a second copy.
+4. Change one sentence, observe before saving, then save and refresh. Explain each state.
+5. Compare your file with an HTTPS website and identify which activities need a network connection.
 
 ### Checkpoint
 
-- Explain what each development tool does. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Create and reopen a project folder safely. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Explain what each tool does using your own file as evidence.
+- Close and reopen the same project and distinguish its local copy from a published website.
+- Explain why saving, committing and deploying are different operations.
 <!-- /lesson -->
 
 <!-- lesson:week-01-lesson-02 -->
-## Terminal essentials
+## Terminal fundamentals
 
 ### Explanation
 
-Practise present-directory, listing, navigation, creation, and help commands. Treat paths as precise addresses and read every command before pressing Enter. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+The terminal accepts written instructions and the shell interprets their syntax. Each session has a working directory. Many commands resolve paths from that directory, so knowing where you are comes before creating, moving or deleting anything. Do not type the prompt symbol shown in a tutorial: a dollar or percent sign usually indicates that the shell is ready.
+
+An absolute path describes a location from the filesystem root. A relative path starts at the current directory. A dot represents that directory and two dots represent its parent. A folder becomes a useful project location because of how you organize files, not because its name has special powers.
+
+In PowerShell, Get-Location shows your location, Get-ChildItem lists contents, and Set-Location changes directories. New-Item creates a file or directory according to ItemType. On macOS or Ubuntu in WSL the corresponding tools include pwd, ls, cd, touch and mkdir. Similar aliases do not mean every command or option is interchangeable.
+
+A path error rarely requires reinstalling software. Read the message, check the current directory and spelling, and use Tab completion. Linux paths distinguish uppercase and lowercase. Put a path containing spaces in quotes so the shell treats it as one argument.
+
+Use the command history to revisit a previous instruction, but read it before executing again. A command that was appropriate in one directory may target different files after navigation. Repetition saves typing only when its context still matches your intention.
+
+Deletion commands may bypass the trash. Practice only inside the directory created for this exercise and inspect its contents first. Do not run recursive deletion against your home folder or a repository containing work. A powerful command is not automatically the appropriate response to uncertainty.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+In native Windows PowerShell:
 
 ```powershell
 Get-Location
-New-Item -ItemType Directory practica
-Set-Location practica
+New-Item -ItemType Directory terminal-practice
+Set-Location terminal-practice
+New-Item -ItemType File notes.txt
 Get-ChildItem
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+On macOS or Ubuntu in WSL:
+
+```bash
+pwd
+mkdir terminal-practice
+cd terminal-practice
+touch notes.txt
+ls
+```
+
+Both sequences create a directory, enter it and create an empty file. Do not run both against the same location without checking what already exists. Open notes.txt in the editor, add a sentence and save. The terminal and editor see the same file only when their environment and path agree.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Repeat with macOS commands if available, then explain the path shown after every navigation step.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Choose the appropriate shell and record the starting location. Create the practice directory and verify that it exists before entering it.
+2. Create notes.txt, edit and save it, then list the directory again. Open the file to verify the sentence exists on disk.
+3. Create a subdirectory and enter it. Show the current location, return to the parent and explain which part of the path changed.
+4. Rename only the practice file using Rename-Item in PowerShell or mv in Bash. Verify that its contents remain intact.
+5. Read the help for a command you intend to use. Before removing the practice material, inspect the exact path and contents, delete only the practice file, then remove the empty directory.
 
 ### Checkpoint
 
-- Navigate without losing track of location. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Recognize destructive commands and pause before using them. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Navigate to a directory and back while explaining each path instead of guessing.
+- Identify which commands belong to PowerShell and which belong to Bash.
+- Show what evidence you would inspect before deletion and explain how you recognize a command whose scope is too broad.
 <!-- /lesson -->
 
 <!-- lesson:week-01-lesson-03 -->
@@ -245,32 +303,48 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Use status, add, commit, log, remote, push, and pull in a small repository. A commit is a clear checkpoint with a reason, not a backup of random files. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Git records project versions on your computer. GitHub hosts a remote copy and supports collaboration. You can save a file without committing it, commit without publishing, and publish source code without deploying a website. These states matter because each operation preserves or shares a different kind of progress.
+
+The working tree contains files you edit. The staging area contains exactly the changes selected for the next commit. The repository stores commits and their relationships. git add stages a particular version: editing again afterward does not silently update that selection. git status helps distinguish untracked, modified and staged work.
+
+A commit should express one understandable intention, such as adding navigation or fixing a broken link. Combining unrelated work makes review and reversal harder. Its message explains purpose instead of merely saying updated. That history also helps when you return after several days and no longer remember why a line was written.
+
+Read the actual diff instead of relying only on filenames. A file may contain several unrelated edits, and a generated or downloaded file may include information you did not intend to publish. Reviewing the staged content connects your commit message to evidence of what is being recorded.
+
+A remote has a name, usually origin, and a URL. main is a branch rather than a server. git push origin main sends that branch's commits to the configured remote. git pull obtains and integrates remote work; do not treat it as a magic repair command when you have pending changes or a conflict. Read the state and understand which versions differ first.
+
+Configure identity and authentication through the preparation lessons. On a shared computer, do not leave private keys, logged-in sessions or someone else's global identity behind. Use GitHub's private email address if you do not want your personal address published. Never stage passwords or secret files, even if you intend to delete them later: repository history can retain them.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+Inside a practice repository containing index.html:
 
 ```bash
 git status
+git diff
 git add index.html
+git diff --staged
 git commit -m "Explain the profile goal"
 git log --oneline
+git remote -v
+git push origin main
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+Before committing, compare the staged diff with the message. After pushing, open GitHub and verify the same commit. A clean working tree means no pending local file changes; it does not prove that all commits have reached the remote.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Change a second file, stage only one file, and use status to prove what will and will not enter the commit.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Create a practice repository with a README on GitHub and clone it using your configured authentication. Open that folder and verify origin.
+2. Make two small, different changes to README and index.html. Run status and describe both.
+3. Stage only index.html and use the staged diff to prove what will enter the commit. Commit it while leaving the README change pending.
+4. Stage and commit the README separately. Review both messages and push.
+5. Open the repository in the browser and compare files and commit identifiers with your local history. Document how to open the page, what you built and what you checked.
 
 ### Checkpoint
 
-- Describe the working tree, staging area, and repository. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Publish a sequence of focused commits. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Demonstrate pending, staged, committed and published states with the two files.
+- Explain origin and main and show how you know the newest commit reached GitHub.
+- Show two focused commits and explain why their separation makes the project easier to review.
 <!-- /lesson -->
 
 <!-- lesson:week-01-lesson-04 -->
@@ -278,34 +352,61 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Turn a content outline into headings, landmarks, links, lists, images, and forms whose structure still makes sense without visual styling. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+HTML communicates what content means. A heading identifies a topic, a list groups entries, a link navigates to a resource, and a button performs an action. Choosing elements solely for their default appearance creates confusing structure. CSS can resize a heading without replacing it with a large paragraph.
+
+A document begins with a doctype and an html element declaring its language. head contains metadata such as encoding and tab title. body contains visible page content. Within it, header introduces a site or section, nav groups significant navigation, main contains the central content, and footer closes with related information. A section usually needs a heading describing its subject; it is not merely a styling box.
+
+Headings form a hierarchy. Use one h1 for this page's overall subject, h2 for sections and h3 when a section truly has subsections. Do not skip levels to obtain smaller type. Reading only the headings should reveal a coherent outline of the page.
+
+Links need an href destination and text that lets people anticipate it. An informative image needs alternative text conveying its relevant information; a purely decorative image can use an empty alt. Lists use ul or ol depending on whether sequence matters, and li for each entry. If you add a form, associate each label with its control through for and id. A disappearing placeholder is not a replacement for a persistent label.
+
+Indentation displays relationships, but tags create the actual tree. Close the innermost element before its parent and resolve paths from the document that uses them. Browsers attempt to repair invalid markup, so a page that appears reasonable may still contain structural errors.
+
+Think about the reading order before arranging anything visually. Someone following the document linearly should encounter the introduction, relevant navigation and project information in a useful sequence. Changing font size or moving boxes later will not repair an outline whose meaning is unclear. Write the content first and choose elements that express its relationships.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
-
 ```html
-<header>
-  <h1>Ana learns the web</h1>
-</header>
-<main>
-  <section><h2>Projects</h2></section>
-</main>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana · Developer profile</title>
+  </head>
+  <body>
+    <header>
+      <h1>Ana learns web development</h1>
+      <nav aria-label="Main">
+        <a href="#projects">Projects</a>
+      </nav>
+    </header>
+    <main>
+      <section id="projects">
+        <h2>Projects</h2>
+        <ul><li>My first recipe website</li></ul>
+      </section>
+    </main>
+    <footer><p>A place to share what I learn.</p></footer>
+  </body>
+</html>
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+The link targets the projects ID on the same page. The tab title and h1 serve different purposes. The content still has a useful structure without CSS. Do not publish your phone number, exact address or other personal details just to fill a profile.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Add navigation and a footer while keeping one h1 and a heading order that never skips a level.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Write a plain-text outline covering introduction, learning goal, projects and a GitHub link. Choose appropriate regions and headings.
+2. Build a complete document using your own content. Include a project list and navigation pointing to a real section.
+3. Move through links with Tab and activate them with Enter. Verify that their destination matches their text.
+4. Validate with the W3C HTML validator. Fix the first error, validate again and document the outcome.
+5. Disable any styles you added and ask another person to explain the outline. Adjust the structure if the reading order is unclear.
 
 ### Checkpoint
 
-- Choose elements for meaning instead of appearance. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Validate HTML and repair reported errors. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Justify tags by function, including the distinction between links and buttons.
+- Show a coherent heading hierarchy and validation evidence with no unresolved errors.
+- Verify keyboard navigation and explain what remains understandable without styling.
 <!-- /lesson -->
 
 ## Weekly project

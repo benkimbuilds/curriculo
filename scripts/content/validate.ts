@@ -6,4 +6,4 @@ const lessons = documents.reduce(
   0,
 );
 
-console.log(`Curriculum valid: ${documents.length} localized weeks, ${lessons} localized lessons.`);
+console.log(`Guided core valid: ${documents.length} localized weeks, ${lessons} localized lesson bodies. Run content:odin:check for full upstream coverage.`);

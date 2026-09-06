@@ -146,16 +146,35 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "javascript/getting_hired",
-      "javascript/final_project",
-      "javascript/nodejs/deployment"
+      "javascript/computer_science/a_very_brief_intro_to_cs.md",
+      "javascript/computer_science/recursive_methods.md",
+      "javascript/computer_science/project_recursion.md",
+      "javascript/computer_science/time_complexity.md",
+      "javascript/computer_science/space_complexity.md",
+      "javascript/computer_science/common_data_structures_algorithms.md",
+      "javascript/computer_science/project_linked_lists.md",
+      "javascript/computer_science/hash_map_data_structure.md",
+      "javascript/computer_science/project_hash_map.md",
+      "javascript/computer_science/project_binary_search_trees.md",
+      "javascript/computer_science/project_knights_travails.md",
+      "advanced_html_css/responsive_design/project_homepage.md",
+      "react/react_and_the_backend/project_messaging_app.md",
+      "nodeJS/final_project/project_odin_book.md",
+      "nodeJS/final_project/conclusion.md",
+      "getting_hired/applying_and_interviewing/collect_leads.md",
+      "getting_hired/applying_and_interviewing/qualify_leads.md",
+      "getting_hired/applying_and_interviewing/project_resume.md",
+      "getting_hired/applying_and_interviewing/applying.md",
+      "getting_hired/applying_and_interviewing/preparing_to_interview_and_interviewing.md",
+      "getting_hired/applying_and_interviewing/handling_an_offer.md",
+      "getting_hired/applying_and_interviewing/conclusion.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "original-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
+    "editor": "Ruta curriculum adaptation",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -182,31 +201,48 @@ Finish the most valuable scope, test and observe production behavior, improve th
 
 ### Explanation
 
-Test domain rules, authorization denials, keyboard flow, narrow screens, slow networks, and failure recovery. Remove secrets and unused collection before polishing minor features. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+A quality pass starts with the promises in your acceptance criteria. Test the rules whose failure would lose work, expose data, or mislead a user before polishing minor decoration. For the loan project, that means availability, ownership, persistence, and recovery. A screenshot alone cannot prove these.
+
+Use different levels of tests for different questions. A unit test checks a small domain rule without a browser or database. An integration test checks real boundaries such as a database constraint or authenticated server operation. A browser test checks the user journey, labels, focus, and rendered result. Repeating the same assertion at every level adds little; place each check where its failure can be understood.
+
+Authorization tests need at least two accounts. Verify that account A can access A's record and account B cannot, including by changing a URL or request body directly. Hiding links is not enough. Test expired sessions, malformed ids, missing records, and repeated submissions. Use synthetic data and disposable environments.
+
+Inspect the interface with keyboard navigation, narrow width, enlarged text, and slow networking. Labels should explain controls, errors should identify recovery, and focus should stay meaningful after changes. Browser overflow measurements do not catch text pressed against dividers or unreadable hierarchy; inspect the actual screens too.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+This Node unit test describes a small domain rule. Keep a separate integration test for the database's one-active-loan invariant, because two concurrent requests can both pass this pure function before either inserts a record.
 
-```text
-High: another user can edit a project -> block launch
-Medium: slow empty state -> fix or document
-Low: icon alignment -> defer
-```
+~~~js
+import test from "node:test";
+import assert from "node:assert/strict";
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+function canBorrow({ active, disabled }) {
+  return !active && !disabled;
+}
+test("only available enabled items can be borrowed", () => {
+  assert.equal(canBorrow({ active: false, disabled: false }), true);
+  assert.equal(canBorrow({ active: true, disabled: false }), false);
+  assert.equal(canBorrow({ active: false, disabled: true }), false);
+  assert.equal(canBorrow({ active: true, disabled: true }), false);
+});
+~~~
+
+The truth table explains all combinations. It does not replace input validation: your boundary should reject missing or incorrectly typed fields rather than relying on truthiness. It also does not prove server ownership checks, which require separate tests against the real operation.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Triage five real findings by impact, likelihood, and recovery; resolve security and data-loss risks before polish.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Map each acceptance criterion to one useful automated or manual check. Identify gaps before adding more tests.
+2. Run the domain checks and deliberately break one rule to confirm the test detects it.
+3. Exercise own-versus-other account reads and writes through the server, not only the interface.
+4. Inspect all pages used by the main journey at phone and desktop widths, by keyboard, and with slow network settings.
+5. Review repository history, logs, forms, and configuration for secrets and unnecessary personal-data collection. Remove unused collection and document any remaining issue.
 
 ### Checkpoint
 
-- Prioritize launch risks with evidence. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Close high-impact defects or document a safe limitation. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- A report connects each important promise with a passing check or an explicit unresolved defect.
+- Another account cannot read or mutate private records by altering requests.
+- The main journey remains readable and recoverable under narrow screens, keyboard input, and network failure.
 <!-- /lesson -->
 
 <!-- lesson:week-12-lesson-02 -->
@@ -214,31 +250,50 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Verify migrations, health, logs, rate limits, error reporting, backups, and rollback. Create a launch checklist another person can follow and confirm the deployed commit. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Production readiness means the deployed system can start, serve its real dependencies, and recover from expected failures. A successful build is necessary but does not prove database connectivity, email delivery, worker execution, or the user's complete journey.
+
+Separate liveness from readiness. Liveness says the process responds; readiness says required dependencies are usable. In this platform, /api/health and /api/ready serve those different purposes. A worker needs its own evidence: a running process plus a completed synthetic job or an appropriate queue check, not merely the web page loading.
+
+Configuration belongs to the environment that uses it. Database URLs, auth secrets, and email credentials stay server-side. The public origin and trusted origins must match the actual HTTPS site. A successful local email captured by a development inbox does not prove production delivery. Verify registration, verification, and recovery with authorized test accounts if those are part of your project.
+
+Migrations change persistent data and need a recovery plan. Prefer changes compatible with both old and new application versions when rolling deployments. Back up before risky changes and practice restoring into a separate database. Having a backup listed in a dashboard is weaker evidence than a restore you have tested.
+
+Application rollback does not automatically reverse schema changes or restore lost data. Record the prior version, deployment steps, and conditions for rollback. Avoid destructive migration edits just to make an old application start.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+For this repository, the release checklist can use these existing commands. Run database operations only against the intended environment; inspect its identity before executing.
 
-```text
-commit abc123 -> build -> migration 004 -> deploy
-health 200 -> owner flow pass -> denial pass
-backup created -> rollback rehearsed
-```
+~~~sh
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm content:validate
+pnpm build
+~~~
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+After deployment, replace the example origin with your real site:
+
+~~~sh
+curl --fail --silent --show-error https://your-app.example/api/health
+curl --fail --silent --show-error https://your-app.example/api/ready
+~~~
+
+A 200 response is only one check. Confirm the deployed commit, inspect safe logs for startup and migration errors, and perform a synthetic user journey that writes and reads data. If your project includes email and a worker, verify them explicitly. Do not paste credentials into screenshots or reports.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Execute the release rehearsal, replace every placeholder with actual evidence, and have another person follow recovery steps.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Create an environment checklist naming each required variable and owning service, with no secret values.
+2. Apply migrations to a fresh disposable database and start the application from documented commands.
+3. Deploy, check health/readiness, and run the main journey from a clean test account.
+4. Create and restore a test backup into another disposable database; compare expected record counts and constraints.
+5. Rehearse returning to a prior compatible application version. Record what requires a separate database recovery decision.
 
 ### Checkpoint
 
-- Trace production to an immutable commit. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Run and record a recovery drill. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Your report distinguishes build success, healthy process, usable database, email delivery, and worker execution.
+- The deployed version and successful synthetic journey are recorded.
+- Backup and rollback instructions are reproducible and do not assume code rollback reverses data changes.
 <!-- /lesson -->
 
 <!-- lesson:week-12-lesson-03 -->
@@ -246,35 +301,61 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Write for a reviewer who has five minutes: problem, users, constraints, architecture, screenshots, setup, tests, tradeoffs, and what you personally contributed. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+A portfolio reviewer may have only a few minutes. Help them understand the problem, your contribution, and the evidence that the project works. A list of technology logos says little about engineering judgment. Explain why you chose a design, what alternatives you considered, and what limitation remains.
+
+Write the README for a person who has never seen the project. Begin with the user's problem and the main result, then provide a screenshot or short demo link. State whether it is a learning project, an adaptation, or work used by real people. Do not invent adoption numbers or claim a team feature was solely yours.
+
+Separate quick evaluation from local setup. A nontechnical reviewer needs a readable description and demonstration. A technical reviewer needs prerequisites, exact commands, environment-variable names, migrations, seed data, and tests. Use placeholders for secrets and explain how to obtain local values. Keep setup instructions synchronized with the actual package scripts.
+
+Documentation should expose limitations rather than hide them. If AI uses a deterministic stub, label it. If email requires configuration, say so before the reviewer tries account recovery. If automated evaluation only covers some criteria, distinguish it from human assessment. Honesty lets someone evaluate the project fairly.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+Use this outline and fill it with project-specific facts, not generic adjectives:
 
-```markdown
-# Project name
-Problem and user
-## Run locally
+~~~markdown
+# Equipment borrowing
+A small application for checking shared equipment availability and recording loans.
+
+## Demo
+Public URL, screenshot, and safe instructions for trying a synthetic example.
+
+## What I built
+My routes, domain rules, tests, and collaboration responsibilities.
+
 ## Architecture
-## Tests
-## Tradeoffs
-## Deployed commit
-```
+Browser -> authenticated server operation -> PostgreSQL constraints.
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+## Run locally
+Required runtime version, install command, environment template,
+migration and seed commands, then start command.
+
+## Verify
+Test commands and the main manual journey.
+
+## Decisions and limits
+Why one active loan is enforced in the database.
+What is outside scope, and what remains unverified.
+
+## Credits
+Source curriculum, libraries, adapted material, and applicable licenses.
+~~~
+
+For a case study, show one decision in depth: two borrowers submitted at once; the application needed a database constraint; the second request now receives a recoverable conflict. Include a test or trace. That explains your work more clearly than saying “robust backend.”
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Ask an unfamiliar reviewer to follow the README and repair every place where they must guess.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Select two or three projects that demonstrate different skills. Remove broken links and redundant examples.
+2. Write a concise case study with problem, constraints, contribution, decision, evidence, and next improvement.
+3. Follow your README from a clean clone using only its instructions. Record and fix every missing step.
+4. Ask a nontechnical peer to explain the project after one minute and a technical peer to run one test.
+5. Review screenshots, sample accounts, and git history for private information. Attribute adapted work and collaborators.
 
 ### Checkpoint
 
-- Make the repository reproducible from its README. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Explain one decision and one rejected alternative. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- A reviewer identifies the problem and your personal contribution quickly.
+- Setup and verification succeed without undocumented manual actions.
+- Claims about AI, deployment, usage, and evaluation match the evidence rather than marketing language.
 <!-- /lesson -->
 
 <!-- lesson:week-12-lesson-04 -->
@@ -282,33 +363,44 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Plan a reliable three-minute story, prepare fallback screenshots, answer with situation-action-result evidence, and admit uncertainty while explaining how you would investigate. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+A demonstration is a short explanation supported by a reliable user journey. Choose one problem and show its resolution. A three-minute demo does not need to visit every page. Too many features make it harder for a reviewer to understand the core behavior and your decisions.
+
+Plan the starting state. Use synthetic data, a test account, and a known item available to borrow. Verify the deployed version before presenting. Prepare screenshots or a short recording in case the network fails, and label them as recorded evidence rather than pretending they are live.
+
+Use a simple structure: context, action, result, and one technical decision. In the loan project, explain the wasted-trip problem, show current availability and checkout, then show the persisted loan after refresh. Briefly describe how the database prevents simultaneous duplicate loans. End with a limitation and the next improvement you would test.
+
+Interview answers should also connect claims to evidence. A situation-action-result structure keeps the explanation concrete. Distinguish your contribution from the team's. Explain an unsuccessful attempt if it reveals what you learned, but spend most time on the final reasoning and proof.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+A three-minute outline could be:
 
-```text
-0:00 problem and user
-0:30 primary journey
-2:00 engineering decision
-2:35 evidence and learning
-2:55 close
-```
+~~~text
+0:00–0:30  Who borrows equipment, and what went wrong before.
+0:30–1:20  Sign in with a test account, choose an item, and borrow it.
+1:20–1:45  Refresh and show the persisted loan.
+1:45–2:20  Explain the concurrency test and unique active-loan constraint.
+2:20–2:45  Show one failure recovery and one limitation.
+2:45–3:00  State the next experiment and invite questions.
+~~~
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+For a technical interview problem, start by restating inputs and expected outputs, asking about constraints, and working through a small example. A straightforward correct solution is a good starting point. Explain complexity and improvements afterward. If you do not know a method, say what you would inspect in documentation instead of fabricating a name.
+
+Prepare for questions such as “What would break with two simultaneous users?”, “How do you prevent another account reading this record?”, and “What did the test fail to cover?”. Answers should point to actual code and evidence. Admitting a known limitation with a plan is stronger than claiming complete reliability.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Practise once live and once with fallback captures, then answer one tradeoff and one unknown with evidence.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Write and rehearse a three-minute script using one real end-to-end journey.
+2. Run it from the documented starting state twice, including a fresh browser session.
+3. Practice a network failure and switch to clearly labelled screenshots without losing the explanation.
+4. Pair with a peer for five technical questions and a small coding problem. Think aloud, clarify, test, and summarize.
+5. Record feedback on clarity, timing, unsupported claims, and unanswered questions. Revise and rehearse once more.
 
 ### Checkpoint
 
-- Deliver a timed live demo with a fallback. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Explain code decisions without reading the code aloud. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- The live demo fits three minutes and proves persistence and the main rule.
+- A fallback is available and honestly identified if needed.
+- You can explain one tradeoff, one defect you repaired, and one remaining limitation with concrete evidence.
 <!-- /lesson -->
 
 ## Weekly project

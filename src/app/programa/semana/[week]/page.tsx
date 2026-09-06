@@ -17,11 +17,13 @@ export default async function WeekPage({ params }: { params: Promise<{ week: str
   if (!week) notFound();
   const lessonState = new Map(context.lessonProgress.map((record) => [record.lessonId, record.state]));
   const color = colors[(week.week - 1) % colors.length];
-  const lessons = week.modules.flatMap((module) => module.lessons).map((lesson, index) => ({
+  const coreLessons = week.modules.flatMap((module) => module.lessons).filter((lesson) => lesson.required);
+  const libraryModules = week.modules.filter((module) => module.id.includes("-odin-"));
+  const lessons = coreLessons.map((lesson, index) => ({
     slug: lesson.id,
     title: lesson.title,
     meta: `${lesson.estimatedMinutes} min`,
-    status: isLessonComplete(lessonState.get(lesson.id)) ? "done" as const : index === week.modules.flatMap((module) => module.lessons).findIndex((item) => !isLessonComplete(lessonState.get(item.id))) ? "current" as const : "upcoming" as const,
+    status: isLessonComplete(lessonState.get(lesson.id)) ? "done" as const : index === coreLessons.findIndex((item) => !isLessonComplete(lessonState.get(item.id))) ? "current" as const : "upcoming" as const,
   }));
   const completedLessons = lessons.filter(({ status }) => status === "done").length;
   const latestSubmission = context.submissions.filter(({ projectId }) => projectId === week.project.id).sort((left, right) => right.attempt - left.attempt)[0];
@@ -37,6 +39,7 @@ export default async function WeekPage({ params }: { params: Promise<{ week: str
             <article className="tip-card"><Lightbulb /><div><strong>Trabaja a tu ritmo</strong><p>Las horas son una guía, no una fecha límite. Lo importante es practicar y entender.</p></div></article>
           </aside>
         </div>
+        {libraryModules.length ? <section className="panel odin-week-library"><p className="eyebrow">Currículo ampliado</p><h2>Profundización y proyectos de práctica</h2><p>Estos materiales completan la cobertura de Odin. Puedes guardar su avance, pero no cambian el porcentaje de la ruta guiada. Cada proyecto de práctica tiene sus propios requisitos; su entrega no usa el evaluador del proyecto semanal.</p>{libraryModules.map((module) => <details className="odin-course" key={module.id}><summary>{module.title}<span>{module.lessons.length} materiales</span></summary><div className="lesson-list">{module.lessons.map((lesson) => <LessonRow key={lesson.id} title={lesson.title} href={`/programa/semana/${number}/leccion/${lesson.id}`} meta={`${lesson.kind === "lab" ? "Proyecto de práctica" : "Lección"} · ${lesson.estimatedMinutes} min`} status={isLessonComplete(lessonState.get(lesson.id)) ? "done" : "upcoming"} />)}</div></details>)}<Link className="text-link" href="/programa/biblioteca">Ver todas las materias <ArrowRight /></Link></section> : null}
       </div>
     </AppShell>
   );

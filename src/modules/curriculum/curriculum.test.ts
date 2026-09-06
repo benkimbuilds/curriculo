@@ -38,7 +38,7 @@ describe("curriculum content", () => {
     for (const body of bodies) {
       expect(body.wordCount).toBeGreaterThanOrEqual(140);
       expect(body.blocks.some((block) => block.type === "code")).toBe(true);
-      expect(body.blocks.filter((block) => block.type === "heading")).toHaveLength(5);
+      expect(body.blocks.filter((block) => block.type === "heading").length).toBeGreaterThanOrEqual(5);
       expect(body.blocks.some((block) => block.type === "list" && block.ordered && block.items.length >= 3)).toBe(true);
       expect(body.blocks.some((block) => block.type === "list" && !block.ordered && block.items.length >= 2)).toBe(true);
     }
@@ -51,6 +51,14 @@ describe("curriculum content", () => {
     expect(lesson?.content.lessonId).toBe(lesson?.id);
     expect(lesson?.content.blocks.some((block) => block.type === "code")).toBe(true);
     expect(JSON.stringify(lesson?.content.blocks)).not.toContain("<script");
+  });
+
+  it("does not republish the retired generic lesson-expansion template", () => {
+    const result = loadCurriculum();
+    for (const document of result.documents) {
+      expect(document.body).not.toContain("The goal is not to memorize isolated syntax. You should be able to name the input");
+      expect(document.body).not.toContain("La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra");
+    }
   });
 
   it("exposes only the published Spanish learner sequence by default", () => {

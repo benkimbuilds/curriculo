@@ -146,16 +146,22 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "foundations/javascript_basics",
-      "foundations/javascript_basics/problem_solving",
-      "foundations/javascript_basics/fundamentals-part-1"
+      "foundations/javascript_basics/variables_and_operators.md",
+      "foundations/javascript_basics/installing_nodejs.md",
+      "foundations/javascript_basics/data_types_and_conditionals.md",
+      "foundations/javascript_basics/javascript_developer_tools.md",
+      "foundations/javascript_basics/function_basics.md",
+      "foundations/javascript_basics/problem_solving.md",
+      "foundations/javascript_basics/understanding_errors.md",
+      "foundations/javascript_basics/project_rock_paper_scissors.md",
+      "foundations/javascript_basics/clean_code.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "original-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
+    "editor": "Ruta curriculum adaptation",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -182,32 +188,48 @@ Learn variables, decisions, loops, functions, arrays, objects, debugging, and te
 
 ### Explanation
 
-Explore strings, numbers, booleans, null, undefined, comparisons, conditionals, and loops. Trace each change on paper before asking the computer. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+JavaScript evaluates expressions to produce values. A number such as 120 represents a quantity; a string such as "120" represents text. A boolean is either true or false and usually represents the answer to a question. null is an explicit empty value; undefined often means no value has been assigned or returned. These are different states, so do not treat all of them as zero.
+
+Open the browser developer tools and choose Console. Each example in this lesson can run there without installing a library. A declaration gives a value a name. Use const when you will not reassign that name, and let when the variable must change. Naming a value makes a calculation readable; it does not turn text into a number. The + operator adds numbers but joins strings, so "12" + 3 produces "123". Convert input deliberately with Number, and reject blank text before conversion because Number("") is zero.
+
+A comparison produces a boolean. Prefer === for equality because it compares without silently converting types. Conditions in if/else choose which block runs. Relational operators such as < and >= compare ordered values. For a budget, a negative balance can select an overspending message; exactly zero needs its own boundary case.
+
+A loop repeats a block. A for loop has an initializer, condition, and update. Trace all three: if the update never moves toward a false condition, execution may never stop. A counter beginning at zero and continuing while it is less than three runs for 0, 1, and 2, not for 3. Indentation makes the blocks visible but braces determine their boundaries.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+~~~js
+const income = 1200;
+let total = 0;
+for (let day = 0; day < 3; day += 1) {
+  total += 125;
+  console.log(day, total);
+}
+const remaining = income - total;
+if (remaining < 0) {
+  console.log("Over budget");
+} else if (remaining === 0) {
+  console.log("Balanced");
+} else {
+  console.log("Available:", remaining);
+}
+~~~
 
-```js
-const amount = 250;
-const isExpense = true;
-const signedAmount = isExpense ? -amount : amount;
-console.log(signedAmount);
-```
-
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+The trace is (0,125), (1,250), (2,375), followed by an available balance of 825. total += 125 means total = total + 125. The loop variable exists inside the loop; remaining is calculated only after the repetition finishes. Currency eventually needs a consistent rounding policy; do not assume arbitrary decimal arithmetic is exact.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Trace the values before running it, then test zero, a decimal, and a string to see why input normalization matters.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Make a paper table with columns day, total before, and total after. Predict all three iterations, then run the example.
+2. Change income to 375 and then 200. Predict which branch runs and verify the exact messages. Restore it afterward.
+3. In a separate console expression compare 12 === "12", Number("12") === 12, and Number("not a number"). Explain the different results.
+4. Write a loop that totals five identical fares of 20. Change the count to zero and prove no iterations run.
+5. Record one type mistake and one off-by-one mistake, including their fixes.
 
 ### Checkpoint
 
-- Choose strict comparisons and explicit conditions. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Trace a loop and explain its stopping condition. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Show the complete trace and final 825 result without skipping the update step.
+- Demonstrate negative, zero, and positive balances selecting three distinct branches.
+- Explain why accepting blank input as zero would be a validation decision, not an automatic consequence you should ignore.
 <!-- /lesson -->
 
 <!-- lesson:week-03-lesson-02 -->
@@ -215,32 +237,49 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Design small functions around one job, name parameters for their meaning, return results instead of depending on global mutation, and distinguish declaration from invocation. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+A function packages a calculation so you can give it inputs and receive a result. Defining a function does not execute its body. Calling it with parentheses runs the body with arguments; the names in its declaration are parameters. In balance(100, 35), 100 and 35 are arguments assigned to the local parameter names income and expenses.
+
+A useful contract describes valid inputs, the returned value, and invalid-input behavior. For this lesson the inputs are nonnegative integer cents, not formatted currency strings. This avoids mixing display concerns with calculations and makes a negative result meaningful: spending can exceed income even though neither input is negative.
+
+return ends the current function call and provides a value to its caller. console.log displays something for a human but does not return that value from your function. A function that reaches its end without return produces undefined. This distinction matters when another calculation depends on the result.
+
+Parameters and variables declared inside the function have local scope. Code outside cannot read them directly. Avoid changing an unrelated global total inside a calculator: then the answer depends on the history of earlier calls. A pure calculation returns the same result for the same inputs and does not modify anything outside itself. This makes repeated calls and tests easier to understand.
+
+Validation belongs at the boundary of the contract. Number.isInteger checks both numeric type and whole-number form. A guard clause rejects a bad input before the normal calculation. throw creates an error rather than disguising invalid input as a valid result. The caller can decide how to show that error; the calculator should not need to know about buttons or HTML.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
-
-```js
+~~~js
 function balance(income, expenses) {
-  return income - expenses;
+  if (!Number.isInteger(income) || income < 0) {
+    throw new TypeError("income must be nonnegative integer cents");
+  }
+  if (!Number.isInteger(expenses) || expenses < 0) {
+    throw new TypeError("expenses must be nonnegative integer cents");
+  }
+  const remaining = income - expenses;
+  return remaining;
 }
-const result = balance(1200, 750);
-```
+const first = balance(10000, 3500);
+const second = balance(10000, 3500);
+console.log(first, second); // 6500 6500
+~~~
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+The ! operator means not; || means either condition can trigger rejection. The function accepts zero and allows a negative returned balance. It rejects numeric-looking text deliberately. Calling balance("10000", 3500) throws before subtraction rather than relying on automatic conversion.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Write the function contract, add an invalid-input decision, and confirm that calling it twice with the same values returns the same result.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Write the function contract in three sentences before typing the code. State the unit: cents.
+2. Run equal income and expense values, zero expenses, and expenses larger than income. Predict 0, the original income, and a negative result.
+3. Call it with a string, a decimal, and a negative input one at a time. Read the exact error and identify the guard that produced it.
+4. Remove return temporarily. Observe that the caller gets undefined, restore it, and explain why logging remaining inside would not fix the contract.
+5. Write a separate formatBalance function for presentation. Keep formatting out of the arithmetic function.
 
 ### Checkpoint
 
-- Write functions with clear contracts. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Explain local scope and avoid accidental globals. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Two identical calls return 6500 without relying on any global variable.
+- You can demonstrate a valid negative result and distinguish it from a rejected negative input.
+- Show that local remaining is unavailable outside the function and explain why the returned value remains usable.
 <!-- /lesson -->
 
 <!-- lesson:week-03-lesson-03 -->
@@ -248,30 +287,49 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Represent ordered collections with arrays and named properties with objects. Combine map, filter, find, and reduce only after writing the desired transformation in words. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+An array is an ordered collection: its first element has index 0 and its length is the number of elements. An object groups named properties. For a budget, an array represents many entries and each object represents one entry with an identifier, category, and amount in cents. These choices reflect the problem: category is a name, not an array position.
+
+Read an object's property with a dot, as in entry.cents. Read an array element with brackets, as in entries[0]. Reading a nonexistent position returns undefined. An empty array has length zero, so code must not assume entries[0] exists.
+
+Start transformations with a plain loop. An accumulator is a variable that collects a result across iterations. Only after you can trace the loop should you use array methods. filter creates a new array containing elements that pass a condition; map creates one output per input; find returns the first matching element or undefined. reduce combines elements into one result and should receive an initial value so an empty collection has defined behavior.
+
+A callback is a function supplied to another function. The array method calls your callback for each entry. Arrow syntax such as entry => entry.cents is a short function returning that expression. Braces change the form: an arrow body with braces requires an explicit return for a result.
+
+Creating a new array does not automatically clone the objects inside. Filtering entries preserves references to the original entry objects. Mutating a property on a filtered entry can still affect the original. For edits, create a new object with object spread and the changed field, while keeping stable identifiers for later lookup.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+~~~js
+const entries = [
+  { id: "a", category: "food", cents: 8000 },
+  { id: "b", category: "travel", cents: 4000 },
+  { id: "c", category: "food", cents: 2500 },
+];
+let foodTotal = 0;
+for (const entry of entries) {
+  if (entry.category === "food") foodTotal += entry.cents;
+}
+const food = entries.filter(entry => entry.category === "food");
+const total = food.reduce((sum, entry) => sum + entry.cents, 0);
+const labels = food.map(entry => entry.id);
+console.log(foodTotal, total, labels); // 10500 10500 ["a", "c"]
+~~~
 
-```js
-const entries = [{ category: "food", amount: 80 }, { category: "travel", amount: 40 }];
-const total = entries.reduce((sum, entry) => sum + entry.amount, 0);
-```
-
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+for...of gives each value, not its index. The reduction starts at zero, then adds 8000 and 2500. A find for an unknown id returns undefined; check for that before accessing its cents property.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Filter one category and calculate its total without mutating entries; prove the original array is unchanged.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Draw the array and its three objects. Label the difference between index 1, id "b", and category "travel".
+2. Trace the loop and reduction independently. Confirm they produce the same food total.
+3. Filter a category with no entries. Confirm reducing that result with initial zero returns zero.
+4. Find entry "b", then search for "missing" and handle the absence with an explicit message.
+5. Build an edited array using map and a new object for entry "a". Prove the original cents value is unchanged.
 
 ### Checkpoint
 
-- Select a data structure that matches the problem. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Transform a collection without unnecessary mutation. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- The food total is 10500 cents, the travel total is 4000, and an absent category totals zero.
+- Explain when you would choose map, filter, find, or reduce using your own budget examples.
+- Demonstrate that an immutable edit changes only the new result and does not silently modify the original entries.
 <!-- /lesson -->
 
 <!-- lesson:week-03-lesson-04 -->
@@ -279,31 +337,57 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Reproduce the problem, form one hypothesis, inspect values, make the smallest change, and add a test that would catch the defect if it returned. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Debugging starts with a reproducible mismatch between expected and actual behavior. Write the smallest input that shows the problem. Record the expected output, actual output, and exact steps. “It is broken” does not tell you whether the fault is input conversion, a calculation, or presentation.
+
+Read the first relevant error and its stack trace. A syntax error prevents parsing; a runtime exception interrupts execution; a logic error can produce a plausible but wrong value without throwing. For the last kind, inspect the values at the point where your expectation first diverges. A breakpoint pauses execution so you can inspect local variables and step through one statement at a time.
+
+Tests make those expectations repeatable. Use normal, boundary, and invalid inputs. A test should fail when the behavior is wrong and pass when it is repaired. If you only run a passing test, you do not yet know that it detects the defect you care about. Temporarily reintroducing the known bug provides useful evidence.
+
+Node includes a test runner and assertions, so this exercise does not need a testing package. Save the example as budget.test.mjs and run node --test budget.test.mjs in your terminal. The .mjs extension selects JavaScript modules. import loads the built-in test function and assertion library. A test callback contains the checks; assert.equal compares actual with expected, and assert.throws expects a function call to reject invalid input.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+~~~js
+import test from "node:test";
+import assert from "node:assert/strict";
 
-```js
-test("empty expenses total zero", () => {
-  expect(sumExpenses([])).toBe(0);
+function sumExpenses(cents) {
+  let total = 0;
+  for (const value of cents) {
+    if (!Number.isInteger(value) || value < 0) {
+      throw new TypeError("invalid expense");
+    }
+    total += value;
+  }
+  return total;
+}
+test("totals normal and empty input", () => {
+  assert.equal(sumExpenses([125, 250]), 375);
+  assert.equal(sumExpenses([]), 0);
+  assert.equal(sumExpenses([0]), 0);
 });
-```
+test("rejects text, fractions, and negatives", () => {
+  for (const value of ["125", 1.5, -1]) {
+    assert.throws(() => sumExpenses([value]), TypeError);
+  }
+});
+~~~
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+The function receives an array of cents, so decimals are invalid here even though a user interface may accept a formatted decimal amount before converting it to cents. Tests express that unit decision. They do not need network access or a browser because the arithmetic is independent.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Introduce a defect that returns undefined, observe the failure, repair it, and keep the test as regression evidence.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Run the tests and save the summary. Check that both test names appear.
+2. Change total += value to total = value. Run again and inspect the expected 375 versus actual 250 failure.
+3. Put a breakpoint on the accumulation line in a browser version of the function. Step through both values and explain why replacement loses the first amount.
+4. Restore accumulation, rerun, and add a test with three expenses to prevent the same regression.
+5. Add a short defect note with input, cause, fix, and regression test. Keep assertions focused on public behavior.
 
 ### Checkpoint
 
-- Use breakpoints and console output intentionally. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Write tests for normal, boundary, and invalid inputs. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Show a failing run caused by the deliberate accumulation bug and a passing run after the repair.
+- Explain why an empty array returns zero and why a string amount is rejected.
+- Given a new failure, identify the first incorrect value before changing the code.
 <!-- /lesson -->
 
 ## Weekly project

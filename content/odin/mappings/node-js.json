@@ -1,0 +1,213 @@
+[
+  {
+    "id": "odin-node-js-9dfc032b",
+    "titleEs": "Introducción al backend",
+    "week": 7,
+    "estimatedMinutes": 60,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-node-js-e05fed63",
+    "titleEs": "Introducción: ¿qué es Node.js?",
+    "week": 7,
+    "estimatedMinutes": 180,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-node-js-e03532e7",
+    "titleEs": "Primeros pasos con Node.js",
+    "week": 7,
+    "estimatedMinutes": 240,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-node-js-8c6f41d0",
+    "titleEs": "Depuración de Node.js",
+    "week": 7,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-node-js-de746d83",
+    "titleEs": "Proyecto: sitio informativo básico",
+    "week": 7,
+    "estimatedMinutes": 240,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-node-js-e7ede753",
+    "titleEs": "Variables de entorno",
+    "week": 7,
+    "estimatedMinutes": 150,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-node-js-18a063b0",
+    "titleEs": "Introducción a los frameworks",
+    "week": 7,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-node-js-3615a687",
+    "titleEs": "Introducción a Next.js",
+    "week": 7,
+    "estimatedMinutes": 240,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-3851f3b7",
+    "titleEs": "Rutas, parámetros y organización",
+    "week": 7,
+    "estimatedMinutes": 240,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-4c3ee6e9",
+    "titleEs": "Controladores, respuestas y errores",
+    "week": 7,
+    "estimatedMinutes": 300,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-7199ddba",
+    "titleEs": "Vistas con React Server Components",
+    "week": 7,
+    "estimatedMinutes": 240,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-3abf7691",
+    "titleEs": "Proyecto: tablón de mensajes",
+    "week": 7,
+    "estimatedMinutes": 480,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-42d668a1",
+    "titleEs": "Despliegue y diagnóstico",
+    "week": 8,
+    "estimatedMinutes": 240,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-2db51796",
+    "titleEs": "Formularios y manejo de datos",
+    "week": 7,
+    "estimatedMinutes": 360,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-42c192e3",
+    "titleEs": "Instalar PostgreSQL",
+    "week": 8,
+    "estimatedMinutes": 120,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-14563fb8",
+    "titleEs": "Usar PostgreSQL desde Next.js",
+    "week": 8,
+    "estimatedMinutes": 360,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-9e4e739d",
+    "titleEs": "Proyecto: aplicación de inventario",
+    "week": 8,
+    "estimatedMinutes": 720,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-1f8942fc",
+    "titleEs": "Autenticación, sesiones y permisos",
+    "week": 8,
+    "estimatedMinutes": 420,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-f4c4918c",
+    "titleEs": "Proyecto: solo miembros",
+    "week": 8,
+    "estimatedMinutes": 720,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-09dcf3ca",
+    "titleEs": "Prisma ORM: modelos, cliente y migraciones",
+    "week": 8,
+    "estimatedMinutes": 360,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-a9e92de2",
+    "titleEs": "Proyecto: almacenamiento de archivos",
+    "week": 11,
+    "estimatedMinutes": 900,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-ef267268",
+    "titleEs": "Fundamentos de APIs y CORS",
+    "week": 11,
+    "estimatedMinutes": 240,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-a9234831",
+    "titleEs": "Seguridad de APIs y tokens",
+    "week": 11,
+    "estimatedMinutes": 240,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-ff7c9084",
+    "titleEs": "Proyecto: API de blog",
+    "week": 11,
+    "estimatedMinutes": 960,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-5942067c",
+    "titleEs": "Probar rutas y controladores en Next.js",
+    "week": 11,
+    "estimatedMinutes": 240,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-e053758b",
+    "titleEs": "Probar operaciones de base de datos",
+    "week": 11,
+    "estimatedMinutes": 240,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-386dd44a",
+    "titleEs": "Proyecto: búsqueda de personajes en una imagen",
+    "week": 11,
+    "estimatedMinutes": 900,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-8e0206b5",
+    "titleEs": "Proyecto: aplicación de mensajería",
+    "week": 12,
+    "estimatedMinutes": 960,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-0b69dd30",
+    "titleEs": "Proyecto final: Odin-Book",
+    "week": 12,
+    "estimatedMinutes": 1800,
+    "treatment": "nextjs-replacement"
+  },
+  {
+    "id": "odin-node-js-5881368f",
+    "titleEs": "Conclusión y próximos pasos en backend",
+    "week": 12,
+    "estimatedMinutes": 90,
+    "treatment": "nextjs-replacement"
+  }
+]
+

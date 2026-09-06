@@ -146,17 +146,28 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "javascript/getting_hired/building_your_personal_website",
-      "javascript/final_project",
-      "javascript/nodejs/deployment"
+      "nodeJS/orms/project_file_uploader.md",
+      "nodeJS/apis/api_basics.md",
+      "nodeJS/apis/api_security.md",
+      "nodeJS/apis/project_blog_api.md",
+      "nodeJS/testing_express/testing_routes_and_controllers.md",
+      "nodeJS/testing_express/testing_database_operations.md",
+      "react/react_and_the_backend/project_wheres_waldo_a_photo_tagging_app.md",
+      "getting_hired/preparing_for_job_search/how_this_course_will_work.md",
+      "getting_hired/preparing_for_job_search/professional_networking.md",
+      "getting_hired/preparing_for_job_search/strategy.md",
+      "getting_hired/preparing_for_job_search/starts_with_you.md",
+      "getting_hired/preparing_for_job_search/what_companies_want.md",
+      "getting_hired/preparing_for_job_search/what_you_can_do_to_prepare.md",
+      "getting_hired/preparing_for_job_search/project_portfolio.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "translated-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
-    "translator": "AI Builders LATAM Spanish editorial team",
+    "editor": "Ruta curriculum adaptation",
+    "translator": "Adaptación al español asistida por IA",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -183,31 +194,44 @@ Encuentra una necesidad local real y segura, valídala con investigación ligera
 
 ### Explicación
 
-Entrevista u observa sin recolectar información sensible innecesaria. Separa lo dicho, lo inferido y lo desconocido; no empieces desde una tecnología favorita. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Descubrir un problema significa entender qué intenta hacer una persona y dónde falla su proceso actual, antes de elegir funciones. Para el proyecto final, elige un flujo cotidiano pequeño que puedas observar con seguridad, como reservar equipo compartido o registrar préstamos de una biblioteca comunitaria. No recolectes expedientes privados solo para hacer realista una demostración.
+
+Una entrevista debe explorar comportamiento reciente, no invitar a aceptar tu idea. “¿Usarías un panel con IA?” provoca especulación o cortesía. “Cuéntame la última vez que intentaste pedir algo prestado” revela pasos, demoras, soluciones improvisadas y decisiones. Pregunta qué pasó después, qué información faltaba y cómo supo que había terminado.
+
+Explica el propósito y pide permiso para tomar notas o grabar. Normalmente bastan notas. Usa seudónimo o número de participante, evita detalles identificables y permite no responder. Observar puede revelar diferencias entre relato y práctica, pero nunca entres en cuentas o documentos sin autorización.
+
+Separa evidencia e interpretación. Una cita es lo que alguien dijo; una observación, lo que viste; una interpretación, tu posible explicación. Una conversación sugiere una hipótesis, no demuestra una necesidad universal. Busca patrones, contradicciones y casos donde el método actual funcione bien.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Una persona dice: “Pregunté a tres personas si estaba libre el proyector y aun así llegué después de que alguien se lo llevara”. Tus notas podrían ser:
 
-```text
-Evidence: three learners lose track of application deadlines.
-Inference: reminders may help.
-Unknown: whether they want email or a checklist.
-```
+~~~text
+Observación: consultó disponibilidad mediante tres mensajes separados.
+Declaración: llegó cuando el equipo ya se había prestado.
+Interpretación: falta un registro actualizado único.
+Desconocido: si hubo una reserva o una demora al registrar la salida.
+Siguiente pregunta: ¿cómo marcaron que el equipo ya estaba prestado?
+Resultado deseado: confirmar disponibilidad antes de trasladarse.
+~~~
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+No saltes directamente a un calendario o chatbot. Quizá el problema sea que nadie actualiza a tiempo; una pantalla compleja conservaría la misma incertidumbre. Investiga quién cambia disponibilidad, cuándo y qué ocurre sin internet.
+
+Una definición útil incluye persona, situación, obstáculo y consecuencia. “Quien pide equipo compartido no puede confirmar disponibilidad antes de salir y hace viajes en vano” se puede investigar. “Necesitamos una plataforma moderna” propone una solución sin evidencia.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Reescribe una idea centrada en tecnología como problema y elimina detalles que podrían identificar participantes.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Elige un flujo y escribe cinco preguntas neutrales sobre su última ocurrencia real.
+2. Realiza dos conversaciones breves u observación consentida. Si no tienes participantes, usa un escenario hipotético identificado; no lo presentes como validación real.
+3. Ordena notas en observaciones, citas, interpretaciones y dudas. Elimina datos personales innecesarios.
+4. Escribe una definición del problema y evidencia que podría contradecirla.
+5. Compártela con una persona participante o colega y comprueba si describe el problema con precisión.
 
 ### Comprobación
 
-- Escribir notas sin identificar participantes. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Definir un problema sin esconder una solución. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Puedes relacionar la definición con evidencia concreta, no con una tecnología favorita.
+- Los supuestos y escenarios hipotéticos están identificados.
+- La siguiente investigación resuelve una duda que podría cambiar el alcance.
 <!-- /lesson -->
 
 <!-- lesson:week-11-lesson-02 -->
@@ -215,32 +239,45 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Elige usuario y tarea principal, enumera no-objetivos, define una señal medible y recorta hasta probar el supuesto riesgoso en una semana. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+El alcance convierte un problema en una promesa pequeña que puedes entregar y comprobar. Elige una persona principal y una tarea. Un proyecto final puede demostrar buena ingeniería sin incluir todo lo que tendría un producto comercial. Lo importante es que el recorrido principal funcione con restricciones explícitas.
+
+Escribe el resultado y encuentra el comportamiento mínimo para lograrlo. Para préstamos de equipo, el resultado podría ser reducir viajes en vano; el primer comportamiento, ver disponibilidad y registrar una salida. Recomendaciones, chat, pagos y analítica detallada pueden quedar explícitamente fuera.
+
+Define éxito con denominador y contexto. “Les gusta” no es comprobable. “Cuatro de cinco participantes de práctica encuentran un equipo y registran un préstamo en menos de dos minutos sin ayuda” es observable, pero cinco personas no demuestran que funcione para todas. Elige una prueba pequeña adecuada y reporta límites honestamente.
+
+Los criterios de aceptación describen comportamiento, no tecnologías. Incluye recorrido normal, entrada inválida, datos faltantes, autorización y recuperación. “Usa Next.js” no indica si el préstamo funciona. La tecnología puede ser una restricción; la aceptación debe expresar la tarea y su regla de negocio.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+~~~text
+Persona principal: alguien autenticado que pide equipo.
+Tarea: encontrar un equipo disponible y registrar un préstamo.
+Prueba: completar sin ayuda usando datos ficticios preparados.
+Reglas:
+- Un equipo ocupado no se puede volver a prestar.
+- Dos solicitudes simultáneas no pueden obtener el mismo equipo.
+- Cada persona ve su préstamo, no el historial privado de otra.
+- Un fallo conserva la selección y explica cómo recuperarse.
+Fuera de alcance: pagos, entregas, recomendaciones, mensajería pública.
+~~~
 
-```text
-Now: record an opportunity and deadline
-Next: reminders
-Later: recommendations
-Not now: messaging and payments
-```
+La concurrencia se olvida fácilmente en un boceto. Desactivar un botón no basta: dos navegadores pueden enviar a la vez. La operación de datos debe imponer disponibilidad atómicamente. Descubrirlo ahora ayuda a dedicar tiempo al recorrido correcto en vez de agregar pantallas decorativas.
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+Estima tareas pequeñas y reserva tiempo para integración, pruebas y despliegue. Si el recorrido supera el tiempo disponible, elimina ramas opcionales. No elimines la regla de autorización o consistencia que lo hace confiable. Un flujo más pequeño completo demuestra más que una demostración extensa dependiente de datos preparados.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Recorta una función más, nombra el supuesto más riesgoso y define una señal observable para el alfa.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Define persona, tarea y resultado en tres frases.
+2. Lista diez funciones posibles y conserva solo las necesarias para un recorrido completo. Anota las demás fuera de alcance.
+3. Escribe seis criterios: incluye acción inválida, acción no autorizada y recuperación.
+4. Crea una prueba manual de cinco pasos con datos iniciales y condición de aprobación.
+5. Pide a un colega que cuestione el alcance e identifique el supuesto más riesgoso. Recorta o aclara.
 
 ### Comprobación
 
-- Crear alcance de ahora, después y futuro. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Definir éxito observable en un piloto. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Alguien puede determinar si la tarea pasó sin juzgar gustos visuales.
+- Lo excluido está explicado deliberadamente.
+- El plan contempla error y concurrencia, no solo éxito.
 <!-- /lesson -->
 
 <!-- lesson:week-11-lesson-03 -->
@@ -248,32 +285,48 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Mapea rutas, componentes, datos, autorización, servicios y fallos. Convierte el corte mínimo en issues ordenados con comprobaciones. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+La arquitectura explica dónde viven responsabilidades y cómo cruzan los datos sus límites. Parte del recorrido principal: pantalla, operación del servidor, validación, autorización, cambio en base de datos y respuesta. Un diagrama sirve si aclara quién impone cada regla.
+
+En Next.js, los componentes del navegador manejan interacción pero no son confiables para imponer permisos. Las operaciones del servidor cargan sesión, validan y llaman lógica del dominio. La base impone restricciones que deben mantenerse bajo concurrencia. Adaptadores externos de correo o IA tienen una interfaz pequeña, tiempos máximos y fallos explícitos.
+
+Modela conceptos reales. Un equipo tiene identidad y estado relacionado con disponibilidad; un préstamo conecta equipo y persona con fechas de salida y devolución. Evita duplicar hechos derivados sin reglas de sincronización. Si la disponibilidad depende de préstamos activos, define cómo se representa uno activo.
+
+El backlog debe describir comportamientos completos, no capas aisladas. “Construir todas las tablas” puede dejar días sin nada demostrable. “Prestar un equipo desde la pantalla real y verlo en mis préstamos” atraviesa lo esencial y revela integración temprano. Ordena por dependencia y riesgo.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Una restricción de PostgreSQL evita dos préstamos activos para el mismo equipo. Este fragmento supone que users e items ya existen; adapta tipos a sus claves reales.
 
-```text
-route -> server rule -> projects table
-  |          |-> authorization
-  |-> form validation
-external email: disabled in alpha
-```
+~~~sql
+CREATE TABLE loans (
+  id uuid PRIMARY KEY,
+  item_id uuid NOT NULL REFERENCES items(id),
+  borrower_id text NOT NULL REFERENCES users(id),
+  checked_out_at timestamptz NOT NULL DEFAULT now(),
+  returned_at timestamptz,
+  CHECK (returned_at IS NULL OR returned_at >= checked_out_at)
+);
+CREATE UNIQUE INDEX one_active_loan_per_item
+  ON loans (item_id) WHERE returned_at IS NULL;
+~~~
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+El índice parcial aplica solo a filas activas. Devolver establece returned_at y permite un préstamo futuro conservando historial. El servidor también comprueba que el equipo sea prestable y la sesión tenga permiso. Convierte el conflicto de unicidad en “equipo ya no disponible”, no en caída genérica. No confíes en borrower_id enviado por el navegador.
+
+Divide el primer recorrido: migración y datos ficticios; operación autorizada con manejo de conflictos; pantalla; pruebas de acceso propio/ajeno y concurrencia; despliegue y comprobación. Cada tarea necesita una condición observable.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Agrega estados de fallo y límites de confianza; convierte el corte vertical mínimo en issues ordenados.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Dibuja la solicitud real y marca límites de confianza.
+2. Lista entidades, claves, relaciones e invariantes. Identifica una regla que deba imponer la base.
+3. Escribe la migración con nombres y tipos reales. Aplícala primero en una base desechable.
+4. Crea cinco tareas ordenadas para terminar el recorrido, incluidas pruebas y publicación.
+5. Revisa qué ocurre con base no disponible, duplicado y sesión vencida.
 
 ### Comprobación
 
-- Registrar decisiones y tradeoffs de arquitectura. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Ordenar trabajo por dependencia y riesgo. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Cada regla tiene responsable: respuesta de interfaz, política del servidor o restricción de datos.
+- Otro navegador tampoco puede crear un segundo préstamo activo.
+- El backlog produce un recorrido demostrable antes de funciones secundarias.
 <!-- /lesson -->
 
 <!-- lesson:week-11-lesson-04 -->
@@ -281,32 +334,46 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Construye una ruta delgada con interfaz real, reglas de servidor, persistencia y despliegue. Integra seguido y demuestra desde una cuenta limpia. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Una entrega vertical es un recorrido pequeño que atraviesa interfaz real, servidor, persistencia y aplicación publicada. Sirve para revelar supuestos temprano: nombres de campos, errores, sesiones y restricciones suelen fallar en las conexiones entre capas.
+
+Construye primero el éxito mínimo y después sus fallos importantes. Para préstamos, prepara un equipo, muéstralo, registra su salida, guarda el préstamo y enséñalo a la misma persona tras recargar. Un arreglo local que desaparece al recargar es un prototipo, no evidencia de persistencia. Un servidor simulado sirve para trabajar interfaz, pero debe reemplazarse antes de afirmar que funciona de extremo a extremo.
+
+Integra cambios pequeños con frecuencia. Usa commits enfocados que expliquen por qué cambias algo. Revisa diferencias buscando secretos, archivos accidentales y supuestos. Una bandera puede ocultar interfaz incompleta, pero ocultar un botón no protege su endpoint: autorizar sigue siendo obligatorio.
+
+Entregar incluye una prueba desde cero. Tu navegador puede guardar cookies, caché y configuración que otra persona no tiene. Clona o inicia con instrucciones documentadas, usa una cuenta nueva de prueba y datos ficticios, y verifica sin intervención manual en la base.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Usa este recorrido como registro de depuración:
 
-```text
-issue #1 schema + migration
-issue #2 create form + server validation
-issue #3 owner list + denial test
-issue #4 deploy + smoke check
-```
+~~~text
+Navegador: envía POST de préstamo con itemId únicamente.
+Servidor: la sesión autenticada proporciona borrowerId.
+Validación: itemId tiene formato esperado.
+Política: la cuenta puede pedir ese equipo.
+Base: inserta un préstamo activo; un conflicto se vuelve respuesta recuperable.
+Respuesta: devuelve id de préstamo y datos seguros de presentación.
+Navegador: confirma y actualiza la lista de préstamos propios.
+Recarga: el préstamo persistido sigue visible a su propietario.
+~~~
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+Si se informa éxito pero desaparece al recargar, investiga persistencia. Si dos clics producen dos registros, revisa idempotencia o unicidad. Si otra cuenta lo ve, revisa autorización de lectura, no solo escritura.
+
+Una demostración útil muestra evidencia en los límites pertinentes sin secretos. Registra estado de solicitud, identificador seguro y resultado visible. Evita capturas de conexiones o datos personales reales.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Entrégalos por dependencia, vincula cada criterio con evidencia y demuestra desde una cuenta limpia.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Implementa el recorrido con un equipo ficticio y una cuenta de prueba. No agregues pantallas secundarias todavía.
+2. Recarga, sal y vuelve a entrar. Confirma persistencia y propiedad.
+3. Envía dos veces y casi simultáneamente desde dos cuentas. Debe existir solo el préstamo activo permitido.
+4. Provoca un fallo de red o base en el entorno local. Conserva entrada y muestra recuperación.
+5. Publica con el flujo del proyecto, repite en la URL desplegada y registra commit y resultado.
 
 ### Comprobación
 
-- Desplegar el recorrido principal completo. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Recolectar evidencia de aceptación. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- El recorrido completo funciona tras recargar desde una cuenta de prueba limpia.
+- Duplicados y concurrencia no rompen el invariante.
+- La evidencia identifica una versión real ejecutándose; pruebas locales y simuladas están marcadas como tales.
 <!-- /lesson -->
 
 ## Proyecto semanal

@@ -1,0 +1,289 @@
+[
+  {
+    "id": "odin-javascript-93d2a049",
+    "titleEs": "Cómo trabajar este curso de JavaScript",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "technical-adaptation"
+  },
+  {
+    "id": "odin-javascript-929a6951",
+    "titleEs": "Organizar código con objetos",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-0b148848",
+    "titleEs": "Constructores de objetos y prototipos",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-67338e32",
+    "titleEs": "Proyecto: biblioteca",
+    "week": 5,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-7ff3da5b",
+    "titleEs": "Funciones fábrica y patrón módulo",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-47798979",
+    "titleEs": "Proyecto: gato (Tic Tac Toe)",
+    "week": 5,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-0583cd2d",
+    "titleEs": "Clases",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-ab4b6ccf",
+    "titleEs": "Módulos ES6",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-bec8407e",
+    "titleEs": "npm y las dependencias",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-3d7e10dc",
+    "titleEs": "Webpack: preparar una aplicación para el navegador",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-a1453e8f",
+    "titleEs": "Proyecto: página de restaurante",
+    "week": 5,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-16848c3e",
+    "titleEs": "Mejorar el flujo de Webpack",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-ae0d44bf",
+    "titleEs": "JSON",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-eb45fbdb",
+    "titleEs": "Principios de programación orientada a objetos",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-5934b09a",
+    "titleEs": "Proyecto: lista de tareas",
+    "week": 5,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-a7ae0481",
+    "titleEs": "Linting y formato",
+    "week": 4,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-c95fe496",
+    "titleEs": "Validación de formularios con JavaScript",
+    "week": 4,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-f5c4b108",
+    "titleEs": "ECMAScript y compatibilidad",
+    "week": 4,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-31ab5898",
+    "titleEs": "Código asíncrono",
+    "week": 4,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-8ce12e98",
+    "titleEs": "Trabajar con APIs",
+    "week": 4,
+    "estimatedMinutes": 90,
+    "treatment": "technical-adaptation"
+  },
+  {
+    "id": "odin-javascript-70e6bedf",
+    "titleEs": "Async y await",
+    "week": 4,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-5212a020",
+    "titleEs": "Proyecto: aplicación del clima",
+    "week": 4,
+    "estimatedMinutes": 480,
+    "treatment": "technical-adaptation"
+  },
+  {
+    "id": "odin-javascript-fcb8c8f9",
+    "titleEs": "Fundamentos de pruebas",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-319ce38c",
+    "titleEs": "Proyecto: práctica de pruebas",
+    "week": 5,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-82c12ec2",
+    "titleEs": "Más pruebas: aislamiento, funciones puras y dobles",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "technical-adaptation"
+  },
+  {
+    "id": "odin-javascript-460291a1",
+    "titleEs": "Una introducción breve a ciencias de la computación",
+    "week": 12,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-b56213ff",
+    "titleEs": "Métodos recursivos",
+    "week": 12,
+    "estimatedMinutes": 90,
+    "treatment": "technical-adaptation"
+  },
+  {
+    "id": "odin-javascript-eaf37749",
+    "titleEs": "Proyecto: recursión, Fibonacci y merge sort",
+    "week": 12,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-8eb8c99d",
+    "titleEs": "Complejidad temporal",
+    "week": 12,
+    "estimatedMinutes": 90,
+    "treatment": "technical-adaptation"
+  },
+  {
+    "id": "odin-javascript-759b5d1f",
+    "titleEs": "Complejidad espacial",
+    "week": 12,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-8e973ed3",
+    "titleEs": "Estructuras de datos y algoritmos comunes",
+    "week": 12,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-d2c7044f",
+    "titleEs": "Proyecto: listas enlazadas",
+    "week": 12,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-7ab99479",
+    "titleEs": "Cómo funciona una tabla hash",
+    "week": 12,
+    "estimatedMinutes": 90,
+    "treatment": "technical-adaptation"
+  },
+  {
+    "id": "odin-javascript-90f1f539",
+    "titleEs": "Proyecto: HashMap",
+    "week": 12,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-6932753f",
+    "titleEs": "Proyecto: árboles binarios de búsqueda",
+    "week": 12,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-d4c45487",
+    "titleEs": "Proyecto: el recorrido del caballo",
+    "week": 12,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-52b17564",
+    "titleEs": "Mirar Git con más profundidad",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-7f8c8015",
+    "titleEs": "Trabajar con remotos e historial compartido",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-c8b7ccc1",
+    "titleEs": "Git en trabajo real y contribuciones abiertas",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-62702165",
+    "titleEs": "Proyecto: batalla naval",
+    "week": 5,
+    "estimatedMinutes": 480,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-javascript-4b881c82",
+    "titleEs": "Cierre del curso de JavaScript",
+    "week": 5,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  }
+]

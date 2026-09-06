@@ -146,16 +146,57 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "foundations/html_css/css-foundations",
-      "foundations/html_css/flexbox",
-      "intermediate_html_css/grid"
+      "foundations/html_css/css_foundations/intro_to_css.md",
+      "foundations/html_css/css_foundations/the_cascade.md",
+      "foundations/html_css/css_foundations/inspecting_html_and_css.md",
+      "foundations/html_css/css_foundations/the_box_model.md",
+      "foundations/html_css/css_foundations/block_and_inline.md",
+      "foundations/html_css/flexbox/flexbox_intro.md",
+      "foundations/html_css/flexbox/flexbox_growing_and_shrinking.md",
+      "foundations/html_css/flexbox/flexbox_axes.md",
+      "foundations/html_css/flexbox/flexbox_alignment.md",
+      "foundations/html_css/flexbox/project_landing_page.md",
+      "intermediate_html_css/intermediate_html_concepts/introduction.md",
+      "intermediate_html_css/intermediate_html_concepts/svgs.md",
+      "intermediate_html_css/intermediate_html_concepts/tables.md",
+      "intermediate_html_css/intermediate_css_concepts/default_styles.md",
+      "intermediate_html_css/intermediate_css_concepts/css_units.md",
+      "intermediate_html_css/intermediate_css_concepts/more_text_styles.md",
+      "intermediate_html_css/intermediate_css_concepts/more_css_properties.md",
+      "intermediate_html_css/intermediate_css_concepts/advanced_selectors.md",
+      "intermediate_html_css/intermediate_css_concepts/positioning.md",
+      "intermediate_html_css/intermediate_css_concepts/css_functions.md",
+      "intermediate_html_css/intermediate_css_concepts/custom_properties.md",
+      "intermediate_html_css/intermediate_css_concepts/browser_compatibility.md",
+      "intermediate_html_css/intermediate_css_concepts/frameworks_and_preprocessors.md",
+      "intermediate_html_css/forms/form_basics.md",
+      "intermediate_html_css/forms/form_validations.md",
+      "intermediate_html_css/forms/project_sign_up_form.md",
+      "intermediate_html_css/grid/introduction_to_grid.md",
+      "intermediate_html_css/grid/creating_a_grid.md",
+      "intermediate_html_css/grid/positioning_grid_elements.md",
+      "intermediate_html_css/grid/advanced_grid_properties.md",
+      "intermediate_html_css/grid/using_flexbox_and_grid.md",
+      "intermediate_html_css/grid/project_admin_dashboard.md",
+      "advanced_html_css/accessibility/introduction_to_web_accessibility.md",
+      "advanced_html_css/accessibility/the_web_content_accessibility_guidelines_wcag.md",
+      "advanced_html_css/accessibility/semantic_html.md",
+      "advanced_html_css/accessibility/accessible_colors.md",
+      "advanced_html_css/accessibility/keyboard_navigation.md",
+      "advanced_html_css/accessibility/meaningful_text.md",
+      "advanced_html_css/accessibility/wai_aria.md",
+      "advanced_html_css/accessibility/accessibility_auditing.md",
+      "advanced_html_css/responsive_design/introduction_to_responsive_design.md",
+      "advanced_html_css/responsive_design/natural_responsiveness.md",
+      "advanced_html_css/responsive_design/responsive_images.md",
+      "advanced_html_css/responsive_design/media_queries.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "original-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
+    "editor": "Ruta curriculum adaptation",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -182,31 +223,45 @@ Use CSS deliberately, make layouts adapt from phones to lab monitors, and check 
 
 ### Explanation
 
-Connect stylesheets, inspect computed styles, and reason through selector specificity, inheritance, units, color, and the box model instead of changing values blindly. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+A stylesheet does not execute from top to bottom like a sequence of JavaScript instructions. The browser collects declarations that apply to an element and resolves conflicts through the cascade. Within ordinary author rules in the same layer, selector specificity helps determine which declaration wins; when that is equal, the later declaration wins. Inheritance is a different mechanism: some properties, including text color, can pass from a parent when the child does not have its own winning declaration.
+
+Consider a paragraph with class `notice` inside `main`. The selector `.notice` matches it, and so does `main .notice`. The second selector has an additional type component, so its normal color declaration wins over either of the simple class rules below. Moving a less specific rule to the bottom does not automatically beat a more specific one. Avoid adding `!important` as your first response: inspect why the existing declaration wins and make the intended relationship clear.
+
+Spacing has a separate model. Every box has content, padding, border, and margin. Padding separates content from its border; margin separates the box from neighboring boxes. With the default content-box sizing, a declared width excludes padding and borders. With border-box sizing, they are included. A title touching a card border usually needs interior padding, not extra margin between neighboring cards.
+
+Use relative units deliberately. A rem follows the root font size, while an em can follow the element's font size. A thin border may intentionally use pixels. There is no single unit that solves every layout. Ask what should grow when the text grows, then choose the unit that expresses that relationship. Keep browser font preferences and zoom in mind when testing.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
-
 ```css
+*, *::before, *::after { box-sizing: border-box; }
 .notice { color: navy; }
 main .notice { color: teal; }
 .notice { color: purple; }
+.card {
+  max-width: 36rem;
+  padding: 1.5rem;
+  border: 1px solid #667788;
+  margin-block: 1rem;
+}
+.card p { line-height: 1.5; }
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+Create a paragraph inside a card inside main. Open DevTools, select the paragraph, and inspect both Styles and Computed. Crossed-out declarations show losing rules; the computed color shows the result. Then inspect the card's box diagram. Compare its content edge, padding edge, and border rather than guessing which number controls the visible space.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Predict the final color, verify it in computed styles, then make the first rule win without using important.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Create an HTML page with a main element, two cards, headings, paragraphs, and a link. Connect an external stylesheet and verify its request succeeds.
+2. Apply the example and predict the paragraph color before opening Computed. Disable the winning rule and explain the next winner.
+3. Remove the card padding, observe the crowded border, and restore it. Change the margin separately and explain why it affects a different relationship.
+4. Add a long heading and increase the browser's default text size. Replace any fixed height that clips content with natural height or a justified minimum.
+5. Read [MDN's cascade guide](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance) and [box model guide](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/The_box_model). Record one inspected rule and one measured spacing correction.
 
 ### Checkpoint
 
-- Predict which declaration wins in the cascade. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Diagnose spacing with browser developer tools. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Explain why teal wins in the example and show the competing declarations in DevTools.
+- Identify the content, padding, border, and margin of your card, and demonstrate which change fixes text touching its border.
+- Show that longer text remains visible when the font size increases.
 <!-- /lesson -->
 
 <!-- lesson:week-02-lesson-02 -->
@@ -214,33 +269,45 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Use normal flow first, Flexbox for one-dimensional alignment, and Grid for two-dimensional regions. Prefer content-driven breakpoints over device lists. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Start with normal document flow. Headings and paragraphs already stack vertically, and text wraps into available space. You do not need a positioning system for every element. Introduce Flexbox when a group needs coordinated behavior along one main axis, and Grid when rows and columns need a shared structure.
+
+A row of actions is a useful Flexbox case. Each button has content with a natural size; the group can align items, maintain gaps, and wrap when the combined widths no longer fit. The main axis depends on flex-direction. Justify-content distributes along that axis, while align-items controls the cross axis. If you change direction, do not assume the same property still means horizontal alignment.
+
+A project gallery is a useful Grid case. The container defines column tracks, and its direct children occupy cells. Repeat with auto-fit and minmax can determine how many readable columns fit without naming a particular phone or tablet. A one-fr maximum distributes remaining space across columns. The minimum needs to fit inside the container too: an unconditional 16rem minimum can overflow a narrower embedded panel.
+
+Grid and Flexbox work together. A card can be a Grid item in the gallery while its action row is a Flex container. These relationships exist at different levels. Adding display flex to the card does not change the parent gallery's column definition. Identify the responsible parent before editing a layout rule.
+
+Content introduces constraints. A long URL, a large image, or an unbreakable label can create a minimum size that resists shrinking. Inspect the offending child rather than hiding overflow on the whole page. Use min-width zero where a flexible child needs permission to shrink, and give long text an appropriate wrapping policy. Keep reading order in HTML logical even if Grid could visually move an item elsewhere.
 
 ### Example
-
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
 
 ```css
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1.5rem;
 }
+.card { min-width: 0; padding: 1.5rem; border: 1px solid #9aa7b0; }
+.card h2 { overflow-wrap: anywhere; }
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+.actions a { padding: .75rem 1rem; }
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+The gallery gap separates cards, while card padding separates text from borders. The action gap separates controls. Those values serve different purposes. A larger gallery gap cannot repair text crowded inside a card. Activate the Grid overlay to see tracks and use the box model inspector to see padding.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Add one card with a very long title and explain why the grid wraps without a device-specific breakpoint.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Build a gallery with six cards, each containing a title, description, and two real links. Keep the markup in the intended reading order.
+2. Apply the example and inspect the column tracks. Resize the parent until a column disappears, then explain the minimum and gaps that caused the change.
+3. Replace one title with a long URL and one description with several paragraphs. Confirm every card can grow vertically without clipping.
+4. Add a third action with a long label. Observe how Flexbox wraps the actions independently from the Grid columns.
+5. Compare [Grid layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) with [Flexbox basics](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox). Write one reason for each system used in your page.
 
 ### Checkpoint
 
-- Choose Flexbox or Grid for a stated reason. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Avoid fixed dimensions that clip real content. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Identify which container controls the gallery and which controls the buttons inside each card.
+- Demonstrate an added card and a long title without changing device-specific CSS.
+- Explain why gap, padding, and a fixed height are not interchangeable layout fixes.
 <!-- /lesson -->
 
 <!-- lesson:week-02-lesson-03 -->
@@ -248,30 +315,48 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Start with the smallest useful layout, add media queries when content needs space, and use fluid type, images, and containers that do not create horizontal scrolling. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Responsive implementation means preserving a usable interface as the available space changes. A page can pass at one phone width and one desktop width while failing between them. Test a continuous range and vary content as well as screen size. Zoom and larger text also change how much room the interface effectively has.
+
+Begin with a narrow layout that works in normal flow. Let content containers grow up to a readable maximum, then center them rather than stretching paragraphs across an ultrawide screen. Give images a flexible maximum width and automatic height to preserve their ratio. If an image must fill a fixed visual frame, use object-fit deliberately and verify that the crop preserves its subject.
+
+A media query applies declarations when the viewport satisfies a condition. It does not add specificity or override the cascade automatically. Choose a breakpoint when the actual content needs another arrangement, not because a device list says tablets begin at a particular number. A sidebar can move above the article when there is insufficient room for both. A small action row may simply wrap and need no query.
+
+The viewport meta tag tells a mobile browser to use the device's available CSS width instead of shrinking an artificial desktop-sized viewport. It sets an initial scale; it should not prevent the user from zooming. Frameworks may emit it for you, so inspect the rendered document before adding duplicates.
+
+Forms expose responsive defects quickly. A label may wrap, an error may be several lines long, and a virtual keyboard may reduce the visible area. Keep labels above fields when that avoids squeezed columns, allow controls to fill their container, and avoid fixed heights on error messages. Do not remove instructions on small screens just to make a screenshot fit.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
 
 ```css
 .page { width: min(100% - 2rem, 70rem); margin-inline: auto; }
 img { max-width: 100%; height: auto; }
+.content { display: grid; gap: 2rem; }
+input, textarea, select { max-width: 100%; font: inherit; }
+@media (min-width: 52rem) {
+  .content { grid-template-columns: minmax(0, 2fr) minmax(14rem, 1fr); }
+}
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+Below the breakpoint, the content regions stack in source order. Above it, they form a main column and a secondary column. The minimum sidebar width is a conscious constraint; verify that the remaining main width is still sufficient at the exact moment this layout activates.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Test at 320, 768, and 1280 pixels, and note the first width at which the content—not a device name—needs a change.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Use your gallery and add an introduction, a large image, and a small information-request form with visible labels.
+2. Test at 320, 360, 768, and 1280 CSS pixels. Then drag slowly between those widths and note the first point where content becomes cramped.
+3. Add a media query only for a necessary structural change. Test just below, exactly at, and just above the breakpoint.
+4. Zoom to 200%, paste a long email-shaped sample into the field, and display a multi-line error. Ensure no content disappears behind fixed boxes.
+5. Inspect the largest offending element if horizontal scrolling appears. Fix its width, minimum, or wrapping rule instead of masking the document with overflow hidden.
+6. Follow [MDN's responsive design introduction](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design) and [Chrome device mode](https://developer.chrome.com/docs/devtools/device-mode/). Record screenshots and the content condition that justified your breakpoint.
 
 ### Checkpoint
 
-- Test layouts at multiple viewport widths. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Make images and text scale without hiding information. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Show the same content at narrow, intermediate, and wide widths without lost information.
+- Explain why your breakpoint exists and show behavior immediately around it.
+- Demonstrate that images retain their proportions and the form remains usable with enlarged text.
 <!-- /lesson -->
 
 <!-- lesson:week-02-lesson-04 -->
@@ -279,31 +364,51 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Work through keyboard order, visible focus, headings, labels, alternative text, contrast, reduced motion, and error messages as normal quality checks. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Accessibility is part of whether someone can complete the task. For this week's page, focus on a concrete journey: find the service, understand its conditions, enter a request, and recognize the result or error. A page that looks polished but cannot be operated by keyboard has not completed that journey for everyone.
+
+Use semantic HTML before adding ARIA. A button performs an action; a link with an href navigates. A div styled to resemble a button does not automatically receive focus, respond to Enter or Space, or announce its role. Headings describe the hierarchy, and main and nav identify important regions. Choose heading levels for structure and change their appearance with CSS.
+
+Every input needs a meaningful label. The label's for value should match a unique input id. The name attribute serves a different purpose: it identifies the submitted value. Use email for an email address, tel for a telephone, and text for identifiers that are not quantities. A placeholder is only a disappearing hint and cannot replace a persistent label.
+
+Explain constraints before submission. Required, minlength, and type-based checks can provide a useful first layer, but browser checks are not server protection. A demonstration form should not pretend to create a real account. When an error appears, identify the affected field and how to fix it while preserving what the person entered. Associate additional instructions through aria-describedby when appropriate.
+
+Keyboard users need visible focus and a sensible order. Tab and Shift+Tab should follow the document logically; Enter and Space should activate native controls as expected. Closed panels must not contain invisible focus stops. Preserve the browser's focus indicator or replace it with a clear one, and check that borders or overflow do not clip it.
+
+Color and images also communicate information. Check foreground/background contrast, keep links distinguishable by more than color, and write alternative text according to an image's purpose. Decorative images can have an empty alt. If you add motion, provide a reduced-motion alternative that keeps the information available.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
-
 ```html
-<label for="email">Correo</label>
-<input id="email" name="email" type="email">
-<button>Solicitar información</button>
+<form action="/request" method="post">
+  <label for="email">Email (required)</label>
+  <p id="email-help">We will use this address to reply about the workshop.</p>
+  <input id="email" name="email" type="email" required
+         autocomplete="email" aria-describedby="email-help">
+  <button type="submit">Request workshop information</button>
+</form>
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+```css
+:focus-visible { outline: 3px solid #155b9e; outline-offset: 3px; }
+label, input { display: block; }
+input { width: 100%; padding: .75rem; margin-block: .5rem 1rem; }
+```
+
+The route is illustrative: connect a real handler or clearly label the page as a demonstration. Inspect the field's accessible name and description, then click the label to verify focus moves to the input.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Reach every control with the keyboard, add a visible focus style, and write useful alternative text for one informative image.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Complete the whole page using only Tab, Shift+Tab, Enter, and Space. Record the first missing or confusing focus stop.
+2. Inspect heading order and replace interactive generic containers with appropriate native elements.
+3. Test empty and invalid input, then correct it. Verify helpful feedback and preservation of other values.
+4. Check text and link colors with [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) and review image alternatives using [WebAIM's alt-text guide](https://webaim.org/techniques/alttext).
+5. Run a browser accessibility audit, fix relevant findings, and repeat the manual journey. If available, test with NVDA on Windows or VoiceOver on macOS.
 
 ### Checkpoint
 
-- Complete a keyboard-only task flow. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Record and fix accessibility findings. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Demonstrate the main journey without a mouse, including error recovery.
+- Show a correctly associated label, visible focus, and meaningful image alternative.
+- Distinguish what the automatic audit checked from what you verified manually.
 <!-- /lesson -->
 
 ## Weekly project

@@ -146,17 +146,23 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "foundations/javascript_basics",
-      "foundations/javascript_basics/problem_solving",
-      "foundations/javascript_basics/fundamentals-part-1"
+      "foundations/javascript_basics/variables_and_operators.md",
+      "foundations/javascript_basics/installing_nodejs.md",
+      "foundations/javascript_basics/data_types_and_conditionals.md",
+      "foundations/javascript_basics/javascript_developer_tools.md",
+      "foundations/javascript_basics/function_basics.md",
+      "foundations/javascript_basics/problem_solving.md",
+      "foundations/javascript_basics/understanding_errors.md",
+      "foundations/javascript_basics/project_rock_paper_scissors.md",
+      "foundations/javascript_basics/clean_code.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "translated-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
-    "translator": "AI Builders LATAM Spanish editorial team",
+    "editor": "Ruta curriculum adaptation",
+    "translator": "Adaptación al español asistida por IA",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -183,32 +189,48 @@ Aprende variables, decisiones, ciclos, funciones, arreglos, objetos, depuración
 
 ### Explicación
 
-Explora strings, números, booleanos, null, undefined, comparaciones, condiciones y ciclos. Traza cada cambio en papel antes de preguntarle a la computadora. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+JavaScript evalúa expresiones para producir valores. Un número como 120 representa una cantidad; una cadena como "120" representa texto. Un booleano es true o false y suele responder una pregunta. null expresa un valor vacío elegido de forma explícita; undefined suele indicar que todavía no se asignó o devolvió un valor. Son estados distintos: no los conviertas todos en cero sin decidirlo.
+
+Abre las herramientas de desarrollo del navegador y elige Console. Puedes ejecutar aquí los ejemplos sin instalar bibliotecas. Una declaración da nombre a un valor. Usa const cuando no reasignarás ese nombre y let cuando la variable deba cambiar. Nombrar un valor no convierte texto en número. El operador + suma números pero concatena cadenas: "12" + 3 produce "123". Convierte entradas deliberadamente con Number y rechaza texto vacío antes de convertirlo, porque Number("") produce cero.
+
+Una comparación devuelve un booleano. Prefiere === para igualdad porque compara sin convertir los tipos silenciosamente. Las condiciones if/else eligen qué bloque ejecutar. Operadores como < y >= comparan valores ordenados. En un presupuesto, un saldo negativo puede seleccionar un aviso de exceso; exactamente cero necesita su propio caso límite.
+
+Un ciclo repite instrucciones. Un for tiene inicialización, condición y actualización. Traza las tres partes: si la actualización no acerca el valor a una condición falsa, la ejecución podría no terminar. Un contador que empieza en cero y continúa mientras sea menor que tres recorre 0, 1 y 2, no 3. La sangría ayuda a leer, pero las llaves delimitan los bloques.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+~~~js
+const income = 1200;
+let total = 0;
+for (let day = 0; day < 3; day += 1) {
+  total += 125;
+  console.log(day, total);
+}
+const remaining = income - total;
+if (remaining < 0) {
+  console.log("Presupuesto excedido");
+} else if (remaining === 0) {
+  console.log("Equilibrado");
+} else {
+  console.log("Disponible:", remaining);
+}
+~~~
 
-```js
-const amount = 250;
-const isExpense = true;
-const signedAmount = isExpense ? -amount : amount;
-console.log(signedAmount);
-```
-
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+La secuencia es (0,125), (1,250), (2,375) y después un saldo disponible de 825. total += 125 significa total = total + 125. La variable day existe dentro del ciclo; remaining se calcula después de terminar la repetición. Más adelante usarás una política consistente para redondear dinero: no supongas que toda operación decimal es exacta.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Traza los valores antes de ejecutar; prueba cero, un decimal y un string para ver por qué importa normalizar entradas.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Haz una tabla con day, total antes y total después. Predice las tres repeticiones y luego ejecuta.
+2. Cambia income a 375 y después a 200. Predice qué rama se ejecutará y comprueba el mensaje exacto.
+3. Compara 12 === "12", Number("12") === 12 y Number("no es un número") en expresiones separadas. Explica los resultados.
+4. Escribe un ciclo para sumar cinco pasajes de 20. Cambia la cantidad de pasajes a cero y comprueba que no haya repeticiones.
+5. Registra un error de tipos y otro de límite del ciclo, junto con sus correcciones.
 
 ### Comprobación
 
-- Elegir comparaciones estrictas y condiciones explícitas. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Trazar un ciclo y explicar cuándo termina. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Muestra la secuencia completa y el resultado 825 sin omitir la actualización del contador.
+- Demuestra que saldos negativo, cero y positivo seleccionan ramas distintas.
+- Explica por qué aceptar una entrada vacía como cero debe ser una decisión de validación consciente.
 <!-- /lesson -->
 
 <!-- lesson:week-03-lesson-02 -->
@@ -216,32 +238,49 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Diseña funciones pequeñas con una sola responsabilidad, nombra parámetros por su significado, devuelve resultados y distingue entre declarar e invocar. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Una función agrupa un cálculo para recibir entradas y devolver un resultado. Definirla no ejecuta su cuerpo. Invocarla con paréntesis lo ejecuta con argumentos; los nombres escritos en la declaración son parámetros. En balance(100, 35), los argumentos 100 y 35 se asignan a los parámetros locales income y expenses.
+
+Un contrato útil describe entradas válidas, valor devuelto y comportamiento ante entradas inválidas. En esta lección las entradas son centavos enteros no negativos, no cadenas con formato monetario. Así separas el cálculo de la presentación. El resultado sí puede ser negativo: los gastos pueden superar a los ingresos aunque ninguna entrada sea negativa.
+
+return termina la invocación actual y entrega un valor a quien llamó la función. console.log muestra algo para una persona, pero no devuelve ese valor desde tu función. Una función que termina sin return produce undefined. La diferencia importa cuando otro cálculo depende de su resultado.
+
+Los parámetros y variables declarados dentro tienen alcance local. El código externo no puede leerlos directamente. Evita modificar un total global dentro de una calculadora: entonces la respuesta dependería de llamadas anteriores. Un cálculo puro devuelve el mismo resultado para las mismas entradas y no modifica nada externo. Esto facilita entender llamadas repetidas y pruebas.
+
+Valida en el límite del contrato. Number.isInteger comprueba que el valor sea numérico y entero. Una condición de guarda rechaza entradas incorrectas antes del cálculo normal. throw produce un error en vez de disfrazar una entrada inválida como un resultado válido. Quien llama decidirá cómo mostrarlo; la calculadora no necesita conocer botones ni HTML.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
-
-```js
+~~~js
 function balance(income, expenses) {
-  return income - expenses;
+  if (!Number.isInteger(income) || income < 0) {
+    throw new TypeError("income debe ser centavos enteros no negativos");
+  }
+  if (!Number.isInteger(expenses) || expenses < 0) {
+    throw new TypeError("expenses debe ser centavos enteros no negativos");
+  }
+  const remaining = income - expenses;
+  return remaining;
 }
-const result = balance(1200, 750);
-```
+const first = balance(10000, 3500);
+const second = balance(10000, 3500);
+console.log(first, second); // 6500 6500
+~~~
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+! significa negación; || indica que cualquiera de las condiciones puede provocar el rechazo. La función acepta cero y permite un saldo negativo. Rechaza deliberadamente texto que parece numérico. balance("10000", 3500) lanza un error antes de restar, sin depender de conversión automática.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Escribe el contrato, decide qué hacer con entrada inválida y confirma que dos llamadas iguales devuelven lo mismo.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Escribe el contrato en tres frases antes de copiar código. Indica la unidad: centavos.
+2. Prueba ingresos y gastos iguales, gastos cero y gastos mayores que ingresos. Predice cero, el ingreso original y un resultado negativo.
+3. Prueba una cadena, una fracción y un valor negativo por separado. Lee el error exacto e identifica qué guarda lo produjo.
+4. Quita return temporalmente. Observa undefined en quien llama, restáuralo y explica por qué imprimir remaining dentro no arreglaría el contrato.
+5. Escribe otra función formatBalance para presentación. Mantén el formato fuera de la aritmética.
 
 ### Comprobación
 
-- Escribir funciones con contratos claros. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Explicar el alcance local y evitar variables globales accidentales. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Dos llamadas idénticas devuelven 6500 sin depender de una variable global.
+- Demuestra la diferencia entre un saldo negativo válido y una entrada negativa rechazada.
+- Comprueba que remaining no existe fuera de la función y explica por qué el resultado devuelto sí se puede usar.
 <!-- /lesson -->
 
 <!-- lesson:week-03-lesson-03 -->
@@ -249,30 +288,49 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Representa colecciones ordenadas con arreglos y propiedades nombradas con objetos. Escribe primero en palabras la transformación que buscas. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Un arreglo es una colección ordenada: el primer elemento tiene índice 0 y length indica cuántos contiene. Un objeto reúne propiedades con nombre. Para un presupuesto, el arreglo representa varios movimientos y cada objeto representa uno con identificador, categoría y cantidad en centavos. La elección refleja el problema: una categoría tiene nombre, no posición fija.
+
+Lee una propiedad con punto, como entry.cents. Lee un elemento con corchetes, como entries[0]. Una posición inexistente devuelve undefined. Un arreglo vacío tiene longitud cero; no puedes asumir que entries[0] existe.
+
+Empieza las transformaciones con un ciclo sencillo. Un acumulador reúne un resultado a través de las repeticiones. Cuando puedas trazar el ciclo, usa métodos de arreglos. filter crea un arreglo con los elementos que cumplen una condición; map produce una salida por entrada; find devuelve la primera coincidencia o undefined. reduce combina los elementos en un resultado y debe recibir un valor inicial para definir qué pasa con una colección vacía.
+
+Un callback es una función que entregas a otra función. El método la llama para cada elemento. La forma de flecha entry => entry.cents es una función breve que devuelve esa expresión. Si agregas llaves al cuerpo de una flecha, necesitas return explícito para devolver el resultado.
+
+Un arreglo nuevo no clona automáticamente sus objetos. filter conserva referencias a los objetos originales; modificar una propiedad en un elemento filtrado puede cambiar también el original. Para editar sin mutación, crea un objeto nuevo con propagación de propiedades y el campo actualizado. Conserva identificadores estables para buscarlo después.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+~~~js
+const entries = [
+  { id: "a", category: "food", cents: 8000 },
+  { id: "b", category: "travel", cents: 4000 },
+  { id: "c", category: "food", cents: 2500 },
+];
+let foodTotal = 0;
+for (const entry of entries) {
+  if (entry.category === "food") foodTotal += entry.cents;
+}
+const food = entries.filter(entry => entry.category === "food");
+const total = food.reduce((sum, entry) => sum + entry.cents, 0);
+const labels = food.map(entry => entry.id);
+console.log(foodTotal, total, labels); // 10500 10500 ["a", "c"]
+~~~
 
-```js
-const entries = [{ category: "food", amount: 80 }, { category: "travel", amount: 40 }];
-const total = entries.reduce((sum, entry) => sum + entry.amount, 0);
-```
-
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+for...of entrega cada valor, no el índice. La reducción empieza en cero y suma 8000 y 2500. Buscar un id desconocido con find devuelve undefined: compruébalo antes de leer cents.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Filtra una categoría y calcula su total sin mutar entries; demuestra que el arreglo original no cambió.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Dibuja el arreglo y sus tres objetos. Distingue índice 1, id "b" y categoría "travel".
+2. Traza por separado el ciclo y reduce. Confirma que calculan el mismo total de alimentos.
+3. Filtra una categoría sin movimientos. Confirma que reducir con valor inicial cero devuelve cero.
+4. Busca "b" y después "missing". Para la ausencia, muestra un mensaje explícito.
+5. Crea un arreglo editado con map y un objeto nuevo para "a". Demuestra que cents en el original no cambió.
 
 ### Comprobación
 
-- Seleccionar la estructura que corresponde al problema. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Transformar una colección sin mutaciones innecesarias. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Alimentos suma 10500 centavos, transporte 4000 y una categoría ausente cero.
+- Explica cuándo elegirías map, filter, find o reduce usando ejemplos del presupuesto.
+- Demuestra que una edición inmutable modifica solo el nuevo resultado.
 <!-- /lesson -->
 
 <!-- lesson:week-03-lesson-04 -->
@@ -280,31 +338,57 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Reproduce el problema, formula una hipótesis, inspecciona valores, haz el cambio mínimo y agrega una prueba que detectaría el mismo defecto. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Depurar empieza con una diferencia reproducible entre lo esperado y lo real. Escribe la entrada más pequeña que muestra el problema. Registra resultado esperado, resultado obtenido y pasos exactos. “Está roto” no indica si falla la conversión de entrada, el cálculo o la presentación.
+
+Lee el primer error pertinente y su seguimiento de llamadas. Un error de sintaxis impide interpretar el código; una excepción interrumpe su ejecución; un error lógico puede producir un valor convincente pero incorrecto sin lanzar nada. En este último caso, inspecciona dónde aparece la primera diferencia con tu predicción. Un punto de interrupción pausa la ejecución para revisar variables locales y avanzar instrucción por instrucción.
+
+Las pruebas vuelven repetibles esas expectativas. Incluye entradas normales, límites e inválidas. Una prueba debe fallar cuando el comportamiento es incorrecto y pasar después de repararlo. Verla pasar una vez no demuestra que detecte el defecto importante. Reintroducir temporalmente el error conocido te permite comprobarlo.
+
+Node incluye un ejecutor de pruebas y aserciones: no necesitas instalar un paquete. Guarda el ejemplo como budget.test.mjs y ejecuta node --test budget.test.mjs en la terminal. La extensión .mjs selecciona módulos de JavaScript. import carga test y las aserciones incorporadas. El callback contiene las comprobaciones; assert.equal compara resultado real y esperado, y assert.throws espera que una llamada rechace una entrada inválida.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+~~~js
+import test from "node:test";
+import assert from "node:assert/strict";
 
-```js
-test("empty expenses total zero", () => {
-  expect(sumExpenses([])).toBe(0);
+function sumExpenses(cents) {
+  let total = 0;
+  for (const value of cents) {
+    if (!Number.isInteger(value) || value < 0) {
+      throw new TypeError("gasto inválido");
+    }
+    total += value;
+  }
+  return total;
+}
+test("suma entradas normales y vacías", () => {
+  assert.equal(sumExpenses([125, 250]), 375);
+  assert.equal(sumExpenses([]), 0);
+  assert.equal(sumExpenses([0]), 0);
 });
-```
+test("rechaza texto, fracciones y negativos", () => {
+  for (const value of ["125", 1.5, -1]) {
+    assert.throws(() => sumExpenses([value]), TypeError);
+  }
+});
+~~~
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+La función recibe un arreglo de centavos: las fracciones son inválidas aquí aunque una interfaz acepte importes decimales y los convierta antes. Las pruebas expresan esa decisión de unidad. No necesitan internet ni navegador porque la aritmética es independiente.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Introduce un defecto que devuelva undefined, observa el fallo, corrígelo y conserva la prueba como evidencia.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Ejecuta las pruebas y guarda el resumen. Comprueba que aparezcan ambos nombres.
+2. Cambia total += value por total = value. Ejecuta otra vez e inspecciona el fallo: se esperaba 375 y apareció 250.
+3. Coloca un punto de interrupción en esa línea en una versión del navegador. Recorre los dos valores y explica por qué asignar pierde el primero.
+4. Restaura la suma, repite las pruebas y agrega un caso con tres gastos.
+5. Escribe una nota con entrada, causa, arreglo y prueba de regresión. Comprueba comportamiento público, no detalles internos irrelevantes.
 
 ### Comprobación
 
-- Usar breakpoints y consola con intención. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Probar entradas normales, límites e inválidas. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Muestra una ejecución fallida por el error deliberado y otra correcta después de repararlo.
+- Explica por qué un arreglo vacío suma cero y una cadena se rechaza.
+- Ante un fallo nuevo, identifica el primer valor incorrecto antes de modificar código.
 <!-- /lesson -->
 
 ## Proyecto semanal

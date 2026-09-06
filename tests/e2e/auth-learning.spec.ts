@@ -131,3 +131,30 @@ test("registration, verification, protected learning, sign-out, and recovery", a
   await expect(page.getByRole("heading", { level: 1, name: /Tu equipo y la web/i })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Explicación" })).toBeVisible();
 });
+
+test("full library search and progress stay separate from the guided core", async ({ page }) => {
+  test.setTimeout(60_000);
+  const email = `ruta-library-${Date.now()}@example.test`;
+  const password = "ruta-library-password-123";
+  const registration = await page.request.post("/api/auth/sign-up/email", { data: { name: "Persona biblioteca", email, password, callbackURL: "/dashboard" } });
+  expect(registration.ok()).toBe(true);
+  await page.goto(firstUrl(await latestMessage(email, "Verifica")));
+  await page.goto("/programa/biblioteca");
+  await expect(page.getByRole("heading", { level: 1, name: "Currículo completo" })).toBeVisible();
+  await expect(page.locator(".curriculum-scope")).toContainText("197 materiales");
+  await page.getByLabel("Buscar en el currículo").fill("hash");
+  await page.getByLabel("Materia", { exact: true }).selectOption("javascript");
+  await page.getByRole("button", { name: "Buscar", exact: true }).click();
+  await page.locator('a[href$="/odin-javascript-90f1f539"]').click();
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("HashMap");
+  await expect(page.locator(".lesson-body")).toContainText("set");
+  await page.getByRole("button", { name: "Marcar como completada" }).click();
+  await expect(page.getByRole("button", { name: "Lección completada" })).toBeDisabled();
+  const lessonUrl = page.url();
+  await page.goto("/programa/biblioteca");
+  await expect(page.locator(".curriculum-scope")).toContainText("Completados: 1.");
+  await page.goto("/programa");
+  await expect(page.locator(".program-summary")).toContainText("0%");
+  await page.goto(`${lessonUrl}?idioma=en`);
+  await expect(page.getByText("This page could not be found.")).toBeVisible();
+});

@@ -146,16 +146,23 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "javascript/nodejs/databases",
-      "javascript/nodejs/authentication",
-      "javascript/nodejs/deployment"
+      "databases/databases/databases.md",
+      "databases/databases/databases_and_sql.md",
+      "databases/databases/project_sql_zoo.md",
+      "nodeJS/express/deployment.md",
+      "nodeJS/express/installing_postgresql.md",
+      "nodeJS/express/using_postgresql.md",
+      "nodeJS/express/project_inventory_application.md",
+      "nodeJS/authentication/authentication_basics.md",
+      "nodeJS/authentication/project_members_only.md",
+      "nodeJS/orms/prisma_orm.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "original-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
+    "editor": "Ruta curriculum adaptation",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -182,33 +189,39 @@ Design a PostgreSQL model, evolve it with migrations, authenticate people safely
 
 ### Explanation
 
-Identify entities, stable identifiers, relationships, required fields, uniqueness, and deletion behavior. Normalize repeated facts and use constraints to protect invariants. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Turn the tracker into entities and constraints before writing forms. A project belongs to one user; a task belongs to one project. Store the relationship once rather than repeating a user's email in every task. A primary key identifies a row; a foreign key preserves references. NOT NULL, UNIQUE and CHECK protect domain rules even when two requests arrive together.
+
+The example uses fictional owner IDs to focus on modeling. In the complete application, reference the authentication library's actual user key rather than creating a competing identity table. Decide deletion behavior explicitly: RESTRICT rejects deleting occupied projects, while CASCADE would remove dependent tasks. Neither is universally correct.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
-
 ```sql
-create table projects (
-  id uuid primary key,
-  owner_id uuid not null references users(id),
-  title text not null check (length(title) between 1 and 120)
+CREATE TABLE projects (
+  id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  owner_id TEXT NOT NULL,
+  title TEXT NOT NULL CHECK (char_length(title) BETWEEN 1 AND 120),
+  UNIQUE (owner_id, title)
 );
+CREATE TABLE tasks (
+  id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  project_id INTEGER NOT NULL REFERENCES projects(id) ON DELETE RESTRICT,
+  title TEXT NOT NULL,
+  completed BOOLEAN NOT NULL DEFAULT false
+);
+CREATE INDEX tasks_project_idx ON tasks(project_id);
 ```
-
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Add tasks with a required project relationship and decide explicitly what deletion of a project should do.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Draw users, projects and tasks with relationship cardinalities; choose deletion rules.
+2. Apply the example only to a practice database and insert one project with two tasks.
+3. Attempt duplicate project titles for one owner, a missing project reference and deletion of an occupied project; explain each result.
+4. Adapt owner_id to your actual auth schema and add its foreign key through a migration. Document whether account deletion deletes or anonymizes owned data.
 
 ### Checkpoint
 
-- Draw an entity relationship diagram. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Encode at least three domain rules as constraints. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Demonstrate three database-enforced invariants with failing SQL examples.
+- Explain why uniqueness per owner differs from global title uniqueness.
 <!-- /lesson -->
 
 <!-- lesson:week-08-lesson-02 -->
@@ -216,30 +229,43 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Use parameterized queries through the project data layer, inspect query plans when needed, and write forward migrations that can run against existing data. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+User input is data, never SQL source. Parameters separate those concerns, while ownership conditions ensure the selected rows belong to the session. Selecting by ID alone is not enough for a private tracker. Use a bounded result order and inspect query plans when real measurements reveal a problem.
+
+Migrations are ordered changes committed with source. Test both an empty database and one containing existing rows. Adding a required column without a default can fail on populated data; an expand/backfill/contract sequence lets you preserve records. Reverting application code does not automatically reverse schema or data.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
-
-```sql
-alter table projects add column status text not null default 'active';
-create index projects_owner_idx on projects(owner_id);
+```ts
+// In a server data module with a shared pg pool:
+export async function renameProject(
+  pool: import("pg").Pool,
+  projectId: number,
+  ownerId: string,
+  title: string,
+) {
+  const { rows } = await pool.query(
+    "UPDATE projects SET title = $1 WHERE id = $2 AND owner_id = $3 RETURNING id, title",
+    [title, projectId, ownerId],
+  );
+  return rows[0] ?? null;
+}
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+```sql
+ALTER TABLE projects ADD COLUMN archived BOOLEAN NOT NULL DEFAULT false;
+```
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Apply this after inserting old rows, verify the default, and write the query that benefits from the index.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Create two fictional owners and projects. Call renameProject using the authenticated owner's ID, not a form-supplied value.
+2. Try a quoted title and verify it remains data. Try another owner's project and confirm no row changes.
+3. Save the archived-column migration, apply it to an empty database and an existing-data copy, and compare row counts.
+4. Run EXPLAIN on a frequently used read query and decide whether an index matches its actual predicates.
 
 ### Checkpoint
 
-- Avoid string-built SQL from user input. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Apply and verify a migration on an empty database. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Show a quoted title saved safely and a cross-owner update returning no row.
+- Demonstrate the same migration preserving existing rows and recreating the expected schema from scratch.
 <!-- /lesson -->
 
 <!-- lesson:week-08-lesson-03 -->
@@ -247,31 +273,47 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Understand sessions, password hashing, verification, recovery, and cookie security. For every read or mutation, separately prove who the user is and what they may access. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+Use a maintained authentication library for credential hashing, sessions, verification and recovery. The complete library lesson provides Better Auth setup; finish that first. Do not replace it with a cookie containing a user ID. Authentication identifies a user; authorization checks that user's access to one operation and resource.
+
+Every Server Action and Route Handler is a separate entry point. A protected layout or hidden button cannot secure a direct request. Derive owner identity from a validated session and constrain the database operation. Use a response that does not leak another user's private record when access is denied.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
-
 ```ts
-if (!session) return forbidden();
-const project = await findProject(projectId);
-if (project.ownerId !== session.userId) return forbidden();
-```
+// Example Server Action after Better Auth and a shared pool are configured:
+"use server";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
+import { pool } from "@/lib/db";
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+export async function archiveProject(form: FormData) {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session?.user.emailVerified) return { error: "Verified session required" };
+  const raw = form.get("projectId");
+  if (typeof raw !== "string" || !/^[1-9]\d*$/.test(raw)) {
+    return { error: "Invalid project" };
+  }
+  const id = Number(raw);
+  if (!Number.isSafeInteger(id)) return { error: "Invalid project" };
+  const { rowCount } = await pool.query(
+    "UPDATE projects SET archived = true WHERE id = $1 AND owner_id = $2",
+    [id, session.user.id],
+  );
+  return rowCount === 1 ? { ok: true } : { error: "Project unavailable" };
+}
+```
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Test owner success and non-owner denial for both read and update; do not trust ownerId from the request body.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Configure the library's official Next integration and database migrations. Create two fictional accounts, verify them and sign in separately.
+2. Implement the example using the constrained schema from this week. Confirm a user's own project can be archived.
+3. Submit the second user's project ID while authenticated as the first. Confirm rejection and unchanged data.
+4. Sign out, then retry the operation. Test an expired or reused recovery link through the provider flow and document the observed behavior.
 
 ### Checkpoint
 
-- Distinguish authentication from authorization. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Test an ownership denial as well as success. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Demonstrate authenticated success, cross-owner denial and signed-out denial against the same action.
+- Explain how password hashing, HttpOnly cookies and ownership filters solve different problems.
 <!-- /lesson -->
 
 <!-- lesson:week-08-lesson-04 -->
@@ -279,31 +321,42 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Configure secrets outside Git, run migrations as a release step, expose health checks, read structured logs, back up data, and rehearse rollback instead of treating deploy as the finish line. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+A deploy is complete only when the running app can perform its real data flow. Compilation, process liveness and database readiness are separate signals. Keep secrets in provider configuration, run migrations before dependent code starts, and test sign-in, write and read at the public origin.
+
+Use Railway web and PostgreSQL services or the lab's hosted environment. Personal paid hosting is not required for local completion. A managed database still needs a documented backup policy and a restore exercise. A backup that has never been restored is an assumption, not evidence.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+```ts
+// app/api/ready/route.ts
+import { pool } from "@/lib/db";
 
-```text
-release: migrate -> start -> ready
-verify: health -> primary flow -> logs
-recover: stop -> roll forward or rollback -> verify
+export async function GET() {
+  try {
+    await pool.query("SELECT 1");
+    return Response.json({ ready: true }, {
+      headers: { "Cache-Control": "no-store" },
+    });
+  } catch {
+    return Response.json({ ready: false }, {
+      status: 503,
+      headers: { "Cache-Control": "no-store" },
+    });
+  }
+}
 ```
-
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Run the checklist in a clean environment and record the commit, migration, timestamps, and recovery decision.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Run a production build locally, then start it with the same required environment names as hosting.
+2. Deploy app and database, run migrations, configure HTTPS origin and verify /api/ready plus a real authenticated write/read.
+3. Observe sanitized runtime logs while deliberately sending one invalid request. Record revision, migration and outcome without credentials.
+4. Restore a backup into a separate disposable database and compare expected records. Document code rollback and whether the previous revision supports the current schema.
 
 ### Checkpoint
 
-- Deploy without committing a secret. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Document a health and rollback check. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Show a deployed revision and successful real write/read; a green build alone does not satisfy this check.
+- Provide restore evidence and explain why readiness SELECT 1 does not prove that every required migration is present.
 <!-- /lesson -->
 
 ## Weekly project

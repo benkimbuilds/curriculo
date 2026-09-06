@@ -10,7 +10,7 @@ export default async function DashboardPage() {
   const summary = getStudentProgressSummary(context);
   const currentWeek = summary.currentWeek ?? context.weeks[0];
   const currentLesson = summary.currentLesson ?? currentWeek.modules[0]?.lessons[0];
-  const currentWeekLessons = currentWeek.modules.flatMap((module) => module.lessons);
+  const currentWeekLessons = currentWeek.modules.flatMap((module) => module.lessons).filter((lesson) => lesson.required);
   const nextLessons = currentWeekLessons
     .filter((lesson) => !isLessonComplete(summary.lessonState.get(lesson.id)))
     .slice(0, 3);

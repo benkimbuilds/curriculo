@@ -146,17 +146,36 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "javascript/getting_hired",
-      "javascript/final_project",
-      "javascript/nodejs/deployment"
+      "javascript/computer_science/a_very_brief_intro_to_cs.md",
+      "javascript/computer_science/recursive_methods.md",
+      "javascript/computer_science/project_recursion.md",
+      "javascript/computer_science/time_complexity.md",
+      "javascript/computer_science/space_complexity.md",
+      "javascript/computer_science/common_data_structures_algorithms.md",
+      "javascript/computer_science/project_linked_lists.md",
+      "javascript/computer_science/hash_map_data_structure.md",
+      "javascript/computer_science/project_hash_map.md",
+      "javascript/computer_science/project_binary_search_trees.md",
+      "javascript/computer_science/project_knights_travails.md",
+      "advanced_html_css/responsive_design/project_homepage.md",
+      "react/react_and_the_backend/project_messaging_app.md",
+      "nodeJS/final_project/project_odin_book.md",
+      "nodeJS/final_project/conclusion.md",
+      "getting_hired/applying_and_interviewing/collect_leads.md",
+      "getting_hired/applying_and_interviewing/qualify_leads.md",
+      "getting_hired/applying_and_interviewing/project_resume.md",
+      "getting_hired/applying_and_interviewing/applying.md",
+      "getting_hired/applying_and_interviewing/preparing_to_interview_and_interviewing.md",
+      "getting_hired/applying_and_interviewing/handling_an_offer.md",
+      "getting_hired/applying_and_interviewing/conclusion.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "translated-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
-    "translator": "AI Builders LATAM Spanish editorial team",
+    "editor": "Ruta curriculum adaptation",
+    "translator": "Adaptación al español asistida por IA",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -183,31 +202,48 @@ Termina el alcance más valioso, prueba y observa producción, mejora tu histori
 
 ### Explicación
 
-Prueba reglas, denegaciones, teclado, pantallas angostas, red lenta y recuperación. Elimina secretos y recolección innecesaria antes de pulir detalles. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Una revisión de calidad empieza por las promesas de aceptación. Comprueba primero reglas cuyo fallo perdería trabajo, expondría datos o engañaría a alguien. Para préstamos: disponibilidad, propiedad, persistencia y recuperación. Una captura no demuestra esas propiedades.
+
+Usa niveles distintos para preguntas distintas. Una prueba unitaria comprueba una regla pequeña sin navegador ni base. Una de integración comprueba límites reales, como una restricción de datos u operación autenticada. Una de navegador verifica recorrido, etiquetas, foco y resultado visible. Repetir lo mismo en todos los niveles aporta poco: ubica cada prueba donde se pueda entender su fallo.
+
+Autorizar requiere probar al menos dos cuentas. A puede acceder a su registro y B no, incluso cambiando URL o cuerpo de solicitud directamente. Ocultar enlaces no basta. Prueba sesión vencida, ids mal escritos, registros ausentes y envíos repetidos. Usa datos ficticios y entornos desechables.
+
+Inspecciona teclado, pantalla estrecha, texto ampliado y red lenta. Las etiquetas deben explicar controles, los errores señalar recuperación y el foco permanecer útil. Medir desbordamiento no detecta texto pegado a divisores ni jerarquía ilegible: revisa también las pantallas reales.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Esta prueba de Node expresa una regla de dominio pequeña. Mantén aparte la integración del invariante de un préstamo activo: dos solicitudes concurrentes pueden pasar esta función antes de insertar.
 
-```text
-High: another user can edit a project -> block launch
-Medium: slow empty state -> fix or document
-Low: icon alignment -> defer
-```
+~~~js
+import test from "node:test";
+import assert from "node:assert/strict";
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+function canBorrow({ active, disabled }) {
+  return !active && !disabled;
+}
+test("solo se presta equipo disponible y habilitado", () => {
+  assert.equal(canBorrow({ active: false, disabled: false }), true);
+  assert.equal(canBorrow({ active: true, disabled: false }), false);
+  assert.equal(canBorrow({ active: false, disabled: true }), false);
+  assert.equal(canBorrow({ active: true, disabled: true }), false);
+});
+~~~
+
+La tabla cubre combinaciones. No sustituye validación: rechaza campos ausentes o tipos incorrectos en el límite, en vez de confiar en valores verdaderos o falsos por conversión. Tampoco demuestra propiedad en el servidor; eso necesita pruebas contra la operación real.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Clasifica cinco hallazgos por impacto, probabilidad y recuperación; resuelve seguridad y pérdida antes del detalle visual.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Relaciona cada criterio con una comprobación automatizada o manual útil. Identifica lagunas antes de agregar más.
+2. Ejecuta reglas y rompe una temporalmente para comprobar que su prueba detecta el error.
+3. Prueba lectura y escritura propia/ajena mediante el servidor, no solo la pantalla.
+4. Inspecciona las páginas del recorrido en teléfono y escritorio, con teclado y red lenta.
+5. Revisa historial, registros, formularios y configuración buscando secretos y recolección innecesaria. Elimina campos no usados y documenta pendientes.
 
 ### Comprobación
 
-- Priorizar riesgos de lanzamiento con evidencia. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Cerrar defectos importantes o documentar una limitación segura. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- El informe conecta cada promesa importante con evidencia o un defecto explícito.
+- Otra cuenta no puede leer ni modificar registros privados alterando solicitudes.
+- El recorrido permanece legible y recuperable en pantalla estrecha, con teclado y al fallar la red.
 <!-- /lesson -->
 
 <!-- lesson:week-12-lesson-02 -->
@@ -215,31 +251,50 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Verifica migraciones, salud, logs, límites, errores, respaldos y rollback. Crea una lista que otra persona pueda seguir y confirma el commit desplegado. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Estar listo para producción significa que el sistema desplegado inicia, usa dependencias reales y se recupera de fallos esperados. Compilar no demuestra conexión a base, entrega de correo, ejecución de worker ni recorrido completo.
+
+Separa vida y preparación. Una comprobación de vida indica que el proceso responde; una de preparación verifica dependencias necesarias. En esta plataforma /api/health y /api/ready cumplen funciones diferentes. El worker necesita evidencia propia: proceso activo y trabajo ficticio completado o comprobación apropiada de cola, no solo que cargue la web.
+
+La configuración pertenece al entorno que la usa. URL de base, secretos de autenticación y credenciales de correo quedan en el servidor. Origen público y orígenes confiables deben coincidir con el sitio HTTPS real. Un correo capturado por una bandeja local no demuestra entrega en producción. Si tu proyecto los incluye, verifica registro, confirmación y recuperación con cuentas de prueba autorizadas.
+
+Las migraciones cambian datos persistentes y requieren recuperación. Prefiere cambios compatibles con versiones vieja y nueva durante despliegues progresivos. Respalda antes de cambios riesgosos y practica restaurar en otra base. Ver un respaldo en un panel es evidencia más débil que haber probado una restauración.
+
+Volver a una versión anterior no revierte automáticamente esquema ni datos perdidos. Registra versión previa, pasos y condiciones para regresar. Evita editar migraciones destructivamente para que una aplicación vieja arranque.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Este repositorio dispone de estos comandos para una lista de publicación. Ejecuta operaciones de base solo contra el entorno previsto y verifica su identidad antes.
 
-```text
-commit abc123 -> build -> migration 004 -> deploy
-health 200 -> owner flow pass -> denial pass
-backup created -> rollback rehearsed
-```
+~~~sh
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm content:validate
+pnpm build
+~~~
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+Después de publicar, sustituye el origen de ejemplo por tu sitio real:
+
+~~~sh
+curl --fail --silent --show-error https://your-app.example/api/health
+curl --fail --silent --show-error https://your-app.example/api/ready
+~~~
+
+Una respuesta 200 es solo una comprobación. Confirma commit desplegado, revisa registros seguros de inicio/migración y realiza un recorrido ficticio que escriba y lea datos. Si hay correo y worker, verifícalos explícitamente. No incluyas credenciales en capturas ni informes.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Ejecuta el ensayo, sustituye cada placeholder por evidencia real y pide a otra persona seguir la recuperación.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Lista variables requeridas y servicio responsable sin sus valores secretos.
+2. Aplica migraciones en una base desechable nueva e inicia con instrucciones documentadas.
+3. Publica, comprueba salud/preparación y prueba el recorrido desde una cuenta limpia.
+4. Crea y restaura un respaldo de prueba en otra base desechable. Compara conteos y restricciones esperados.
+5. Ensaya regresar a una versión compatible anterior. Anota qué requiere una decisión independiente sobre datos.
 
 ### Comprobación
 
-- Rastrear producción a un commit inmutable. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Ejecutar y registrar un ejercicio de recuperación. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- El informe distingue compilación, proceso vivo, base utilizable, correo y worker.
+- Registra versión desplegada y recorrido ficticio exitoso.
+- Respaldo y reversión son reproducibles sin asumir que volver código revierte datos.
 <!-- /lesson -->
 
 <!-- lesson:week-12-lesson-03 -->
@@ -247,35 +302,61 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Escribe para quien sólo tiene cinco minutos: problema, usuarios, restricciones, arquitectura, capturas, instalación, pruebas, tradeoffs y aportación personal. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Quien revisa un portafolio puede tener pocos minutos. Ayúdale a entender problema, contribución y evidencia. Una lista de logos dice poco de tus decisiones. Explica por qué elegiste un diseño, qué alternativas consideraste y qué limitación permanece.
+
+Escribe el README para quien nunca vio el proyecto. Empieza por problema y resultado principal, con captura o demostración. Indica si es aprendizaje, adaptación o trabajo usado por personas reales. No inventes usuarios ni atribuyas solo a ti una función de equipo.
+
+Separa evaluación rápida e instalación. Una persona no técnica necesita descripción y demostración; una técnica, prerrequisitos, comandos exactos, nombres de variables, migraciones, datos de prueba y pruebas. Usa valores ficticios para secretos y explica cómo obtener configuración local. Mantén instrucciones sincronizadas con scripts reales.
+
+La documentación debe mostrar límites. Si la IA es una simulación determinista, dilo. Si el correo requiere configuración, adviértelo antes de que prueben recuperación. Si evaluación automática cubre solo algunos criterios, distínguela de revisión humana. La precisión permite valorar el trabajo justamente.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Completa este esquema con hechos del proyecto:
 
-```markdown
-# Project name
-Problem and user
-## Run locally
-## Architecture
-## Tests
-## Tradeoffs
-## Deployed commit
-```
+~~~markdown
+# Préstamo de equipo
+Aplicación pequeña para consultar disponibilidad y registrar préstamos.
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+## Demostración
+URL, captura e instrucciones seguras para probar con datos ficticios.
+
+## Mi contribución
+Rutas, reglas, pruebas y responsabilidades de colaboración.
+
+## Arquitectura
+Navegador -> operación autenticada -> restricciones PostgreSQL.
+
+## Ejecución local
+Versión de runtime, instalación, plantilla de variables,
+migraciones, datos ficticios e inicio.
+
+## Verificación
+Comandos de pruebas y recorrido manual principal.
+
+## Decisiones y límites
+Por qué la base impone un préstamo activo.
+Qué está fuera de alcance y qué falta verificar.
+
+## Créditos
+Currículo, bibliotecas, adaptaciones y licencias aplicables.
+~~~
+
+En un caso de estudio, profundiza en una decisión: dos personas enviaban a la vez; se necesitó una restricción de base; la segunda recibe conflicto recuperable. Incluye prueba o recorrido. Eso explica más que “backend robusto”.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Pide a una persona nueva seguir el README y corrige cada punto donde tenga que adivinar.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Elige dos o tres proyectos que muestren habilidades distintas. Quita enlaces rotos y ejemplos redundantes.
+2. Escribe problema, restricciones, contribución, decisión, evidencia y próxima mejora.
+3. Sigue el README desde un clon limpio sin instrucciones adicionales. Corrige cada paso ausente.
+4. Pide a alguien no técnico que explique el proyecto después de un minuto y a alguien técnico que ejecute una prueba.
+5. Revisa capturas, cuentas ficticias e historial por información privada. Atribuye adaptaciones y colaboraciones.
 
 ### Comprobación
 
-- Hacer reproducible el repositorio desde el README. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Explicar una decisión y una alternativa rechazada. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Quien revisa identifica rápidamente problema y contribución personal.
+- Instalación y verificación funcionan sin pasos manuales ocultos.
+- Afirmaciones sobre IA, publicación, uso y evaluación coinciden con evidencia.
 <!-- /lesson -->
 
 <!-- lesson:week-12-lesson-04 -->
@@ -283,33 +364,44 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Prepara una historia confiable de tres minutos, ten capturas de respaldo, responde con evidencia y reconoce incertidumbre explicando cómo investigarías. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Una demostración es una explicación breve respaldada por un recorrido confiable. Elige un problema y muestra su resolución. Tres minutos no requieren visitar todas las páginas; demasiadas funciones dificultan entender comportamiento principal y decisiones.
+
+Prepara el estado inicial: datos ficticios, cuenta de prueba y equipo disponible. Verifica la versión desplegada. Ten capturas o grabación breve por si falla la red, identificadas como evidencia grabada y no como ejecución en vivo.
+
+Usa contexto, acción, resultado y una decisión técnica. En préstamos, explica los viajes en vano, muestra disponibilidad y salida, y después el préstamo persistido al recargar. Describe brevemente cómo la base impide duplicados simultáneos. Termina con una limitación y próxima mejora a comprobar.
+
+En entrevistas, conecta afirmaciones con evidencia mediante situación, acción y resultado. Distingue tu contribución de la del equipo. Un intento fallido puede explicar aprendizaje, pero dedica más tiempo al razonamiento final y su prueba.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Un guion de tres minutos:
 
-```text
-0:00 problem and user
-0:30 primary journey
-2:00 engineering decision
-2:35 evidence and learning
-2:55 close
-```
+~~~text
+0:00–0:30  Quién pide equipo y qué fallaba antes.
+0:30–1:20  Entrar con cuenta de prueba, elegir equipo y pedirlo.
+1:20–1:45  Recargar y mostrar préstamo persistido.
+1:45–2:20  Explicar prueba concurrente y restricción de préstamo activo.
+2:20–2:45  Mostrar recuperación ante fallo y una limitación.
+2:45–3:00  Plantear siguiente experimento y abrir preguntas.
+~~~
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+Para un ejercicio técnico, reformula entradas y salidas, pregunta restricciones y recorre un ejemplo pequeño. Una solución sencilla correcta es buen inicio; explica complejidad y mejoras después. Si no recuerdas un método, di qué consultarías en documentación en vez de inventarlo.
+
+Prepárate para “¿qué pasa con dos solicitudes simultáneas?”, “¿cómo impides que otra cuenta lea esto?” y “¿qué no cubre la prueba?”. Responde con código y evidencia reales. Reconocer un límite y un plan es mejor que afirmar confiabilidad absoluta.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Practica una vez en vivo y otra con capturas de respaldo; responde un tradeoff y una incógnita con evidencia.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Escribe y ensaya un guion de tres minutos con un recorrido completo real.
+2. Ejecútalo dos veces desde el estado documentado, incluida una sesión nueva.
+3. Practica un fallo de red y pasa a capturas identificadas sin perder la explicación.
+4. Responde cinco preguntas técnicas y resuelve un problema pequeño con un colega. Piensa en voz alta, aclara, prueba y resume.
+5. Registra comentarios sobre claridad, tiempo, afirmaciones sin sustento y dudas. Revisa y ensaya otra vez.
 
 ### Comprobación
 
-- Dar una demo cronometrada con alternativa. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Explicar decisiones sin leer el código en voz alta. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- La demostración cabe en tres minutos y prueba persistencia y regla principal.
+- Existe alternativa identificada honestamente si hace falta.
+- Explicas una decisión entre alternativas, un defecto reparado y una limitación con evidencia.
 <!-- /lesson -->
 
 ## Proyecto semanal

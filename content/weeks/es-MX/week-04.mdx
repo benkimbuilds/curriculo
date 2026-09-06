@@ -146,17 +146,28 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "foundations/javascript_basics/dom_manipulation_and_events",
-      "javascript/asynchronous_javascript_apis",
-      "javascript/organizing_your_javascript_code"
+      "foundations/javascript_basics/loops_and_arrays.md",
+      "foundations/javascript_basics/DOM_manipulation_and_events.md",
+      "foundations/javascript_basics/revisiting_rock_paper_scissors.md",
+      "foundations/javascript_basics/project_etch_a_sketch.md",
+      "foundations/javascript_basics/object_basics.md",
+      "foundations/javascript_basics/project_calculator.md",
+      "foundations/tying_it_all_together/conclusion.md",
+      "javascript/javascript_in_the_real_world/linting.md",
+      "javascript/javascript_in_the_real_world/form_validation_with_javascript.md",
+      "javascript/javascript_in_the_real_world/ecmascript.md",
+      "javascript/asynchronous_javascript_and_apis/asynchronous_code.md",
+      "javascript/asynchronous_javascript_and_apis/working_with_apis.md",
+      "javascript/asynchronous_javascript_and_apis/async_and_await.md",
+      "javascript/asynchronous_javascript_and_apis/project_weather_app.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "translated-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
-    "translator": "AI Builders LATAM Spanish editorial team",
+    "editor": "Ruta curriculum adaptation",
+    "translator": "Adaptación al español asistida por IA",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -183,33 +194,63 @@ Conecta JavaScript con el documento, administra eventos, guarda preferencias peq
 
 ### Explicación
 
-Selecciona elementos estables, escucha eventos intencionales, actualiza sólo la región afectada y delega eventos cuando varios controles comparten comportamiento. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+El navegador interpreta HTML y construye el Modelo de Objetos del Documento, DOM: un árbol de elementos que JavaScript puede consultar y actualizar. Una variable con un elemento guarda una referencia al nodo, no una copia del HTML. document.querySelector devuelve la primera coincidencia o null. Elige identificadores estables para comportamiento, en vez de depender de una posición visual como “el tercer hijo”.
+
+Un evento describe algo que ocurrió, como un clic o un envío de formulario. addEventListener registra un callback; el navegador lo llama después. Entrega la función, no el resultado de ejecutarla al registrar. El objeto de evento describe el objetivo y tiene métodos como preventDefault. Dentro de un formulario un botón envía por defecto: usa type="button" cuando no deba enviarlo.
+
+Muchos eventos se propagan desde su objetivo hacia los elementos superiores. La delegación registra un solo listener en un contenedor estable e identifica el control pertinente. Funciona también con filas agregadas después del registro. El objetivo del clic podría ser un icono dentro del botón; closest es más robusto que asumir que target siempre es el botón.
+
+Trata el texto de la persona como texto. textContent y los nodos de texto muestran caracteres; innerHTML puede interpretar marcas si recibe contenido no confiable. Representa los datos de forma deliberada y actualiza la región afectada para conservar foco y otros estados previsibles.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Guarda este HTML completo y ábrelo en el navegador. El script está después de los elementos para que existan cuando se consultan.
 
-```js
-const list = document.querySelector("[data-list]");
-list.addEventListener("click", (event) => {
-  const button = event.target.closest("button");
-  if (button) button.closest("li").remove();
-});
-```
+~~~html
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<title>Lista de gastos</title>
+<h1>Gastos</h1>
+<ul id="expenses"></ul>
+<p id="status" role="status"></p>
+<script>
+  const list = document.querySelector("#expenses");
+  const status = document.querySelector("#status");
+  const row = document.createElement("li");
+  row.append(document.createTextNode("Autobús — 20 "));
+  const remove = document.createElement("button");
+  remove.type = "button";
+  remove.dataset.action = "remove";
+  remove.textContent = "Eliminar gasto de autobús";
+  row.append(remove);
+  list.append(row);
+  list.addEventListener("click", event => {
+    if (!(event.target instanceof Element)) return;
+    const button = event.target.closest('[data-action="remove"]');
+    if (!button || !list.contains(button)) return;
+    button.closest("li").remove();
+    status.textContent = "Gasto eliminado";
+  });
+</script>
+</html>
+~~~
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+El listener permanece en la lista después de eliminar la fila. En un presupuesto real, elimina también el registro correspondiente de los datos: quitar un nodo no modifica automáticamente los datos guardados.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Agrega elementos después de registrar el listener y comprueba que el mismo manejador funciona con botones nuevos.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Inspecciona li y button en las herramientas de desarrollo. Identifica las líneas que los crearon.
+2. Agrega otra fila después de registrar el listener. Comprueba que su botón funciona por delegación.
+3. Pon un span dentro del botón y haz clic en ese texto. Explica por qué closest sigue encontrando el control.
+4. Muestra una cadena que contenga una etiqueta HTML strong mediante textContent. Comprueba que las marcas sigan visibles en vez de volver negrita la palabra.
+5. Decide dónde irá el foco al eliminar una fila enfocada; implementa y prueba esa decisión.
 
 ### Comprobación
 
-- Conectar eventos sin JavaScript inline. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Conservar el foco después de actualizaciones dinámicas. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Puedes eliminar filas iniciales y agregadas después sin registrar un listener por fila.
+- El texto se muestra literalmente y la eliminación actualiza un mensaje visible.
+- Explica la diferencia entre el estado del DOM y los datos de la aplicación.
 <!-- /lesson -->
 
 <!-- lesson:week-04-lesson-02 -->
@@ -217,31 +258,58 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Lee FormData, normaliza valores, valida cerca del campo y usa localStorage sólo para preferencias pequeñas, no sensibles y eliminables. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Un formulario es un límite estructurado de entrada. Asocia cada control con label, id y name; FormData usa name para recoger valores. Los campos entregan cadenas incluso si usan type="number". Normaliza y valida antes de pasar los datos a la función de cálculo.
+
+Las restricciones nativas como required dan respuesta inmediata, pero JavaScript y el futuro servidor necesitan sus propias reglas. Decide qué significan texto vacío, espacios, fracciones, negativos y cantidades muy grandes. Aquí aceptarás hasta dos decimales y convertirás a centavos enteros. Rechaza otros formatos con un mensaje útil en vez de adivinar la intención.
+
+localStorage guarda cadenas bajo claves para un origen del navegador. JSON.stringify convierte un valor a texto; JSON.parse lo reconstruye, pero no demuestra que tenga la estructura esperada. El almacenamiento puede bloquearse, llenarse o modificarse manualmente: necesitas recuperación en lectura y escritura. Persiste al recargar y puede compartirse entre personas que usan el mismo perfil. Guarda solo datos de práctica no sensibles y permite borrarlos.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Agrega un formulario con id "expense-form", un campo etiquetado con name "amount", un botón de envío y un párrafo con id "feedback". Conecta este script después del HTML.
 
-```js
-const data = new FormData(form);
-const query = String(data.get("query") ?? "").trim();
-const errors = query ? {} : { query: "Write a search term" };
-```
+~~~js
+function parseCents(raw) {
+  const text = raw.trim();
+  if (!/^\d+(\.\d{1,2})?$/.test(text)) {
+    throw new Error("Usa una cantidad no negativa con hasta dos decimales");
+  }
+  const cents = Math.round(Number(text) * 100);
+  if (!Number.isSafeInteger(cents) || cents > 100000000) {
+    throw new Error("La cantidad es demasiado grande");
+  }
+  return cents;
+}
+const form = document.querySelector("#expense-form");
+const feedback = document.querySelector("#feedback");
+form.addEventListener("submit", event => {
+  event.preventDefault();
+  try {
+    const data = new FormData(form);
+    const cents = parseCents(String(data.get("amount") ?? ""));
+    localStorage.setItem("budget-demo:v1", JSON.stringify({ cents }));
+    feedback.textContent = "Guardado solo en este dispositivo";
+  } catch (error) {
+    feedback.textContent = error.message;
+  }
+});
+~~~
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+La expresión regular acepta dígitos y una parte decimal opcional de uno o dos dígitos. Rechaza comas, símbolos de moneda, notación exponencial y negativos. Explica el formato junto al campo. El máximo es una política del ejercicio, no una regla financiera universal. Si falla la escritura, el texto introducido permanece.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Muestra el error junto al campo, enfócalo después del envío y guarda sólo una preferencia visual inofensiva.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Construye el formulario y prueba 0, 12.50, vacío, -1, 1.234 y 1e3.
+2. Recarga y lee la clave dentro de try/catch. Analiza JSON y verifica que cents sea entero no negativo dentro del límite antes de usarlo.
+3. Corrompe manualmente el valor guardado. Muestra una explicación y descarta el registro inválido.
+4. Agrega “Borrar datos locales” para eliminar solo esta clave, sin borrar almacenamiento ajeno.
+5. Prueba almacenamiento bloqueado y confirma que el formulario explique el fallo sin afirmar que guardó.
 
 ### Comprobación
 
-- Separar validación de cambios en el DOM. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Explicar qué información nunca debe ir a localStorage. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- 12.50 se convierte en 1250 centavos; los formatos inválidos no llegan a la calculadora.
+- Un JSON guardado corrupto no rompe la página.
+- La persona puede borrar los datos y entender que están en este navegador.
 <!-- /lesson -->
 
 <!-- lesson:week-04-lesson-03 -->
@@ -249,31 +317,57 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Sigue el trabajo asíncrono desde la solicitud hasta el análisis de la respuesta. Revisa el estado HTTP, limita espera y no confíes ciegamente en el JSON. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+El trabajo de red termina después de la instrucción que lo inicia. Una Promise representa un resultado pendiente que se resolverá o rechazará. async marca una función que devuelve una promesa; await pausa esa función hasta que la promesa termine, sin bloquear toda la interacción del navegador.
+
+fetch devuelve una promesa con un Response. Algunos fallos de red la rechazan, pero respuestas 404 o 500 normalmente la resuelven. Comprueba response.ok antes de interpretar el cuerpo. response.json también es asíncrono y puede fallar si no hay JSON válido. Un JSON válido puede tener estructura incorrecta: valida campos antes de mostrarlos.
+
+Una solicitud puede tardar demasiado o dejar de ser pertinente cuando comienza otra búsqueda. AbortController permite cancelarla mediante signal. Un tiempo máximo limita la espera; cancelar es distinto de “no hay resultados”. Limpia siempre los temporizadores en finally para liberar recursos tanto al fallar como al tener éxito.
+
+Para una práctica gratuita y controlada, sirve un archivo JSON desde tu servidor local existente. Coloca catalog.json en public con [{"id":"bus","name":"Autobús"}]. Visita /catalog.json directamente primero. Abrir desde file:// puede tener restricciones diferentes: usa el servidor HTTP de desarrollo ya configurado.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+~~~js
+async function loadCatalog() {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 5000);
+  try {
+    const response = await fetch("/catalog.json", {
+      signal: controller.signal,
+    });
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    const value = await response.json();
+    if (!Array.isArray(value) || !value.every(item =>
+      item && typeof item.id === "string" &&
+      typeof item.name === "string"
+    )) {
+      throw new Error("Catálogo inválido");
+    }
+    return value;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+loadCatalog()
+  .then(items => console.log(items))
+  .catch(error => console.error("Catálogo no disponible:", error.message));
+~~~
 
-```js
-const response = await fetch(url, { signal });
-if (!response.ok) throw new Error(`HTTP ${response.status}`);
-const payload = await response.json();
-```
-
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+El callback de then recibe el arreglo. catch maneja fallos de red, errores HTTP creados por ti, errores de análisis y de validación. Una interfaz real debe mostrar mensaje y reintento, no únicamente escribir en consola. No interpretes la respuesta como HTML.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Usa una respuesta de prueba sin un campo obligatorio e impide que llegue a la función de renderizado.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Crea catalog.json, comprueba su URL y ejecuta la función. Explica los dos await.
+2. Solicita una ruta inexistente y confirma que el estado HTTP se convierte en error.
+3. Sustituye temporalmente el archivo por JSON mal escrito y después JSON con estructura incorrecta. Comprueba ambos errores.
+4. Usa limitación de velocidad o modo sin conexión en herramientas de desarrollo. Observa espera, cancelación y fallo.
+5. Restaura el archivo válido y reintenta sin recargar toda la página.
 
 ### Comprobación
 
-- Usar async y await con manejo explícito de errores. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Validar los campos utilizados de la respuesta. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Distingues rechazo de red, HTTP no exitoso, JSON mal escrito y datos inválidos.
+- El temporizador se limpia incluso si falla el análisis.
+- El catálogo local funciona sin cuenta de API ni servicio pagado.
 <!-- /lesson -->
 
 <!-- lesson:week-04-lesson-04 -->
@@ -281,33 +375,52 @@ Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia u
 
 ### Explicación
 
-Dibuja las vistas de carga, vacío, parcial, éxito, datos viejos y error antes de programar. Ofrece reintento y conserva información útil cuando convenga. La meta no es memorizar sintaxis aislada, sino poder explicar qué información entra, qué decisión toma cada paso y qué evidencia muestra que funciona. Antes de copiar algo, predice el resultado. Si el resultado cambia, reduce el caso hasta entender una sola causa. Este hábito evita que una persona principiante dependa de ensayo y error y deja una ruta clara para pedir ayuda.
+Una interfaz contiene más que su captura exitosa. Antes de terminar una solicitud puede estar inactiva o cargando; después puede tener resultados, una colección vacía o un error. Si conserva resultados anteriores mientras actualiza, son datos previos hasta que la solicitud nueva termine. Un resultado parcial debe identificarse si el servidor devuelve información incompleta deliberadamente.
+
+Representa estos estados explícitamente en vez de distribuir booleanos independientes. isLoading, hasError y hasResults podrían resultar verdaderos al mismo tiempo con vistas contradictorias. Un valor de estado y sus datos hacen más claras las combinaciones válidas. También necesitas una política de transición: actualizar puede conservar datos útiles; un fallo de primera carga no tiene nada que conservar.
+
+Un resultado vacío significa que la solicitud funcionó y no encontró elementos. No equivale a no poder contactar al servidor. Explica qué ocurrió y qué puede hacer la persona. Conserva sus entradas al reintentar: un fallo de red no debería borrar su trabajo.
+
+Las respuestas pueden llegar fuera de orden. Si empieza A y después B, A podría terminar al final y sobrescribir la selección actual. Cancela solicitudes antiguas o usa una secuencia para ignorar respuestas que dejaron de ser pertinentes.
 
 ### Ejemplo
 
-Lee el ejemplo de arriba hacia abajo y señala qué parte representa entrada, transformación y resultado. Escríbelo a mano en un archivo de práctica: teclear obliga a notar puntuación, nombres y estructura que se pierden al copiar y pegar.
+Usa loadCatalog de la lección anterior. Agrega un párrafo de estado, una lista y un botón Reintentar. La función render actualizará esos elementos con textContent.
 
-```js
-const states = {
-  loading: { message: "Loading…" },
-  empty: { message: "No results" },
-  error: { message: "Try again" }
-};
-```
+~~~js
+let currentRequest = 0;
+let state = { status: "idle", items: [], error: null };
+async function refresh() {
+  const request = ++currentRequest;
+  state = { ...state, status: "loading", error: null };
+  render(state);
+  try {
+    const items = await loadCatalog();
+    if (request !== currentRequest) return;
+    state = { status: items.length ? "success" : "empty", items, error: null };
+  } catch {
+    if (request !== currentRequest) return;
+    state = { ...state, status: "error", error: "No se pudo actualizar" };
+  }
+  render(state);
+}
+~~~
 
-Si te atoras, vuelve al ejemplo mínimo, lee el primer error completo y cambia una sola cosa. Pide ayuda compartiendo la predicción, el resultado real y lo que ya probaste, nunca una contraseña o token.
+La secuencia protege tanto éxito como fallo. Ignorar una respuesta no detiene su tráfico: cancelarla sería otra mejora. render debe identificar como previos los elementos conservados durante loading o error, desactivar únicamente controles que no puedan usarse y permitir reintentar después de fallar.
 
 ### Ejercicio guiado
 
-1. Crea una carpeta o archivo desechable para esta lección y escribe una predicción concreta antes de ejecutar el ejemplo.
-2. Teclea el ejemplo, ejecútalo o revísalo con la herramienta apropiada y compara el resultado con tu predicción. Conserva el mensaje exacto si falla.
-3. Crea controles para forzar cada estado y cambia el error genérico por un mensaje con una acción de recuperación real.
-4. Haz un commit sólo si el cambio pertenece a tu proyecto; si era práctica desechable, resume en tus notas lo que aprendiste.
+1. Dibuja las vistas inactiva, cargando, exitosa, vacía y con error. Incluye mensaje exacto y acción disponible.
+2. Implementa render con región de estado y lista. Usa nodos de texto, no HTML no confiable.
+3. Haz que un cargador de prueba devuelva un arreglo vacío y después lance un error. Verifica que las vistas difieran.
+4. Haz que una primera solicitud termine después de una segunda con datos distintos. Confirma que aparezca solo el resultado nuevo.
+5. Prueba una actualización fallida después de un éxito. Conserva datos previos, identifícalos y prueba Reintentar.
 
 ### Comprobación
 
-- Representar cada estado con datos de ejemplo. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
-- Escribir mensajes de recuperación útiles. Muéstralo con una ejecución, captura, prueba o explicación propia; repetir la frase no cuenta como evidencia.
+- Cada estado tiene mensaje deliberado y siguiente acción razonable.
+- Una respuesta antigua no sobrescribe el resultado ni el error de una nueva.
+- El fallo conserva entradas y datos útiles sin presentarlos como recién obtenidos.
 <!-- /lesson -->
 
 ## Proyecto semanal

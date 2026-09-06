@@ -146,16 +146,29 @@
   "provenance": {
     "adaptedFrom": "The Odin Project",
     "upstreamRepository": "https://github.com/TheOdinProject/curriculum",
-    "upstreamCommit": "8551be4a27227a29d8b87e5bdef542ad25b61f41",
+    "upstreamCommit": "fc46ee82462f9916889030985640805d29837f74",
     "upstreamPaths": [
-      "javascript/typescript",
-      "javascript/react",
-      "javascript/react/states_and_effects"
+      "advanced_html_css/animation/transforms.md",
+      "advanced_html_css/animation/transitions.md",
+      "advanced_html_css/animation/keyframes.md",
+      "react/introduction/how_this_course_will_work.md",
+      "react/introduction/introduction_to_react.md",
+      "react/introduction/setting_up_a_react_environment.md",
+      "react/getting_started_with_react/react_components.md",
+      "react/getting_started_with_react/what_is_jsx.md",
+      "react/getting_started_with_react/passing_data_between_components.md",
+      "react/getting_started_with_react/rendering_techniques.md",
+      "react/getting_started_with_react/keys_in_react.md",
+      "react/states_and_effects/introduction_to_state.md",
+      "react/states_and_effects/more_on_state.md",
+      "react/states_and_effects/project_cv_application.md",
+      "react/states_and_effects/how_to_deal_with_side_effects.md",
+      "react/states_and_effects/project_memory_card.md"
     ],
     "license": "CC BY-NC-SA 4.0",
     "attribution": "Original adaptation informed by The Odin Project, created by Erik Trautman and maintained by The Odin Project community.",
     "adaptationStatus": "original-adaptation",
-    "editor": "AI Builders LATAM curriculum team",
+    "editor": "Ruta curriculum adaptation",
     "reviewedAt": "2026-09-05",
     "externalResources": [
       {
@@ -182,32 +195,48 @@ Use types to make assumptions visible and compose React interfaces from accessib
 
 ### Explanation
 
-Type function inputs and outputs, use unions for real alternatives, narrow unknown data, and let compiler errors expose unclear assumptions instead of silencing them with any. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+TypeScript checks assumptions before JavaScript runs. A type describes the values your program expects, but it does not transform a network response into a valid record. If a server sends a number where you expected a name, the browser still receives that number. This distinction between compile-time checks and runtime validation is the central skill in this lesson.
+
+Model the weekly resource directory with an ID, a name, and a category. A union such as `"health" | "education"` expresses the supported alternatives more precisely than `string`. A function accepting that union cannot accidentally receive `"heath"` without the compiler reporting it. Avoid using `any` to silence that useful feedback. Use `unknown` for data whose shape has not yet been checked: you must narrow it before reading properties or calling methods.
+
+Narrowing follows ordinary JavaScript conditions. Check that a value is an object, exclude `null`, verify required properties exist, then inspect the type and permitted values of each property. Checking only that an `id` exists does not establish that a record has a valid name or category. A type predicate is a promise to the compiler, so an incomplete predicate can manufacture false confidence.
+
+Prefer a parse result when the interface needs to explain failure. A discriminated union lets callers check one field and then access either a validated resource or an error message. This models success and failure as distinct states instead of producing an object whose `resource` and `error` properties might both be missing. Types should describe the domain's real possibilities, including failure, rather than only its happy path.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+Save this in a TypeScript module and call it with valid and invalid objects. Notice that the returned resource is newly constructed from checked fields; unrelated input properties do not automatically become trusted application data.
 
 ```ts
 type Resource = { id: string; name: string; category: "health" | "education" };
-function isResource(value: unknown): value is Resource {
-  return typeof value === "object" && value !== null && "id" in value;
+type ParseResult = { ok: true; resource: Resource } | { ok: false; error: string };
+function parseResource(value: unknown): ParseResult {
+  if (typeof value !== "object" || value === null) return { ok: false, error: "Expected an object" };
+  if (!("id" in value) || typeof value.id !== "string" || !value.id.trim()) return { ok: false, error: "Missing ID" };
+  if (!("name" in value) || typeof value.name !== "string" || !value.name.trim()) return { ok: false, error: "Missing name" };
+  if (!("category" in value) || (value.category !== "health" && value.category !== "education")) return { ok: false, error: "Unknown category" };
+  return { ok: true, resource: { id: value.id, name: value.name.trim(), category: value.category } };
 }
+const result = parseResource({ id: "r1", name: " Library ", category: "education" });
+if (result.ok) console.log(result.resource.name);
+else console.error(result.error);
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+The `ok` field narrows the result in the caller. Inside the successful branch, `resource` is available; in the other branch, `error` is available. Try accessing `resource` before the check and read the compiler's objection. Do not fix it with `as Resource`: an assertion changes what TypeScript believes without validating the runtime value. Likewise, an optional field should be modeled as optional only when the application can genuinely operate without it.
+
+Use inference for obvious local values and explicit types at meaningful boundaries: exported function parameters, domain records, and component props. Run the project's typecheck command after each change. Then run the code too, because a successful typecheck does not test parsing behavior, network failures, or user interaction. This is why both type errors and runtime validation results belong in your debugging process.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Add checks for every field and return a readable validation result instead of using a type assertion.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Define the domain types and predict results for `null`, an empty object, a misspelled category, and a valid resource.
+2. Run the parser for each input. Confirm that an object containing only `id` is rejected, and that a whitespace-only name is rejected.
+3. Add an optional description with a documented maximum length. Decide what an absent description means and reject an invalid provided value.
+4. Build a small table of inputs and expected results, then explain which failures the compiler catches and which require runtime checks.
 
 ### Checkpoint
 
-- Model a small domain without unsafe any. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Narrow external data before use. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Demonstrate that misspelling a category in typed application code causes a compiler error, while an external misspelling returns a readable validation error.
+- Explain why checking only `id`, or writing `as Resource`, cannot establish a valid resource. Show rejection of at least three malformed inputs.
 <!-- /lesson -->
 
 <!-- lesson:week-06-lesson-02 -->
@@ -215,32 +244,47 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Turn a page sketch into components with one responsibility. Pass data down through typed props and keep semantic HTML inside the component boundary. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+A React component describes a piece of interface from its inputs. Start with a page sketch: a resource directory has a heading, filters, a list, and a form for adding a draft. Those responsibilities suggest useful components. A component boundary should make data flow or reuse easier to understand; creating a new file for every span does not automatically improve design.
+
+Props carry data from parent to child. A typed props object makes that contract explicit: the parent must provide a resource with the supported category, and the child can read it without inventing defaults that conceal missing information. Props are read-only inputs. A child that needs to request an action receives a callback instead of modifying the parent's data directly.
+
+JSX is a JavaScript syntax extension, not an HTML string. It requires a single root expression, explicitly closed tags, and React property names such as `className` and `htmlFor`. Use fragments when grouping siblings should not add a layout box. Place dynamic values in braces and use ordinary JavaScript expressions to derive them. A raw object is not meaningful visible content; render its individual fields.
+
+Keep semantic HTML inside component boundaries. A resource card can be an article with a heading; a collection can use a list. The visual shape of a card does not decide whether its outer element must be a button. If clicking a title navigates, render a link; if clicking performs an action, render a button. These choices determine keyboard behavior and accessible names before CSS is applied.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+The list owns iteration while the card owns presentation. Both use the same domain contract, and the key belongs to the element returned directly by `map`.
 
 ```tsx
-type CardProps = { name: string; category: string };
-export function ResourceCard({ name, category }: CardProps) {
-  return <article><h2>{name}</h2><p>{category}</p></article>;
+type Resource = { id: string; name: string; category: "health" | "education" };
+const categoryLabels = { health: "Health", education: "Education" };
+export function ResourceCard({ resource }: { resource: Resource }) {
+  return <article><h2>{resource.name}</h2><p>{categoryLabels[resource.category]}</p></article>;
+}
+export function ResourceList({ resources }: { resources: Resource[] }) {
+  if (resources.length === 0) return <p>No resources match these filters.</p>;
+  return <ul>{resources.map(resource => <li key={resource.id}><ResourceCard resource={resource} /></li>)}</ul>;
 }
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+Keys identify records across insertions, deletions, and reordering. Using an index can attach a row's state to the wrong record when order changes. Generating a random key during render instead tells React that every row is new. Generate IDs when records are created and preserve them with the data. The key is internal to React; a component that needs the ID must receive it separately through its resource prop.
+
+Try rendering the list with two resources, then no resources. The empty message is an intentional state, not a broken layout. Add a resource without changing `ResourceCard` itself: this demonstrates why props and iteration are useful. Then alter the category label in one place and see how all cards use the same translation. Avoid embedding display labels as data identifiers when stable category values are what your logic needs.
+
+In Next.js, a purely presentational card can remain a Server Component. Adding browser state or event handlers requires an appropriate Client Component boundary, not moving the entire application into client code. Keep this lesson focused on component contracts; the routing module explains how pages and layouts compose them.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Render three cards from data using stable resource IDs as keys, then explain why the component boundary is useful.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Sketch the directory and identify components by responsibility. Write each component's inputs before its markup.
+2. Render three fictional resources with stable IDs and semantic headings. Inspect the resulting DOM instead of assuming component names become HTML tags.
+3. Reorder and remove entries, then render an empty list. Confirm that the empty message is visible and no key warnings appear.
+4. Add a callback prop to request selecting a resource. Demonstrate that it runs only after the event, not while rendering.
 
 ### Checkpoint
 
-- Extract components for reuse rather than file size alone. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Render lists with stable domain keys. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Explain what responsibility each component owns and show a second dataset rendered without duplicating component markup.
+- Demonstrate stable identity after reordering and explain why a key is not an ordinary prop available to the child.
 <!-- /lesson -->
 
 <!-- lesson:week-06-lesson-03 -->
@@ -248,30 +292,56 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Store the minimum state needed, derive totals during render, update arrays immutably, and keep form ownership explicit. Move state only as high as sharing requires. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+State stores information a component must remember between renders. In the resource directory, the search text changes as a person types and the resource collection changes when a draft is added. The filtered list can be calculated from those two facts, so it should not be a third independently updated state. Otherwise adding a resource or clearing a filter could leave the list and its count inconsistent.
+
+A state setter requests another render. It does not replace the local variable inside the currently running handler. Treat that variable as a snapshot: a log immediately after calling the setter still sees the current render's value. If the next value depends on the previous one, use a functional updater so multiple queued updates compose correctly. Updaters must remain pure; create IDs before calling them and pass those values into the update.
+
+Inputs can be controlled by React through `value` and `onChange`. Initialize text with an empty string and update it from the event. A controlled field without a change handler is effectively read-only. When several components need the same value, lift its ownership to their nearest useful common ancestor and pass values and callbacks down. Do not synchronize sibling copies with effects.
+
+Objects and arrays in state are immutable snapshots. Use a new array when adding or removing a record, and copy any changed record. A spread copies only one level. This keeps previous renders meaningful and allows React's identity comparison to detect the change. Mutating an array with `push` and returning that same array can leave the interface stale.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+This component derives filtered results and their count from one search state. It also treats a blank result as a normal interface state.
 
 ```tsx
-const [query, setQuery] = useState("");
-const visible = resources.filter((item) => item.name.includes(query));
+"use client";
+import { useState } from "react";
+type Resource = { id: string; name: string };
+export function Directory({ initialResources }: { initialResources: Resource[] }) {
+  const [resources, setResources] = useState(initialResources);
+  const [query, setQuery] = useState("");
+  const visible = resources.filter(item => item.name.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()));
+  function addDraft() {
+    const draft = { id: crypto.randomUUID(), name: "Community library" };
+    setResources(previous => [...previous, draft]);
+  }
+  return <section>
+    <label>Search<input value={query} onChange={event => setQuery(event.target.value)} /></label>
+    <p>{visible.length} results</p>
+    <button onClick={addDraft}>Add example draft</button>
+    {visible.length === 0 ? <p>No matching resources.</p> : <ul>{visible.map(item => <li key={item.id}>{item.name}</li>)}</ul>}
+  </section>;
+}
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+Trace one keystroke: the browser dispatches change, the handler reads its value, the setter schedules a render, the filter runs with the new query, and React commits the changed list and count. No effect is necessary because nothing external is being synchronized. Adding a draft follows the same chain with a new resources array. A draft that does not match the active query correctly remains hidden until the query changes.
+
+The initializer is used when the component instance mounts. Later changes to `initialResources` do not automatically replace local state. Decide explicitly whether a component owns an editable copy or should render incoming props directly; silently mixing those models causes surprising resets. This example intentionally owns a local draft collection and does not persist it after refresh.
+
+When you introduce the real add form, separate its temporary text from a validated resource. Submitting invalid input should show an error and preserve the draft for correction. Successful submission should add one record and clear the relevant fields. These observable transitions form the basis of the next lesson's tests.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Remove any separate visibleResources state, add case-insensitive search, and trace one input event to the displayed list.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Run the directory with three resources, type a matching query, clear it, and try a query with no results. Predict each count before checking it.
+2. Add a category filter without introducing a separate filtered-results state. Derive both filters from the same collection.
+3. Implement removal with `filter` and editing with `map`, preserving stable IDs and unmodified records.
+4. Add a validated form and explain its success and failure transitions. Confirm that failed validation does not discard typed input.
 
 ### Checkpoint
 
-- Avoid duplicated or contradictory state. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Trace an event from control to state to output. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Show that adding or removing a record updates both the filtered list and count without synchronization effects.
+- Trace one input event through a render, and explain why the setter does not change the current handler's snapshot immediately.
 <!-- /lesson -->
 
 <!-- lesson:week-06-lesson-04 -->
@@ -279,30 +349,57 @@ If you get stuck, return to the smallest example, read the first complete error,
 
 ### Explanation
 
-Test through roles, names, and visible results as a learner would. Cover an important interaction and a validation failure rather than snapshots of markup. The goal is not to memorize isolated syntax. You should be able to name the input, the decision made at each step, and the evidence that shows the result is correct. Predict before copying. If reality differs, reduce the case until one cause is understandable. This habit replaces random trial and error with a repeatable way to learn and ask for help.
+A useful component test describes something a person can accomplish: search for a resource, add a valid draft, or recover from invalid input. It should continue to pass when you rename state variables or split a component without changing behavior. Tests that inspect private state instead of the interface make refactoring difficult and can miss broken controls.
+
+React Testing Library renders components into a test DOM. Vitest executes tests and provides assertions; jsdom supplies the simulated DOM; jest-dom adds readable DOM assertions; user-event simulates interaction sequences. This is not a visual browser: it cannot guarantee correct spacing or verify every navigation behavior. Use browser checks for layout and complete route journeys.
+
+Query by role and accessible name whenever possible. A labeled input can be found by its label, and a button by its visible purpose. This makes a missing label a useful test failure instead of bypassing the problem with a CSS selector. `getBy` expects an element now, `queryBy` is useful for asserting absence, and `findBy` waits asynchronously for an element. Choose the query based on behavior, not to make a flaky test stop failing.
+
+Each test should arrange its own data and component, act through a user interaction, and assert the resulting state of the interface. Create `userEvent.setup()` inside the test, before rendering, and await interactions. Ensure RTL cleanup runs after every test so one instance does not leak into another. If your runner does not expose automatic cleanup hooks globally, register `afterEach(cleanup)` in setup explicitly.
 
 ### Example
 
-Read the example from top to bottom and point out the input, transformation, and result. Type it into a scratch file instead of pasting it; typing makes punctuation, names, and structure visible.
+This example targets the Directory from the previous lesson. Its initial data makes both the positive and negative assertion meaningful: the library exists before filtering and disappears afterward.
 
 ```tsx
-await user.type(screen.getByLabelText(/buscar/i), "salud");
-expect(screen.getByRole("heading", { name: /clínica/i })).toBeVisible();
+import { it, expect } from "vitest";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { Directory } from "./Directory";
+
+it("filters resources and restores them when cleared", async () => {
+  const user = userEvent.setup();
+  render(<Directory initialResources={[
+    { id: "clinic", name: "Community clinic" },
+    { id: "library", name: "Library" },
+  ]} />);
+  const search = screen.getByRole("textbox", { name: "Search" });
+  await user.type(search, "CLINIC");
+  expect(screen.getByText("Community clinic")).toBeVisible();
+  expect(screen.queryByText("Library")).not.toBeInTheDocument();
+  expect(screen.getByText("1 results")).toBeVisible();
+  await user.clear(search);
+  expect(screen.getByText("Library")).toBeVisible();
+});
 ```
 
-If you get stuck, return to the smallest example, read the first complete error, and change one thing. Ask for help with your prediction, the actual result, and what you tried—never with a password or token.
+The test checks case-insensitive behavior and recovery, not just whether an input exists. If you replace the implementation with a nonfunctional textbox, it fails. If you rename `query` internally, it still passes. This is the difference between a behavior contract and a mirror of the implementation.
+
+For the add form, submit whitespace and assert that a readable error appears, no new resource is added, and the draft remains available for correction. Then correct the value and submit successfully. Do not make a real network request unless the test intentionally verifies that integration; simulate an external response at its boundary when needed. A mock callback can verify what the component requested, but it cannot prove that the real server persists the record.
+
+Snapshots compare serialized markup with a saved version. They may be useful for a small stable output, but they do not exercise a click or validate a rule. Updating snapshots blindly can approve a regression. Keep failure messages specific enough to explain the broken user task, and read the rendered DOM when a query fails before weakening the assertion.
 
 ### Guided exercise
 
-1. Create a disposable folder or file for this lesson and write one concrete prediction before running the example.
-2. Type the example, run or inspect it with the appropriate tool, and compare the result with your prediction. Preserve the exact message if it fails.
-3. Add an invalid form submission and assert the accessible error instead of inspecting component state.
-4. Commit only when the change belongs in your project; for disposable practice, record the lesson in your learning notes instead.
+1. Configure the existing project's Vitest and RTL setup, including jsdom, jest-dom matchers, and cleanup. Run one minimal rendering test first.
+2. Implement the search journey above, then deliberately remove case normalization and confirm that the test detects the regression before restoring it.
+3. Add invalid and successful submission tests using labels and buttons, checking both visible feedback and resulting resources.
+4. Run the complete component suite and manually check the same journey in a real browser at a narrow width. Record what each kind of verification can establish.
 
 ### Checkpoint
 
-- Query components by accessible role. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
-- Test a complete user interaction. Show this with a run, capture, test, or explanation in your own words; repeating the sentence is not evidence.
+- Show a passing search-and-clear journey and demonstrate that a deliberately broken filter causes it to fail.
+- Show a validation failure test that preserves typed data, and explain why a snapshot alone would not establish that behavior.
 <!-- /lesson -->
 
 ## Weekly project

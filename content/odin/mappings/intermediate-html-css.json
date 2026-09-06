@@ -1,0 +1,156 @@
+[
+  {
+    "id": "odin-intermediate-html-css-c1209191",
+    "titleEs": "Introducción a HTML y CSS intermedios",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-30c64bee",
+    "titleEs": "Gráficos SVG",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-92707e2c",
+    "titleEs": "Tablas HTML",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-d490e207",
+    "titleEs": "Estilos predeterminados del navegador",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-2a114e3d",
+    "titleEs": "Unidades CSS",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-b29df942",
+    "titleEs": "Más estilos de texto",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-a5db6aab",
+    "titleEs": "Más propiedades CSS",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-cc9598a9",
+    "titleEs": "Selectores avanzados",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-68b722bd",
+    "titleEs": "Posicionamiento CSS",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-65a64b3a",
+    "titleEs": "Funciones CSS",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-b11ce418",
+    "titleEs": "Propiedades personalizadas",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-cc398a00",
+    "titleEs": "Compatibilidad entre navegadores",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-6bcc2cd9",
+    "titleEs": "Frameworks y preprocesadores CSS",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-6029885a",
+    "titleEs": "Fundamentos de formularios",
+    "week": 2,
+    "estimatedMinutes": 180,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-969ae828",
+    "titleEs": "Validación de formularios",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-91ab41f2",
+    "titleEs": "Proyecto: formulario de registro",
+    "week": 2,
+    "estimatedMinutes": 600,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-589f2842",
+    "titleEs": "Introducción a Grid",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-5c95b05e",
+    "titleEs": "Crear una cuadrícula",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-48813f31",
+    "titleEs": "Colocar elementos en Grid",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-4247602b",
+    "titleEs": "Propiedades avanzadas de Grid",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-eee5a7e7",
+    "titleEs": "Combinar Flexbox y Grid",
+    "week": 2,
+    "estimatedMinutes": 90,
+    "treatment": "translation"
+  },
+  {
+    "id": "odin-intermediate-html-css-c35f0b7b",
+    "titleEs": "Proyecto: panel administrativo",
+    "week": 2,
+    "estimatedMinutes": 600,
+    "treatment": "translation"
+  }
+]
