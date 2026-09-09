@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { ToastProvider } from "@/components/toast-provider";
 import "./globals.css";
 import "./aibuilders-theme.css";
 
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html data-scroll-behavior="smooth" lang="es-MX">
-      <body>{children}</body>
+      <body>{children}<ToastProvider /></body>
     </html>
   );
 }

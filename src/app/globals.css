@@ -168,6 +168,10 @@ textarea { resize: vertical; }
 input::placeholder, textarea::placeholder { color: #9aa39f; }
 .form-stack input:focus, .form-stack textarea:focus, .feedback-form textarea:focus { border-color: var(--ink); outline: 3px solid rgb(23 63 53 / 9%); }
 .label-row { align-items: center; display: flex; justify-content: space-between; }
+.password-field { display: block; position: relative; }
+.password-field input { padding-right: 46px; width: 100%; }
+.password-field__toggle { align-items: center; background: transparent; border: 0; border-radius: 8px; color: var(--muted); display: inline-flex; height: 38px; justify-content: center; padding: 0; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); width: 38px; }
+.password-field__toggle:hover { color: var(--ink-deep); }
 .label-row a, .auth-footer a, .check-label a, .auth-demo-link a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 .check-label { align-items: flex-start !important; flex-direction: row !important; font-weight: 450 !important; line-height: 1.55; }
 .check-label input { flex: 0 0 auto; height: 17px; min-height: 0; margin-top: 2px; width: 17px; }
