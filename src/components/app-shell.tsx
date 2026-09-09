@@ -4,7 +4,10 @@ import { AccountMenu } from "./auth/account-menu";
 import { BookOpen, Grid, Home, People, Shield, User } from "./icons";
 import { Logo } from "./logo";
 import { ProgramNavigation } from "./program-navigation";
+import { StudentSidebar } from "./student-sidebar";
 import { listCurriculumWeeks } from "@/modules/curriculum";
+import { getCurrentSession } from "@/modules/auth/session";
+import { listCompletedWeekNumbers } from "@/app/programa/student-data";
 
 type ShellRole = "student" | "staff" | "admin";
 
@@ -22,26 +25,28 @@ const staffLinks = [
   { href: "/admin/curriculo", label: "Currículo", icon: BookOpen },
 ];
 
-export function AppShell({ children, role = "student", userName }: { children: ReactNode; role?: ShellRole; userName?: string }) {
+export async function AppShell({ children, role = "student", userName }: { children: ReactNode; role?: ShellRole; userName?: string }) {
   const links = role === "student" ? studentLinks : staffLinks;
-  const weeks = role === "student" ? listCurriculumWeeks().map(({ week, title }) => ({ week, title })) : [];
+  const currentSession = role === "student" ? await getCurrentSession() : null;
+  const completedWeeks = currentSession ? new Set(await listCompletedWeekNumbers(currentSession.user.id)) : new Set<number>();
+  const weeks = role === "student" ? listCurriculumWeeks().map(({ week, title }) => ({ week, title, completed: completedWeeks.has(week) })) : [];
   const roleLabel = role === "student" ? "Estudiante" : role === "staff" ? "Facilitadora" : "Administración";
   const displayName = userName ?? (role === "student" ? "Mi cuenta" : "Equipo");
   const initials = displayName.split(/\s+/).map((part) => part[0]).join("").slice(0, 2).toUpperCase();
   return (
     <div className="app-frame">
       <a className="skip-link" href="#contenido">Saltar al contenido</a>
-      <aside className="sidebar">
+      {role === "student" ? <StudentSidebar initials={initials} userName={displayName} weeks={weeks} /> : <aside className="sidebar">
         <div className="sidebar__top"><Logo /></div>
-        <nav aria-label={role === "student" ? "Área de estudiante" : "Área de equipo"} className="sidebar__nav">
+        <nav aria-label="Área de equipo" className="sidebar__nav">
           {links.map(({ href, label, icon: Icon }) => href === "/programa" ? <ProgramNavigation key={href} weeks={weeks} /> : <Link href={href} key={href}><Icon /> <span>{label}</span></Link>)}
         </nav>
         <div className="sidebar__profile">
           <span className="avatar avatar--green avatar--sm">{initials}</span>
           <span><strong>{displayName}</strong><small>{roleLabel}</small></span>
-          <AccountMenu showProfile={role === "student"} />
+          <AccountMenu showProfile={false} />
         </div>
-      </aside>
+      </aside>}
       <header className="mobile-app-header"><Logo /><details><summary aria-label="Abrir navegación">Menú</summary><nav>{links.map(({ href, label }) => href === "/programa" ? <ProgramNavigation key={href} weeks={weeks} /> : <Link href={href} key={href}>{label}</Link>)}<AccountMenu showProfile={role === "student"} /></nav></details></header>
       <main className="app-main" id="contenido">{children}</main>
     </div>

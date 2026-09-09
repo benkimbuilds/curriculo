@@ -181,9 +181,12 @@ input::placeholder, textarea::placeholder { color: #9aa39f; }
 .form-success svg { flex: 0 0 auto; height: 17px; width: 17px; }
 .form-error { background: #f8e2df; border: 1px solid #e8c2bc; border-radius: 8px; color: #8f3d35; font-size: 12px; line-height: 1.5; margin: 0; padding: 11px; }
 /* Signed-in shell */
-.app-frame { background: #f8f6ef; display: grid; grid-template-columns: 252px minmax(0, 1fr); min-height: 100vh; }
-.sidebar { background: var(--paper); border-right: 1px solid var(--line); display: flex; flex-direction: column; height: 100vh; padding: 26px 18px 18px; position: sticky; top: 0; }
+.app-frame { background: #f8f6ef; display: grid; grid-template-columns: max-content minmax(0, 1fr); min-height: 100vh; }
+.sidebar { background: var(--paper); border-right: 1px solid var(--line); display: flex; flex-direction: column; height: 100vh; padding: 26px 18px 18px; position: sticky; top: 0; width: 224px; }
 .sidebar__top { padding: 0 8px 30px; }
+.sidebar__favicon-link { display: none; }
+.sidebar__collapse-toggle { align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: 50%; box-shadow: 0 3px 10px rgb(0 0 0 / 8%); color: var(--muted); display: inline-flex; height: 32px; justify-content: center; padding: 0; position: absolute; right: -16px; top: 30px; transition: background .15s ease, border-color .15s ease, color .15s ease, transform .15s ease; width: 32px; z-index: 2; }
+.sidebar__collapse-toggle:hover, .sidebar__collapse-toggle:focus-visible { background: var(--ink-deep); border-color: var(--ink-deep); color: white; outline: none; transform: scale(1.08); }
 .sidebar__nav { display: flex; flex-direction: column; gap: 6px; }
 .sidebar__nav a { align-items: center; border-radius: 9px; color: #52665f; display: flex; font-size: 13px; font-weight: 680; gap: 11px; padding: 11px 12px; }
 .sidebar__nav a:hover { background: #f0ecdf; color: var(--ink); }
@@ -197,6 +200,16 @@ input::placeholder, textarea::placeholder { color: #9aa39f; }
 .sidebar__profile > span:nth-child(2) { display: flex; flex-direction: column; min-width: 0; }
 .sidebar__profile strong { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sidebar__profile small { color: var(--muted); font-size: 9px; }
+.sidebar.is-collapsed { padding-inline: 10px; width: 72px; }
+.sidebar.is-collapsed .sidebar__top { height: 26px; padding: 0 0 38px; text-align: center; }
+.sidebar.is-collapsed .sidebar__top .logo, .sidebar.is-collapsed .sidebar__nav a span, .sidebar.is-collapsed .sidebar__profile > span:nth-child(2) { display: none; }
+.sidebar.is-collapsed .sidebar__favicon-link { display: inline-flex; }
+.sidebar.is-collapsed .sidebar__nav a { justify-content: center; padding-inline: 0; }
+.sidebar.is-collapsed .sidebar__nav > a > svg { flex-basis: 21px; height: 21px; width: 21px; }
+.sidebar.is-collapsed .sidebar__profile { justify-content: center; padding-inline: 0; }
+.sidebar.is-collapsed .sidebar__profile .account-menu { margin-left: 0; }
+.sidebar.is-collapsed .sidebar__profile > .avatar { display: none; }
+.sidebar.is-collapsed .account-menu__trigger svg { height: 21px; width: 21px; }
 .icon-button { background: none; border: 0; color: var(--muted); margin-left: auto; }
 .mobile-app-header { display: none; }
 .app-main { min-width: 0; }
@@ -554,8 +567,8 @@ kbd { background: #f2f0e9; border: 1px solid #d1cec5; border-bottom-width: 2px; 
 @media (max-width: 1050px) {
   .hero__grid { gap: 42px; }
   .weeks-grid, .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .app-frame { grid-template-columns: 220px minmax(0, 1fr); }
-  .sidebar { padding-inline: 13px; }
+  .sidebar { padding-inline: 13px; width: 220px; }
+  .sidebar.is-collapsed { width: 68px; }
   .week-preview { grid-template-columns: 50px 1fr; }.week-preview__project { display: none; }
   .moderation-list { grid-template-columns: 1fr; }
   .cohort-table__head, .cohort-table__row { grid-template-columns: 1.3fr .6fr .8fr 1.1fr 25px; }.cohort-table__head span:nth-child(5), .cohort-table__row > .status { display: none; }
@@ -679,7 +692,7 @@ body { background: var(--paper); color: var(--ink-deep); }
 .button { border-radius: 2px; box-shadow: none !important; transition: background .15s ease, color .15s ease; }
 .button:hover { transform: none; }
 .panel, .metric-card, .program-summary, .week-card, .week-hero, .project-header, .project-showcase, .tip-card, .continue-card, .streak { border-radius: 2px; box-shadow: none; }
-.app-frame { background: var(--paper); grid-template-columns: 224px minmax(0, 1fr); }
+.app-frame { background: var(--paper); grid-template-columns: max-content minmax(0, 1fr); }
 .sidebar { background: #ebe7dc; padding: 24px 16px 18px; }
 .sidebar__nav { border-top: 1px solid var(--line); gap: 0; }
 .sidebar__nav a { border-bottom: 1px solid var(--line); border-radius: 0; font-weight: 550; padding: 13px 7px; }
@@ -855,6 +868,9 @@ input:not([type=checkbox]):not([type=radio]), select, textarea { min-width: 0; m
 .switch span { flex-shrink: 0; }
 .account-menu { margin-left: auto; position: relative; }
 .account-menu summary { align-items: center; display: flex; justify-content: center; list-style: none; min-width: 36px; min-height: 36px; cursor: pointer; }
+.account-menu__trigger { background: transparent; border: 1px solid transparent; border-radius: 50%; color: var(--muted); padding: 0; transition: background .15s ease, border-color .15s ease, color .15s ease; }
+.account-menu__trigger:hover, .account-menu[open] .account-menu__trigger { background: white; border-color: var(--line); color: var(--ink-deep); }
+.account-menu__trigger:focus-visible { border-color: var(--ink-deep); outline: 2px solid rgb(17 17 17 / 14%); outline-offset: 2px; }
 .account-menu > div { background: var(--paper); border: 1px solid var(--line); box-shadow: 0 8px 24px rgb(23 35 30 / 10%); bottom: calc(100% + 8px); display: grid; gap: 4px; min-width: 180px; padding: 8px; position: absolute; right: 0; z-index: 60; }
 .account-menu > div a, .account-menu > div button { display: block; background: transparent; border: 0; font-size: 13px; line-height: 1.5; padding: 12px; text-align: left; }
 .account-menu > div a:hover, .account-menu > div button:hover { background: var(--cream); }

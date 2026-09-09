@@ -37,6 +37,20 @@ async function findActiveEnrollment(userId: string) {
     ?? records[0];
 }
 
+export async function listCompletedWeekNumbers(userId: string): Promise<number[]> {
+  const enrollmentWithVersion = await findActiveEnrollment(userId);
+  if (!enrollmentWithVersion) return [];
+  const records = await db
+    .select({ weekId: weekProgress.weekId })
+    .from(weekProgress)
+    .where(and(
+      eq(weekProgress.enrollmentId, enrollmentWithVersion.enrollment.id),
+      eq(weekProgress.contentVersion, enrollmentWithVersion.contentVersion),
+      eq(weekProgress.state, "completed"),
+    ));
+  return records.map(({ weekId }) => Number(weekId.match(/week-(\d+)/)?.[1])).filter(Number.isInteger);
+}
+
 export async function loadStudentContext(returnTo: string): Promise<StudentContext> {
   const currentSession = await getCurrentSession();
   if (!currentSession) redirect(`/iniciar-sesion?next=${encodeURIComponent(returnTo)}`);
