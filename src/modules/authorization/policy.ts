@@ -12,6 +12,7 @@ export const permissions = [
   "cohort:manage",
   "roster:read",
   "intervention:manage",
+  "mentoring:manage",
   "moderation:manage",
   "role:manage",
   "system:diagnose",
@@ -41,6 +42,7 @@ const rolePermissions: Record<PlatformRole, ReadonlySet<Permission>> = {
     "cohort:read-own",
     "roster:read",
     "intervention:manage",
+    "mentoring:manage",
     "moderation:manage",
   ]),
   administrator: new Set([
@@ -51,6 +53,7 @@ const rolePermissions: Record<PlatformRole, ReadonlySet<Permission>> = {
     "cohort:manage",
     "roster:read",
     "intervention:manage",
+    "mentoring:manage",
     "moderation:manage",
     "role:manage",
   ]),

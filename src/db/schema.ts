@@ -48,6 +48,7 @@ export const cohortInvitationStatusEnum = pgEnum("cohort_invitation_status", [
   "revoked",
   "expired",
 ]);
+export const mentoringAssignmentStatusEnum = pgEnum("mentoring_assignment_status", ["active", "ended"]);
 export const progressStateEnum = pgEnum("progress_state", [
   "not_started",
   "viewed",
@@ -336,6 +337,42 @@ export const cohortMemberships = pgTable(
   (table) => [
     unique("cohort_member_unique").on(table.cohortId, table.userId),
     unique("cohort_enrollment_unique").on(table.cohortId, table.enrollmentId),
+  ],
+);
+
+export const mentoringAssignments = pgTable(
+  "mentoring_assignments",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    organizationId: uuid("organization_id")
+      .notNull()
+      .references(() => organizations.id, { onDelete: "cascade" }),
+    mentorUserId: uuid("mentor_user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    studentUserId: uuid("student_user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    cohortId: uuid("cohort_id").references(() => cohorts.id, { onDelete: "cascade" }),
+    enrollmentId: uuid("enrollment_id").references(() => enrollments.id, { onDelete: "cascade" }),
+    status: mentoringAssignmentStatusEnum("status").default("active").notNull(),
+    assignedByUserId: uuid("assigned_by_user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "restrict" }),
+    assignedAt: timestamp("assigned_at", { withTimezone: true }).defaultNow().notNull(),
+    endedAt: timestamp("ended_at", { withTimezone: true }),
+    ...timestamps,
+  },
+  (table) => [
+    uniqueIndex("mentoring_self_paced_active_unique")
+      .on(table.mentorUserId, table.studentUserId)
+      .where(sql`${table.cohortId} is null and ${table.status} = 'active'`),
+    uniqueIndex("mentoring_cohort_active_unique")
+      .on(table.cohortId, table.mentorUserId, table.studentUserId)
+      .where(sql`${table.cohortId} is not null and ${table.status} = 'active'`),
+    index("mentoring_student_idx").on(table.studentUserId, table.status),
+    index("mentoring_mentor_idx").on(table.mentorUserId, table.status),
+    check("mentoring_different_users", sql`${table.mentorUserId} <> ${table.studentUserId}`),
   ],
 );
 
@@ -651,6 +688,7 @@ export const schema = {
   enrollments,
   cohortMemberships,
   cohortStaffAssignments,
+  mentoringAssignments,
   cohortInvitations,
   lessonProgress,
   weekProgress,
