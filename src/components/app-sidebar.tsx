@@ -6,7 +6,7 @@ import { ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
 import { useEffect, useState, type ComponentType } from "react";
 
 import { AccountMenu } from "./auth/account-menu";
-import { Compass, Grid, Home, Shield, User } from "./icons";
+import { Compass, Grid, Home, People, Shield, User } from "./icons";
 import { Logo } from "./logo";
 import { ProgramNavigation } from "./program-navigation";
 
@@ -15,7 +15,7 @@ const preferenceKey = "ruta:sidebar-collapsed";
 export type SidebarLink = {
   href: string;
   label: string;
-  icon: "book" | "compass" | "grid" | "home" | "shield" | "user";
+  icon: "book" | "compass" | "grid" | "home" | "people" | "shield" | "user";
 };
 
 const icons: Record<SidebarLink["icon"], ComponentType<{ className?: string }>> = {
@@ -23,6 +23,7 @@ const icons: Record<SidebarLink["icon"], ComponentType<{ className?: string }>> 
   compass: Compass,
   grid: Grid,
   home: Home,
+  people: People,
   shield: Shield,
   user: User,
 };

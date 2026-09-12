@@ -23,11 +23,14 @@ const studentLinks: SidebarLink[] = [
 
 const staffLinks: SidebarLink[] = [
   { href: "/staff", label: "Resumen", icon: "grid" },
+  { href: "/staff/mentoria", label: "Mentoría", icon: "user" },
   { href: "/staff/moderacion", label: "Moderación", icon: "shield" },
 ];
 
 const adminLinks: SidebarLink[] = [
   { href: "/admin", label: "Resumen", icon: "grid" },
+  { href: "/staff", label: "Cohortes", icon: "people" },
+  { href: "/staff/mentoria", label: "Mentoría", icon: "user" },
   { href: "/staff/moderacion", label: "Moderación", icon: "shield" },
   { href: "/admin/curriculo", label: "Currículo", icon: "compass" },
   { href: "/admin/usuarios", label: "Usuarios", icon: "user" },
@@ -35,7 +38,10 @@ const adminLinks: SidebarLink[] = [
 
 const editorLinks: SidebarLink[] = [{ href: "/admin/curriculo", label: "Currículo", icon: "compass" }];
 const learningLinks: SidebarLink[] = [
-  { href: "/programa", label: "Programa", icon: "book" },
+  { href: "/dashboard", label: "Mi inicio", icon: "home" },
+  { href: "/programa", label: "Mi programa", icon: "book" },
+  { href: "/galeria", label: "Comunidad", icon: "grid" },
+  { href: "/perfil", label: "Mi perfil", icon: "user" },
 ];
 
 const navigationPermissions: Partial<Record<SidebarLink["href"], Permission>> = {
@@ -43,13 +49,14 @@ const navigationPermissions: Partial<Record<SidebarLink["href"], Permission>> = 
   "/admin/curriculo": "curriculum:audit",
   "/admin/usuarios": "role:manage",
   "/staff": "roster:read",
+  "/staff/mentoria": "mentoring:manage",
   "/staff/moderacion": "moderation:manage",
 };
 
 export function resolveShellRole(roles: readonly PlatformRole[]): ShellRole {
   if (roles.includes("developer_administrator") || roles.includes("administrator")) return "admin";
-  if (roles.includes("curriculum_editor")) return "editor";
   if (roles.includes("instructor")) return "staff";
+  if (roles.includes("curriculum_editor")) return "editor";
   return "student";
 }
 
@@ -70,7 +77,8 @@ export async function AppShell({ children, userName }: { children: ReactNode; us
       : role === "admin"
         ? adminLinks
         : staffLinks;
-  const candidateLinks = role === "student" ? teamLinks : canViewLearning ? [...teamLinks, ...learningLinks] : teamLinks;
+  const capabilityLinks = role === "staff" && Boolean(authorization && hasPermission(authorization, "curriculum:audit")) ? editorLinks : [];
+  const candidateLinks = role === "student" ? teamLinks : [...teamLinks, ...capabilityLinks, ...(canViewLearning ? learningLinks : [])];
   const links = candidateLinks.filter(({ href }) => {
     const permission = navigationPermissions[href];
     return !permission || Boolean(authorization && hasPermission(authorization, permission));
@@ -83,8 +91,8 @@ export async function AppShell({ children, userName }: { children: ReactNode; us
   return (
     <div className="app-frame">
       <a className="skip-link" href="#contenido">Saltar al contenido</a>
-      <AppSidebar initials={initials} links={links} roleLabel={roleLabel} showProfile={role === "student"} userName={displayName} weeks={weeks} />
-      <header className="mobile-app-header"><Logo /><details><summary aria-label="Abrir navegación">Menú</summary><nav>{links.map(({ href, label }) => href === "/programa" ? <ProgramNavigation key={href} label={label} weeks={weeks} /> : <Link href={href} key={href}>{label}</Link>)}<AccountMenu showProfile={role === "student"} /></nav></details></header>
+      <AppSidebar initials={initials} links={links} roleLabel={roleLabel} showProfile={canViewLearning} userName={displayName} weeks={weeks} />
+      <header className="mobile-app-header"><Logo /><details><summary aria-label="Abrir navegación">Menú</summary><nav>{links.map(({ href, label }) => href === "/programa" ? <ProgramNavigation key={href} label={label} weeks={weeks} /> : <Link href={href} key={href}>{label}</Link>)}<AccountMenu showProfile={canViewLearning} /></nav></details></header>
       <main className="app-main" id="contenido">{children}</main>
     </div>
   );
