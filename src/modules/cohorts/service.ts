@@ -21,6 +21,36 @@ import { loadAuthorizationContext, requirePermission } from "@/modules/authoriza
 import { AuthorizationDeniedError, ResourceNotFoundError } from "@/shared/errors";
 import { getEnvironment } from "@/shared/env";
 
+export type CohortCreationCandidates = {
+  learners: Array<{ id: string; name: string; email: string }>;
+  mentors: Array<{ id: string; name: string; email: string }>;
+};
+
+export async function listCohortCreationCandidates(
+  organizationId: string,
+  database: Database = db,
+): Promise<CohortCreationCandidates> {
+  const [learners, mentors] = await Promise.all([
+    database.select({ id: user.id, name: user.name, email: user.email })
+      .from(user)
+      .innerJoin(roleAssignments, and(
+        eq(roleAssignments.userId, user.id),
+        eq(roleAssignments.organizationId, organizationId),
+        eq(roleAssignments.role, "student"),
+      ))
+      .where(and(eq(user.emailVerified, true), eq(user.isActive, true))),
+    database.select({ id: user.id, name: user.name, email: user.email })
+      .from(user)
+      .innerJoin(roleAssignments, and(
+        eq(roleAssignments.userId, user.id),
+        eq(roleAssignments.organizationId, organizationId),
+        eq(roleAssignments.role, "instructor"),
+      ))
+      .where(and(eq(user.emailVerified, true), eq(user.isActive, true))),
+  ]);
+  return { learners, mentors };
+}
+
 export type CreateCohortInput = Pick<
   Cohort,
   | "organizationId"
@@ -31,7 +61,10 @@ export type CreateCohortInput = Pick<
   | "endsAt"
   | "timezone"
   | "capacity"
->;
+> & {
+  learnerIds?: string[];
+  mentorIds?: string[];
+};
 
 export async function createCohort(
   input: CreateCohortInput,
@@ -39,15 +72,67 @@ export async function createCohort(
   database: Database = db,
 ): Promise<Cohort> {
   await requirePermission(actorUserId, input.organizationId, "cohort:manage", database);
+  const { learnerIds = [], mentorIds = [], ...cohortInput } = input;
+  const uniqueLearnerIds = [...new Set(learnerIds)];
+  const uniqueMentorIds = [...new Set(mentorIds)];
+  if (uniqueLearnerIds.length > input.capacity) throw new Error("COHORT_CAPACITY_REACHED");
   return database.transaction(async (transaction) => {
-    const [cohort] = await transaction.insert(cohorts).values(input).returning();
+    const [cohort] = await transaction.insert(cohorts).values(cohortInput).returning();
     if (!cohort) throw new Error("Cohort insert did not return a record");
+
+    if (uniqueLearnerIds.length) {
+      const learners = await transaction
+        .select({ id: user.id, emailVerified: user.emailVerified })
+        .from(user)
+        .innerJoin(roleAssignments, and(
+          eq(roleAssignments.userId, user.id),
+          eq(roleAssignments.organizationId, cohort.organizationId),
+          eq(roleAssignments.role, "student"),
+        ))
+        .where(and(inArray(user.id, uniqueLearnerIds), eq(user.isActive, true)));
+      if (learners.length !== uniqueLearnerIds.length || learners.some((learner) => !learner.emailVerified)) {
+        throw new Error("LEARNER_EMAIL_NOT_VERIFIED");
+      }
+      for (const learnerId of uniqueLearnerIds) {
+        const [enrollment] = await transaction.insert(enrollments).values({
+          userId: learnerId,
+          programVersionId: cohort.programVersionId,
+          cohortId: cohort.id,
+          mode: "facilitated",
+          status: "active",
+        }).returning({ id: enrollments.id });
+        if (!enrollment) throw new Error("COHORT_ENROLLMENT_CREATE_FAILED");
+        await transaction.insert(cohortMemberships).values({
+          cohortId: cohort.id,
+          userId: learnerId,
+          enrollmentId: enrollment.id,
+          status: "active",
+        });
+      }
+    }
+
+    if (uniqueMentorIds.length) {
+      const mentors = await transaction
+        .select({ userId: roleAssignments.userId })
+        .from(roleAssignments)
+        .where(and(
+          eq(roleAssignments.organizationId, cohort.organizationId),
+          eq(roleAssignments.role, "instructor"),
+          inArray(roleAssignments.userId, uniqueMentorIds),
+        ));
+      if (mentors.length !== uniqueMentorIds.length) throw new Error("COHORT_MENTOR_ROLE_REQUIRED");
+      await transaction.insert(cohortStaffAssignments).values(
+        uniqueMentorIds.map((userId) => ({ cohortId: cohort.id, userId, role: "instructor" as const })),
+      );
+    }
+
     await recordAuditEvent(transaction, {
       actorUserId,
       organizationId: input.organizationId,
       eventType: "cohort.created",
       subjectType: "cohort",
       subjectId: cohort.id,
+      metadata: { learnerCount: uniqueLearnerIds.length, mentorCount: uniqueMentorIds.length },
     });
     return cohort;
   });

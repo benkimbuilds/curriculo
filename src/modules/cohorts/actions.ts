@@ -38,12 +38,14 @@ export async function createCohortAction(
       endsAt: z.coerce.date(),
       capacity: z.coerce.number().int().min(1).max(500),
     }).parse(Object.fromEntries(formData));
+    const learnerIds = z.array(z.uuid()).parse(formData.getAll("learnerIds"));
+    const mentorIds = z.array(z.uuid()).parse(formData.getAll("mentorIds"));
     const organizationId = await resolveDefaultOrganizationId();
     const [version] = await db.select({ id: programVersions.id }).from(programVersions)
       .innerJoin(programs, eq(programs.id, programVersions.programId))
       .where(sql`${programs.organizationId} = ${organizationId} and ${programVersions.isDefault} = true`).limit(1);
     if (!version) throw new Error("PROGRAM_VERSION_NOT_FOUND");
-    const cohort = await createCohort({ ...parsed, organizationId, programVersionId: version.id, timezone: "America/Mexico_City" }, session.user.id);
+    const cohort = await createCohort({ ...parsed, organizationId, programVersionId: version.id, timezone: "America/Mexico_City", learnerIds, mentorIds }, session.user.id);
     cohortId = cohort.id;
   } catch (error) {
     if (error instanceof ApplicationError && error.code === "AUTHORIZATION_DENIED") {
