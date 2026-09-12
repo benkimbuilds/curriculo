@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { inArray } from "drizzle-orm";
 import { AppShell } from "@/components/app-shell";
-import { ArrowLeft, Check, Clock, ExternalLink, GitBranch, Shield } from "@/components/icons";
+import { BackLink } from "@/components/back-link";
+import { Check, Clock, ExternalLink, GitBranch, Shield } from "@/components/icons";
 import { StatusPill } from "@/components/ui";
 import { db } from "@/db";
 import { evaluationResults, evaluationRuns } from "@/db/schema";
@@ -28,7 +28,7 @@ export default async function SubmissionPage({ params }: { params: Promise<{ wee
   return (
     <AppShell userName={context.user.name}>
       <div className="app-content app-content--narrow">
-        <Link className="back-link" href={`/programa/semana/${week}`}><ArrowLeft /> Volver a la semana {week}</Link>
+        <BackLink href={`/programa/semana/${week}`}>Volver a la semana {week}</BackLink>
         <header className="project-header"><div><p className="eyebrow">PROYECTO · SEMANA {weekNumber}</p><h1>{curriculumWeek.project.title}</h1><p>{curriculumWeek.project.summary}</p><div className="project-header__meta"><span><Clock /> {Math.round(curriculumWeek.project.estimatedMinutes / 60)} horas</span><span><GitBranch /> {curriculumWeek.project.collaboration === "individual" ? "Individual" : "Colaborativo"}</span>{weekNumber === 1 ? <StatusPill tone="info">Evaluación automática piloto</StatusPill> : <StatusPill tone="neutral">Revisión con rúbrica</StatusPill>}</div></div><div className="project-header__mark"><span>&lt;/&gt;</span></div></header>
         <div className="submission-layout">
           <section>

@@ -27,7 +27,8 @@ const staffLinks: SidebarLink[] = [
 ];
 
 const adminLinks: SidebarLink[] = [
-  ...staffLinks,
+  { href: "/admin", label: "Resumen", icon: "grid" },
+  { href: "/staff/moderacion", label: "Moderación", icon: "shield" },
   { href: "/admin/curriculo", label: "Currículo", icon: "compass" },
   { href: "/admin/usuarios", label: "Usuarios", icon: "user" },
 ];
@@ -38,6 +39,7 @@ const learningLinks: SidebarLink[] = [
 ];
 
 const navigationPermissions: Partial<Record<SidebarLink["href"], Permission>> = {
+  "/admin": "role:manage",
   "/admin/curriculo": "curriculum:audit",
   "/admin/usuarios": "role:manage",
   "/staff": "roster:read",

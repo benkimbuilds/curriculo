@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
-import { ArrowLeft, ArrowRight, Check, Clock, GitBranch, Lightbulb } from "@/components/icons";
+import { BackLink } from "@/components/back-link";
+import { ArrowRight, Check, Clock, GitBranch, Lightbulb } from "@/components/icons";
 import { LessonRow, ProgressBar, StatusPill } from "@/components/ui";
 import { isLessonComplete, loadStudentContext } from "../../student-data";
 
@@ -30,7 +31,7 @@ export default async function WeekPage({ params }: { params: Promise<{ week: str
   return (
     <AppShell userName={context.user.name}>
       <div className="app-content app-content--narrow">
-        <Link className="back-link" href="/programa"><ArrowLeft /> Volver al programa</Link>
+        <BackLink href="/programa">Volver al programa</BackLink>
         <header className={`week-hero week-hero--${color}`}><div><p className="eyebrow">SEMANA {number}</p><h1>{week.title}</h1><p>{week.summary}</p><div className="week-hero__meta"><span><Clock /> {Math.round(week.estimatedMinutes / 60)} h estimadas</span><span>{lessons.length} lecciones</span><span>1 proyecto</span></div></div><span className="week-hero__number">{String(number).padStart(2, "0")}</span></header>
         <div className="week-layout">
           <section className="panel"><div className="panel__header"><div><p className="eyebrow">Lecciones</p><h2>Aprende paso a paso</h2></div><StatusPill tone="info">{completedLessons}/{lessons.length} completadas</StatusPill></div><ProgressBar value={lessons.length ? Math.round((completedLessons / lessons.length) * 100) : 0} /><div className="lesson-list lesson-list--roomy">{lessons.map((lesson) => <LessonRow href={`/programa/semana/${number}/leccion/${lesson.slug}`} key={lesson.slug} {...lesson} />)}</div></section>

@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
 import { AppShell } from "@/components/app-shell";
-import { ArrowLeft, Check, ExternalLink, GitBranch, Message, Shield } from "@/components/icons";
+import { BackLink } from "@/components/back-link";
+import { Check, ExternalLink, GitBranch, Message, Shield } from "@/components/icons";
 import { Avatar, StatusPill } from "@/components/ui";
 import { getCurrentSession } from "@/modules/auth/session";
 import { reportGalleryEntryAction, submitStructuredFeedbackAction } from "@/modules/community/db-actions";
@@ -27,7 +27,7 @@ export default async function ProjectDetailPage({ params, searchParams }: { para
 
   return (
     <AppShell userName={session.user.name}><div className="app-content app-content--narrow">
-      <Link className="back-link" href="/galeria"><ArrowLeft /> Volver a la galería</Link>
+      <BackLink href="/galeria">Volver a la galería</BackLink>
       <header className="project-detail-header"><div className="project-detail-author"><Avatar color="yellow" name={project.author} /><span><strong>{project.author}</strong><small>Estudiante · Semana {project.week}</small></span></div><StatusPill tone="good"><Check /> Proyecto aprobado</StatusPill></header>
       <section className="project-showcase"><div className="project-showcase__browser"><span className="browser-chrome"><i /><i /><i /></span><div><p>Semana {project.week}</p><h1>{project.title}<em>.</em></h1><span>{project.technology}</span></div></div><div className="project-showcase__actions"><h2>{project.title}</h2><div>{project.deploymentUrl ? <a className="button button--primary" href={project.deploymentUrl} rel="noreferrer" target="_blank">Abrir proyecto <ExternalLink /></a> : null}<a className="button button--ghost" href={project.repositoryUrl} rel="noreferrer" target="_blank"><GitBranch /> Ver código</a></div></div></section>
       <div className="project-detail-grid"><article className="panel reflection"><p className="eyebrow">Objetivo del proyecto</p><h2>Qué construyó</h2><p>{project.description}</p><p>{project.reviewCount} revisiones estructuradas recibidas.</p></article><aside className="panel project-facts"><h3>Sobre la entrega</h3><dl><div><dt>Semana</dt><dd>{project.week}</dd></div><div><dt>Versión</dt><dd><code>{project.commitSha.slice(0, 12)}</code></dd></div><div><dt>Entregado</dt><dd>{project.submittedAt.toLocaleDateString("es-MX")}</dd></div></dl>{!isOwner ? <form action={reportProject} className="form-stack"><label>Motivo del reporte<select name="reason" required><option value="personal_information">Datos personales</option><option value="harassment">Acoso</option><option value="hate_or_discrimination">Odio o discriminación</option><option value="sexual_content">Contenido sexual</option><option value="spam">Spam</option><option value="copyright">Derechos de autor</option><option value="other_safety_concern">Otro riesgo de seguridad</option></select></label><button className="report-link" type="submit"><Shield /> Reportar contenido</button>{query.reportado ? <p className="form-success">Reporte recibido.</p> : null}</form> : null}</aside></div>

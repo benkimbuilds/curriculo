@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
+import { BackLink } from "@/components/back-link";
 import { ArrowLeft, ArrowRight, Check, Clock, ExternalLink } from "@/components/icons";
 import { LessonContent } from "@/components/lesson-content";
 import { listCurriculumWeeks, lessonHeadingId } from "@/modules/curriculum";
@@ -45,7 +46,7 @@ export default async function LessonPage({ params, searchParams }: {
   return <AppShell userName={context.user.name}><div className="lesson-page">
     {locale !== "en" ? <LessonProgressTracker contentVersion={week.contentVersion} enrollmentId={context.enrollment.id} initialPosition={progress?.resumePosition ?? 0} lessonId={lesson.id} week={weekNumber} /> : null}
     <header className="lesson-header">
-      <Link className="back-link" href={source ? "/programa/biblioteca" : `/programa/semana/${weekNumber}`}><ArrowLeft />{source ? "Biblioteca completa" : `Semana ${weekNumber}`}</Link>
+      <BackLink href={source ? "/programa/biblioteca" : `/programa/semana/${weekNumber}`}>{source ? "Biblioteca completa" : `Semana ${weekNumber}`}</BackLink>
       <div className="lesson-header__meta"><span>{source ? "MATERIAL" : "LECCIÓN"} {lessonIndex + 1} DE {sequence.length}</span><span><Clock /> {lesson.estimatedMinutes} min</span><span>{source?.kind === "project" ? "PROYECTO DE PRÁCTICA" : source ? "PROFUNDIZACIÓN" : "RUTA GUIADA"}</span></div>
       <h1>{lesson.title}</h1><p>{lesson.summary}</p>
       {canAudit ? <Link className="text-link" href={`/programa/semana/${weekNumber}/leccion/${slug}${locale === "en" ? "" : "?idioma=en"}`}>{locale === "en" ? "Volver a español" : "Auditar contenido en inglés"}</Link> : null}
