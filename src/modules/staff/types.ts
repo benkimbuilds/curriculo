@@ -44,6 +44,7 @@ export interface LearnerRosterEvidence {
   cohortId: string;
   displayName: string;
   email: string;
+  directMentors: readonly { id: string; name: string }[];
   completedRequiredItems: number;
   expectedCompletedItems: number | null;
   totalRequiredItems: number;

@@ -11,6 +11,7 @@ import {
   evaluationRuns,
   interventionNotes,
   lessonProgress,
+  mentoringAssignments,
   profiles,
   submissions,
   user,
@@ -150,6 +151,12 @@ export class DrizzleRosterRepository implements RosterRepository {
   constructor(private readonly database: Database = db, private readonly now = new Date()) {}
 
   async listEvidenceByCohort(cohortId: string): Promise<readonly LearnerRosterEvidence[]> {
+    const [cohortScope] = await this.database
+      .select({ organizationId: cohorts.organizationId })
+      .from(cohorts)
+      .where(eq(cohorts.id, cohortId))
+      .limit(1);
+    if (!cohortScope) throw new ResourceNotFoundError("Cohort");
     const members = await this.database
       .select({
         userId: cohortMemberships.userId,
@@ -167,6 +174,29 @@ export class DrizzleRosterRepository implements RosterRepository {
           eq(cohortMemberships.status, "active"),
         ),
       );
+    const memberIds = members.map(({ userId }) => userId);
+    const mentorRows = memberIds.length
+      ? await this.database
+          .select({
+            studentUserId: mentoringAssignments.studentUserId,
+            mentorId: mentoringAssignments.mentorUserId,
+            mentorName: user.name,
+          })
+          .from(mentoringAssignments)
+          .innerJoin(user, eq(user.id, mentoringAssignments.mentorUserId))
+          .where(and(
+            eq(mentoringAssignments.organizationId, cohortScope.organizationId),
+            eq(mentoringAssignments.status, "active"),
+            inArray(mentoringAssignments.studentUserId, memberIds),
+          ))
+      : [];
+    const mentorsByStudent = new Map<string, { id: string; name: string }[]>();
+    for (const mentor of mentorRows) {
+      mentorsByStudent.set(mentor.studentUserId, [
+        ...(mentorsByStudent.get(mentor.studentUserId) ?? []),
+        { id: mentor.mentorId, name: mentor.mentorName },
+      ]);
+    }
     const enrollmentIds = members.map(({ enrollmentId }) => enrollmentId);
     if (!enrollmentIds.length) return [];
     const [lessons, attempts, schedules] = await Promise.all([
@@ -232,6 +262,7 @@ export class DrizzleRosterRepository implements RosterRepository {
         cohortId,
         displayName: member.displayName || member.accountName,
         email: member.email,
+        directMentors: mentorsByStudent.get(member.userId) ?? [],
         completedRequiredItems,
         expectedCompletedItems: expectedLessonIds.size,
         totalRequiredItems,
