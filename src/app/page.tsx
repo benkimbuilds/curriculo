@@ -1,14 +1,26 @@
 import Link from "next/link";
 
 import { PublicFooter, PublicHeader } from "@/components/public-header";
+import { getCurrentSession } from "@/modules/auth/session";
+import { getRoleHomeDestination } from "@/modules/authorization/navigation";
+import { loadAuthorizationContext } from "@/modules/authorization/service";
+import { resolveDefaultOrganizationId } from "@/modules/community/db-community";
 import { listCurriculumWeeks } from "@/modules/curriculum";
+import { hasLearningEnrollment } from "@/app/programa/student-data";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getCurrentSession();
+  const accountLink = session
+    ? getRoleHomeDestination(
+      (await loadAuthorizationContext(session.user.id, await resolveDefaultOrganizationId())).organizationRoles,
+      await hasLearningEnrollment(session.user.id),
+    )
+    : undefined;
   const weeks = listCurriculumWeeks({ locale: "es-MX" });
 
   return (
     <>
-      <PublicHeader />
+      <PublicHeader accountLink={accountLink} />
       <main className="editorial-home">
         <section className="editorial-hero">
           <div className="shell-width editorial-hero__inner">
@@ -16,7 +28,7 @@ export default function Home() {
             <h1>Currículo abierto para aprender desarrollo web.</h1>
             <div className="editorial-hero__summary">
               <p>Un programa gratuito de doce semanas para personas que empiezan desde cero. Se estudia con explicaciones, práctica diaria y un proyecto verificable cada semana.</p>
-              <div className="editorial-actions"><Link href="/registro">Crear una cuenta</Link><Link href="#plan-estudios">Revisar el plan de estudios</Link></div>
+              <div className="editorial-actions"><Link href={accountLink?.href ?? "/registro"}>{accountLink ? `Ir a ${accountLink.label}` : "Crear una cuenta"}</Link><Link href="#plan-estudios">Revisar el plan de estudios</Link></div>
             </div>
             <dl className="program-facts">
               <div><dt>Duración</dt><dd>12 semanas</dd></div>
@@ -59,7 +71,7 @@ export default function Home() {
         <section className="editorial-section access-section">
           <div className="shell-width editorial-columns">
             <div><p className="editorial-label">Acceso público</p><h2>El material completo está disponible sin costo.</h2></div>
-            <div className="access-section__copy"><p>Cualquier persona con un correo verificado puede estudiar a su ritmo. Además de la ruta guiada de doce semanas, la biblioteca incluye Fundamentos y Full Stack JavaScript de The Odin Project, adaptados al español y a Next.js. Completar toda la biblioteca requiere tiempo adicional.</p><Link href="/registro">Inscribirme</Link></div>
+            <div className="access-section__copy"><p>Cualquier persona con un correo verificado puede estudiar a su ritmo. Además de la ruta guiada de doce semanas, la biblioteca incluye Fundamentos y Full Stack JavaScript de The Odin Project, adaptados al español y a Next.js. Completar toda la biblioteca requiere tiempo adicional.</p><Link href={accountLink?.href ?? "/registro"}>{accountLink ? `Ir a ${accountLink.label}` : "Inscribirme"}</Link></div>
           </div>
         </section>
       </main>

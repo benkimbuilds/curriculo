@@ -9,6 +9,7 @@ import { db } from "@/db";
 import { programVersions, programs, user } from "@/db/schema";
 import { requireCurrentSession } from "@/modules/auth/session";
 import { resolveDefaultOrganizationId } from "@/modules/community/db-community";
+import { ApplicationError } from "@/shared/errors";
 
 import {
   archiveCohort,
@@ -21,22 +22,39 @@ import {
   removeLearnerFromCohort,
 } from "./service";
 
-export async function createCohortAction(formData: FormData): Promise<void> {
-  const session = await requireCurrentSession();
-  const parsed = z.object({
-    name: z.string().trim().min(3).max(160),
-    slug: z.string().trim().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
-    startsAt: z.coerce.date(),
-    endsAt: z.coerce.date(),
-    capacity: z.coerce.number().int().min(1).max(500),
-  }).parse(Object.fromEntries(formData));
-  const organizationId = await resolveDefaultOrganizationId();
-  const [version] = await db.select({ id: programVersions.id }).from(programVersions)
-    .innerJoin(programs, eq(programs.id, programVersions.programId))
-    .where(sql`${programs.organizationId} = ${organizationId} and ${programVersions.isDefault} = true`).limit(1);
-  if (!version) throw new Error("PROGRAM_VERSION_NOT_FOUND");
-  const cohort = await createCohort({ ...parsed, organizationId, programVersionId: version.id, timezone: "America/Mexico_City" }, session.user.id);
-  redirect(`/staff/cohortes/${cohort.id}`);
+export type CohortActionState = { status: "idle" | "error"; message: string };
+
+export async function createCohortAction(
+  _previous: CohortActionState,
+  formData: FormData,
+): Promise<CohortActionState> {
+  let cohortId: string;
+  try {
+    const session = await requireCurrentSession();
+    const parsed = z.object({
+      name: z.string().trim().min(3).max(160),
+      slug: z.string().trim().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+      startsAt: z.coerce.date(),
+      endsAt: z.coerce.date(),
+      capacity: z.coerce.number().int().min(1).max(500),
+    }).parse(Object.fromEntries(formData));
+    const organizationId = await resolveDefaultOrganizationId();
+    const [version] = await db.select({ id: programVersions.id }).from(programVersions)
+      .innerJoin(programs, eq(programs.id, programVersions.programId))
+      .where(sql`${programs.organizationId} = ${organizationId} and ${programVersions.isDefault} = true`).limit(1);
+    if (!version) throw new Error("PROGRAM_VERSION_NOT_FOUND");
+    const cohort = await createCohort({ ...parsed, organizationId, programVersionId: version.id, timezone: "America/Mexico_City" }, session.user.id);
+    cohortId = cohort.id;
+  } catch (error) {
+    if (error instanceof ApplicationError && error.code === "AUTHORIZATION_DENIED") {
+      return { status: "error", message: "No tienes permiso para crear cohortes." };
+    }
+    if (error instanceof z.ZodError) {
+      return { status: "error", message: "Revisa los datos de la cohorte e inténtalo de nuevo." };
+    }
+    return { status: "error", message: "No pudimos crear la cohorte. Inténtalo de nuevo." };
+  }
+  redirect(`/staff/cohortes/${cohortId}`);
 }
 
 export async function inviteLearnersAction(cohortId: string, formData: FormData): Promise<void> {

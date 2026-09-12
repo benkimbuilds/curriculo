@@ -2,13 +2,13 @@ import Link from "next/link";
 
 import { Logo } from "./logo";
 
-export function PublicHeader() {
+export function PublicHeader({ accountLink }: { accountLink?: { href: string; label: string } }) {
   return (
     <header className="public-header">
       <div className="public-header__inner shell-width">
         <Logo />
         <nav aria-label="Navegación principal" className="public-nav"><Link href="/#plan-estudios">Plan de estudios</Link><Link href="/#metodo">Método</Link><Link href="/galeria">Proyectos</Link></nav>
-        <div className="public-header__actions"><Link href="/iniciar-sesion">Acceder</Link><Link className="public-header__enroll" href="/registro">Inscribirse</Link></div>
+        <div className="public-header__actions">{accountLink ? <Link className="public-header__enroll" href={accountLink.href}>{accountLink.label}</Link> : <><Link href="/iniciar-sesion">Acceder</Link><Link className="public-header__enroll" href="/registro">Inscribirse</Link></>}</div>
       </div>
     </header>
   );

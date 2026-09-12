@@ -6,6 +6,9 @@ import { redirect } from "next/navigation";
 import { db } from "@/db";
 import { announcements, cohorts, cohortSchedules, enrollments, lessonProgress, programVersions, submissions, weekProgress } from "@/db/schema";
 import { getCurrentSession } from "@/modules/auth/session";
+import { getRoleHomeDestination, hasLearningAccess } from "@/modules/authorization/navigation";
+import { loadAuthorizationContext } from "@/modules/authorization/service";
+import { resolveDefaultOrganizationId } from "@/modules/community/db-community";
 import { listCurriculumWeeks, type CurriculumDocument } from "@/modules/curriculum";
 import { provisionVerifiedLearner } from "@/modules/enrollment/service";
 
@@ -37,6 +40,10 @@ async function findActiveEnrollment(userId: string) {
     ?? records[0];
 }
 
+export async function hasLearningEnrollment(userId: string): Promise<boolean> {
+  return Boolean(await findActiveEnrollment(userId));
+}
+
 export async function listCompletedWeekNumbers(userId: string): Promise<number[]> {
   const enrollmentWithVersion = await findActiveEnrollment(userId);
   if (!enrollmentWithVersion) return [];
@@ -55,8 +62,14 @@ export async function loadStudentContext(returnTo: string): Promise<StudentConte
   const currentSession = await getCurrentSession();
   if (!currentSession) redirect(`/iniciar-sesion?next=${encodeURIComponent(returnTo)}`);
   if (!currentSession.user.emailVerified) redirect("/verifica-tu-correo");
-
+  const authorization = await loadAuthorizationContext(
+    currentSession.user.id,
+    await resolveDefaultOrganizationId(),
+  );
   let enrollmentWithVersion = await findActiveEnrollment(currentSession.user.id);
+  if (!hasLearningAccess(authorization.organizationRoles, Boolean(enrollmentWithVersion))) {
+    redirect(getRoleHomeDestination(authorization.organizationRoles).href);
+  }
   if (!enrollmentWithVersion) {
     await provisionVerifiedLearner(currentSession.user.id);
     enrollmentWithVersion = await findActiveEnrollment(currentSession.user.id);

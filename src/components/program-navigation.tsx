@@ -4,9 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useId, useState } from "react";
 import { createPortal } from "react-dom";
-import { CircleCheck, Clock3, BookOpen } from "lucide-react";
+import { BookOpen, CircleCheck, Clock3 } from "lucide-react";
 
-export function ProgramNavigation({ weeks }: { weeks: { week: number; title: string; completed?: boolean }[] }) {
+export function ProgramNavigation({ label = "Mi programa", weeks }: { label?: string; weeks: { week: number; title: string; completed?: boolean }[] }) {
   const pathname = usePathname();
   const id = useId();
   const [disclosure, setDisclosure] = useState<{ pathname: string; expanded: boolean } | null>(null);
@@ -29,7 +29,7 @@ export function ProgramNavigation({ weeks }: { weeks: { week: number; title: str
         onClick={() => setDisclosure({ pathname, expanded: !expanded })}
         type="button"
       >
-        <BookOpen /><span>Mi programa</span>
+        <BookOpen /><span>{label}</span>
         <svg aria-hidden="true" className="program-navigation__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="m6 9 6 6 6-6" /></svg>
       </button>
       <ul className="program-navigation__weeks" id={id} hidden={!expanded}>

@@ -94,6 +94,7 @@ export const user = pgTable(
     name: text("name").notNull(),
     email: text("email").notNull(),
     emailVerified: boolean("email_verified").default(false).notNull(),
+    isActive: boolean("is_active").default(true).notNull(),
     image: text("image"),
     ...timestamps,
   },

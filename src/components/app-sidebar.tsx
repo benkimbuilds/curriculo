@@ -2,23 +2,46 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, BookOpen, Grid2X2, House, UserRound } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
+import { useEffect, useState, type ComponentType } from "react";
 
 import { AccountMenu } from "./auth/account-menu";
+import { Compass, Grid, Home, Shield, User } from "./icons";
 import { Logo } from "./logo";
 import { ProgramNavigation } from "./program-navigation";
 
-const preferenceKey = "ruta:student-sidebar-collapsed";
+const preferenceKey = "ruta:sidebar-collapsed";
 
-const links = [
-  { href: "/dashboard", label: "Inicio", icon: House },
-  { href: "/programa", label: "Mi programa", icon: BookOpen },
-  { href: "/galeria", label: "Comunidad", icon: Grid2X2 },
-  { href: "/perfil", label: "Mi perfil", icon: UserRound },
-];
+export type SidebarLink = {
+  href: string;
+  label: string;
+  icon: "book" | "compass" | "grid" | "home" | "shield" | "user";
+};
 
-export function StudentSidebar({ initials, userName, weeks }: { initials: string; userName: string; weeks: { week: number; title: string; completed: boolean }[] }) {
+const icons: Record<SidebarLink["icon"], ComponentType<{ className?: string }>> = {
+  book: BookOpen,
+  compass: Compass,
+  grid: Grid,
+  home: Home,
+  shield: Shield,
+  user: User,
+};
+
+export function AppSidebar({
+  initials,
+  links,
+  roleLabel,
+  showProfile,
+  userName,
+  weeks,
+}: {
+  initials: string;
+  links: SidebarLink[];
+  roleLabel: string;
+  showProfile: boolean;
+  userName: string;
+  weeks: { week: number; title: string; completed?: boolean }[];
+}) {
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
@@ -52,20 +75,20 @@ export function StudentSidebar({ initials, userName, weeks }: { initials: string
           {collapsed ? <ArrowRight size={16} strokeWidth={2} /> : <ArrowLeft size={16} strokeWidth={2} />}
         </button>
       </div>
-      <nav aria-label="Área de estudiante" className="sidebar__nav">
-        {links.map(({ href, label, icon: Icon }) => {
-          if (href === "/programa") {
-            return collapsed
-              ? <Link aria-label={label} href={href} key={href} title={label}><Icon /><span>{label}</span></Link>
-              : <ProgramNavigation key={href} weeks={weeks} />;
-          }
-          return <Link href={href} key={href} title={collapsed ? label : undefined}><Icon /><span>{label}</span></Link>;
+      <nav aria-label={`Área de ${roleLabel.toLowerCase()}`} className="sidebar__nav">
+        {links.map(({ href, label, icon }) => {
+          const Icon = icons[icon];
+          return href === "/programa"
+          ? collapsed
+            ? <Link aria-label={label} href={href} key={href} title={label}><Icon /><span>{label}</span></Link>
+            : <ProgramNavigation key={href} label={label} weeks={weeks} />
+          : <Link href={href} key={href} title={collapsed ? label : undefined}><Icon /><span>{label}</span></Link>;
         })}
       </nav>
       <div className="sidebar__profile">
         <span className="avatar avatar--green avatar--sm">{initials}</span>
-        <span><strong>{userName}</strong><small>Estudiante</small></span>
-        <AccountMenu compact={collapsed} />
+        <span><strong>{userName}</strong><small>{roleLabel}</small></span>
+        <AccountMenu compact={collapsed} showProfile={showProfile} />
       </div>
     </aside>
   );

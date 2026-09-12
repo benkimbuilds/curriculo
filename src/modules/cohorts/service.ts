@@ -1,6 +1,6 @@
 import { createHash, randomBytes } from "node:crypto";
 
-import { and, count, eq, sql } from "drizzle-orm";
+import { and, count, eq, inArray, sql } from "drizzle-orm";
 
 import { db, type Database } from "@/db";
 import {
@@ -281,6 +281,37 @@ export async function grantOrganizationRole(
   await database.transaction(async (transaction) => {
     await transaction.insert(roleAssignments).values({ organizationId, userId: targetUserId, role }).onConflictDoNothing();
     await recordAuditEvent(transaction, { actorUserId, organizationId, eventType: "organization.role_granted", subjectType: "role_assignment", subjectId: `${targetUserId}:${role}` });
+  });
+}
+
+export async function revokeOrganizationRole(
+  organizationId: string,
+  targetUserId: string,
+  role: "student" | "instructor" | "administrator" | "curriculum_editor" | "developer_administrator",
+  actorUserId: string,
+  database: Database = db,
+): Promise<void> {
+  await requirePermission(actorUserId, organizationId, "role:manage", database);
+  if (role === "developer_administrator") {
+    const actor = await loadAuthorizationContext(actorUserId, organizationId, database);
+    if (!actor.organizationRoles.includes("developer_administrator")) {
+      throw new AuthorizationDeniedError("role:manage:developer_administrator");
+    }
+  }
+  await database.transaction(async (transaction) => {
+    if (role === "administrator" || role === "developer_administrator") {
+      const [privileged] = await transaction.select({ value: count() }).from(roleAssignments).where(and(
+        eq(roleAssignments.organizationId, organizationId),
+        inArray(roleAssignments.role, ["administrator", "developer_administrator"]),
+      ));
+      if ((privileged?.value ?? 0) <= 1) throw new Error("LAST_ADMINISTRATOR");
+    }
+    await transaction.delete(roleAssignments).where(and(
+      eq(roleAssignments.organizationId, organizationId),
+      eq(roleAssignments.userId, targetUserId),
+      eq(roleAssignments.role, role),
+    ));
+    await recordAuditEvent(transaction, { actorUserId, organizationId, eventType: "organization.role_revoked", subjectType: "role_assignment", subjectId: `${targetUserId}:${role}` });
   });
 }
 
