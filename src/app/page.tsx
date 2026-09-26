@@ -1,81 +1,93 @@
-import Link from "next/link";
-
-import { PublicFooter, PublicHeader } from "@/components/public-header";
+import type { Metadata } from "next";
+import { Academia } from "@/components/sections/academia";
+import { Aliados } from "@/components/sections/aliados";
+import { Centro } from "@/components/sections/centro";
+import { Faq } from "@/components/sections/faq";
+import { Galeria } from "@/components/sections/galeria";
+import { Hero } from "@/components/sections/hero";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
+import { SkipLink } from "@/components/layout/skip-link";
+import { MotionRoot } from "@/components/motion/motion-root";
+import { CurriculumOverview } from "@/components/curriculum-overview";
+import { site } from "@/config/site";
+import { faqItems } from "@/content/faq";
 import { getCurrentSession } from "@/modules/auth/session";
 import { getRoleHomeDestination } from "@/modules/authorization/navigation";
 import { loadAuthorizationContext } from "@/modules/authorization/service";
 import { resolveDefaultOrganizationId } from "@/modules/community/db-community";
-import { listCurriculumWeeks } from "@/modules/curriculum";
 import { hasLearningEnrollment } from "@/app/programa/student-data";
+import { listCurriculumWeeks } from "@/modules/curriculum";
+
+export const metadata: Metadata = {
+  title: "Iquiti — Centro de Innovación y Academia de Tecnología",
+  description: "Iquiti reúne innovación, aprendizaje tecnológico y comunidad. Explora el currículo abierto de su Academia de Tecnología.",
+};
+
+function StructuredData() {
+  const published = faqItems.filter((item) => item.status === "published");
+  const graph = [
+    {
+      "@type": "Organization",
+      name: site.name,
+      alternateName: "Iquiti",
+      url: site.url,
+      logo: new URL("/brand/iquiti/logo-vertical.svg", site.url).toString(),
+      description: site.description,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: site.location.street,
+        addressLocality: `${site.location.neighborhood}, ${site.location.locality}`,
+        addressRegion: site.location.region,
+        addressCountry: site.location.country,
+      },
+    },
+    published.length > 0 && {
+      "@type": "FAQPage",
+      mainEntity: published.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      })),
+    },
+  ].filter(Boolean);
+
+  return (
+    <script
+      type="application/ld+json"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD serializado y escapado, sin entrada de usuario.
+      dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replace(/</g, "\\u003c") }}
+    />
+  );
+}
 
 export default async function Home() {
   const session = await getCurrentSession();
   const accountLink = session
     ? getRoleHomeDestination(
-      (await loadAuthorizationContext(session.user.id, await resolveDefaultOrganizationId())).organizationRoles,
-      await hasLearningEnrollment(session.user.id),
-    )
+        (await loadAuthorizationContext(session.user.id, await resolveDefaultOrganizationId())).organizationRoles,
+        await hasLearningEnrollment(session.user.id),
+      )
     : undefined;
+  const accountHref = accountLink?.href ?? "/registro";
   const weeks = listCurriculumWeeks({ locale: "es-MX" });
 
   return (
-    <>
-      <PublicHeader accountLink={accountLink} />
-      <main className="editorial-home">
-        <section className="editorial-hero">
-          <div className="shell-width editorial-hero__inner">
-            <p className="editorial-label">Programa abierto</p>
-            <h1>Currículo abierto para aprender desarrollo web.</h1>
-            <div className="editorial-hero__summary">
-              <p>Un programa gratuito de doce semanas para personas que empiezan desde cero. Se estudia con explicaciones, práctica diaria y un proyecto verificable cada semana.</p>
-              <div className="editorial-actions"><Link href={accountLink?.href ?? "/registro"}>{accountLink ? `Ir a ${accountLink.label}` : "Crear una cuenta"}</Link><Link href="#plan-estudios">Revisar el plan de estudios</Link></div>
-            </div>
-            <dl className="program-facts">
-              <div><dt>Duración</dt><dd>12 semanas</dd></div>
-              <div><dt>Dedicación</dt><dd>20–40 horas por semana</dd></div>
-              <div><dt>Modalidad</dt><dd>Autodidacta o con cohorte</dd></div>
-              <div><dt>Entorno</dt><dd>Windows y macOS</dd></div>
-            </dl>
-          </div>
-        </section>
-
-        <section className="editorial-section" id="metodo">
-          <div className="shell-width editorial-columns">
-            <div><p className="editorial-label">Método</p><h2>Leer lo necesario. Construir. Comprobar.</h2></div>
-            <ol className="method-list">
-              <li><span>01</span><div><strong>Estudia el concepto</strong><p>Cada lección explica una idea, muestra un ejemplo y propone una práctica guiada.</p></div></li>
-              <li><span>02</span><div><strong>Entrega trabajo real</strong><p>Cada semana termina con código publicado, un commit identificable y una reflexión breve.</p></div></li>
-              <li><span>03</span><div><strong>Usa evidencia</strong><p>Las pruebas automáticas y la revisión humana señalan qué funciona y qué debe corregirse.</p></div></li>
-            </ol>
-          </div>
-        </section>
-
-        <section className="editorial-section syllabus" id="plan-estudios">
-          <div className="shell-width">
-            <header className="syllabus__header">
-              <div><p className="editorial-label">Plan de estudios</p><h2>Doce semanas, doce proyectos.</h2></div>
-              <p>Los fundamentos de The Odin Project se reorganizan para una formación intensiva con React, Next.js, PostgreSQL y desarrollo responsable con IA.</p>
-            </header>
-            <div className="syllabus__table" role="list">
-              {weeks.map((week) => (
-                <article className="syllabus-row" key={week.id} role="listitem">
-                  <span className="syllabus-row__number">{String(week.week).padStart(2, "0")}</span>
-                  <div><h3>{week.title}</h3><p>{week.summary}</p></div>
-                  <div className="syllabus-row__project"><span>Proyecto</span><strong>{week.project.title}</strong></div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="editorial-section access-section">
-          <div className="shell-width editorial-columns">
-            <div><p className="editorial-label">Acceso público</p><h2>El material completo está disponible sin costo.</h2></div>
-            <div className="access-section__copy"><p>Cualquier persona con un correo verificado puede estudiar a su ritmo. Además de la ruta guiada de doce semanas, la biblioteca incluye Fundamentos y Full Stack JavaScript de The Odin Project, adaptados al español y a Next.js. Completar toda la biblioteca requiere tiempo adicional.</p><Link href={accountLink?.href ?? "/registro"}>{accountLink ? `Ir a ${accountLink.label}` : "Inscribirme"}</Link></div>
-          </div>
-        </section>
+    <div data-iquiti-home>
+      <StructuredData />
+      <SkipLink />
+      <SiteHeader platformHref={accountHref} />
+      <main id="contenido" tabIndex={-1} className="outline-none">
+        <Hero />
+        <Centro />
+        <Academia platformHref={accountHref} />
+        <CurriculumOverview weeks={weeks} accountHref={accountHref} />
+        <Aliados />
+        <Galeria />
+        <Faq />
       </main>
-      <PublicFooter />
-    </>
+      <SiteFooter platformHref={accountHref} />
+      <MotionRoot />
+    </div>
   );
 }
