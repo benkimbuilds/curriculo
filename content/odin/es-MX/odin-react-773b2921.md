@@ -4,7 +4,7 @@ Ya has practicado componentes, JSX, props, estado, efectos, pruebas, rutas, cont
 
 ## Qué estudiar después
 
-El curso original propone continuar con [bases de datos](https://www.theodinproject.com/paths/full-stack-javascript/courses/databases) y [Node.js](https://www.theodinproject.com/paths/full-stack-javascript/courses/nodejs) antes de profundizar en metaframeworks. Ruta integra Next.js antes para trabajar rutas y despliegue, pero esos fundamentos de servidor siguen siendo necesarios. Un framework no elimina HTTP, SQL, validación ni autorización.
+El curso original propone continuar con [bases de datos](https://www.theodinproject.com/paths/full-stack-javascript/courses/databases) y [Node.js](https://www.theodinproject.com/paths/full-stack-javascript/courses/nodejs) antes de profundizar en metaframeworks. Academia Iquiti integra Next.js antes para trabajar rutas y despliegue, pero esos fundamentos de servidor siguen siendo necesarios. Un framework no elimina HTTP, SQL, validación ni autorización.
 
 Los metaframeworks amplían React con componentes servidor, carga de datos y convenciones de rutas. Distingue siempre qué pertenece a React y qué a Next.js: `useState` y contexto son conceptos de React; los archivos `page.tsx` y las reglas del App Router son convenciones de Next.js. Esa separación facilita leer otro proyecto o actualizar herramientas.
 
@@ -22,7 +22,7 @@ Revisa la [introducción a almacenamiento local](http://coding.smashingmagazine.
 
 1. Revisa los tres proyectos: registra una decisión sobre estado, una sobre pruebas y una sobre navegación, con el código que la demuestra.
 2. Propón cómo persistirías el carrito entre dos dispositivos. Distingue identidad, almacenamiento y autorización.
-3. Envía comentarios a los responsables de Ruta. Si encuentras un problema también presente en el original, puedes abrir un issue en el [repositorio de Odin](https://github.com/TheOdinProject/curriculum/issues). El [formulario original de feedback de React](https://docs.google.com/forms/d/e/1FAIpQLSdj_tNMp0LEz3ZLPqYcF67V11tX_CCJP3CTictPZzZ6XQm2Gw/viewform?usp=sf_link) es opcional y corresponde al curso de Odin, no a una evaluación de Ruta.
+3. Envía comentarios a los responsables de Academia Iquiti. Si encuentras un problema también presente en el original, puedes abrir un issue en el [repositorio de Odin](https://github.com/TheOdinProject/curriculum/issues). El [formulario original de feedback de React](https://docs.google.com/forms/d/e/1FAIpQLSdj_tNMp0LEz3ZLPqYcF67V11tX_CCJP3CTictPZzZ6XQm2Gw/viewform?usp=sf_link) es opcional y corresponde al curso de Odin, no a una evaluación de Academia Iquiti.
 
 ## Comprueba lo aprendido
 

@@ -87,7 +87,7 @@ export function ContactForm() {
 }
 ```
 
-Este primer ejemplo **solo valida**; el mensaje lo dice explícitamente. Crea `app/contacts/new/page.tsx` que importe y renderice `ContactForm`. La edad 18–120 es una regla ficticia del ejercicio original, no una restricción para participar en Ruta.
+Este primer ejemplo **solo valida**; el mensaje lo dice explícitamente. Crea `app/contacts/new/page.tsx` que importe y renderice `ContactForm`. La edad 18–120 es una regla ficticia del ejercicio original, no una restricción para participar en Academia Iquiti.
 
 ## Errores y escritura
 

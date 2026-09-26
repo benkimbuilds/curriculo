@@ -2,7 +2,7 @@
 
 Un empaquetador comienza en un punto de entrada, recorre sus importaciones, construye un grafo de dependencias y produce archivos de distribución. Además puede transformar recursos y optimizar código. Aunque herramientas como Next.js configuran buena parte de esto, comprender el proceso ayuda a depurar proyectos existentes y reconocer la diferencia entre código fuente y código entregado.
 
-Usa una versión LTS de Node compatible con las herramientas instaladas. Los ejemplos de configuración ESM siguientes utilizan `import.meta.dirname`; comprueba tu versión con `node --version`. Ejecuta la práctica en una carpeta separada del código de Ruta.
+Usa una versión LTS de Node compatible con las herramientas instaladas. Los ejemplos de configuración ESM siguientes utilizan `import.meta.dirname`; comprueba tu versión con `node --version`. Ejecuta la práctica en una carpeta separada del código de Academia Iquiti.
 
 ## Instalar y distinguir src de dist
 

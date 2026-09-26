@@ -1,6 +1,6 @@
 # Setting up Git
 
-## Ruta platform adaptation
+## Academia Iquiti platform adaptation
 
 On Windows with WSL2, install and configure Git inside Ubuntu using the Linux guide. On native Windows, use the official Git for Windows installer (https://git-scm.com/downloads/win) and Git Bash for these shell examples. On macOS use the macOS guide. Do not mix native Windows and WSL tooling within one working copy. On shared lab computers use an individual system account or a repository-local identity approved by the lab; avoid leaving personal global identity, private keys or authenticated sessions for the next user. Prefer a passphrase for private keys and never overwrite an existing key without checking its use.
 

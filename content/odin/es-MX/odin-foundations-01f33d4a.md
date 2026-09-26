@@ -4,7 +4,7 @@ Ya recorriste HTML, CSS y JavaScript, organizaste archivos con la terminal y pub
 
 ## La ruta de esta edición
 
-El original presenta varias rutas tecnológicas. Ruta continúa deliberadamente con **Full Stack JavaScript**, profundizando HTML y CSS, JavaScript, React, bases de datos y conceptos de servidor, y adaptando la construcción de aplicaciones a Next.js. No necesitas elegir otra tecnología ni usar una ruleta para avanzar.
+El original presenta varias rutas tecnológicas. Academia Iquiti continúa deliberadamente con **Full Stack JavaScript**, profundizando HTML y CSS, JavaScript, React, bases de datos y conceptos de servidor, y adaptando la construcción de aplicaciones a Next.js. No necesitas elegir otra tecnología ni usar una ruleta para avanzar.
 
 Node permite utilizar JavaScript fuera del navegador. Compartir lenguaje entre cliente y servidor reduce cambios de sintaxis y puede permitir reutilizar lógica, pero no elimina sus responsabilidades distintas. Un navegador no debe recibir secretos del servidor y no todas las APIs existen en ambos entornos.
 

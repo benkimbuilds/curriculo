@@ -33,7 +33,7 @@ No confundas separación entre pistas con relleno de una tarjeta: el texto debe 
 
 ## Entrega
 
-Publica el código en GitHub y la demostración en GitHub Pages. Incluye captura, instrucciones y decisiones de distribución en el README. Si quieres aportar retroalimentación al proyecto original, existe este [formulario del curso intermedio de Odin](https://docs.google.com/forms/d/e/1FAIpQLSf_hNwIjvqcPZyl9Lx41mgJNQKp04qOro03SI8ABw4Zp7U_4w/viewform?usp=sf_link); es opcional y externo a Ruta.
+Publica el código en GitHub y la demostración en GitHub Pages. Incluye captura, instrucciones y decisiones de distribución en el README. Si quieres aportar retroalimentación al proyecto original, existe este [formulario del curso intermedio de Odin](https://docs.google.com/forms/d/e/1FAIpQLSf_hNwIjvqcPZyl9Lx41mgJNQKp04qOro03SI8ABw4Zp7U_4w/viewform?usp=sf_link); es opcional y externo a Academia Iquiti.
 
 ## Comprobación
 

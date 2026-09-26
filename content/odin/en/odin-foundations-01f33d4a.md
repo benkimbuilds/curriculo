@@ -4,7 +4,7 @@ You have practiced HTML, CSS and JavaScript, organized files through the termina
 
 ## The path in this edition
 
-The original conclusion presents multiple technology paths. Ruta deliberately continues with **Full Stack JavaScript**: deeper HTML and CSS, JavaScript, React, databases and server concepts, with application-building adapted to Next.js. You do not need to choose another language or spin a selection wheel to continue.
+The original conclusion presents multiple technology paths. Academia Iquiti deliberately continues with **Full Stack JavaScript**: deeper HTML and CSS, JavaScript, React, databases and server concepts, with application-building adapted to Next.js. You do not need to choose another language or spin a selection wheel to continue.
 
 Node runs JavaScript outside the browser. Sharing a language between frontend and backend reduces syntax switching and sometimes permits shared logic, but the environments still have different responsibilities. Browser code must not receive server secrets, and not every API exists in both environments.
 

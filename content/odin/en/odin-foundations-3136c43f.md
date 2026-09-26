@@ -1,6 +1,6 @@
 # Command line basics
 
-## Ruta platform adaptation
+## Academia Iquiti platform adaptation
 
 Use Terminal on macOS or Ubuntu in WSL2 on Windows for this lesson's Bash/Unix commands. Do not paste them indiscriminately into PowerShell: its explicit counterparts include Get-Location, Get-ChildItem, Set-Location and New-Item. In WSL, store projects under the Linux home directory and open VS Code through its WSL connection. For the deletion exercise, inspect the exact test folder, remove only its practice file and then use rmdir on the empty folder; recursive deletion is unnecessary.
 
@@ -99,7 +99,7 @@ Some of the following resources assume you have a Desktop folder located in your
 
 ### Using the correct OS
 
-The Unix examples require macOS, Ubuntu or Ubuntu in WSL2. On Windows, open the prepared Ubuntu terminal. If the environment is not ready, return to the [Installations lesson](https://www.theodinproject.com/lessons/foundations-installations) and use Ruta's Windows guidance. Do not repartition a lab computer.
+The Unix examples require macOS, Ubuntu or Ubuntu in WSL2. On Windows, open the prepared Ubuntu terminal. If the environment is not ready, return to the [Installations lesson](https://www.theodinproject.com/lessons/foundations-installations) and use Academia Iquiti's Windows guidance. Do not repartition a lab computer.
 
 
 

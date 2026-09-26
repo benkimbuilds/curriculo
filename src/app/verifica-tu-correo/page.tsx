@@ -12,7 +12,7 @@ export default function VerifyEmailPage() {
           <h1>Confirma tu correo.</h1>
           <p>Enviamos un enlace a la dirección con la que te registraste. Debes abrirlo antes de entrar al programa.</p>
           <ol>
-            <li><span>01</span><div><strong>Abre el mensaje de Ruta</strong><p>Revisa también las carpetas de correo no deseado o promociones.</p></div></li>
+            <li><span>01</span><div><strong>Abre el mensaje de Academia Iquiti</strong><p>Revisa también las carpetas de correo no deseado o promociones.</p></div></li>
             <li><span>02</span><div><strong>Selecciona el enlace</strong><p>El enlace es personal y vence después de una hora.</p></div></li>
             <li><span>03</span><div><strong>Vuelve a iniciar sesión</strong><p>Tu acceso autodidacta se activa al confirmar la dirección.</p></div></li>
           </ol>
@@ -22,7 +22,7 @@ export default function VerifyEmailPage() {
           <ResendVerificationForm />
         </aside>
       </div>
-      <footer className="verification-page__footer"><span>Ruta · Currículo abierto</span><Link href="/">Volver al inicio</Link></footer>
+      <footer className="verification-page__footer"><span>Academia Iquiti</span><Link href="/">Volver al inicio</Link></footer>
     </main>
   );
 }

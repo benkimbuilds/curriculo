@@ -1,8 +1,8 @@
 # Text editors
 
-## Ruta platform adaptation
+## Academia Iquiti platform adaptation
 
-On Windows with WSL2, install VS Code on Windows, add its WSL extension, and open the repository from Ubuntu with code . so the editor connects to Linux. Keep files and development tools in the same environment. Native Windows HTML exercises may use VS Code directly. On macOS, install VS Code natively. A conventional Linux virtual machine instead needs the editor inside the guest. These are Ruta's supported adaptations; Odin's own community support scope remains separate.
+On Windows with WSL2, install VS Code on Windows, add its WSL extension, and open the repository from Ubuntu with code . so the editor connects to Linux. Keep files and development tools in the same environment. Native Windows HTML exercises may use VS Code directly. On macOS, install VS Code natively. A conventional Linux virtual machine instead needs the editor inside the guest. These are Academia Iquiti's supported adaptations; Odin's own community support scope remains separate.
 
 ### Introduction
 

@@ -64,7 +64,7 @@ export function AppSidebar({
     <aside className={`sidebar${collapsed ? " is-collapsed" : ""}`}>
       <div className="sidebar__top">
         <Logo />
-        <Link aria-label="Ruta, inicio" className="sidebar__favicon-link" href="/"><Image alt="" height={26} priority src="/icon.svg" width={26} /></Link>
+        <Link aria-label="Academia Iquiti, inicio" className="sidebar__favicon-link" href="/"><Image alt="" height={26} priority src="/icon.svg" width={26} /></Link>
         <button
           aria-expanded={!collapsed}
           aria-label={collapsed ? "Expandir navegación" : "Minimizar navegación"}

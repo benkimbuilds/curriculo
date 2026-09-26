@@ -4,7 +4,7 @@ Un editor dentro del navegador permite empezar rápido, pero no enseña por sí 
 
 ## Adaptación para Windows y macOS
 
-Odin usa instrucciones Unix y brinda soporte para macOS, Ubuntu y sus [variantes oficiales](https://ubuntu.com/desktop/flavours). Ruta admite Windows y macOS. Para seguir los ejercicios Unix en Windows recomendamos un entorno Ubuntu en **WSL2**, preparado con apoyo del laboratorio. Puedes mantener Windows, tus programas y tus archivos personales. WSL2 no es WSL1: comprueba qué versión estás usando.
+Odin usa instrucciones Unix y brinda soporte para macOS, Ubuntu y sus [variantes oficiales](https://ubuntu.com/desktop/flavours). Academia Iquiti admite Windows y macOS. Para seguir los ejercicios Unix en Windows recomendamos un entorno Ubuntu en **WSL2**, preparado con apoyo del laboratorio. Puedes mantener Windows, tus programas y tus archivos personales. WSL2 no es WSL1: comprueba qué versión estás usando.
 
 En Windows, sigue la [guía oficial de instalación de WSL](https://learn.microsoft.com/en-us/windows/wsl/install). Desde PowerShell con permisos administrativos, el paso habitual es `wsl --install`; reinicia si se solicita, abre Ubuntu y crea su usuario. Verifica en PowerShell con `wsl --list --verbose` que la distribución use versión 2. En un equipo compartido, el personal del laboratorio debe autorizar y preparar la instalación. No cambies particiones ni controles del equipo por tu cuenta.
 
@@ -16,9 +16,9 @@ En macOS abre Terminal desde Aplicaciones > Utilidades o Spotlight. No necesitas
 
 Una **máquina virtual** emula una computadora dentro de otra; permite probar Linux sin reemplazar Windows, pero consume memoria y almacenamiento. Odin explica la [instalación en VirtualBox](https://github.com/TheOdinProject/curriculum/blob/main/foundations/installations/installation_guides/linux/virtual_machine.md) y este [video describe las máquinas virtuales](https://youtu.be/yIVXjl4SwVo).
 
-El **arranque dual** instala sistemas separados y permite elegir uno al encender. Puede usar todos los recursos del equipo, pero modificar particiones implica riesgo para los datos. La [guía de arranque dual](https://github.com/TheOdinProject/curriculum/blob/main/foundations/installations/installation_guides/linux/dual_boot.md) se conserva como alternativa; no es requisito de Ruta ni una actividad para realizar sin respaldo y supervisión. También existen [Linux en ChromeOS](https://github.com/TheOdinProject/curriculum/blob/main/foundations/installations/installation_guides/linux/chromeos.md) y la [guía WSL2 de Odin](https://github.com/TheOdinProject/curriculum/blob/main/foundations/installations/installation_guides/linux/wsl2.md).
+El **arranque dual** instala sistemas separados y permite elegir uno al encender. Puede usar todos los recursos del equipo, pero modificar particiones implica riesgo para los datos. La [guía de arranque dual](https://github.com/TheOdinProject/curriculum/blob/main/foundations/installations/installation_guides/linux/dual_boot.md) se conserva como alternativa; no es requisito de Academia Iquiti ni una actividad para realizar sin respaldo y supervisión. También existen [Linux en ChromeOS](https://github.com/TheOdinProject/curriculum/blob/main/foundations/installations/installation_guides/linux/chromeos.md) y la [guía WSL2 de Odin](https://github.com/TheOdinProject/curriculum/blob/main/foundations/installations/installation_guides/linux/wsl2.md).
 
-El soporte de la comunidad original es distinto del de Ruta. Sus [razones para no soportar Windows nativo](https://github.com/TheOdinProject/blog/wiki/Why-We-Do-Not-Support-Windows) explican esa decisión; no asumas que podrán resolver cualquier configuración del laboratorio.
+El soporte de la comunidad original es distinto del de Academia Iquiti. Sus [razones para no soportar Windows nativo](https://github.com/TheOdinProject/blog/wiki/Why-We-Do-Not-Support-Windows) explican esa decisión; no asumas que podrán resolver cualquier configuración del laboratorio.
 
 ## Navegador y verificación
 
@@ -32,7 +32,7 @@ Como contexto adicional, consulta la [participación de distintos navegadores](h
 
 ## Comprobación
 
-- ¿Qué sistemas admite el currículo original y cómo adapta Ruta Windows?
+- ¿Qué sistemas admite el currículo original y cómo adapta Academia Iquiti Windows?
 - ¿Qué diferencia hay entre WSL2, una máquina virtual y arranque dual?
 - ¿En qué sistema ejecutas cada herramienta de tu configuración?
 - ¿Qué navegador usamos para los ejercicios y por qué?
@@ -43,7 +43,7 @@ El motivo de usar un entorno de desarrollo real es aprender a controlar dónde v
 
 Una máquina virtual tiene un sistema invitado separado del sistema anfitrión. Si instalas Ubuntu dentro de VirtualBox, el editor, Git y Node que ejecutas dentro de Ubuntu no son automáticamente los mismos que instalaste en Windows. Esa separación visual puede ser útil para algunas personas. También exige asignar memoria y almacenamiento suficientes y puede rendir peor en equipos limitados.
 
-WSL2 integra Linux con Windows de forma más estrecha. Esa comodidad puede producir confusión si no sabes qué terminal abriste o qué versión de una herramienta se está ejecutando. Por eso Ruta recomienda acompañamiento del laboratorio al configurarlo. La recomendación adapta el entorno a las computadoras disponibles; no implica que las advertencias del currículo original sobre mezclar sistemas dejen de importar.
+WSL2 integra Linux con Windows de forma más estrecha. Esa comodidad puede producir confusión si no sabes qué terminal abriste o qué versión de una herramienta se está ejecutando. Por eso Academia Iquiti recomienda acompañamiento del laboratorio al configurarlo. La recomendación adapta el entorno a las computadoras disponibles; no implica que las advertencias del currículo original sobre mezclar sistemas dejen de importar.
 
 Si ya trabajas en Ubuntu o una variante oficial y tienes las herramientas requeridas, no necesitas instalar otro sistema. Si trabajas en macOS, tampoco necesitas crear una máquina virtual para seguir los comandos Unix. Elegir una configuración estable y conocerla es más útil que probar todas las alternativas antes de comenzar.
 
@@ -59,6 +59,6 @@ Desde PowerShell, el comando de listado de WSL permite comprobar que la distribu
 
 Chrome se ejecuta en Windows cuando usas WSL2. VS Code también puede instalarse en Windows y conectarse al entorno Linux para abrir archivos y ejecutar herramientas allí. La conexión del editor debe mostrarse claramente. En una máquina virtual convencional, en cambio, puedes instalar ambos dentro del sistema invitado. Comprender esta diferencia te permite elegir la guía correcta.
 
-Los recursos originales limitan soporte a configuraciones concretas para que su comunidad pueda reproducir problemas. Si preguntas allí por una instalación adaptada de Ruta, explica la configuración real y respeta sus límites. El laboratorio puede ofrecer ayuda para Windows nativo que la comunidad original no promete.
+Los recursos originales limitan soporte a configuraciones concretas para que su comunidad pueda reproducir problemas. Si preguntas allí por una instalación adaptada de Academia Iquiti, explica la configuración real y respeta sus límites. El laboratorio puede ofrecer ayuda para Windows nativo que la comunidad original no promete.
 
 Al finalizar esta lección debes poder abrir navegador y terminal, identificar el sistema donde estás trabajando y localizar tu carpeta de proyectos. No es necesario instalar todavía todas las herramientas de las próximas semanas. Cada instalación adicional tendrá una razón y una comprobación propia.

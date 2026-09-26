@@ -4,7 +4,7 @@ Build a small application where someone enters information and generates a résu
 
 ## Complete requirements
 
-1. Create a React project. Ruta's submitted application uses Next.js App Router; a Vite sandbox remains useful for isolated component practice.
+1. Create a React project. Academia Iquiti's submitted application uses Next.js App Router; a Vite sandbox remains useful for isolated component practice.
 2. Plan components for general information (name, email, phone), education (school, qualification, study dates), and practical experience (company, position, responsibilities, start and end dates).
 3. Include edit and submit controls for each section or the entire CV. Submitting shows field values as HTML content. Editing restores inputs containing the displayed values. Users must be able to edit and resubmit without losing information.
 4. Put reusable components in `src/components` and CSS in a styles directory or colocated CSS Modules. Import each stylesheet appropriately.
@@ -35,7 +35,7 @@ This fragment is not a completed project. Connect it to labels, inputs, form sub
 
 The original recommends [Netlify](https://docs.netlify.com/), [Vercel](https://www.vercel.com/docs), or [Cloudflare Pages](https://developers.cloudflare.com/pages) for Vite's static output: import a GitHub repository, select a deployment branch, and publish `dist`. The [Vite deployment guide](https://vitejs.dev/guide/static-deploy.html) documents that alternative.
 
-Ruta replaces that step with a Next.js deployment on a compatible Node host such as Railway. Run `npm run build` and `npm run start` locally. Connect the repository in the provider, configure build and start commands, and open its assigned HTTPS domain. Do not publish a Vite `dist` directory or rewrite every route to `/index.html`; Next.js handles these routes itself.
+Academia Iquiti replaces that step with a Next.js deployment on a compatible Node host such as Railway. Run `npm run build` and `npm run start` locally. Connect the repository in the provider, configure build and start commands, and open its assigned HTTPS domain. Do not publish a Vite `dist` directory or rewrite every route to `/index.html`; Next.js handles these routes itself.
 
 Pages use `app/.../page.tsx`; shared `layout.tsx` files render nested content through `children`. A future `/cv/[id]` page would read asynchronous parameters, validate the identifier, use `not-found.tsx` for an absent CV, and `error.tsx` for unexpected rendering failures. Ordinary navigation uses `Link` from `next/link`. Authentication and database storage are not required for this first project, so do not delay the state-and-form exercise while implementing them.
 

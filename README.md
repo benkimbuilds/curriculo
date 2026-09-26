@@ -1,6 +1,6 @@
-# Ruta
+# Academia Iquiti
 
-Ruta is a free, open-source learning platform and 12-week curriculum for people
+Academia Iquiti is a free, open-source learning platform and 12-week curriculum for people
 learning full-stack web development from zero. The learner experience is written
 in Spanish; authorized curriculum administrators can switch
 to the English audit edition.
@@ -67,16 +67,15 @@ requirements and self-checks; they are not silently sent to the weekly grader.
 
 ### Visual system
 
-Ruta shares the design language of AI Builders LATAM: Instrument Serif headings,
-Geist body text, Geist Mono labels, white surfaces, charcoal actions, subtle gray
-borders, and rounded navigation and cards. `src/app/aibuilders-theme.css` adapts
-the styles from the local `website-lat` project across public, learner, and staff
-screens. `src/app/globals.css` retains structural layouts and responsive behavior.
-Fonts are self-hosted in `public/fonts`, alongside their SIL Open Font licenses.
+Academia Iquiti uses Manrope for interface text and titles, with monospace reserved
+for code. Public, learner, and staff screens share the Iquiti palette: white and
+off-white surfaces, black text, and purple actions. `src/app/aibuilders-theme.css`
+carries that treatment. `src/app/globals.css` retains structural layouts and
+responsive behavior. Manrope is self-hosted in `src/app/fonts`.
 
 ### Runtime
 
-Ruta is a modular Next.js application with one codebase and two application
+Academia Iquiti is a modular Next.js application with one codebase and two application
 processes. Both processes use the same production Docker image and database.
 
 | Component | Railway service | Responsibility | Public traffic |

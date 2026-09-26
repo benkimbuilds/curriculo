@@ -16,6 +16,6 @@ No necesitas recordar cada firma de método. Sí necesitas saber localizar docum
 
 ## Reflexión y retroalimentación
 
-Escribe qué lección te costó más, qué ejemplo te ayudó y qué explicación mejorarías para otra persona. Puedes dejar retroalimentación sobre el curso original mediante [su formulario de JavaScript](https://docs.google.com/forms/d/e/1FAIpQLSeHcp46iWF5D7V7wPPHDeIHK0q5Nu0zXHZi46pP7ExVjULvZA/viewform?usp=sf_link), indicando que trabajaste una adaptación si ese contexto influye. No incluyas datos sensibles ni supongas que ese formulario administra tu cuenta en Ruta.
+Escribe qué lección te costó más, qué ejemplo te ayudó y qué explicación mejorarías para otra persona. Puedes dejar retroalimentación sobre el curso original mediante [su formulario de JavaScript](https://docs.google.com/forms/d/e/1FAIpQLSeHcp46iWF5D7V7wPPHDeIHK0q5Nu0zXHZi46pP7ExVjULvZA/viewform?usp=sf_link), indicando que trabajaste una adaptación si ese contexto influye. No incluyas datos sensibles ni supongas que ese formulario administra tu cuenta en Academia Iquiti.
 
 Completar esta sección no termina el aprendizaje. El valor de tus proyectos crece cuando puedes explicar sus decisiones, mejorar un límite y volver a demostrar que funcionan después de un cambio.
