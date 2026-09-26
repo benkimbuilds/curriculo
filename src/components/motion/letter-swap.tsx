@@ -50,7 +50,9 @@ export function LetterSwap({
   // `center`: el retraso crece con la distancia al centro, así el giro se abre hacia los extremos.
   const middle = (words.reduce((n, { chars }) => n + chars.length, 0) - 1) / 2;
   const step = (i: number) => (from === "center" ? Math.abs(i - middle) : i);
-  let index = -1;
+  const wordStarts = words.map((_, position) =>
+    words.slice(0, position).reduce((count, word) => count + word.chars.length, 0),
+  );
 
   return (
     <Tag className={className} data-letter-swap={trigger} data-direction={direction}>
@@ -64,7 +66,7 @@ export function LetterSwap({
             {w > 0 ? " " : null}
             <span className="letter-word">
               {chars.map((char, c) => {
-                index += 1;
+                const index = wordStarts[w] + c;
                 const offset = step(index) * stagger;
                 // Dos retrasos: la entrada incluye el retraso inicial; el hover no (responde al instante).
                 const style = {
