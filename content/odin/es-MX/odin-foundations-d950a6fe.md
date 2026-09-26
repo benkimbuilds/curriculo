@@ -2,7 +2,7 @@
 
 Desarrollar software implica colaborar. Una comunidad permite aprender con personas que avanzan a ritmos diferentes: puedes recibir orientación de quienes ya resolvieron una dificultad y consolidar lo aprendido ayudando a quienes apenas llegan. También puedes compartir un proyecto terminado con personas que comprenden el trabajo detrás de él. Los comentarios sobre las lecciones ayudan a mejorar el currículo abierto.
 
-Odin tiene [Facebook](https://www.facebook.com/theodinproject/), [X](https://x.com/TheOdinProject) y el hashtag `#TheOdinProject`, pero su comunidad de ayuda se reúne en Discord. Participar en servicios externos requiere cumplir sus condiciones de edad y sus reglas; no es necesario publicar información personal para completar Ruta. Si no puedes o no quieres usar Discord, practica la colaboración en tu grupo acompañado.
+Odin tiene [Facebook](https://www.facebook.com/theodinproject/), [X](https://x.com/TheOdinProject) y el hashtag `#TheOdinProject`, pero su comunidad de ayuda se reúne en Discord. Participar en servicios externos requiere cumplir sus condiciones de edad y sus reglas; no es necesario publicar información personal para completar Academia Iquiti. Si no puedes o no quieres usar Discord, practica la colaboración en tu grupo acompañado.
 
 ## Antes de preguntar
 
@@ -79,6 +79,6 @@ Cuando descubras que tu explicación inicial era incorrecta, corrígela abiertam
 
 Detrás de un nombre de usuario hay alguien con conocimientos, horarios y emociones distintos. Evita burlas por errores básicos, comparaciones de velocidad y respuestas que suponen falta de esfuerzo. Lee antes de responder y no atribuyas intención por una frase breve. Si aparece frustración, ofrece una pausa o termina tu participación con respeto.
 
-Compartir progreso también incluye explicar lo que aprendiste, no sólo mostrar el resultado más vistoso. Un pequeño proyecto que demuestra una idea puede iniciar una conversación útil. Las redes y el Discord de Odin son espacios externos con reglas propias; revisa sus condiciones y no sientas obligación de vincular cuentas personales o revelar ubicación. En Ruta, el acompañamiento local permite practicar estas mismas habilidades de colaboración.
+Compartir progreso también incluye explicar lo que aprendiste, no sólo mostrar el resultado más vistoso. Un pequeño proyecto que demuestra una idea puede iniciar una conversación útil. Las redes y el Discord de Odin son espacios externos con reglas propias; revisa sus condiciones y no sientas obligación de vincular cuentas personales o revelar ubicación. En Academia Iquiti, el acompañamiento local permite practicar estas mismas habilidades de colaboración.
 
 Una conversación útil termina con comprensión compartida del problema y de la evidencia que confirma su resolución.

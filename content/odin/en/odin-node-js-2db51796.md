@@ -87,7 +87,7 @@ export function ContactForm() {
 }
 ```
 
-This initial example **validates only**, as its message explicitly states. Add `app/contacts/new/page.tsx` importing and rendering `ContactForm`. The 18–120 age range is the original exercise's fictional domain rule, not a Ruta participation requirement.
+This initial example **validates only**, as its message explicitly states. Add `app/contacts/new/page.tsx` importing and rendering `ContactForm`. The 18–120 age range is the original exercise's fictional domain rule, not a Academia Iquiti participation requirement.
 
 ## Errors and persistence
 

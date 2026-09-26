@@ -1,0 +1,767 @@
+/*
+ * Capa base del sistema. Valores: siempre desde tokens (--iq-*).
+ * Para cambiar un valor editar tokens/*.json y ejecutar `pnpm tokens`.
+ */
+
+@layer base {
+  [data-iquiti-home] {
+    background-color: var(--iq-bg);
+    color: var(--iq-fg);
+    font-family: var(--iq-font-family-sans);
+    font-size: 100%; /* respeta la preferencia del navegador */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--iq-layout-header-h) + 1rem); /* WCAG 2.4.11: el header no tapa el foco */
+    interpolate-size: allow-keywords; /* permite animar a height:auto donde exista soporte */
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    [data-iquiti-home] {
+      scroll-behavior: smooth;
+    }
+  }
+
+  [data-iquiti-home] {
+    min-height: 100dvh;
+    overflow-x: clip;
+    font-size: var(--iq-type-body-size);
+    line-height: var(--iq-type-body-leading);
+  }
+
+  [data-surface] {
+    background-color: var(--iq-bg);
+    color: var(--iq-fg);
+  }
+
+  /* Logos originales: el color se aplica por superficie (no se editan los SVG). */
+  [data-iquiti-home],
+  [data-surface="dark"] {
+    --iq-logo-filter: brightness(0) invert(0.93);
+  }
+  [data-surface="brand"] {
+    --iq-logo-filter: brightness(0) invert(1);
+  }
+  [data-surface="light"],
+  [data-surface="white"],
+  [data-surface="accent"] {
+    --iq-logo-filter: none;
+  }
+
+  [data-iquiti-home] ::selection {
+    background-color: var(--iq-accent);
+    color: var(--iq-bg);
+  }
+
+  [data-iquiti-home] :focus-visible {
+    outline: var(--iq-focus-width) solid var(--iq-focus);
+    outline-offset: var(--iq-focus-offset);
+  }
+
+  [data-iquiti-home] h1,
+  [data-iquiti-home] h2,
+  [data-iquiti-home] h3 {
+    text-wrap: balance;
+  }
+
+  [data-iquiti-home] p {
+    text-wrap: pretty;
+  }
+
+  [data-iquiti-home] summary {
+    list-style: none;
+  }
+  [data-iquiti-home] summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Estado inicial de motion. Solo opacidad: el contenido sigue enfocable y legible por AT. */
+  html[data-motion="on"] [data-iquiti-home] [data-reveal] {
+    opacity: 0;
+  }
+}
+
+/* ---------- Utilidades del sistema ---------- */
+
+/* Retícula técnica de 4rem; usa la línea decorativa de la superficie. */
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, var(--iq-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--iq-line) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  background-position: center;
+}
+
+/* Retícula de puntos finos (nodos sin líneas): un punto de 1px en cada cruce de 2rem. */
+@utility grid-dots {
+  background-image: radial-gradient(circle at center, var(--iq-line) 1px, transparent 1.5px);
+  background-size: 2rem 2rem;
+  background-position: center;
+}
+
+/* Textura menuda: puntos de ~1.2px cada 10.4px, al 16% del texto de la superficie. */
+@utility dot-texture {
+  background-image: radial-gradient(
+    circle at center,
+    color-mix(in srgb, var(--iq-fg) 16%, transparent) 0.585px,
+    transparent 0.78px
+  );
+  background-size: 10.4px 10.4px;
+  background-position: center;
+}
+
+/* Header translúcido con el fondo de su superficie; fallback sólido (sin soporte o transparencia reducida). */
+@utility header-glass {
+  background-color: color-mix(in srgb, var(--iq-bg) 80%, transparent);
+  backdrop-filter: blur(var(--iq-blur-glass)) saturate(1.2);
+  transition:
+    background-color var(--iq-duration-base) var(--iq-ease-standard),
+    border-color var(--iq-duration-base) var(--iq-ease-standard),
+    color var(--iq-duration-base) var(--iq-ease-standard);
+
+  @supports not (backdrop-filter: blur(1px)) {
+    background-color: var(--iq-bg);
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--iq-bg);
+    backdrop-filter: none;
+  }
+}
+
+/* ---------- Componentes con CSS propio ---------- */
+
+/*
+ * Botón con relleno desde el centro (btn-wipe). El relleno es un ::after detrás del contenido
+ * (isolation crea el contexto de apilamiento): nace como una píldora pequeña y crece hasta
+ * cubrir el botón. Hover y foco visible comparten el efecto.
+ */
+.btn-wipe {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-clip: padding-box; /* el fondo no asoma bajo el borde (con radio, el relleno no lo cubre) */
+}
+.btn-wipe::after {
+  content: "";
+  position: absolute;
+  inset: -1px; /* cubre también el borde del botón */
+  z-index: -1;
+  border-radius: inherit;
+  background-color: var(--btn-wipe-bg);
+  opacity: 0;
+  transform: scale(0.2);
+  transition:
+    transform var(--iq-duration-slow) var(--iq-ease-out-expo),
+    opacity var(--iq-duration-base) var(--iq-ease-out-expo);
+}
+.btn-wipe:hover,
+.btn-wipe:focus-visible {
+  color: var(--btn-wipe-fg);
+}
+.btn-wipe:hover::after,
+.btn-wipe:focus-visible::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-wipe::after {
+    transition: none; /* el cambio de color se mantiene, sin desplazamiento */
+  }
+}
+@media (forced-colors: active) {
+  .btn-wipe::after {
+    display: none;
+  }
+}
+
+/*
+ * Subrayado que se teje (link-weave): dos medias líneas nacen en los extremos del texto y se unen
+ * al centro en hover/foco. Se aplica a un enlace cuyo primer hijo <span> es el texto.
+ */
+.link-weave > span {
+  position: relative;
+}
+.link-weave > span::before,
+.link-weave > span::after {
+  content: "";
+  position: absolute;
+  bottom: -0.35em;
+  width: 50%;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transition: transform var(--iq-duration-slow) var(--iq-ease-out-expo);
+}
+.link-weave > span::before {
+  left: 0;
+  transform-origin: left center;
+}
+.link-weave > span::after {
+  right: 0;
+  transform-origin: right center;
+}
+.link-weave:hover > span::before,
+.link-weave:hover > span::after,
+.link-weave:focus-visible > span::before,
+.link-weave:focus-visible > span::after {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .link-weave > span::before,
+  .link-weave > span::after {
+    transition: none;
+  }
+}
+
+/*
+ * Cuadro de retícula con capa degradada (cell-sweep). En hover/foco una capa con el tinte del
+ * acento sube desde la arista inferior. Es decorativo: el contenido no se mueve, ningún estado
+ * depende del efecto y el cuadro sigue siendo texto, no un control.
+ */
+.cell-sweep {
+  position: relative;
+  isolation: isolate; /* el degradado queda detrás del texto y delante del fondo de la sección */
+  overflow: clip;
+}
+/* Capa degradada: densa en la base, disuelta antes de la mitad del cuadro. */
+.cell-sweep::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  /* Verde de marca, no el acento de la superficie: el tinte es el mismo sobre claro y sobre
+     oscuro. Caso documentado de primitivo (decoración, nunca texto). */
+  background-image: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--iq-color-brand-green) 22%, transparent),
+    color-mix(in srgb, var(--iq-color-brand-green) 7%, transparent) 40%,
+    transparent 85%
+  );
+  opacity: 0;
+  transform: translateY(24%);
+  transition:
+    opacity var(--iq-duration-base) var(--iq-ease-standard),
+    transform var(--iq-duration-slow) var(--iq-ease-out-expo);
+}
+/* Solo con puntero fino: en táctil el efecto se quedaría fijo tras un toque suelto. */
+@media (hover: hover) {
+  .cell-sweep:hover::before {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.cell-sweep:focus-within::before {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  /* La capa aparece en su sitio: cambia el color, no la posición. */
+  .cell-sweep::before {
+    transform: none;
+    transition: opacity var(--iq-duration-base) var(--iq-ease-standard);
+  }
+}
+@media (forced-colors: active) {
+  .cell-sweep::before {
+    display: none;
+  }
+}
+
+/*
+ * Hilo corto de lista (thread-mark). Sustituye a la numeración: marca cada fila sin pesar en la
+ * lectura. Al trazarse suelta un eco —una copia que se alarga y se disuelve una sola vez— y el eco
+ * se repite si el puntero entra en la fila (.thread-row). Decorativo: va con aria-hidden.
+ */
+.thread-mark {
+  display: block; /* también fuera de una retícula: un <span> en flujo ignoraría alto y ancho */
+  position: relative;
+  height: 1px;
+  width: 2rem;
+  background-color: var(--iq-accent);
+  transform-origin: left center; /* el trazo nace del margen, como un hilo que se tiende */
+}
+.thread-mark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: inherit;
+  transform-origin: left center;
+  opacity: 0; /* en reposo no hay nada que ver ni que animar */
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* GSAP marca el hilo al terminar el trazo; el eco es CSS y suena una vez. */
+  .thread-mark[data-thread="eco"]::after {
+    animation: iq-thread-echo var(--iq-duration-reveal) var(--iq-ease-out);
+  }
+  @media (hover: hover) {
+    .thread-row:hover .thread-mark::after {
+      animation: iq-thread-echo var(--iq-duration-reveal) var(--iq-ease-out);
+    }
+  }
+}
+@keyframes iq-thread-echo {
+  from {
+    opacity: 0.55;
+    transform: scaleX(1);
+  }
+  to {
+    opacity: 0;
+    transform: scaleX(1.8);
+  }
+}
+@media (forced-colors: active) {
+  .thread-mark {
+    background-color: CanvasText;
+  }
+  .thread-mark::after {
+    display: none;
+  }
+}
+
+/*
+ * Corrimiento de fila (row-drift). En hover el hilo, el título y el cuerpo se corren un poco,
+ * cada uno una distancia distinta. Decorativo: la fila sigue siendo texto, no un control.
+ */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .row-drift .thread-mark,
+  .row-drift h3,
+  .row-drift p {
+    transition: transform var(--iq-duration-slow) var(--iq-ease-out-expo);
+  }
+  .row-drift:hover .thread-mark {
+    transform: translateX(0.375rem);
+  }
+  .row-drift:hover h3 {
+    transform: translateX(0.75rem);
+  }
+  .row-drift:hover p {
+    transform: translateX(1.125rem);
+  }
+}
+
+/*
+ * Cinta en bucle (Marquee). La pista lleva dos copias de la lista y recorre media pista: al llegar
+ * al 50 % la segunda copia está exactamente donde empezó la primera, así el bucle no tiene costura.
+ * El movimiento se detiene con el control de pausa, con el puntero encima o con el foco dentro.
+ */
+.marquee {
+  overflow: clip; /* la pista es más ancha que la cinta; clip no crea caja de scroll */
+  /* Los extremos se disuelven en la superficie, sea cual sea su color. */
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+.marquee-run {
+  display: flex;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: iq-marquee var(--marquee-duration, 48s) linear infinite;
+  }
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+  @media (hover: hover) {
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+  }
+}
+@keyframes iq-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+/* Sin movimiento la cinta es una retícula: la copia sobra y la pista se reparte en filas. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    mask-image: none;
+  }
+  .marquee-track {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .marquee-run + .marquee-run {
+    display: none;
+  }
+}
+
+/*
+ * Arco de fotos (PhotoArc). Sin JS, o con movimiento reducido, es una fila que se desplaza a mano.
+ * Con `data-arc="live"` las piezas se posicionan en perspectiva (solo transform y opacity, vía JS).
+ */
+.photo-arc-stage {
+  overflow: clip;
+}
+.photo-arc-track {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-inline: var(--iq-layout-gutter);
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--iq-layout-gutter);
+}
+.photo-arc-card {
+  position: relative;
+  flex: 0 0 clamp(12rem, 46vw, 16rem);
+  aspect-ratio: 3 / 4;
+  scroll-snap-align: center;
+  overflow: hidden;
+  border: 1px solid var(--iq-line);
+  background-color: var(--iq-bg-raised);
+}
+.photo-arc-card img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+[data-arc="live"] .photo-arc-stage {
+  position: relative;
+  height: clamp(20rem, 46vw, 30rem);
+  perspective: 1250px;
+  perspective-origin: 50% 42%;
+  touch-action: pan-y;
+}
+[data-arc="live"] .photo-arc-track {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: visible;
+  padding: 0;
+  transform-style: preserve-3d;
+}
+[data-arc="live"] .photo-arc-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  flex: none;
+  width: clamp(11.5rem, 20vw, 17.5rem);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.photo-arc-progress {
+  width: clamp(8rem, 22vw, 14rem);
+  height: 1px;
+  overflow: hidden;
+  background-color: var(--iq-line-strong);
+}
+.photo-arc-progress-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--iq-fg);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+@media (hover: hover) and (pointer: fine) {
+  [data-arc="live"] .photo-arc-stage {
+    cursor: grab;
+  }
+  [data-arc="live"] .photo-arc-stage.is-dragging {
+    cursor: grabbing;
+    user-select: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-arc="live"] .photo-arc-stage {
+    height: auto;
+    perspective: none;
+  }
+  [data-arc="live"] .photo-arc-track {
+    position: static;
+    display: flex;
+    overflow-x: auto;
+    padding-inline: var(--iq-layout-gutter);
+  }
+  [data-arc="live"] .photo-arc-card {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+  }
+}
+@media (forced-colors: active) {
+  .photo-arc-card {
+    border-color: CanvasText;
+  }
+  .photo-arc-progress {
+    background-color: Canvas;
+    border-block-end: 1px solid CanvasText;
+  }
+  .photo-arc-progress-fill {
+    background-color: CanvasText;
+  }
+}
+
+/*
+ * Giro 3D por letra (LetterSwap). La caja gira sobre un eje que pasa por su centro: las caras se
+ * separan media altura de línea (vertical) o media eme (horizontal), como en el efecto original.
+ */
+[data-letter-swap] .letter-word {
+  display: inline-block;
+  white-space: nowrap; /* el salto de línea ocurre entre palabras, no entre letras */
+}
+[data-letter-swap] {
+  perspective: 800px;
+}
+[data-letter-swap] .letter-box {
+  display: inline-block;
+  position: relative;
+  transform-style: preserve-3d;
+}
+[data-letter-swap] .letter-face {
+  display: inline-block;
+  backface-visibility: hidden;
+}
+[data-letter-swap] .letter-face-back {
+  position: absolute;
+  inset: 0;
+}
+
+/* Caras según el eje de giro */
+/* Solo el swap de dos caras necesita profundidad: en la entrada evita agrandar el texto. */
+[data-letter-swap*="hover"][data-direction="top"] .letter-face,
+[data-letter-swap*="hover"][data-direction="bottom"] .letter-face {
+  transform: translateZ(0.5lh);
+}
+[data-letter-swap][data-direction="top"] .letter-face-back {
+  transform: rotateX(90deg) translateZ(0.5lh);
+}
+[data-letter-swap][data-direction="bottom"] .letter-face-back {
+  transform: rotateX(-90deg) translateZ(0.5lh);
+}
+[data-letter-swap*="hover"][data-direction="left"] .letter-face,
+[data-letter-swap*="hover"][data-direction="right"] .letter-face {
+  transform: translateZ(0.32em);
+}
+[data-letter-swap][data-direction="left"] .letter-face-back {
+  transform: rotateY(90deg) translateZ(0.32em);
+}
+[data-letter-swap][data-direction="right"] .letter-face-back {
+  transform: rotateY(-90deg) translateZ(0.32em);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Entrada al cargar: la letra gira hasta quedar de frente. */
+  /* `backwards` (no `both`): al terminar, el transform queda libre para el swap en hover. */
+  [data-letter-swap^="load"] .letter-box {
+    animation-duration: var(--iq-duration-reveal);
+    animation-timing-function: var(--iq-ease-out-expo);
+    animation-fill-mode: backwards;
+    animation-delay: var(--letter-delay, 0ms);
+  }
+  [data-letter-swap^="load"][data-direction="top"] .letter-box {
+    animation-name: iq-letter-in-top;
+  }
+  [data-letter-swap^="load"][data-direction="left"] .letter-box {
+    animation-name: iq-letter-in-left;
+  }
+
+  /* Swap en hover/foco: la caja gira y la segunda cara toma el frente. */
+  [data-letter-swap*="hover"] .letter-box {
+    transition: transform var(--iq-duration-slow) var(--iq-ease-out-expo);
+    transition-delay: var(--letter-hover-delay, 0ms);
+  }
+  [data-letter-swap*="hover"][data-direction="top"]:hover .letter-box {
+    transform: rotateX(-90deg);
+  }
+  [data-letter-swap*="hover"][data-direction="bottom"]:hover .letter-box {
+    transform: rotateX(90deg);
+  }
+  [data-letter-swap*="hover"][data-direction="left"]:hover .letter-box {
+    transform: rotateY(-90deg);
+  }
+  [data-letter-swap*="hover"][data-direction="right"]:hover .letter-box {
+    transform: rotateY(90deg);
+  }
+}
+
+@keyframes iq-letter-in-top {
+  from {
+    opacity: 0;
+    transform: perspective(800px) rotateX(-90deg);
+  }
+}
+@keyframes iq-letter-in-left {
+  from {
+    opacity: 0;
+    transform: perspective(600px) rotateY(-90deg);
+  }
+}
+
+/* Grano de película: textura sutil en dispositivos con puntero fino. */
+@media (hover: hover) and (prefers-reduced-transparency: no-preference) {
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: var(--iq-z-grain);
+    pointer-events: none;
+    opacity: 0.045;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/*
+ * Entrada del primer viewport (data-intro). CSS puro: arranca en el primer pintado, sin JS.
+ * Para contenido bajo el pliegue usar data-reveal (GSAP + ScrollTrigger).
+ */
+.intro-mask {
+  display: inline-block;
+  overflow: clip;
+  /* Aire para tildes y la cola de la Q sin alterar el layout. */
+  padding-block: 0.12em 0.14em;
+  margin-block: -0.12em -0.14em;
+}
+.intro-mask > [data-intro] {
+  display: inline-block;
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-intro] {
+    animation: iq-intro-up var(--iq-duration-reveal) var(--iq-ease-out-expo) both;
+  }
+  [data-intro="fade"] {
+    animation-name: iq-intro-fade;
+  }
+  [data-intro="rise"] {
+    animation-name: iq-intro-rise;
+    animation-duration: var(--iq-duration-reveal-slow);
+  }
+  /* Giro 3D sobre el borde superior: el texto cae hacia el lector. */
+  [data-intro="rotate-top"] {
+    animation-name: iq-intro-rotate-top;
+    animation-duration: var(--iq-duration-reveal-slow);
+    transform-origin: top center;
+  }
+  /* Giro 3D sobre el borde izquierdo: la palabra se abre como una página. */
+  [data-intro="rotate-left"] {
+    animation-name: iq-intro-rotate-left;
+    animation-duration: var(--iq-duration-reveal-slow);
+    transform-origin: left center;
+    display: inline-block;
+  }
+}
+@keyframes iq-intro-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--iq-distance-md));
+  }
+}
+@keyframes iq-intro-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes iq-intro-rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes iq-intro-rotate-top {
+  from {
+    opacity: 0;
+    transform: perspective(900px) rotateX(-62deg);
+  }
+}
+@keyframes iq-intro-rotate-left {
+  from {
+    opacity: 0;
+    transform: perspective(700px) rotateY(-72deg);
+  }
+}
+
+/* Campo de hilos del hero: aparece suave cuando el primer cuadro está dibujado. */
+.thread-field {
+  opacity: 0;
+}
+.thread-field[data-ready] {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .thread-field {
+    transition: opacity 1.6s var(--iq-ease-out);
+  }
+}
+@media (forced-colors: active) {
+  .thread-field {
+    display: none;
+  }
+}
+
+/* Indicador de scroll del hero (decorativo). */
+.scroll-cue::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--iq-accent);
+  transform: translateY(-100%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-cue::after {
+    animation: iq-scroll-cue 2.4s var(--iq-ease-in-out) infinite;
+  }
+}
+@keyframes iq-scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  55%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* FAQ: apertura animada donde el navegador soporte ::details-content. */
+.faq-item::details-content {
+  block-size: 0;
+  overflow-y: clip;
+  transition:
+    block-size var(--iq-duration-base) var(--iq-ease-standard),
+    content-visibility var(--iq-duration-base) allow-discrete;
+}
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+
+/* Menú móvil (<dialog>): fundido de entrada/salida y bloqueo de scroll sin JS. */
+.mobile-menu {
+  opacity: 0;
+  transition:
+    opacity var(--iq-duration-base) var(--iq-ease-out),
+    overlay var(--iq-duration-base) allow-discrete,
+    display var(--iq-duration-base) allow-discrete;
+}
+.mobile-menu[open] {
+  opacity: 1;
+  @starting-style {
+    opacity: 0;
+  }
+}
+.mobile-menu::backdrop {
+  background: transparent;
+}
+html:has(.mobile-menu[open]) {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-item::details-content,
+  .mobile-menu {
+    transition: none;
+  }
+}
+
+/* Alto contraste (Windows): bordes visibles y sin decoración que compita. */
+@media (forced-colors: active) {
+  body::after,
+  .grid-lines {
+    display: none;
+  }
+  .dot-texture {
+    background-image: none;
+  }
+}

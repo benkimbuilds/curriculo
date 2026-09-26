@@ -1,6 +1,6 @@
 # Curriculum attribution and license
 
-Ruta adapts **The Odin Project**, created by Erik Trautman and maintained by The Odin Project community. The full-library baseline is curriculum commit `fc46ee82462f9916889030985640805d29837f74` from <https://github.com/TheOdinProject/curriculum>. Official course ordering is pinned to application commit `13ba6b2c4219c7e1ea734369425071bb9acd6f7e` from <https://github.com/TheOdinProject/theodinproject>.
+Academia Iquiti adapts **The Odin Project**, created by Erik Trautman and maintained by The Odin Project community. The full-library baseline is curriculum commit `fc46ee82462f9916889030985640805d29837f74` from <https://github.com/TheOdinProject/curriculum>. Official course ordering is pinned to application commit `13ba6b2c4219c7e1ea734369425071bb9acd6f7e` from <https://github.com/TheOdinProject/theodinproject>.
 
 `odin/inventory.json` identifies every Foundations and Full Stack JavaScript lesson/project included in scope. `odin/upstream/` retains original source Markdown. `odin/es-MX/` contains Spanish adaptations; `odin/en/` contains English adaptations where instruction changes. Mappings explicitly distinguish translations, Windows/macOS adaptations, technical corrections, and Next.js replacements. The guided core is separately authored original instruction. Ruby/Rails and archived courses are excluded. Changes include Spanish localization, platform setup, replacement of Express/EJS/Passport application work with Next.js equivalents, and additional AI instruction.
 

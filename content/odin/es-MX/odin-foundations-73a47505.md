@@ -4,7 +4,7 @@ The Odin Project es una comunidad de código abierto que reúne recursos para qu
 
 ## Cómo aprenderás
 
-Cada lección presenta un tema, explica por qué importa y enlaza lecturas, demostraciones o ejercicios elaborados por otras personas. Esas lecturas forman parte de la lección; no basta con leer la introducción de Ruta. Las preguntas al final permiten reconocer lo que necesitas volver a consultar. Los proyectos reúnen conocimientos de varias lecciones y te obligan a tomar decisiones que un tutorial ya habría tomado por ti.
+Cada lección presenta un tema, explica por qué importa y enlaza lecturas, demostraciones o ejercicios elaborados por otras personas. Esas lecturas forman parte de la lección; no basta con leer la introducción de Academia Iquiti. Las preguntas al final permiten reconocer lo que necesitas volver a consultar. Los proyectos reúnen conocimientos de varias lecciones y te obligan a tomar decisiones que un tutorial ya habría tomado por ti.
 
 Aprender se parece a una bola de nieve que crece mientras rueda: acumulas ideas, algunas se olvidan y otras se vuelven claras al usarlas. Un proyecto no es un examen de memoria. Puedes revisar documentación, buscar un mensaje de error y pedir orientación. Lo importante es resolver el problema y explicar tu solución, no recordar cada propiedad de CSS sin consultar nada.
 
@@ -16,9 +16,9 @@ No avances buscando únicamente el resultado visual. Pregunta qué entrada recib
 
 ## Idioma y ritmo
 
-El contenido de Ruta está en español, pero muchos recursos originales, nombres de APIs, errores y discusiones técnicas están en inglés. Conserva un glosario pequeño de términos que se repiten y consulta recursos en español cuando una explicación no resulte clara. No traduzcas nombres de propiedades o comandos: `display`, `git status` y `return` deben escribirse tal como los entiende la herramienta.
+El contenido de Academia Iquiti está en español, pero muchos recursos originales, nombres de APIs, errores y discusiones técnicas están en inglés. Conserva un glosario pequeño de términos que se repiten y consulta recursos en español cuando una explicación no resulte clara. No traduzcas nombres de propiedades o comandos: `display`, `git status` y `return` deben escribirse tal como los entiende la herramienta.
 
-La secuencia de Fundamentos tiene dependencias. Saltarte Git porque todavía no parece importante o comenzar JavaScript sin entender HTML crea huecos que aparecerán en los proyectos. Realiza las lecturas y tareas en orden; sólo los recursos marcados como adicionales son opcionales. La organización en semanas de Ruta es una guía de estudio, no una promesa de que todas las personas dominarán lo mismo en el mismo tiempo.
+La secuencia de Fundamentos tiene dependencias. Saltarte Git porque todavía no parece importante o comenzar JavaScript sin entender HTML crea huecos que aparecerán en los proyectos. Realiza las lecturas y tareas en orden; sólo los recursos marcados como adicionales son opcionales. La organización en semanas de Academia Iquiti es una guía de estudio, no una promesa de que todas las personas dominarán lo mismo en el mismo tiempo.
 
 ## Actividad
 
@@ -28,7 +28,7 @@ La secuencia de Fundamentos tiene dependencias. Saltarte Git porque todavía no 
 
 ## Comprobación
 
-- ¿Qué aporta The Odin Project y qué adapta Ruta?
+- ¿Qué aporta The Odin Project y qué adapta Academia Iquiti?
 - ¿Por qué un proyecto no es una prueba de memorización?
 - ¿Qué problemas puede causar saltar lecciones o realizarlas fuera de orden?
 - ¿Qué partes son opcionales y cómo las reconoces?

@@ -1,6 +1,6 @@
 # Installing Node.js
 
-## Ruta platform adaptation
+## Academia Iquiti platform adaptation
 
 On Windows with WSL2, follow the Linux nvm guide inside Ubuntu and keep Node, npm and repositories in that same environment. nvm for Unix shells does not run by pasting its commands into PowerShell. For native Windows selected by the lab, install the LTS release from https://nodejs.org/en/download and verify node -v and npm -v in a new terminal; that installer does not provide the Unix nvm command. On macOS follow the macOS nvm guide. Browser APIs such as document and prompt are not automatically available in Node.
 

@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { CircleUserRound, Ellipsis } from "lucide-react";
 import { useState } from "react";
 
 import { authClient } from "@/modules/auth/client";
 
-export function AccountMenu({ showProfile = true }: { showProfile?: boolean }) {
+export function AccountMenu({ compact = false, showProfile = true }: { compact?: boolean; showProfile?: boolean }) {
   const router = useRouter();
   const [pending, setPending] = useState(false);
   async function signOut() {
@@ -17,7 +18,7 @@ export function AccountMenu({ showProfile = true }: { showProfile?: boolean }) {
   }
   return (
     <details className="account-menu">
-      <summary aria-label="Abrir menú de cuenta" className="icon-button">•••</summary>
+      <summary aria-label="Abrir menú de cuenta" className="account-menu__trigger">{compact ? <CircleUserRound aria-hidden="true" size={19} strokeWidth={1.8} /> : <Ellipsis aria-hidden="true" size={18} strokeWidth={2} />}</summary>
       <div>{showProfile ? <Link href="/perfil">Mi perfil</Link> : null}<button disabled={pending} onClick={signOut} type="button">{pending ? "Saliendo…" : "Cerrar sesión"}</button></div>
     </details>
   );

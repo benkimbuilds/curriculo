@@ -4,7 +4,7 @@ Construye una aplicación donde una persona pueda ingresar información y genera
 
 ## Requisitos completos
 
-1. Crea un proyecto React. Para la entrega de Ruta usa Next.js con App Router; el laboratorio Vite sigue siendo útil para practicar componentes aislados.
+1. Crea un proyecto React. Para la entrega de Academia Iquiti usa Next.js con App Router; el laboratorio Vite sigue siendo útil para practicar componentes aislados.
 2. Dibuja la estructura de componentes antes de programar. Incluye información general —nombre, correo y teléfono—, formación —institución, título y fechas— y experiencia —empresa, puesto, responsabilidades y periodo de inicio y fin—.
 3. Incluye botones de editar y guardar por sección o para el documento completo. Guardar debe mostrar los valores como contenido HTML; editar debe devolver los inputs con los valores anteriores. La persona puede modificar y guardar repetidamente sin perder datos.
 4. Coloca componentes reutilizables en `src/components` y estilos en una carpeta de estilos o módulos CSS junto a sus componentes. Importa los estilos donde corresponde.
@@ -35,7 +35,7 @@ Este fragmento no es el proyecto resuelto: debes conectarlo a labels, inputs, fo
 
 El original presenta [Netlify](https://docs.netlify.com/), [Vercel](https://www.vercel.com/docs) y [Cloudflare Pages](https://developers.cloudflare.com/pages) para publicar la salida estática de Vite. Esas instrucciones son para una SPA: importar un repositorio, elegir rama y publicar su directorio `dist`. Puedes consultar la [guía original de despliegue de Vite](https://vitejs.dev/guide/static-deploy.html) para entender esa alternativa.
 
-En Ruta sustituimos ese paso por un despliegue de Next.js en un servicio compatible con Node, como Railway. Ejecuta `npm run build` y `npm run start` localmente. En el proveedor conecta tu repositorio, configura el comando de construcción y el de inicio, y abre el dominio HTTPS asignado. No publiques `dist` ni configures todas las rutas a `/index.html`: Next.js debe atenderlas. Las páginas usan `app/.../page.tsx`; un `layout.tsx` comparte la estructura. Una futura ruta `/cv/[id]` leerá parámetros dinámicos y podrá mostrar `not-found.tsx` para un documento inexistente y `error.tsx` para un fallo inesperado. No necesitas autenticación ni base de datos para este primer CV.
+En Academia Iquiti sustituimos ese paso por un despliegue de Next.js en un servicio compatible con Node, como Railway. Ejecuta `npm run build` y `npm run start` localmente. En el proveedor conecta tu repositorio, configura el comando de construcción y el de inicio, y abre el dominio HTTPS asignado. No publiques `dist` ni configures todas las rutas a `/index.html`: Next.js debe atenderlas. Las páginas usan `app/.../page.tsx`; un `layout.tsx` comparte la estructura. Una futura ruta `/cv/[id]` leerá parámetros dinámicos y podrá mostrar `not-found.tsx` para un documento inexistente y `error.tsx` para un fallo inesperado. No necesitas autenticación ni base de datos para este primer CV.
 
 ## Verificación de entrega
 

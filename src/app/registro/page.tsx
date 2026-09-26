@@ -4,7 +4,7 @@ import { RegisterForm } from "@/components/auth-forms";
 
 export default function RegisterPage() {
   return (
-    <AuthShell body="Crea tu cuenta y empieza a aprender hoy. Es gratis, siempre." footer={<>¿Ya tienes cuenta? <Link href="/iniciar-sesion">Inicia sesión</Link></>} title="Empieza tu ruta">
+    <AuthShell body="Crea tu cuenta y empieza hoy a construir la primera versión de tu idea." footer={<>¿Ya tienes cuenta? <Link href="/iniciar-sesion">Inicia sesión</Link></>} title="Regístrate">
       <RegisterForm />
     </AuthShell>
   );

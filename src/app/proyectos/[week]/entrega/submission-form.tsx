@@ -1,7 +1,8 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useFormStatus } from "react-dom";
+import { toast } from "sonner";
 
 import { Spark } from "@/components/icons";
 import { submitProjectAction, type SubmissionActionState } from "../../actions";
@@ -15,6 +16,10 @@ function SubmitButton() {
 
 export function SubmissionForm({ enrollmentId, week }: { enrollmentId: string; week: number }) {
   const [state, formAction] = useActionState(submitProjectAction, initialState);
+  useEffect(() => {
+    if (state.status === "idle" || !state.message) return;
+    toast[state.status === "success" ? "success" : "error"](state.message);
+  }, [state]);
   return (
     <form action={formAction} className="form-stack">
       <input name="enrollmentId" type="hidden" value={enrollmentId} />
@@ -25,7 +30,6 @@ export function SubmissionForm({ enrollmentId, week }: { enrollmentId: string; w
       <label>¿Qué fue lo más difícil?<textarea maxLength={1000} minLength={20} name="reflection" placeholder="Cuéntanos brevemente cómo resolviste un reto…" required rows={5} /></label>
       <label className="check-label"><input name="ownership" required type="checkbox" /><span>Confirmo que este es mi trabajo y que no contiene datos personales sensibles.</span></label>
       <SubmitButton />
-      {state.message ? <p className={state.status === "success" ? "form-success" : "form-error"} role="status">{state.message}</p> : null}
     </form>
   );
 }

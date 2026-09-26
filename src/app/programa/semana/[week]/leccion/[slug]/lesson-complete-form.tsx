@@ -10,7 +10,7 @@ const initialState: LessonActionState = { status: "idle", message: "" };
 
 function CompletionButton({ alreadyComplete }: { alreadyComplete: boolean }) {
   const { pending } = useFormStatus();
-  return <button className={`button ${alreadyComplete ? "button--success" : "button--primary"}`} disabled={pending || alreadyComplete} type="submit"><Check />{pending ? "Guardando…" : alreadyComplete ? "Lección completada" : "Marcar como completada"}</button>;
+  return <button className={`button lesson-completion-form__button ${alreadyComplete ? "lesson-completion-form__button--complete" : "button--primary"}`} disabled={pending || alreadyComplete} type="submit"><Check />{pending ? "Guardando…" : alreadyComplete ? "Lección completada" : "Marcar como completada"}</button>;
 }
 
 export function LessonCompleteForm({ enrollmentId, lessonId, week, contentVersion, alreadyComplete }: { enrollmentId: string; lessonId: string; week: number; contentVersion: string; alreadyComplete: boolean }) {

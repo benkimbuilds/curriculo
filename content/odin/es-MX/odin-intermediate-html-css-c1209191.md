@@ -8,7 +8,7 @@ HTML tiene más elementos que los usados hasta ahora. Elegirlos por su significa
 
 El objetivo es poder interpretar un diseño y reproducir su estructura con autonomía. Esto sirve incluso si te interesa principalmente el servidor: un portafolio claro permite que otras personas entiendan lo que construiste. No necesitas memorizar el catálogo de HTML o CSS. Sí necesitas reconocer qué herramienta podría resolver un problema y saber consultar su documentación.
 
-Más adelante estudiarás animaciones, accesibilidad y diseño adaptable en HTML y CSS avanzados. Conserva tus ejercicios: podrás revisarlos con esos nuevos criterios. En Ruta, estos temas se distribuyen entre las semanas indicadas y pueden requerir práctica adicional al ritmo de la cohorte.
+Más adelante estudiarás animaciones, accesibilidad y diseño adaptable en HTML y CSS avanzados. Conserva tus ejercicios: podrás revisarlos con esos nuevos criterios. En Academia Iquiti, estos temas se distribuyen entre las semanas indicadas y pueden requerir práctica adicional al ritmo de la cohorte.
 
 ## Lecturas y práctica
 

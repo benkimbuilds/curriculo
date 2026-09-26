@@ -44,7 +44,7 @@ export default async function GalleryPage({
   return (
     <AppShell userName={session.user.name}>
       <div className="app-content">
-        <PageIntro action={<span className="gallery-count"><Grid /> {projects.length} proyectos</span>} description="Conoce proyectos aprobados y comparte retroalimentación basada en su rúbrica." eyebrow="Comunidad Ruta" title="Hecho por quienes aprenden" />
+        <PageIntro action={<span className="gallery-count"><Grid /> {projects.length} proyectos</span>} description="Conoce proyectos aprobados y comparte retroalimentación basada en su rúbrica." eyebrow="Comunidad" title="Hecho por quienes aprenden" />
         <div className="community-notice"><Shield /><div><strong>Un espacio verificado y moderado</strong><p>La galería exige correo verificado, respeta cada cohorte y no permite mensajes directos ni comentarios libres.</p></div></div>
         {!enabled ? (
           <section className="panel"><h2>La galería todavía no está habilitada</h2><p>El equipo la activará cuando la operación de moderación esté lista. Tus entregas y tu avance continúan disponibles.</p></section>

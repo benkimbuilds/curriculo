@@ -24,4 +24,4 @@ Si una lección se vuelve difícil, identifica la primera expresión que no comp
 - Puedes describir la diferencia entre aprender el lenguaje y aprender las convenciones de un framework.
 - Tienes una estrategia concreta para investigar un error sin depender de una solución completa.
 
-Esta adaptación conserva la secuencia de fundamentos y omite la nota dirigida a estudiantes de la ruta Ruby, que no forma parte de Ruta.
+Esta adaptación conserva la secuencia de fundamentos y omite la nota dirigida a estudiantes de la ruta Ruby, que no forma parte de Academia Iquiti.

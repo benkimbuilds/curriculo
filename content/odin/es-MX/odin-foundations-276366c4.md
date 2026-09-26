@@ -22,7 +22,7 @@ Delegar el ejercicio completo puede impedir descubrir cómo funciona una operaci
 
 ## Estudia con constancia
 
-Un bloque frecuente con una meta pequeña suele ser más sostenible que estudiar solamente cuando tienes un día entero libre. Tus experiencias anteriores influyen en la velocidad de aprendizaje; tardar más no prueba menor capacidad. El currículo original es autónomo y sin fechas límite. Las semanas de Ruta organizan el acompañamiento, pero no justifican saltar conocimientos para cumplir una fecha. Si una investigación toma más tiempo, documenta lo aprendido y ajusta el plan con tu facilitador.
+Un bloque frecuente con una meta pequeña suele ser más sostenible que estudiar solamente cuando tienes un día entero libre. Tus experiencias anteriores influyen en la velocidad de aprendizaje; tardar más no prueba menor capacidad. El currículo original es autónomo y sin fechas límite. Las semanas de Academia Iquiti organizan el acompañamiento, pero no justifican saltar conocimientos para cumplir una fecha. Si una investigación toma más tiempo, documenta lo aprendido y ajusta el plan con tu facilitador.
 
 ## Dificultades habituales y respuestas concretas
 

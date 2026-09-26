@@ -1,0 +1,179 @@
+/* GENERADO por scripts/tokens/build.mjs desde tokens/*.json — no editar a mano. */
+/* Se restablecen los namespaces por defecto de Tailwind: solo existen los valores del sistema. */
+
+@theme {
+  --color-*: initial;
+  --font-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --ease-*: initial;
+  --shadow-*: initial;
+  --blur-*: initial;
+  --breakpoint-*: initial;
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 75rem;
+  --breakpoint-xl: 90rem;
+}
+
+@theme inline {
+  /* Roles de superficie (cambian con data-surface) */
+  --color-bg: var(--iq-bg);
+  --color-bg-raised: var(--iq-bg-raised);
+  --color-fg: var(--iq-fg);
+  --color-fg-muted: var(--iq-fg-muted);
+  --color-fg-subtle: var(--iq-fg-subtle);
+  --color-accent: var(--iq-accent);
+  --color-line: var(--iq-line);
+  --color-line-strong: var(--iq-line-strong);
+  --color-focus: var(--iq-focus);
+  --color-action: var(--iq-action);
+  --color-action-fg: var(--iq-action-fg);
+  --color-action-hover: var(--iq-action-hover);
+  --color-action-hover-fg: var(--iq-action-hover-fg);
+
+  /* Primitivos de marca: solo para ilustración y casos documentados */
+  --color-purple: var(--iq-color-brand-purple);
+  --color-purple-deep: var(--iq-color-brand-purple-deep);
+  --color-green: var(--iq-color-brand-green);
+  --color-black: var(--iq-color-brand-black);
+  --color-white: var(--iq-color-brand-white);
+  --color-gray: var(--iq-color-brand-gray);
+  --color-cyan: var(--iq-color-complement-cyan);
+  --color-rose: var(--iq-color-complement-rose);
+  --color-orange: var(--iq-color-complement-orange);
+  --color-yellow: var(--iq-color-complement-yellow);
+  --color-sage: var(--iq-color-complement-sage);
+  --color-neutral-0: var(--iq-color-neutral-0);
+  --color-neutral-50: var(--iq-color-neutral-50);
+  --color-neutral-100: var(--iq-color-neutral-100);
+  --color-neutral-200: var(--iq-color-neutral-200);
+  --color-neutral-300: var(--iq-color-neutral-300);
+  --color-neutral-400: var(--iq-color-neutral-400);
+  --color-neutral-500: var(--iq-color-neutral-500);
+  --color-neutral-600: var(--iq-color-neutral-600);
+  --color-neutral-700: var(--iq-color-neutral-700);
+  --color-neutral-800: var(--iq-color-neutral-800);
+  --color-neutral-900: var(--iq-color-neutral-900);
+  --color-neutral-950: var(--iq-color-neutral-950);
+  --color-neutral-1000: var(--iq-color-neutral-1000);
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-sans: var(--iq-font-family-sans);
+  --font-weight-light: var(--iq-font-weight-light);
+  --font-weight-regular: var(--iq-font-weight-regular);
+  --font-weight-medium: var(--iq-font-weight-medium);
+  --font-weight-semibold: var(--iq-font-weight-semibold);
+
+  --radius-none: var(--iq-radius-none);
+  --radius-xs: var(--iq-radius-xs);
+  --radius-full: var(--iq-radius-full);
+
+  --ease-standard: var(--iq-ease-standard);
+  --ease-out: var(--iq-ease-out);
+  --ease-out-expo: var(--iq-ease-out-expo);
+  --ease-in-out: var(--iq-ease-in-out);
+
+  --blur-glass: var(--iq-blur-glass);
+  --blur-reveal: var(--iq-blur-reveal);
+
+  /* Espaciado y contenedores con nombre: px-gutter, py-section, h-header, max-w-content */
+  --spacing-gutter: var(--iq-layout-gutter);
+  --spacing-section: var(--iq-layout-section-y);
+  --spacing-header: var(--iq-layout-header-h);
+  --spacing-target: var(--iq-layout-target);
+  --container-content: var(--iq-layout-max);
+  --container-reading: var(--iq-layout-reading);
+}
+
+/* Tipografía compuesta: type-hero, type-display, … (admite variantes: md:type-title) */
+@utility type-hero {
+  font-family: var(--iq-type-hero-family);
+  font-size: var(--iq-type-hero-size);
+  font-weight: var(--iq-type-hero-weight);
+  letter-spacing: var(--iq-type-hero-tracking);
+  line-height: var(--iq-type-hero-leading);
+  text-transform: var(--iq-type-hero-transform);
+}
+
+@utility type-display {
+  font-family: var(--iq-type-display-family);
+  font-size: var(--iq-type-display-size);
+  font-weight: var(--iq-type-display-weight);
+  letter-spacing: var(--iq-type-display-tracking);
+  line-height: var(--iq-type-display-leading);
+  text-transform: var(--iq-type-display-transform);
+}
+
+@utility type-title {
+  font-family: var(--iq-type-title-family);
+  font-size: var(--iq-type-title-size);
+  font-weight: var(--iq-type-title-weight);
+  letter-spacing: var(--iq-type-title-tracking);
+  line-height: var(--iq-type-title-leading);
+  text-transform: var(--iq-type-title-transform);
+}
+
+@utility type-heading {
+  font-family: var(--iq-type-heading-family);
+  font-size: var(--iq-type-heading-size);
+  font-weight: var(--iq-type-heading-weight);
+  letter-spacing: var(--iq-type-heading-tracking);
+  line-height: var(--iq-type-heading-leading);
+  text-transform: var(--iq-type-heading-transform);
+}
+
+@utility type-statement {
+  font-family: var(--iq-type-statement-family);
+  font-size: var(--iq-type-statement-size);
+  font-weight: var(--iq-type-statement-weight);
+  letter-spacing: var(--iq-type-statement-tracking);
+  line-height: var(--iq-type-statement-leading);
+  text-transform: var(--iq-type-statement-transform);
+}
+
+@utility type-lead {
+  font-family: var(--iq-type-lead-family);
+  font-size: var(--iq-type-lead-size);
+  font-weight: var(--iq-type-lead-weight);
+  letter-spacing: var(--iq-type-lead-tracking);
+  line-height: var(--iq-type-lead-leading);
+  text-transform: var(--iq-type-lead-transform);
+}
+
+@utility type-body {
+  font-family: var(--iq-type-body-family);
+  font-size: var(--iq-type-body-size);
+  font-weight: var(--iq-type-body-weight);
+  letter-spacing: var(--iq-type-body-tracking);
+  line-height: var(--iq-type-body-leading);
+  text-transform: var(--iq-type-body-transform);
+}
+
+@utility type-small {
+  font-family: var(--iq-type-small-family);
+  font-size: var(--iq-type-small-size);
+  font-weight: var(--iq-type-small-weight);
+  letter-spacing: var(--iq-type-small-tracking);
+  line-height: var(--iq-type-small-leading);
+  text-transform: var(--iq-type-small-transform);
+}
+
+@utility type-label {
+  font-family: var(--iq-type-label-family);
+  font-size: var(--iq-type-label-size);
+  font-weight: var(--iq-type-label-weight);
+  letter-spacing: var(--iq-type-label-tracking);
+  line-height: var(--iq-type-label-leading);
+  text-transform: var(--iq-type-label-transform);
+}
+
+@utility type-meta {
+  font-family: var(--iq-type-meta-family);
+  font-size: var(--iq-type-meta-size);
+  font-weight: var(--iq-type-meta-weight);
+  letter-spacing: var(--iq-type-meta-tracking);
+  line-height: var(--iq-type-meta-leading);
+  text-transform: var(--iq-type-meta-transform);
+}

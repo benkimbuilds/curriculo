@@ -1,10 +1,16 @@
 import { headers } from "next/headers";
+import { eq } from "drizzle-orm";
 
+import { db } from "@/db";
+import { user } from "@/db/schema";
 import { auth } from "@/modules/auth/config";
 import { AuthenticationRequiredError, AuthorizationDeniedError } from "@/shared/errors";
 
 export async function getCurrentSession() {
-  return auth.api.getSession({ headers: await headers() });
+  const currentSession = await auth.api.getSession({ headers: await headers() });
+  if (!currentSession) return null;
+  const [account] = await db.select({ isActive: user.isActive }).from(user).where(eq(user.id, currentSession.user.id)).limit(1);
+  return account?.isActive ? currentSession : null;
 }
 
 export async function requireCurrentSession() {

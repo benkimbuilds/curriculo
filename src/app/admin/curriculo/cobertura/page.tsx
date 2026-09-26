@@ -14,7 +14,7 @@ export default async function CoveragePage() {
   const coverage = getOdinCoverage();
   const lessons = listOdinDocuments();
   const labels = { translation: "Traducción", "platform-adaptation": "Windows / macOS", "technical-adaptation": "Actualización técnica", "nextjs-replacement": "Equivalente en Next.js" };
-  return <AppShell role="admin" userName={session.user.name}><div className="app-content">
+  return <AppShell userName={session.user.name}><div className="app-content">
     <PageIntro title="Cobertura de Odin" eyebrow="Auditoría de fuentes" description={`${coverage.mapped} de ${coverage.expected} lecciones y proyectos del inventario fijado cuentan con material localizado.`} />
     <section className="panel coverage-summary"><h2>Qué demuestra este reporte</h2><p>El inventario se deriva del orden oficial de Fundamentos y Full Stack JavaScript. CI compara cada entrada, archivo, hash, edición en español y adaptación declarada. Ruby, Rails y cursos archivados quedan fuera del alcance acordado.</p><p>Esta es una verificación de cobertura estructural y procedencia. No certifica una revisión pedagógica humana independiente, la disponibilidad permanente de recursos externos ni futuras versiones de Odin.</p><p>Currículo: <code>{coverage.curriculumCommit}</code><br />Orden de cursos: <code>{coverage.orderingCommit}</code></p><Link className="button button--ghost" href="/programa/biblioteca">Abrir biblioteca del estudiante</Link></section>
     {coverage.courses.map(course => <section className="panel" key={course.id}><h2>{odinCourseTitles[course.id]} · {course.mapped}/{course.count}</h2><div className="coverage-table">{lessons.filter(item => item.course === course.id).map(item => {

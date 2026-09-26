@@ -1,8 +1,8 @@
 # Join the Odin community
 
-## Ruta platform adaptation
+## Academia Iquiti platform adaptation
 
-Participation in external services must comply with their age requirements and rules. Discord and public social profiles are optional for Ruta participation; learners who cannot use them can practice the same collaboration skills in their supported cohort. Do not publish personal details or feel required to connect social accounts. References to Odin's moderators and server describe that independent community, not a promise of support from Ruta.
+Participation in external services must comply with their age requirements and rules. Discord and public social profiles are optional for Academia Iquiti participation; learners who cannot use them can practice the same collaboration skills in their supported cohort. Do not publish personal details or feel required to connect social accounts. References to Odin's moderators and server describe that independent community, not a promise of support from Academia Iquiti.
 
 ### Introduction
 

@@ -1,8 +1,8 @@
 # How this course works
 
-## Ruta platform adaptation
+## Academia Iquiti platform adaptation
 
-Ruta adapts Foundations into Spanish and continues along Full Stack JavaScript with React and Next.js. The weekly schedule organizes support; it does not guarantee that every learner will master the material at the same pace. External assigned readings and exercises remain part of the lesson. The English edition supports auditing while learners study the Spanish edition.
+Academia Iquiti adapts Foundations into Spanish and continues along Full Stack JavaScript with React and Next.js. The weekly schedule organizes support; it does not guarantee that every learner will master the material at the same pace. External assigned readings and exercises remain part of the lesson. The English edition supports auditing while learners study the Spanish edition.
 
 ### Introduction
 
@@ -50,13 +50,13 @@ The skills you learn here are transferable to various contexts. Once you know th
 
 ### Language in this edition
 
-Ruta provides Spanish teaching material. Programming identifiers, many reference documents, error messages and international discussions still use English. Keep a small bilingual glossary, spend additional time on unfamiliar concepts and use Spanish explanations when helpful. Do not translate API names or commands. Learning to search for a suitable reference is part of becoming an independent developer.
+Academia Iquiti provides Spanish teaching material. Programming identifiers, many reference documents, error messages and international discussions still use English. Keep a small bilingual glossary, spend additional time on unfamiliar concepts and use Spanish explanations when helpful. Do not translate API names or commands. Learning to search for a suitable reference is part of becoming an independent developer.
 
 ### What comes next
 
 Once you've completed this course, you should feel comfortable with the building blocks of web programming but itching to dig deeper.  Though we spend a fair bit of time digging into each of the major topics in this course, it's really just a taste of what comes next (and all the cool stuff you can do with it).
 
-The final lesson reviews your Foundations work before continuing through Full Stack JavaScript. Ruta adapts application-building to Next.js while retaining the underlying frontend and backend concepts.
+The final lesson reviews your Foundations work before continuing through Full Stack JavaScript. Academia Iquiti adapts application-building to Next.js while retaining the underlying frontend and backend concepts.
 
 The Odin Project is maintained by professionals. We have chosen some of the best resources available and curated a guide on how to go through them. If there are no good resources, we write our own. With that said, know that **everything** in the curriculum is intentionally included and vital for you to become a successful programmer.
 
