@@ -250,7 +250,8 @@ export function ThreadField({
     resizeObserver.observe(canvas);
     const visibilityObserver = new IntersectionObserver(([entry]) => {
       onScreen = entry.isIntersecting;
-      onScreen ? start() : stop();
+      if (onScreen) start();
+      else stop();
     });
     visibilityObserver.observe(canvas);
 
