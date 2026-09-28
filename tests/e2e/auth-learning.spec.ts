@@ -31,9 +31,10 @@ function firstUrl(body: string): string {
 test("public pages fit a phone viewport without dated geographic branding", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
 
-  for (const route of ["/", "/registro", "/iniciar-sesion", "/recuperar", "/privacidad", "/terminos"]) {
+  for (const route of ["/", "/curriculo", "/registro", "/iniciar-sesion", "/recuperar", "/privacidad", "/terminos"]) {
     await page.goto(route);
-    await expect(page.locator("body")).not.toContainText(/México|2026/);
+    await expect(page.locator("body")).toContainText("Iquiti");
+    await expect(page.locator("body")).not.toContainText("Ruta Currículo");
     const dimensions = await page.evaluate(() => ({
       content: document.body.scrollWidth,
       viewport: document.documentElement.clientWidth,
@@ -44,11 +45,12 @@ test("public pages fit a phone viewport without dated geographic branding", asyn
   }
 });
 
-test("homepage facts keep readable space on both sides of column dividers", async ({ page }) => {
+test("curriculum facts keep readable space on both sides of column dividers", async ({ page }) => {
   for (const width of [1440, 900, 768, 390]) {
     await page.setViewportSize({ width, height: 1000 });
-    await page.goto("/");
-    const collisions = await page.locator(".program-facts").evaluate((facts) => {
+    await page.goto("/curriculo");
+    const facts = page.locator("main dl").filter({ has: page.getByText("12 semanas", { exact: true }) });
+    const collisions = await facts.evaluate((facts) => {
       const cells = Array.from(facts.children);
       return cells.flatMap((cell, index) => {
         const previous = cells[index - 1];
@@ -92,17 +94,17 @@ test("registration, verification, protected learning, sign-out, and recovery", a
   await page.goto("/recuperar");
   await page.getByLabel("Correo electrónico").fill(email);
   await page.getByRole("button", { name: "Enviar instrucciones" }).click();
-  await expect(page.getByRole("status")).toContainText("Si existe una cuenta");
+  await expect(page.getByText(/Si existe una cuenta con ese correo/)).toBeVisible();
   const resetBody = await latestMessage(email, "Restablece");
   await page.goto(firstUrl(resetBody));
   await page.getByLabel("Nueva contraseña").fill(newPassword);
   await page.getByLabel("Confirma la contraseña").fill(newPassword);
   await page.getByRole("button", { name: "Guardar contraseña" }).click();
-  await expect(page.getByRole("status")).toContainText("Contraseña actualizada");
+  await expect(page.getByText(/Contraseña actualizada/)).toBeVisible();
 
   await page.goto("/iniciar-sesion");
   await page.getByLabel("Correo electrónico").fill(email);
-  await page.getByLabel("Contraseña").fill(newPassword);
+  await page.locator("#sign-in-password").fill(newPassword);
   await page.getByRole("button", { name: "Entrar" }).click();
   await expect(page).toHaveURL(/dashboard/);
   const sidebar = page.locator(".sidebar");

@@ -1,10 +1,10 @@
-export type NavItem = { label: string; href: `#${string}` };
+export type NavItem = { label: string; href: string };
 
-/** Máximo 5 destinos (Ley de Hick). El orden sigue el recorrido de la página. */
+/** Máximo 5 destinos (Ley de Hick). El currículo vive en su propia página; el resto ancla al home. */
 export const primaryNav: NavItem[] = [
-  { label: "Currículo", href: "#plan-estudios" },
-  { label: "Academia", href: "#academia" },
-  { label: "Aliados", href: "#aliados" },
-  { label: "Galería", href: "#galeria" },
-  { label: "Preguntas", href: "#faq" },
+  { label: "Currículo", href: "/curriculo" },
+  { label: "Academia", href: "/#academia" },
+  { label: "Aliados", href: "/#aliados" },
+  { label: "Galería", href: "/#galeria" },
+  { label: "Preguntas", href: "/#faq" },
 ];
