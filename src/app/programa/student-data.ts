@@ -62,13 +62,19 @@ export async function loadStudentContext(returnTo: string): Promise<StudentConte
   const currentSession = await getCurrentSession();
   if (!currentSession) redirect(`/iniciar-sesion?next=${encodeURIComponent(returnTo)}`);
   if (!currentSession.user.emailVerified) redirect("/verifica-tu-correo");
-  const authorization = await loadAuthorizationContext(
-    currentSession.user.id,
-    await resolveDefaultOrganizationId(),
-  );
+  const organizationId = await resolveDefaultOrganizationId();
+  let authorization = await loadAuthorizationContext(currentSession.user.id, organizationId);
   let enrollmentWithVersion = await findActiveEnrollment(currentSession.user.id);
+  // Fresh verified accounts may lack role/enrollment until provisioning runs.
   if (!hasLearningAccess(authorization.organizationRoles, Boolean(enrollmentWithVersion))) {
-    redirect(getRoleHomeDestination(authorization.organizationRoles).href);
+    if (authorization.organizationRoles.length === 0) {
+      await provisionVerifiedLearner(currentSession.user.id);
+      authorization = await loadAuthorizationContext(currentSession.user.id, organizationId);
+      enrollmentWithVersion = await findActiveEnrollment(currentSession.user.id);
+    }
+    if (!hasLearningAccess(authorization.organizationRoles, Boolean(enrollmentWithVersion))) {
+      redirect(getRoleHomeDestination(authorization.organizationRoles, Boolean(enrollmentWithVersion)).href);
+    }
   }
   if (!enrollmentWithVersion) {
     await provisionVerifiedLearner(currentSession.user.id);
