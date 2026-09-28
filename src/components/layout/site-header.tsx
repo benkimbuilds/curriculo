@@ -12,7 +12,13 @@ import { platformCta } from "./platform-cta";
  * arranca en blanco porque el hero es blanco.
  * Convención (Ley de Jakob): marca a la izquierda → inicio; navegación al centro; acción a la derecha.
  */
-export function SiteHeader({ platformHref = platformCta.href }: { platformHref?: string }) {
+export function SiteHeader({
+  platformHref = platformCta.href,
+  platformLabel = platformCta.shortLabel,
+}: {
+  platformHref?: string;
+  platformLabel?: string;
+}) {
   return (
     <header
       id="site-header"
@@ -53,9 +59,9 @@ export function SiteHeader({ platformHref = platformCta.href }: { platformHref?:
 
         <div className="flex items-center justify-end gap-2">
           <ButtonLink href={platformHref} size="sm" className="hidden sm:inline-flex">
-            {platformCta.shortLabel}
+            {platformLabel}
           </ButtonLink>
-          <MobileMenu items={navItems} cta={{ ...platformCta, href: platformHref }} />
+          <MobileMenu items={navItems} cta={{ ...platformCta, href: platformHref, shortLabel: platformLabel }} />
         </div>
       </div>
     </header>

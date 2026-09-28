@@ -8,6 +8,7 @@ import { Hero } from "@/components/sections/hero";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SkipLink } from "@/components/layout/skip-link";
+import { platformCta } from "@/components/layout/platform-cta";
 import { MotionRoot } from "@/components/motion/motion-root";
 import { site } from "@/config/site";
 import { faqItems } from "@/content/faq";
@@ -16,6 +17,8 @@ import { getRoleHomeDestination } from "@/modules/authorization/navigation";
 import { loadAuthorizationContext } from "@/modules/authorization/service";
 import { resolveDefaultOrganizationId } from "@/modules/community/db-community";
 import { hasLearningEnrollment } from "@/app/programa/student-data";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Iquiti — Centro de Innovación y Academia de Tecnología",
@@ -67,13 +70,14 @@ export default async function Home() {
         await hasLearningEnrollment(session.user.id),
       )
     : undefined;
-  const accountHref = accountLink?.href ?? "/registro";
+  const accountHref = accountLink?.href ?? platformCta.href;
+  const accountLabel = accountLink?.label ?? platformCta.shortLabel;
 
   return (
     <div data-iquiti-home>
       <StructuredData />
       <SkipLink />
-      <SiteHeader platformHref={accountHref} />
+      <SiteHeader platformHref={accountHref} platformLabel={accountLabel} />
       <main id="contenido" tabIndex={-1} className="outline-none">
         <Hero />
         <Centro />
