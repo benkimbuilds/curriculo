@@ -31,7 +31,6 @@ export function RegisterForm() {
 }
 
 export function SignInForm({ returnTo = "/dashboard" }: { returnTo?: string }) {
-  const router = useRouter();
   const [state, setState] = useState(initialState);
   const [showPassword, setShowPassword] = useState(false);
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -43,8 +42,7 @@ export function SignInForm({ returnTo = "/dashboard" }: { returnTo?: string }) {
       const result = await authClient.signIn.email({ email: String(data.get("email")), password: String(data.get("password")), callbackURL: safeReturnTo });
       if (result.error) return toast.error("No pudimos iniciar sesión. Revisa tu correo, contraseña y verificación.");
       toast.success("Sesión iniciada.");
-      router.push(safeReturnTo);
-      router.refresh();
+      window.location.assign(safeReturnTo);
     } catch {
       toast.error("No pudimos iniciar sesión. Intenta de nuevo.");
     } finally {

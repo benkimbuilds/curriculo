@@ -28,7 +28,7 @@ html:not(:has([data-iquiti-home])) { scroll-padding-top: 90px; }
 html:has([data-iquiti-home]) { scroll-padding-top: calc(var(--iq-layout-header-h, 4rem) + 1rem); }
 body { background: var(--paper); color: var(--ink-deep); font-family: var(--sans); margin: 0; min-height: 100vh; }
 body:has([data-iquiti-home]) { background-color: var(--iq-bg); color: var(--iq-fg); font-family: var(--iq-font-family-sans); }
-body:not(:has([data-iquiti-home])) a { color: inherit; text-decoration: none; }
+body:not(:has([data-iquiti-home])) a:not(.button) { color: inherit; text-decoration: none; }
 button, input, select, textarea { font: inherit; }
 button, select { cursor: pointer; }
 body:not(:has([data-iquiti-home])) :is(button, a, input, select, textarea, summary):focus-visible { outline: 2px solid #583877; outline-offset: 3px; }
@@ -177,12 +177,12 @@ input::placeholder, textarea::placeholder { color: #9aa39f; }
 .label-row { align-items: center; display: flex; justify-content: space-between; }
 .password-field { display: block; position: relative; }
 .password-field input { padding-right: 46px; width: 100%; }
-.password-field__toggle { align-items: center; background: transparent; border: 0; border-radius: 8px; color: var(--muted); display: inline-flex; height: 38px; justify-content: center; padding: 0; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); width: 38px; }
-.password-field__toggle:hover { color: var(--ink-deep); }
-.label-row a, .auth-footer a, .check-label a, .auth-demo-link a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
-.check-label { align-items: flex-start !important; flex-direction: row !important; font-weight: 450 !important; line-height: 1.55; }
-.check-label input { flex: 0 0 auto; height: 17px; min-height: 0; margin-top: 2px; width: 17px; }
-.auth-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; margin-top: 30px; padding-top: 24px; text-align: center; }
+.password-field__toggle { align-items: center; background: transparent; border: 0; border-radius: 8px; color: #3a3a3a; display: inline-flex; height: 38px; justify-content: center; padding: 0; position: absolute; right: 4px; top: 50%; transform: translateY(-50%); width: 38px; }
+.password-field__toggle:hover { color: #111; }
+.label-row a, .auth-footer a, .check-label a, .auth-demo-link a { color: #3e2754; text-decoration: underline; text-underline-offset: 3px; }
+.check-label { align-items: flex-start !important; flex-direction: row !important; font-weight: 450 !important; line-height: 1.55; color: #111; gap: 10px; }
+.check-label input { accent-color: #583877; color-scheme: light; flex: 0 0 auto; height: 1.125rem; min-height: 0; margin-top: 2px; width: 1.125rem; }
+.auth-footer { border-top: 1px solid var(--line); color: #3a3a3a; font-size: 13px; margin-top: 30px; padding-top: 24px; text-align: center; }
 .auth-demo-link { color: var(--muted); font-size: 12px; margin: 0; text-align: center; }
 .form-success { align-items: flex-start; background: #e8f3ea; border: 1px solid #c5ddcb; border-radius: 8px; color: #2a6142; display: flex; font-size: 12px; gap: 8px; line-height: 1.5; margin: 0; padding: 11px; }
 .form-success svg { flex: 0 0 auto; height: 17px; width: 17px; }

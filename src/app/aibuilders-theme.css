@@ -180,23 +180,53 @@ body:not(:has([data-iquiti-home])) ::selection { background: #b2f3bd; color: #00
 .filter-bar select, .privacy-card > svg, .card-like { color: #666; }
 .gallery-card__footer > span { background: #f5f5f5; color: #666; }
 
+/* Páginas claras (auth, dashboard, app): el :root de marketing usa color-scheme dark
+   y deja checkboxes/radios nativos con contraste pobre sobre fondos blancos. */
+body:not(:has([data-iquiti-home], [data-iquiti-curriculo])) {
+  color-scheme: light;
+}
+
 .button { border-radius: 999px; font-family: var(--sans); font-weight: 600; letter-spacing: .01em; min-height: 46px; padding-inline: 22px; }
-.button--primary { background: #583877; color: #fff; }
-.button--primary:hover { background: #3e2754; }
-.button--secondary, .button--ghost { background: #fff; border-color: #ddd; color: #212121; }
-.button--secondary:hover, .button--ghost:hover { background: #f5f5f5; }
-.text-link { color: #333; font-weight: 600; }
-body:not(:has([data-iquiti-home])) :is(input, select, textarea) { border-color: #ddd; border-radius: 10px; color: #212121; }
-.form-stack label, .feedback-form label, .settings-form label { color: #333; font-weight: 550; }
-.form-stack input:focus, .form-stack textarea:focus, .feedback-form textarea:focus { border-color: #888; outline-color: rgb(0 0 0 / 8%); }
-.input-prefix { border-color: #ddd; border-radius: 10px; }
-.input-prefix span { background: #f7f7f7; }
-.radio-line, .choice-chip { border-radius: 12px; background: #fff; }
+.button--primary { background: #583877; border-color: #583877; color: #fff; }
+a.button--primary { color: #fff; }
+.button--primary:hover { background: #3e2754; border-color: #3e2754; color: #fff; }
+a.button--primary:hover { color: #fff; }
+.button--primary:disabled { background: #583877; border-color: #583877; color: #fff; opacity: .72; }
+.button--secondary, .button--ghost { background: #fff; border-color: #5e5e5e; color: #111; }
+.button--secondary:hover, .button--ghost:hover { background: #f5f5f5; border-color: #111; color: #111; }
+.text-link { color: #111; font-weight: 600; }
+body:not(:has([data-iquiti-home], [data-iquiti-curriculo])) :is(input, select, textarea) {
+  border-color: #5e5e5e;
+  border-radius: 10px;
+  color: #111;
+  background: #fff;
+}
+body:not(:has([data-iquiti-home], [data-iquiti-curriculo])) :is(input, select, textarea)::placeholder {
+  color: #5e5e5e;
+  opacity: 1;
+}
+body:not(:has([data-iquiti-home], [data-iquiti-curriculo])) :is(input[type="checkbox"], input[type="radio"]) {
+  accent-color: #583877;
+  color-scheme: light;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin: 0;
+  flex-shrink: 0;
+}
+.password-field__toggle { color: #3a3a3a; }
+.password-field__toggle:hover { color: #111; }
+.form-stack label, .feedback-form label, .settings-form label { color: #111; font-weight: 550; }
+.check-label { color: #111; }
+.check-label a { color: #3e2754; }
+.form-stack input:focus, .form-stack textarea:focus, .feedback-form textarea:focus { border-color: #583877; outline-color: rgb(88 56 119 / 18%); }
+.input-prefix { border-color: #5e5e5e; border-radius: 10px; }
+.input-prefix span { background: #f7f7f7; color: #3a3a3a; }
+.radio-line, .choice-chip { border-radius: 12px; background: #fff; border-color: #5e5e5e; }
 .status { border-radius: 999px; padding: 6px 12px; font-weight: 550; }
-.status--good { background: #f1f7f3; color: #386044; border-color: #dce9df; }
-.status--warm { background: #faf7ef; color: #78612c; border-color: #eee5cf; }
-.status--alert { background: #fdf3f2; color: #99433c; border-color: #f0dbd8; }
-.status--info, .status--neutral { background: #fafafa; color: #666; }
+.status--good { background: #e7f3eb; color: #1f4f33; border-color: #b7d4c0; }
+.status--warm { background: #f7f0de; color: #5c4718; border-color: #d9c792; }
+.status--alert { background: #fbeceb; color: #7a2f2a; border-color: #e4b8b3; }
+.status--info, .status--neutral { background: #ececec; color: #2e2e2e; border-color: #c4c4c4; }
 .avatar--green, .avatar--clay, .avatar--blue, .avatar--yellow, .avatar--violet { background: #ededed; color: #555; }
 .account-menu > div { border-radius: 14px; }
 .account-menu > div a, .account-menu > div button { border-radius: 8px; }

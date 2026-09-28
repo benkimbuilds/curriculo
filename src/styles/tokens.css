@@ -163,6 +163,15 @@
   --iq-action-fg: var(--iq-color-brand-black);
   --iq-action-hover: var(--iq-color-neutral-100);
   --iq-action-hover-fg: var(--iq-color-brand-black);
+}
+
+/* :root conserva tokens de marketing, pero el esquema claro evita controles nativos
+   (checkbox/radio) ilegibles en auth, dashboard y formularios sobre fondo blanco. */
+:root {
+  color-scheme: light;
+}
+
+[data-surface="dark"] {
   color-scheme: dark;
 }
 

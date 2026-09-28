@@ -12,4 +12,4 @@ export const platformCta = site.academy.platformUrl
       shortLabel: "Aplicar",
       external: true,
     }
-  : { href: "/registro", label: "Acceder a Curriculo", shortLabel: "Entrar", external: false };
+  : { href: "/iniciar-sesion", label: "Acceder a Curriculo", shortLabel: "Entrar", external: false };

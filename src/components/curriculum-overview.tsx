@@ -48,7 +48,7 @@ export function CurriculumOverview({
 
         <div className="mt-14 flex flex-col gap-5 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="type-body max-w-reading text-fg-muted">Estudia a tu ritmo y consulta también la biblioteca de Fundamentos y Full Stack JavaScript adaptados al español.</p>
-          <Link href={accountHref} className="inline-flex min-h-target shrink-0 items-center justify-center bg-action px-6 py-3 type-label text-action-fg transition-colors hover:bg-action-hover hover:text-action-hover-fg">Comenzar el programa</Link>
+          <Link href={accountHref} className="inline-flex min-h-target shrink-0 items-center justify-center rounded-full bg-purple px-6 py-3 type-label text-white transition-colors hover:bg-purple-deep">Comenzar el programa</Link>
         </div>
       </Container>
     </Section>
