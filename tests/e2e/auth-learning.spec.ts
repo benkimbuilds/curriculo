@@ -31,7 +31,7 @@ function firstUrl(body: string): string {
 test("public pages fit a phone viewport without dated geographic branding", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
 
-  for (const route of ["/", "/registro", "/iniciar-sesion", "/recuperar", "/privacidad", "/terminos"]) {
+  for (const route of ["/", "/curriculo", "/registro", "/iniciar-sesion", "/recuperar", "/privacidad", "/terminos"]) {
     await page.goto(route);
     await expect(page.locator("body")).toContainText("Iquiti");
     await expect(page.locator("body")).not.toContainText("Ruta Currículo");
@@ -45,10 +45,10 @@ test("public pages fit a phone viewport without dated geographic branding", asyn
   }
 });
 
-test("homepage facts keep readable space on both sides of column dividers", async ({ page }) => {
+test("curriculum facts keep readable space on both sides of column dividers", async ({ page }) => {
   for (const width of [1440, 900, 768, 390]) {
     await page.setViewportSize({ width, height: 1000 });
-    await page.goto("/");
+    await page.goto("/curriculo");
     const facts = page.locator("main dl").filter({ has: page.getByText("12 semanas", { exact: true }) });
     const collisions = await facts.evaluate((facts) => {
       const cells = Array.from(facts.children);

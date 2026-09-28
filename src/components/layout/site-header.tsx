@@ -23,7 +23,7 @@ export function SiteHeader({ platformHref = platformCta.href }: { platformHref?:
       <div className="mx-auto grid h-header w-full max-w-content grid-cols-[1fr_auto] items-center gap-6 px-gutter md:grid-cols-[1fr_auto_1fr]">
         <div className="flex items-center gap-4">
           <Link
-            href="#inicio"
+            href="/"
             className="-m-2 inline-flex min-h-target items-center p-2"
             aria-label={`${site.shortName}, ir al inicio`}
           >

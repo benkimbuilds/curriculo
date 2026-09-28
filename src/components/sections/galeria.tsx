@@ -2,12 +2,10 @@ import { PhotoArc } from "@/components/ui/photo-arc";
 import { Container, Section, SectionHeader } from "@/components/ui/section";
 import { galleryItems } from "@/content/gallery";
 import { galeria } from "@/content/home";
-import { visible } from "@/lib/content";
 
 /** Galería. Arco de fotos a sangre; el encabezado sigue en el contenedor. */
 export function Galeria() {
-  const items = visible(galleryItems);
-  if (items.length === 0) return null;
+  if (galleryItems.length === 0) return null;
 
   return (
     <Section id="galeria" surface="brand" labelledBy="galeria-title">
@@ -21,7 +19,7 @@ export function Galeria() {
           lead={galeria.lead}
         />
       </Container>
-      <PhotoArc items={items} className="mt-16 lg:mt-24" />
+      <PhotoArc items={galleryItems} className="mt-16 lg:mt-24" />
     </Section>
   );
 }

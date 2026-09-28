@@ -16,7 +16,7 @@ export type ImageAsset = {
   alt: string;
 };
 
-export type MediaItem = Publishable & {
+export type MediaItem = {
   id: string;
   caption: string;
   ratio: Ratio;

@@ -3,14 +3,12 @@ import { Marquee } from "@/components/ui/marquee";
 import { Container, Section, SectionHeader } from "@/components/ui/section";
 import { aliados } from "@/content/home";
 import { sponsors } from "@/content/sponsors";
-import { visible } from "@/lib/content";
 
-/** Aliados. Cinta en bucle continuo. Sin aliados publicados, la sección no se renderiza. */
+/** Aliados. Cinta en bucle continuo. Sin entradas, la sección no se renderiza. */
 export function Aliados() {
-  const items = visible(sponsors);
-  if (items.length === 0) return null;
+  if (sponsors.length === 0) return null;
 
-  const cells = items.map((s) => {
+  const cells = sponsors.map((s) => {
     const content = s.logo ? (
       <Image
         src={s.logo.src}
@@ -56,7 +54,7 @@ export function Aliados() {
         />
 
         <div className="mt-4 lg:mt-6" data-reveal="fade">
-          <Marquee duration={items.length * 6} className="border-y border-line">
+          <Marquee duration={sponsors.length * 6} className="border-y border-line">
             {cells}
           </Marquee>
         </div>

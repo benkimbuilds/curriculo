@@ -9,7 +9,6 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SkipLink } from "@/components/layout/skip-link";
 import { MotionRoot } from "@/components/motion/motion-root";
-import { CurriculumOverview } from "@/components/curriculum-overview";
 import { site } from "@/config/site";
 import { faqItems } from "@/content/faq";
 import { getCurrentSession } from "@/modules/auth/session";
@@ -17,7 +16,6 @@ import { getRoleHomeDestination } from "@/modules/authorization/navigation";
 import { loadAuthorizationContext } from "@/modules/authorization/service";
 import { resolveDefaultOrganizationId } from "@/modules/community/db-community";
 import { hasLearningEnrollment } from "@/app/programa/student-data";
-import { listCurriculumWeeks } from "@/modules/curriculum";
 
 export const metadata: Metadata = {
   title: "Iquiti — Centro de Innovación y Academia de Tecnología",
@@ -70,7 +68,6 @@ export default async function Home() {
       )
     : undefined;
   const accountHref = accountLink?.href ?? "/registro";
-  const weeks = listCurriculumWeeks({ locale: "es-MX" });
 
   return (
     <div data-iquiti-home>
@@ -81,7 +78,6 @@ export default async function Home() {
         <Hero />
         <Centro />
         <Academia platformHref={accountHref} />
-        <CurriculumOverview weeks={weeks} accountHref={accountHref} />
         <Aliados />
         <Galeria />
         <Faq />
