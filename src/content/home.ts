@@ -8,8 +8,8 @@ export const hero = {
   academy: "Academia de Tecnología",
   title: "Iquiti",
   titleNote: "Centro de Innovación",
-  lead: "Un espacio para convertir el aprendizaje tecnológico en soluciones y oportunidades.",
-  primaryCta: { label: "Explorar el Centro", href: "#intro" },
+  lead: "Un entorno para crecer en comunidad, aprender construyendo y desarrollar nuevas habilidades tecnológicas.",
+  primaryCta: { label: "Conoce Iquiti", href: "#intro" },
   secondaryCta: { label: "Academia de Tecnología", href: "#academia" },
 } as const;
 
@@ -28,7 +28,7 @@ export const intro = {
 export const centro = {
   label: "Intro",
   title: "Un lugar para hacerlo posible.",
-  lead: "Iquiti Centro de Innovación y Academia de Tecnología proponen reunir formación aplicada, creación de soluciones y comunidad en un mismo lugar. Un entorno para aprender haciendo y desarrollar nuevas habilidades.",
+  lead: "Iquiti Centro de Innovación y Academia de Tecnología proponen reunir formación aplicada, creación de proyectos y comunidad en un mismo lugar.",
   origin: "Iquiti · del náhuatl: «tejer»",
   network: {
     body: "Iquiti se piensa como una red viva de conocimiento: cada nodo o tejido es una persona, una idea o un proyecto, y cada conexión, un aprendizaje compartido.",
