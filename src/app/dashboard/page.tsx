@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import { AppShell } from "@/components/app-shell";
-import { ArrowRight, BookOpen, Clock, GitBranch, User } from "@/components/icons";
-import { Avatar, LessonRow, ProgressBar, StatusPill } from "@/components/ui";
+import { ArrowRight, BookOpen, Clock, GitBranch } from "@/components/icons";
+import { LessonRow, ProgressBar, StatusPill } from "@/components/ui";
 import { getStudentProgressSummary, isLessonComplete, loadStudentContext } from "@/app/programa/student-data";
 import { listDirectMentors } from "@/modules/mentoring/service";
 import { resolveDefaultOrganizationId } from "@/modules/community/db-community";
@@ -28,9 +28,35 @@ export default async function DashboardPage() {
   return (
     <AppShell userName={context.user.name}>
       <div className="app-content">
-        <header className="dashboard-greeting"><div><p className="eyebrow">{today}</p><h1>Hola, {firstName}</h1><p>Continúa desde tu siguiente lección pendiente.</p></div><p className="enrollment-mode">{context.enrollment.mode === "facilitated" ? "Cohorte facilitada" : "Estudio autodidacta"}</p></header>
-
-        <section className="panel"><div className="panel__header"><div><p className="eyebrow">Acompañamiento</p><h2>Mentor{directMentors.length === 1 ? " directo" : "es directos"}</h2></div><User /></div>{directMentors.length ? <div className="attention-list">{directMentors.map((mentor) => <div key={mentor.id}><Avatar color="green" name={mentor.name} size="sm" /><span><strong>{mentor.name}</strong><small>{mentor.email}</small></span></div>)}</div> : <p>Aún no tienes un mentor directo asignado. Puedes continuar tu ruta autodidacta y solicitar acompañamiento al equipo.</p>}</section>
+        <header className="dashboard-greeting">
+          <p className="eyebrow">{today}</p>
+          <h1>Hola, {firstName}</h1>
+          <p className="dashboard-greeting__lede">Continúa desde tu siguiente lección pendiente.</p>
+          <p className="dashboard-greeting__context">
+            <span>
+              {context.enrollment.mode === "facilitated" ? "Cohorte facilitada" : "Estudio autodidacta"}
+            </span>
+            {directMentors.length ? (
+              <>
+                <span aria-hidden="true">·</span>
+                <span>
+                  Mentor{" "}
+                  {directMentors.map((mentor, index) => (
+                    <span key={mentor.id}>
+                      {index > 0 ? ", " : null}
+                      <a href={`mailto:${mentor.email}`}>{mentor.name}</a>
+                    </span>
+                  ))}
+                </span>
+              </>
+            ) : (
+              <>
+                <span aria-hidden="true">·</span>
+                <span>Sin mentor asignado</span>
+              </>
+            )}
+          </p>
+        </header>
 
         {currentLesson ? <section className="continue-card">
           <div className="continue-card__body"><div className="card-kicker"><span>SEMANA {currentWeek.week}</span><StatusPill tone="warm">En curso</StatusPill></div><h2>{currentLesson.title}</h2><p>{currentLesson.summary}</p><ProgressBar label={`${completedInWeek} de ${currentWeekLessons.length} lecciones completadas`} value={currentWeekLessons.length ? Math.round((completedInWeek / currentWeekLessons.length) * 100) : 0} /><Link className="button button--primary" href={`/programa/semana/${currentWeek.week}/leccion/${currentLesson.id}`}>Continuar <ArrowRight /></Link></div>
