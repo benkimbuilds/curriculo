@@ -13,7 +13,7 @@ export const deckCopy = {
       next: "Diapositiva siguiente",
     },
     slides: [
-      { label: "Inicio", title: "Un lugar para hacer posible lo que sigue." },
+      { label: "Inicio", title: "El hub de innovación de la Ciudad de México." },
       { label: "El problema", title: "El talento existe. Faltan puentes." },
       { label: "La tesis", title: "La innovación empieza cuando más personas pueden crear." },
       { label: "El Hub", title: "Un ecosistema, cuatro motores." },
@@ -29,9 +29,9 @@ export const deckCopy = {
     ],
     cover: {
       eyebrow: "Iquiti · Centro de Innovación y Academia de Tecnología",
-      title: "Un lugar para hacer posible",
-      emphasis: "lo que sigue.",
-      lead: "Una escuela gratuita y un hub de innovación en Utopía Elena Poniatowska, Coyoacán.",
+      title: "El hub de innovación de la",
+      emphasis: "Ciudad de México.",
+      lead: "La próxima empresa puede nacer aquí.",
     },
     problem: {
       category: "El problema", title: "El talento existe. Faltan puentes.",
@@ -138,7 +138,7 @@ export const deckCopy = {
       next: "Next slide",
     },
     slides: [
-      { label: "Opening", title: "A place to make what comes next possible." },
+      { label: "Opening", title: "Mexico City's innovation hub." },
       { label: "The problem", title: "The talent is here. The bridges are missing." },
       { label: "Our thesis", title: "Innovation begins when more people can create." },
       { label: "The Hub", title: "One ecosystem, four engines." },
@@ -154,9 +154,9 @@ export const deckCopy = {
     ],
     cover: {
       eyebrow: "Iquiti · Innovation Hub and Technology Academy",
-      title: "A place to make",
-      emphasis: "what comes next possible.",
-      lead: "A free tech school and innovation hub at Utopía Elena Poniatowska in Coyoacán.",
+      title: "Mexico City's",
+      emphasis: "innovation hub.",
+      lead: "The next company could start here.",
     },
     problem: {
       category: "The problem", title: "The talent is here. The bridges are missing.",
