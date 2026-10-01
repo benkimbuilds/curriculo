@@ -103,9 +103,9 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
       </>;
     case 1:
       return <>
-        <SlideHead number="01" category={t.problem.category} title={t.problem.title} />
-        <div className={styles.threeColumns}>{t.problem.points.map((point, i) => <Statement key={i} number={`0${i + 1}`} title={point.title} body={point.body} />)}</div>
-        <p className={styles.bottomLine}>{t.problem.bottom}</p>
+        <SlideHead number="01" category={t.reinvestment.category} title={t.reinvestment.title} />
+        <div className={styles.flow}>{t.reinvestment.steps.map((step, i) => <div key={i}><span>{`0${i + 1}`}</span><strong>{step.title}</strong><small>{step.body}</small></div>)}</div>
+        <p className={styles.bottomLine}>{t.reinvestment.bottom}</p>
       </>;
     case 2:
       return <>

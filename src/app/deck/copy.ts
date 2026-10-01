@@ -2,7 +2,7 @@ export const deckCopy = {
   es: {
     ui: {
       deck: "Presentación de Iquiti",
-      location: "Centro de Innovación · Coyoacán",
+      location: "Centro de Innovación · Ciudad de México",
       language: "Cambiar a inglés",
       overview: "Índice",
       overviewAria: "Ver índice de diapositivas",
@@ -14,7 +14,7 @@ export const deckCopy = {
     },
     slides: [
       { label: "Inicio", title: "El hub de innovación de la Ciudad de México." },
-      { label: "El problema", title: "El talento existe. Faltan puentes." },
+      { label: "Reinversión", title: "Un ciclo que multiplica oportunidades en la Ciudad de México." },
       { label: "La tesis", title: "La innovación empieza cuando más personas pueden crear." },
       { label: "El Hub", title: "Un ecosistema, cuatro motores." },
       { label: "Coworking", title: "Un lugar para crear empresas en comunidad." },
@@ -33,14 +33,15 @@ export const deckCopy = {
       emphasis: "Ciudad de México.",
       lead: "La próxima empresa puede nacer aquí.",
     },
-    problem: {
-      category: "El problema", title: "El talento existe. Faltan puentes.",
-      points: [
-        { title: "Educación para la era de la IA", body: "Hacen falta rutas locales, accesibles y actuales para usar la IA con criterio y construir soluciones tecnológicas." },
-        { title: "Un espacio gratuito para construir", body: "Iquiti ofrece un lugar físico para aprender con proyectos, encontrar pares y recibir apoyo para emprender." },
-        { title: "Perspectiva más allá de lo local", body: "A quienes empiezan les cuesta conocer emprendedores de la ciudad y de fuera de México que amplíen su visión." },
+    reinvestment: {
+      category: "Ciclo de reinversión", title: "Un ciclo que multiplica oportunidades en la Ciudad de México.",
+      steps: [
+        { title: "Formación abierta", body: "Aprenden a usar IA y tecnología para crear productos y negocios, a su ritmo y con pares." },
+        { title: "Proyectos en el hub", body: "El coworking, los retos y emprendedores residentes ayudan a llevar esas habilidades a soluciones reales." },
+        { title: "Empleo y empresas", body: "Egresados pueden unirse a empresas del hub o aliadas; los nuevos equipos también pueden contratar localmente." },
+        { title: "Reinversión", body: "Empresas que crecen pueden contratar y formar a otros. Un evento de liquidez podría financiar la siguiente generación." },
       ],
-      bottom: "El talento necesita más que formación: un lugar para construir y personas con quienes crecer.",
+      bottom: "Talento, empresas y capital pueden volver al ecosistema de la Ciudad de México, ciclo tras ciclo.",
     },
     thesis: {
       category: "Oportunidad y tesis", title: "La innovación empieza cuando más personas pueden crear.",
@@ -127,7 +128,7 @@ export const deckCopy = {
   en: {
     ui: {
       deck: "Iquiti presentation",
-      location: "Innovation Hub · Coyoacán",
+      location: "Innovation Hub · Mexico City",
       language: "Switch to Spanish",
       overview: "Overview",
       overviewAria: "Show slide overview",
@@ -139,7 +140,7 @@ export const deckCopy = {
     },
     slides: [
       { label: "Opening", title: "Mexico City's innovation hub." },
-      { label: "The problem", title: "The talent is here. The bridges are missing." },
+      { label: "Reinvestment", title: "A cycle that expands opportunity across Mexico City." },
       { label: "Our thesis", title: "Innovation begins when more people can create." },
       { label: "The Hub", title: "One ecosystem, four engines." },
       { label: "Coworking", title: "A place to build companies with the community." },
@@ -158,14 +159,15 @@ export const deckCopy = {
       emphasis: "innovation hub.",
       lead: "The next company could start here.",
     },
-    problem: {
-      category: "The problem", title: "The talent is here. The bridges are missing.",
-      points: [
-        { title: "Education for the AI era", body: "We need accessible, up-to-date local paths to use AI thoughtfully and build technology solutions." },
-        { title: "A free space to build", body: "Iquiti offers a physical place to learn through projects, find peers, and get support to start a business." },
-        { title: "Perspective beyond the local scene", body: "Emerging talent has few chances to meet entrepreneurs across the city and beyond Mexico who can broaden their view." },
+    reinvestment: {
+      category: "Reinvestment cycle", title: "A cycle that expands opportunity across Mexico City.",
+      steps: [
+        { title: "Open learning", body: "People learn to use AI and technology to build products and businesses, at their own pace and with peers." },
+        { title: "Projects in the hub", body: "Coworking, challenges, and resident founders help turn those skills into real solutions." },
+        { title: "Jobs and ventures", body: "Graduates can join hub companies or partner employers; new teams can also hire locally." },
+        { title: "Reinvestment", body: "Growing companies can hire and train others. A liquidity event could help fund the next generation." },
       ],
-      bottom: "Talent needs more than training: a place to build and people to grow with.",
+      bottom: "Talent, companies, and capital can flow back into Mexico City's ecosystem, cycle after cycle.",
     },
     thesis: {
       category: "Opportunity & thesis", title: "Innovation begins when more people can create.",

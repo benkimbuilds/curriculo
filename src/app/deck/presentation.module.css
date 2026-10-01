@@ -176,6 +176,7 @@
   .statement h3 { margin-top: 1rem; }
   .statement { padding-top: .7rem; }
   .pillarGrid, .flow, .plan { grid-template-columns: 1fr 1fr; }
+  .flow { grid-template-columns: 1fr; }
   .pillar { min-height: 10rem; padding: 1rem; }
   .pillar h3 { font-size: 1.3rem; }
   .pillar p { font-size: .85rem; }
