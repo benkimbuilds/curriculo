@@ -100,12 +100,13 @@
 .flow span { font-size: .75rem; color: var(--purple); font-weight: 700; }
 .flow strong { margin-top: auto; font-size: clamp(1.5rem, 2.5vw, 3rem); letter-spacing: -.04em; font-weight: 500; }
 .flow small { margin-top: .6rem; color: var(--muted); font-size: .9rem; }
-.spaceLayout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 5rem); align-items: stretch; min-height: 19rem; }
-.spaceImage { min-height: 20rem; background: #e9e9e9 url("/deck/espacio-moodboard.avif") center / cover no-repeat; }
-.spaceCopy { display: flex; flex-direction: column; }
-.spaceCopy ul { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem 1rem; list-style: none; margin: auto 0 1.4rem; padding: 0; }
-.spaceCopy li { border-top: 1px solid var(--line); padding-top: .7rem; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
-.spaceCopy small { color: var(--muted); }
+.spaceLead { max-width: 58rem; font-size: clamp(1.2rem, 1.7vw, 1.6rem); font-weight: 300; line-height: 1.35; letter-spacing: -.02em; }
+.spaceGallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.spaceGallery figure { min-width: 0; margin: 0; }
+.spacePhoto { position: relative; overflow: hidden; aspect-ratio: 16 / 10; background: #ededed; }
+.spacePhoto img { object-fit: cover; }
+.spaceGallery figcaption { border-bottom: 1px solid var(--line); padding: .65rem 0; font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.spaceNote { color: var(--muted); font-size: .7rem; line-height: 1.4; }
 .budgetIntro { max-width: 57rem; font-size: clamp(1rem, 1.5vw, 1.4rem); color: var(--muted); line-height: 1.45; }
 .budgetList { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
 .budgetList li { border-bottom: 1px solid var(--line); padding: .9rem 0; font-size: clamp(1rem, 1.4vw, 1.35rem); }
@@ -164,7 +165,6 @@
   .simplePanel { min-height: 14rem; }
   .flow div { min-height: 13rem; }
   .planTrack { min-height: 12rem; }
-  .spaceImage { min-height: 15rem; }
 }
 @media (max-width: 640px) {
   .deck { min-height: 25rem; }
@@ -177,7 +177,7 @@
   .cover { justify-content: center; }
   .cover h1, .cover h2 { font-size: clamp(3rem, 13vw, 5rem); }
   .coverGraphic { width: 85vw; right: -35vw; }
-  .threeColumns, .split, .spaceLayout, .thesisLayout, .eventsLayout, .planTracks { grid-template-columns: 1fr; }
+  .threeColumns, .split, .thesisLayout, .eventsLayout, .planTracks, .spaceGallery { grid-template-columns: 1fr; }
   .verticalRule { display: none; }
   .statement h3 { margin-top: 1rem; }
   .statement { padding-top: .7rem; }
@@ -196,7 +196,6 @@
   .eventsPartners .partnerNames li { font-size: 1rem; }
   .simplePanel { min-height: 13rem; }
   .academyHero { flex-direction: column; }
-  .spaceImage { min-height: 15rem; }
   .planTrack { min-height: auto; }
   .planMilestones { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .overview { grid-template-columns: repeat(2, 1fr); padding: 1rem; }

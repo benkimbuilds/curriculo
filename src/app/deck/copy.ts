@@ -97,10 +97,14 @@ export const deckCopy = {
       partnerIntro: "Podemos invitar a integrantes de sus equipos a compartir experiencia en Utopías, según agenda y acuerdos.",
     },
     space: {
-      category: "El espacio", title: "Que se sienta como una posibilidad nueva.", imageAlt: "Moodboard conceptual del espacio Iquiti",
+      category: "El espacio", title: "Que se sienta como una posibilidad nueva.",
       statement: "Un espacio que invite al asombro, al intercambio y a crear algo más grande que uno mismo.",
-      features: ["Trabajo compartido", "Aprendizaje entre pares", "Encuentros y talleres", "Prototipado y conversación"],
-      note: "Imágenes conceptuales; diseño final por definir.",
+      images: [
+        { src: "/deck/space-coworking.avif", caption: "Trabajo compartido", alt: "Referencia conceptual de mesas de coworking y gradas" },
+        { src: "/deck/space-projects.avif", caption: "Aprendizaje entre pares", alt: "Referencia conceptual de grupos trabajando en mesas de proyecto" },
+        { src: "/deck/space-events.avif", caption: "Encuentros y talleres", alt: "Referencia conceptual de un espacio abierto para charlas y talleres" },
+      ],
+      note: "Referencias conceptuales; diseño final por definir.",
     },
     budget: {
       category: "Presupuesto de lanzamiento", title: "US$50,000 para ponerlo en marcha.",
@@ -237,10 +241,14 @@ export const deckCopy = {
       partnerIntro: "We can invite people from their teams to share experience at Utopías, subject to schedules and agreements.",
     },
     space: {
-      category: "The space", title: "A place that feels like a new possibility.", imageAlt: "Conceptual moodboard for the Iquiti space",
+      category: "The space", title: "A place that feels like a new possibility.",
       statement: "A space that invites wonder, exchange, and the creation of something bigger than any one person.",
-      features: ["Shared workspace", "Peer learning", "Gatherings and workshops", "Prototyping and conversation"],
-      note: "Concept images; final design to be determined.",
+      images: [
+        { src: "/deck/space-coworking.avif", caption: "Shared workspace", alt: "Concept reference of coworking tables and stepped seating" },
+        { src: "/deck/space-projects.avif", caption: "Peer learning", alt: "Concept reference of groups working around project tables" },
+        { src: "/deck/space-events.avif", caption: "Gatherings and workshops", alt: "Concept reference of an open space for talks and workshops" },
+      ],
+      note: "Concept references; final design to be determined.",
     },
     budget: {
       category: "Launch budget", title: "US$50,000 to launch it.",

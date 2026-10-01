@@ -165,10 +165,12 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
     case 9:
       return <>
         <SlideHead number="09" category={t.space.category} title={t.space.title} />
-        <div className={styles.spaceLayout}>
-          <div className={styles.spaceImage} role="img" aria-label={t.space.imageAlt} />
-          <div className={styles.spaceCopy}><p className={styles.bigStatement}>{t.space.statement}</p><ul>{t.space.features.map((feature) => <li key={feature}>{feature}</li>)}</ul><small>{t.space.note}</small></div>
-        </div>
+        <p className={styles.spaceLead}>{t.space.statement}</p>
+        <div className={styles.spaceGallery}>{t.space.images.map((item) => <figure key={item.src}>
+          <div className={styles.spacePhoto}><Image src={item.src} alt={item.alt} fill sizes="(max-width: 640px) 100vw, 33vw" unoptimized /></div>
+          <figcaption>{item.caption}</figcaption>
+        </figure>)}</div>
+        <p className={styles.spaceNote}>{t.space.note}</p>
       </>;
     case 10:
       return <>
