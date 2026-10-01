@@ -16,7 +16,7 @@ export const deckCopy = {
       { label: "Inicio", title: "El hub de innovación de la Ciudad de México." },
       { label: "Reinversión", title: "Un ciclo que multiplica oportunidades en la Ciudad de México." },
       { label: "La tesis", title: "La innovación empieza cuando más personas pueden crear." },
-      { label: "El Hub", title: "Un ecosistema, cuatro motores." },
+      { label: "El Hub", title: "Un ecosistema, cinco motores." },
       { label: "Coworking", title: "Un lugar para crear empresas en comunidad." },
       { label: "Grants y eventos", title: "Problemas locales. Conexiones globales." },
       { label: "La Academia", title: "Aprender a aprender. Aprender a hacer." },
@@ -52,8 +52,9 @@ export const deckCopy = {
       ],
     },
     hub: {
-      category: "Hub de Innovación", title: "Un ecosistema, cuatro motores.",
+      category: "Hub de Innovación", title: "Un ecosistema, cinco motores.",
       pillars: [
+        { title: "Academia", body: "Escuela gratuita y de código abierto, con aprendizaje entre pares y proyectos semanales." },
         { title: "Coworking", body: "Un hogar gratuito para emprendedores seleccionados y egresados." },
         { title: "Grants", body: "Retos para crear soluciones a necesidades del comercio y la comunidad local." },
         { title: "Residencias", body: "Emprendedores de otras ciudades y países que llegan a intercambiar conocimiento." },
@@ -142,7 +143,7 @@ export const deckCopy = {
       { label: "Opening", title: "Mexico City's innovation hub." },
       { label: "Reinvestment", title: "A cycle that expands opportunity across Mexico City." },
       { label: "Our thesis", title: "Innovation begins when more people can create." },
-      { label: "The Hub", title: "One ecosystem, four engines." },
+      { label: "The Hub", title: "One ecosystem, five engines." },
       { label: "Coworking", title: "A place to build companies with the community." },
       { label: "Grants & events", title: "Local problems. Global connections." },
       { label: "The Academy", title: "Learn how to learn. Learn by doing." },
@@ -178,8 +179,9 @@ export const deckCopy = {
       ],
     },
     hub: {
-      category: "Innovation Hub", title: "One ecosystem, four engines.",
+      category: "Innovation Hub", title: "One ecosystem, five engines.",
       pillars: [
+        { title: "Academy", body: "A free, open-source school built around peer learning and weekly projects." },
         { title: "Coworking", body: "A free home for selected entrepreneurs and graduates." },
         { title: "Grants", body: "Challenges to solve needs in local commerce and the community." },
         { title: "Residencies", body: "Entrepreneurs from other cities and countries who come to exchange knowledge." },

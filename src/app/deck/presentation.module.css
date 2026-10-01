@@ -65,7 +65,7 @@
 .thesisList p { display: grid; gap: .4rem; border-bottom: 1px solid var(--line); padding-bottom: 1rem; }
 .thesisList strong { color: var(--purple); font-size: 1.1rem; }
 .thesisList span { color: var(--muted); line-height: 1.45; }
-.pillarGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); }
+.pillarGrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--line); }
 .pillar { min-height: 17rem; padding: 1.5rem; border-right: 1px solid var(--line); display: flex; flex-direction: column; }
 .pillar:last-child { border-right: 0; }
 .pillar h3 { margin: auto 0 .75rem; font-size: clamp(1.4rem, 1.9vw, 2.2rem); font-weight: 500; letter-spacing: -.04em; }
@@ -141,8 +141,9 @@
   .deckName { display: none; }
   .slide { gap: 1.8rem; }
   .pillarGrid, .flow, .plan { grid-template-columns: repeat(2, 1fr); }
-  .pillar:nth-child(2) { border-right: 0; }
-  .pillar:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .pillar:nth-child(even) { border-right: 0; }
+  .pillar:nth-child(-n+4) { border-bottom: 1px solid var(--line); }
+  .pillar:last-child { grid-column: 1 / -1; min-height: 8rem; }
   .pillar, .flow div, .plan div { min-height: 11rem; }
   .coverGraphic { right: -6rem; opacity: .15; }
   .overview { grid-template-columns: repeat(3, 1fr); }
@@ -175,7 +176,10 @@
   .verticalRule { display: none; }
   .statement h3 { margin-top: 1rem; }
   .statement { padding-top: .7rem; }
-  .pillarGrid, .flow, .plan { grid-template-columns: 1fr 1fr; }
+  .pillarGrid { grid-template-columns: 1fr; }
+  .pillarGrid .pillar { border-right: 0; border-bottom: 1px solid var(--line); }
+  .pillarGrid .pillar:last-child { grid-column: auto; border-bottom: 0; }
+  .flow, .plan { grid-template-columns: 1fr 1fr; }
   .flow { grid-template-columns: 1fr; }
   .pillar { min-height: 10rem; padding: 1rem; }
   .pillar h3 { font-size: 1.3rem; }
