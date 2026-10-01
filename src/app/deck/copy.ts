@@ -24,7 +24,7 @@ export const deckCopy = {
       { label: "05 · Eventos", title: "Eventos que conectan Utopías con el mundo tecnológico." },
       { label: "El espacio", title: "Que se sienta como una posibilidad nueva." },
       { label: "Presupuesto", title: "US$50,000 para ponerlo en marcha." },
-      { label: "Plan", title: "De propuesta a comunidad activa." },
+      { label: "Plan y metas", title: "Una primera cohorte. Un hub de largo plazo." },
       { label: "Cierre", title: "Construyamos el siguiente nodo." },
     ],
     cover: {
@@ -109,14 +109,29 @@ export const deckCopy = {
       note: "Áreas de inversión propuestas. Obra, mobiliario y capital para grants requieren acuerdos o recursos adicionales.",
     },
     plan: {
-      category: "Plan y fechas clave", title: "De propuesta a comunidad activa.",
+      category: "Plan y metas", title: "Una primera cohorte. Un hub de largo plazo.",
+      school: {
+        label: "Academia · primera cohorte",
+        metrics: [{ value: "150", label: "estudiantes" }, { value: "12", label: "semanas" }],
+        note: "El currículo abierto sigue disponible y permite nuevas cohortes.",
+      },
+      hub: {
+        label: "Hub · metas propuestas para 12 meses",
+        metrics: [
+          { value: "20", label: "equipos activos en coworking" },
+          { value: "4", label: "residencias de emprendedores" },
+          { value: "4", label: "retos locales" },
+          { value: "12", label: "eventos abiertos" },
+        ],
+        note: "Convocatorias continuas, independientes de la cohorte.",
+      },
       milestones: [
-        { date: "OCT–NOV 2026", title: "Preparar", body: "Equipo, espacio, currículo, operación y convocatoria." },
-        { date: "DIC 2026", title: "Convocar", body: "Seleccionar la primera cohorte y a los participantes del coworking." },
-        { date: "ENE–ABR 2027", title: "Lanzar", body: "12 semanas de cohorte, programación mensual y primeros retos." },
-        { date: "ABR 2027", title: "Mostrar", body: "Proyectos finales, oportunidades profesionales y siguiente ciclo." },
+        { date: "OCT–DIC 2026", label: "Preparación y convocatoria" },
+        { date: "ENE 2027", label: "Apertura del hub y la cohorte" },
+        { date: "ABR 2027", label: "Primera muestra de proyectos" },
+        { date: "CONTINUO", label: "Coworking, residencias, retos y eventos" },
       ],
-      note: "Calendario propuesto, sujeto a confirmación de espacio, equipo y financiamiento.",
+      note: "Metas indicativas, sujetas a capacidad del espacio, equipo y financiamiento de grants.",
     },
     close: {
       eyebrow: "Iquiti · Coyoacán, Ciudad de México",
@@ -149,7 +164,7 @@ export const deckCopy = {
       { label: "05 · Events", title: "Events connecting Utopías to the tech world." },
       { label: "The space", title: "A place that feels like a new possibility." },
       { label: "Budget", title: "US$50,000 to launch it." },
-      { label: "Plan", title: "From proposal to active community." },
+      { label: "Plan & targets", title: "A first cohort. A hub built to last." },
       { label: "Closing", title: "Let's build the next node." },
     ],
     cover: {
@@ -234,14 +249,29 @@ export const deckCopy = {
       note: "Proposed uses of funds. Construction, furniture, and grant capital require additional agreements or resources.",
     },
     plan: {
-      category: "Plan & key dates", title: "From proposal to active community.",
+      category: "Plan & targets", title: "A first cohort. A hub built to last.",
+      school: {
+        label: "Academy · first cohort",
+        metrics: [{ value: "150", label: "students" }, { value: "12", label: "weeks" }],
+        note: "The open curriculum stays available and supports future cohorts.",
+      },
+      hub: {
+        label: "Hub · proposed 12-month targets",
+        metrics: [
+          { value: "20", label: "active coworking teams" },
+          { value: "4", label: "entrepreneur residencies" },
+          { value: "4", label: "local challenges" },
+          { value: "12", label: "open events" },
+        ],
+        note: "Rolling applications, independent of the cohort.",
+      },
       milestones: [
-        { date: "OCT–NOV 2026", title: "Prepare", body: "Team, space, curriculum, operations, and applications." },
-        { date: "DEC 2026", title: "Recruit", body: "Select the first cohort and coworking participants." },
-        { date: "JAN–APR 2027", title: "Launch", body: "A 12-week cohort, monthly programming, and first challenges." },
-        { date: "APR 2027", title: "Showcase", body: "Final projects, career opportunities, and the next cycle." },
+        { date: "OCT–DEC 2026", label: "Prepare and recruit" },
+        { date: "JAN 2027", label: "Open the hub and cohort" },
+        { date: "APR 2027", label: "First project showcase" },
+        { date: "ONGOING", label: "Coworking, residencies, challenges, events" },
       ],
-      note: "Proposed timeline, subject to confirmation of the space, team, and funding.",
+      note: "Indicative targets, subject to space capacity, staffing, and grant funding.",
     },
     close: {
       eyebrow: "Iquiti · Coyoacán, Mexico City",

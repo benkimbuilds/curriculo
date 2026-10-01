@@ -180,8 +180,15 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
     case 11:
       return <>
         <SlideHead number="11" category={t.plan.category} title={t.plan.title} />
-        <div className={styles.plan}>{t.plan.milestones.map((milestone, i) => <div key={i}><span>{milestone.date}</span><strong>{milestone.title}</strong><p>{milestone.body}</p></div>)}</div>
-        <p className={styles.note}>{t.plan.note}</p>
+        <div className={styles.planTracks}>
+          {[t.plan.school, t.plan.hub].map((track) => <section className={styles.planTrack} key={track.label} aria-label={track.label}>
+            <strong className={styles.planTrackLabel}>{track.label}</strong>
+            <div className={styles.planMetrics}>{track.metrics.map((metric) => <div key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>
+            <p>{track.note}</p>
+          </section>)}
+        </div>
+        <div className={styles.planMilestones}>{t.plan.milestones.map((milestone) => <div key={milestone.date}><strong>{milestone.date}</strong><span>{milestone.label}</span></div>)}</div>
+        <p className={styles.planNote}>{t.plan.note}</p>
       </>;
     case 12:
       return <>

@@ -109,11 +109,20 @@
 .budgetIntro { max-width: 57rem; font-size: clamp(1rem, 1.5vw, 1.4rem); color: var(--muted); line-height: 1.45; }
 .budgetList { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
 .budgetList li { border-bottom: 1px solid var(--line); padding: .9rem 0; font-size: clamp(1rem, 1.4vw, 1.35rem); }
-.plan { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-.plan div { min-height: 15rem; border-top: 2px solid var(--purple); padding-top: 1rem; display: flex; flex-direction: column; }
-.plan span { color: var(--purple); font-size: .75rem; font-weight: 700; letter-spacing: .07em; }
-.plan strong { margin-top: 2rem; font-size: clamp(1.5rem, 2.5vw, 2.7rem); font-weight: 500; letter-spacing: -.04em; }
-.plan p { margin-top: .6rem; color: var(--muted); line-height: 1.45; }
+.planTracks { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 1rem; }
+.planTrack { display: flex; flex-direction: column; min-height: 15rem; padding: 1.2rem 1.5rem; border-top: 2px solid var(--purple); background: #f6f6f6; }
+.planTrack:nth-child(2) { border-top-color: var(--green); background: #f2faf3; }
+.planTrackLabel { color: var(--purple); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+.planMetrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem 1rem; margin: .9rem 0; }
+.planMetrics div { display: flex; align-items: baseline; gap: .5rem; }
+.planMetrics strong { font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 300; letter-spacing: -.07em; line-height: 1; }
+.planMetrics span { font-size: .82rem; line-height: 1.2; }
+.planTrack p { margin-top: auto; color: var(--muted); font-size: .78rem; line-height: 1.35; }
+.planMilestones { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.planMilestones div { display: flex; flex-direction: column; gap: .4rem; border-top: 1px solid var(--line); padding-top: .6rem; }
+.planMilestones strong { color: var(--purple); font-size: .7rem; letter-spacing: .06em; }
+.planMilestones span { font-size: .82rem; line-height: 1.3; }
+.planNote { color: var(--muted); font-size: .7rem; line-height: 1.35; }
 
 .controls { min-height: 4.4rem; border-top: 1px solid var(--line); gap: 2rem; }
 .progress { gap: 1rem; color: var(--muted); white-space: nowrap; }
@@ -136,11 +145,11 @@
 @media (max-width: 900px) {
   .deckName { display: none; }
   .slide { gap: 1.8rem; }
-  .pillarGrid, .flow, .plan { grid-template-columns: repeat(2, 1fr); }
+  .pillarGrid, .flow { grid-template-columns: repeat(2, 1fr); }
   .pillar:nth-child(even) { border-right: 0; }
   .pillar:nth-child(-n+4) { border-bottom: 1px solid var(--line); }
   .pillar:last-child { grid-column: 1 / -1; min-height: 8rem; }
-  .pillar, .flow div, .plan div { min-height: 11rem; }
+  .pillar, .flow div { min-height: 11rem; }
   .coverGraphic { right: -6rem; opacity: .15; }
   .overview { grid-template-columns: repeat(3, 1fr); }
 }
@@ -154,7 +163,7 @@
   .featurePanel { min-height: 15rem; }
   .simplePanel { min-height: 14rem; }
   .flow div { min-height: 13rem; }
-  .plan div { min-height: 12rem; }
+  .planTrack { min-height: 12rem; }
   .spaceImage { min-height: 15rem; }
 }
 @media (max-width: 640px) {
@@ -168,14 +177,14 @@
   .cover { justify-content: center; }
   .cover h1, .cover h2 { font-size: clamp(3rem, 13vw, 5rem); }
   .coverGraphic { width: 85vw; right: -35vw; }
-  .threeColumns, .split, .spaceLayout, .thesisLayout, .eventsLayout { grid-template-columns: 1fr; }
+  .threeColumns, .split, .spaceLayout, .thesisLayout, .eventsLayout, .planTracks { grid-template-columns: 1fr; }
   .verticalRule { display: none; }
   .statement h3 { margin-top: 1rem; }
   .statement { padding-top: .7rem; }
   .pillarGrid { grid-template-columns: 1fr; }
   .pillarGrid .pillar { border-right: 0; border-bottom: 1px solid var(--line); }
   .pillarGrid .pillar:last-child { grid-column: auto; border-bottom: 0; }
-  .flow, .plan { grid-template-columns: 1fr 1fr; }
+  .flow { grid-template-columns: 1fr 1fr; }
   .flow { grid-template-columns: 1fr; }
   .pillar { min-height: 10rem; padding: 1rem; }
   .pillar h3 { font-size: 1.3rem; }
@@ -188,9 +197,8 @@
   .simplePanel { min-height: 13rem; }
   .academyHero { flex-direction: column; }
   .spaceImage { min-height: 15rem; }
-  .plan div { min-height: 11rem; }
-  .plan strong { font-size: 1.3rem; margin-top: 1.2rem; }
-  .plan p { font-size: .85rem; }
+  .planTrack { min-height: auto; }
+  .planMilestones { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .overview { grid-template-columns: repeat(2, 1fr); padding: 1rem; }
   .overview button { min-height: 6.5rem; }
 }
