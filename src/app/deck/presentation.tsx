@@ -123,42 +123,46 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
       </>;
     case 4:
       return <>
-        <SlideHead number="04" category={t.coworking.category} title={t.coworking.title} />
-        <div className={styles.split}>
-          <div className={styles.featurePanel}><span className={styles.featureNumber}>01 / 02</span><h3>{t.coworking.local.title}</h3><p>{t.coworking.local.body}</p></div>
-          <div className={styles.featurePanel}><span className={styles.featureNumber}>02 / 02</span><h3>{t.coworking.global.title}</h3><p>{t.coworking.global.body}</p></div>
-        </div>
-        <div className={styles.partnerBand}>
-          <div className={styles.partnerMessage}><strong>{t.coworking.partnerLabel}</strong><p>{t.coworking.partnerIntro}</p></div>
-          <ul className={styles.partnerNames} aria-label={t.coworking.partnerLabel}>{partners.map((partner) => <li key={partner}>{partner}</li>)}</ul>
-        </div>
+        <PillarHead number={1} category={t.hub.pillars[0].title} title={t.academy.title} />
+        <div className={styles.academyHero}><p>{t.academy.promise}</p><strong>{t.academy.distinction}</strong></div>
+        <div className={styles.threeColumns}>{t.academy.points.map((point, i) => <Statement key={i} number={`0${i + 1}`} title={point.title} body={point.body} />)}</div>
+        <p className={styles.bottomLine}>{t.academy.bottom}</p>
       </>;
     case 5:
       return <>
-        <SlideHead number="05" category={t.grants.category} title={t.grants.title} />
+        <PillarHead number={2} category={t.hub.pillars[1].title} title={t.coworking.title} />
         <div className={styles.split}>
-          <div className={styles.simplePanel}><span className={styles.dot} /><h3>{t.grants.local.title}</h3><p>{t.grants.local.body}</p><small>{t.grants.local.note}</small></div>
-          <div className={styles.simplePanel}><span className={styles.dot} /><h3>{t.grants.events.title}</h3><p>{t.grants.events.body}</p><small>{t.grants.events.note}</small></div>
+          <div className={styles.featurePanel}><span className={styles.featureNumber}>01 / 02</span><h3>{t.coworking.entry.title}</h3><p>{t.coworking.entry.body}</p></div>
+          <div className={styles.featurePanel}><span className={styles.featureNumber}>02 / 02</span><h3>{t.coworking.next.title}</h3><p>{t.coworking.next.body}</p></div>
         </div>
+        <p className={styles.bottomLine}>{t.coworking.bottom}</p>
       </>;
     case 6:
       return <>
-        <SlideHead number="06" category={t.academy.category} title={t.academy.title} />
-        <div className={styles.academyHero}><p>{t.academy.promise}</p><strong>{t.academy.distinction}</strong></div>
-        <div className={styles.threeColumns}>{t.academy.points.map((point, i) => <Statement key={i} number={`0${i + 1}`} title={point.title} body={point.body} />)}</div>
+        <PillarHead number={3} category={t.hub.pillars[2].title} title={t.grants.title} />
+        <div className={styles.split}>
+          <div className={styles.simplePanel}><span className={styles.dot} /><h3>{t.grants.need.title}</h3><p>{t.grants.need.body}</p><small>{t.grants.need.note}</small></div>
+          <div className={styles.simplePanel}><span className={styles.dot} /><h3>{t.grants.teams.title}</h3><p>{t.grants.teams.body}</p><small>{t.grants.teams.note}</small></div>
+        </div>
+        <p className={styles.bottomLine}>{t.grants.bottom}</p>
       </>;
     case 7:
       return <>
-        <SlideHead number="07" category={t.cohort.category} title={t.cohort.title} />
-        <div className={styles.metricRow}>{["150", "12", "1"].map((value, i) => <div key={i}><strong>{value}</strong><span>{t.cohort.metrics[i]}</span></div>)}</div>
-        <div className={styles.timeline}>{t.cohort.phases.map((phase, i) => <p key={i}><b>{`0${i + 1}`}</b><span>{phase}</span></p>)}</div>
-        <p className={styles.bottomLine}>{t.cohort.bottom}</p>
+        <PillarHead number={4} category={t.hub.pillars[3].title} title={t.residencies.title} />
+        <div className={styles.split}>
+          <div className={styles.featurePanel}><span className={styles.featureNumber}>01 / 02</span><h3>{t.residencies.invited.title}</h3><p>{t.residencies.invited.body}</p></div>
+          <div className={styles.featurePanel}><span className={styles.featureNumber}>02 / 02</span><h3>{t.residencies.exchange.title}</h3><p>{t.residencies.exchange.body}</p></div>
+        </div>
+        <p className={styles.bottomLine}>{t.residencies.bottom}</p>
       </>;
     case 8:
       return <>
-        <SlideHead number="08" category={t.cycle.category} title={t.cycle.title} />
-        <div className={styles.flow}>{t.cycle.steps.map((step, i) => <div key={i}><span>{`0${i + 1}`}</span><strong>{step.title}</strong><small>{step.body}</small></div>)}</div>
-        <p className={styles.bottomLine}>{t.cycle.bottom}</p>
+        <PillarHead number={5} category={t.hub.pillars[4].title} title={t.events.title} />
+        <div className={styles.eventsLayout}>
+          <div className={styles.eventsMetric}><strong>5,000</strong><span>{t.events.community}</span><p>{t.events.cadence}</p></div>
+          <div className={styles.eventsPartners}><strong>{t.events.partnerLabel}</strong><ul className={styles.partnerNames} aria-label={t.events.partnerLabel}>{partners.map((partner) => <li key={partner}>{partner}</li>)}</ul></div>
+        </div>
+        <p className={styles.eventsNote}>{t.events.partnerIntro}</p>
       </>;
     case 9:
       return <>
@@ -201,6 +205,10 @@ function BrandGraphic() {
 
 function SlideHead({ number, category, title }: { number: string; category: string; title: string }) {
   return <div className={styles.slideHead}><p className={styles.eyebrow}>{number} / {category}</p><h2>{title}</h2></div>;
+}
+
+function PillarHead({ number, category, title }: { number: number; category: string; title: string }) {
+  return <div className={styles.slideHead}><p className={styles.eyebrow}>{String(number).padStart(2, "0")} / 05 · {category}</p><h2>{title}</h2></div>;
 }
 
 function Statement({ number, title, body }: { number: string; title: string; body: string }) {

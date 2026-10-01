@@ -76,25 +76,24 @@
 .featureNumber { color: var(--purple); }
 .featurePanel:nth-child(2) .featureNumber { color: var(--green); }
 .featurePanel h3 { margin: auto 0 1rem; font-size: clamp(2rem, 3.4vw, 4rem); font-weight: 400; letter-spacing: -.045em; }
-.partnerBand { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.2fr); gap: 2rem; border-top: 1px solid var(--line); padding-top: 1rem; }
-.partnerMessage strong { color: var(--purple); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
-.partnerMessage p { margin-top: .35rem; color: var(--muted); font-size: .9rem; line-height: 1.4; }
 .partnerNames { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem 1rem; align-content: center; list-style: none; margin: 0; padding: 0; }
 .partnerNames li { font-size: clamp(1rem, 1.5vw, 1.4rem); font-weight: 600; letter-spacing: -.035em; white-space: nowrap; }
+.eventsLayout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 1rem; min-height: 18rem; }
+.eventsMetric, .eventsPartners { padding: clamp(1.5rem, 3vw, 3rem); display: flex; flex-direction: column; }
+.eventsMetric { background: #f6f6f6; }
+.eventsMetric strong { color: var(--purple); font-size: clamp(4rem, 7vw, 7rem); font-weight: 300; letter-spacing: -.08em; line-height: 1; }
+.eventsMetric span, .eventsPartners > strong { color: var(--purple); font-size: .75rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+.eventsMetric p { margin-top: auto; font-size: clamp(1rem, 1.5vw, 1.4rem); line-height: 1.4; }
+.eventsPartners { justify-content: space-between; border: 1px solid var(--line); gap: 2rem; }
+.eventsPartners .partnerNames { gap: 1.25rem 1rem; }
+.eventsPartners .partnerNames li { font-size: clamp(1.2rem, 2vw, 2rem); }
+.eventsNote { padding-top: .8rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; line-height: 1.4; }
 .simplePanel { border-top: 2px solid var(--purple); padding: 1.5rem 0; min-height: 17rem; display: flex; flex-direction: column; align-items: flex-start; }
 .dot { width: 1rem; height: 1rem; background: var(--green); border: 1px solid var(--purple); border-radius: 50%; }
 .simplePanel h3 { margin: auto 0 .75rem; font-size: clamp(1.6rem, 2.5vw, 2.8rem); font-weight: 500; letter-spacing: -.04em; }
 .simplePanel small { margin-top: 1rem; color: var(--muted); }
 .academyHero { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1.4rem 0; font-size: clamp(1.1rem, 1.5vw, 1.55rem); }
 .academyHero strong { color: var(--purple); font-weight: 500; }
-.metricRow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.metricRow div { border-top: 1px solid var(--line); padding-top: 1rem; display: flex; flex-direction: column; }
-.metricRow strong { color: var(--purple); font-size: clamp(4rem, 8vw, 8rem); font-weight: 300; line-height: 1; letter-spacing: -.08em; }
-.metricRow span { font-size: 1rem; text-transform: uppercase; letter-spacing: .08em; }
-.timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.timeline p { display: flex; gap: 1rem; align-items: baseline; border-top: 1px solid var(--line); padding-top: 1rem; }
-.timeline b { color: var(--purple); font-size: .75rem; }
-.timeline span { line-height: 1.4; }
 .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; }
 .flow div { position: relative; display: flex; flex-direction: column; padding: 1.5rem; min-height: 17rem; background: #f6f6f6; }
 .flow div:last-child { background: var(--green); }
@@ -172,7 +171,7 @@
   .cover { justify-content: center; }
   .cover h1, .cover h2 { font-size: clamp(3rem, 13vw, 5rem); }
   .coverGraphic { width: 85vw; right: -35vw; }
-  .threeColumns, .split, .metricRow, .timeline, .spaceLayout, .thesisLayout { grid-template-columns: 1fr; }
+  .threeColumns, .split, .spaceLayout, .thesisLayout, .eventsLayout { grid-template-columns: 1fr; }
   .verticalRule { display: none; }
   .statement h3 { margin-top: 1rem; }
   .statement { padding-top: .7rem; }
@@ -185,14 +184,12 @@
   .pillar h3 { font-size: 1.3rem; }
   .pillar p { font-size: .85rem; }
   .featurePanel { min-height: 13rem; }
-  .partnerBand { grid-template-columns: 1fr; gap: 1rem; }
+  .eventsLayout { min-height: auto; }
+  .eventsMetric, .eventsPartners { min-height: 12rem; }
   .partnerNames { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .partnerNames li { font-size: 1rem; }
+  .eventsPartners .partnerNames li { font-size: 1rem; }
   .simplePanel { min-height: 13rem; }
   .academyHero { flex-direction: column; }
-  .metricRow { grid-template-columns: repeat(3, 1fr); }
-  .metricRow strong { font-size: 3.5rem; }
-  .metricRow span { font-size: .7rem; }
   .spaceImage { min-height: 15rem; }
   .budgetList div { grid-template-columns: 1fr 4rem; gap: .4rem; }
   .budgetList small { display: none; }
