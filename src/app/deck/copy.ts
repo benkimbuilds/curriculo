@@ -106,7 +106,7 @@ export const deckCopy = {
       category: "Presupuesto de lanzamiento", title: "US$50,000 para ponerlo en marcha.",
       intro: "Propuesta de honorarios para el equipo mexicano que está creando el currículo, la identidad, el espacio y la operación inicial.",
       areas: ["Currículo y plataforma", "Marca, web y diseño espacial", "Operación de cohorte y comunidad", "Producción y seguimiento"],
-      note: "Asignación propuesta. Obra, mobiliario y capital para grants requieren acuerdos o recursos adicionales.",
+      note: "Áreas de inversión propuestas. Obra, mobiliario y capital para grants requieren acuerdos o recursos adicionales.",
     },
     plan: {
       category: "Plan y fechas clave", title: "De propuesta a comunidad activa.",
@@ -231,7 +231,7 @@ export const deckCopy = {
       category: "Launch budget", title: "US$50,000 to launch it.",
       intro: "Proposed compensation for the Mexican team creating the curriculum, identity, space, and initial operations.",
       areas: ["Curriculum and platform", "Brand, website, and space design", "Cohort and community operations", "Production and measurement"],
-      note: "Proposed allocation. Construction, furniture, and grant capital require additional agreements or resources.",
+      note: "Proposed uses of funds. Construction, furniture, and grant capital require additional agreements or resources.",
     },
     plan: {
       category: "Plan & key dates", title: "From proposal to active community.",

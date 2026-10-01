@@ -7,8 +7,6 @@ import styles from "./presentation.module.css";
 
 type DeckText = (typeof deckCopy)[DeckLanguage];
 const slideCount = deckCopy.es.slides.length;
-const amounts = ["$20k", "$15k", "$10k", "$5k"];
-const shares = ["40%", "30%", "20%", "10%"];
 const partners = ["OpenAI", "Cursor", "SpaceX", "Vercel", "Google", "NVIDIA"];
 
 export default function Deck() {
@@ -176,7 +174,7 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
       return <>
         <SlideHead number="10" category={t.budget.category} title={t.budget.title} />
         <p className={styles.budgetIntro}>{t.budget.intro}</p>
-        <div className={styles.budgetList}>{t.budget.areas.map((area, i) => <div key={i}><span>{area}</span><strong>{amounts[i]}</strong><small>{shares[i]}</small></div>)}</div>
+        <ul className={styles.budgetList}>{t.budget.areas.map((area) => <li key={area}>{area}</li>)}</ul>
         <p className={styles.note}>{t.budget.note}</p>
       </>;
     case 11:

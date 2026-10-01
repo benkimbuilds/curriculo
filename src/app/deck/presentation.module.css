@@ -107,11 +107,8 @@
 .spaceCopy li { border-top: 1px solid var(--line); padding-top: .7rem; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
 .spaceCopy small { color: var(--muted); }
 .budgetIntro { max-width: 57rem; font-size: clamp(1rem, 1.5vw, 1.4rem); color: var(--muted); line-height: 1.45; }
-.budgetList { display: grid; border-top: 1px solid var(--ink); }
-.budgetList div { display: grid; grid-template-columns: 1fr 7rem 4rem; gap: 1rem; align-items: baseline; border-bottom: 1px solid var(--line); padding: .9rem 0; }
-.budgetList span { font-size: clamp(1rem, 1.4vw, 1.35rem); }
-.budgetList strong { color: var(--purple); font-size: clamp(1.5rem, 2.3vw, 2.3rem); font-weight: 500; letter-spacing: -.04em; }
-.budgetList small { color: var(--muted); text-align: right; }
+.budgetList { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+.budgetList li { border-bottom: 1px solid var(--line); padding: .9rem 0; font-size: clamp(1rem, 1.4vw, 1.35rem); }
 .plan { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
 .plan div { min-height: 15rem; border-top: 2px solid var(--purple); padding-top: 1rem; display: flex; flex-direction: column; }
 .plan span { color: var(--purple); font-size: .75rem; font-weight: 700; letter-spacing: .07em; }
@@ -151,7 +148,7 @@
   .slide { padding-block: 1.4rem; gap: 1rem; }
   .slideHead h2 { font-size: clamp(2.8rem, 5vw, 4.3rem); }
   .eyebrow { margin-bottom: .7rem; }
-  .budgetList div { padding-block: .55rem; }
+  .budgetList li { padding-block: .55rem; }
   .budgetIntro { font-size: 1rem; }
   .pillar { min-height: 13rem; }
   .featurePanel { min-height: 15rem; }
@@ -191,9 +188,6 @@
   .simplePanel { min-height: 13rem; }
   .academyHero { flex-direction: column; }
   .spaceImage { min-height: 15rem; }
-  .budgetList div { grid-template-columns: 1fr 4rem; gap: .4rem; }
-  .budgetList small { display: none; }
-  .budgetList strong { font-size: 1.3rem; }
   .plan div { min-height: 11rem; }
   .plan strong { font-size: 1.3rem; margin-top: 1.2rem; }
   .plan p { font-size: .85rem; }
