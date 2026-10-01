@@ -3,7 +3,7 @@ import Deck from "./presentation";
 
 export const metadata: Metadata = {
   title: "Iquiti · Presentación",
-  description: "Una propuesta para aprender, construir y conectar en Coyoacán.",
+  description: "Una escuela tecnológica abierta y un hub de innovación para crear soluciones y empresas desde Coyoacán.",
   robots: { index: false, follow: false },
 };
 

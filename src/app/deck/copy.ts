@@ -36,11 +36,11 @@ export const deckCopy = {
     problem: {
       category: "El problema", title: "El talento existe. Faltan puentes.",
       points: [
-        { title: "Formación inaccesible", body: "Aprender software e IA suele depender de cursos costosos o de avanzar en soledad." },
-        { title: "Práctica sin entorno", body: "Las primeras ideas necesitan proyectos reales, pares y un lugar donde probarse." },
-        { title: "Oportunidad desconectada", body: "La formación rara vez desemboca en experiencia profesional, equipos o recursos para emprender." },
+        { title: "Educación para la era de la IA", body: "Hacen falta rutas locales, accesibles y actuales para usar la IA con criterio y construir soluciones tecnológicas." },
+        { title: "Un espacio gratuito para construir", body: "Iquiti ofrece un lugar físico para aprender con proyectos, encontrar pares y recibir apoyo para emprender." },
+        { title: "Perspectiva más allá de lo local", body: "A quienes empiezan les cuesta conocer emprendedores de la ciudad y de fuera de México que amplíen su visión." },
       ],
-      bottom: "El resultado: talento con potencial, pero sin una ruta clara hacia el trabajo o nuevas soluciones.",
+      bottom: "El talento necesita más que formación: un lugar para construir y personas con quienes crecer.",
     },
     thesis: {
       category: "Oportunidad y tesis", title: "La innovación empieza cuando más personas pueden crear.",
@@ -161,11 +161,11 @@ export const deckCopy = {
     problem: {
       category: "The problem", title: "The talent is here. The bridges are missing.",
       points: [
-        { title: "Learning behind barriers", body: "Learning software and AI often means expensive courses or going it alone." },
-        { title: "No place to practice", body: "Early ideas need real projects, peers, and space to test them." },
-        { title: "Opportunity out of reach", body: "Training rarely leads directly to professional experience, teams, or startup resources." },
+        { title: "Education for the AI era", body: "We need accessible, up-to-date local paths to use AI thoughtfully and build technology solutions." },
+        { title: "A free space to build", body: "Iquiti offers a physical place to learn through projects, find peers, and get support to start a business." },
+        { title: "Perspective beyond the local scene", body: "Emerging talent has few chances to meet entrepreneurs across the city and beyond Mexico who can broaden their view." },
       ],
-      bottom: "The result: talent with potential, but no clear path to work or new solutions.",
+      bottom: "Talent needs more than training: a place to build and people to grow with.",
     },
     thesis: {
       category: "Opportunity & thesis", title: "Innovation begins when more people can create.",
