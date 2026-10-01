@@ -14,6 +14,7 @@ export const deckCopy = {
     },
     slides: [
       { label: "Inicio", title: "El hub de innovación de la Ciudad de México." },
+      { label: "El problema", title: "El talento está aquí. El camino para crear con tecnología está fragmentado." },
       { label: "Reinversión", title: "Un ciclo que multiplica oportunidades en la Ciudad de México." },
       { label: "La tesis", title: "La innovación empieza cuando más personas pueden crear." },
       { label: "El Hub", title: "Un ecosistema, cinco motores." },
@@ -32,6 +33,15 @@ export const deckCopy = {
       title: "El hub de innovación de la",
       emphasis: "Ciudad de México.",
       lead: "La próxima empresa puede nacer aquí.",
+    },
+    problem: {
+      category: "El problema", title: "El talento está aquí. El camino para crear con tecnología está fragmentado.",
+      points: [
+        { title: "Formación desconectada del presente", body: "Faltan rutas accesibles para usar IA con criterio y construir productos que resuelvan problemas reales." },
+        { title: "Ideas sin continuidad", body: "Sin proyectos, pares, espacio físico y apoyo, cuesta convertir lo aprendido en experiencia o empresa." },
+        { title: "Redes difíciles de alcanzar", body: "Quienes empiezan tienen pocas oportunidades de conectar con emprendedores y empleadores de la ciudad y del mundo." },
+      ],
+      bottom: "El resultado: ideas sin una ruta clara hacia empleo, empresas y reinversión local.",
     },
     reinvestment: {
       category: "Ciclo de reinversión", title: "Un ciclo que multiplica oportunidades en la Ciudad de México.",
@@ -158,6 +168,7 @@ export const deckCopy = {
     },
     slides: [
       { label: "Opening", title: "Mexico City's innovation hub." },
+      { label: "The problem", title: "The talent is here. The path to building with technology is fragmented." },
       { label: "Reinvestment", title: "A cycle that expands opportunity across Mexico City." },
       { label: "Our thesis", title: "Innovation begins when more people can create." },
       { label: "The Hub", title: "One ecosystem, five engines." },
@@ -176,6 +187,15 @@ export const deckCopy = {
       title: "Mexico City's",
       emphasis: "innovation hub.",
       lead: "The next company could start here.",
+    },
+    problem: {
+      category: "The problem", title: "The talent is here. The path to building with technology is fragmented.",
+      points: [
+        { title: "Training out of step", body: "Accessible paths to use AI thoughtfully and build products that solve real problems remain limited." },
+        { title: "Ideas without continuity", body: "Without projects, peers, physical space, and support, learning is hard to turn into experience or a company." },
+        { title: "Networks hard to reach", body: "Emerging builders have few chances to connect with entrepreneurs and employers across the city and the world." },
+      ],
+      bottom: "The result: ideas without a clear path to jobs, companies, or local reinvestment.",
     },
     reinvestment: {
       category: "Reinvestment cycle", title: "A cycle that expands opportunity across Mexico City.",

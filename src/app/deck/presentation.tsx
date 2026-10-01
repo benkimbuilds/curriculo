@@ -74,7 +74,7 @@ export default function Deck() {
           ))}
         </nav>
       ) : (
-        <section className={`${styles.slide} ${index === 0 || index === 12 ? styles.cover : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`}>
+        <section className={`${styles.slide} ${index === 0 || index === 13 ? styles.cover : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`}>
           <SlideContent index={index} t={t} />
         </section>
       )}
@@ -101,32 +101,38 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
       </>;
     case 1:
       return <>
-        <SlideHead number="01" category={t.reinvestment.category} title={t.reinvestment.title} />
-        <div className={styles.flow}>{t.reinvestment.steps.map((step, i) => <div key={i}><span>{`0${i + 1}`}</span><strong>{step.title}</strong><small>{step.body}</small></div>)}</div>
-        <p className={styles.bottomLine}>{t.reinvestment.bottom}</p>
+        <SlideHead number="02" category={t.problem.category} title={t.problem.title} />
+        <div className={styles.threeColumns}>{t.problem.points.map((point, i) => <Statement key={i} number={`0${i + 1}`} title={point.title} body={point.body} />)}</div>
+        <p className={styles.bottomLine}>{t.problem.bottom}</p>
       </>;
     case 2:
       return <>
-        <SlideHead number="02" category={t.thesis.category} title={t.thesis.title} />
+        <SlideHead number="03" category={t.reinvestment.category} title={t.reinvestment.title} />
+        <div className={styles.flow}>{t.reinvestment.steps.map((step, i) => <div key={i}><span>{`0${i + 1}`}</span><strong>{step.title}</strong><small>{step.body}</small></div>)}</div>
+        <p className={styles.bottomLine}>{t.reinvestment.bottom}</p>
+      </>;
+    case 3:
+      return <>
+        <SlideHead number="04" category={t.thesis.category} title={t.thesis.title} />
         <div className={styles.thesisLayout}>
           <p className={styles.bigStatement}>{t.thesis.statement}</p>
           <div className={styles.verticalRule} aria-hidden="true" />
           <div className={styles.thesisList}>{t.thesis.points.map((point) => <p key={point.title}><strong>{point.title}</strong><span>{point.body}</span></p>)}</div>
         </div>
       </>;
-    case 3:
+    case 4:
       return <>
-        <SlideHead number="03" category={t.hub.category} title={t.hub.title} />
+        <SlideHead number="05" category={t.hub.category} title={t.hub.title} />
         <div className={styles.pillarGrid}>{t.hub.pillars.map((pillar, i) => <Pillar key={i} number={`0${i + 1}`} title={pillar.title} body={pillar.body} />)}</div>
       </>;
-    case 4:
+    case 5:
       return <>
         <PillarHead number={1} category={t.hub.pillars[0].title} title={t.academy.title} />
         <div className={styles.academyHero}><p>{t.academy.promise}</p><strong>{t.academy.distinction}</strong></div>
         <div className={styles.threeColumns}>{t.academy.points.map((point, i) => <Statement key={i} number={`0${i + 1}`} title={point.title} body={point.body} />)}</div>
         <p className={styles.bottomLine}>{t.academy.bottom}</p>
       </>;
-    case 5:
+    case 6:
       return <>
         <PillarHead number={2} category={t.hub.pillars[1].title} title={t.coworking.title} />
         <div className={styles.split}>
@@ -135,7 +141,7 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
         </div>
         <p className={styles.bottomLine}>{t.coworking.bottom}</p>
       </>;
-    case 6:
+    case 7:
       return <>
         <PillarHead number={3} category={t.hub.pillars[2].title} title={t.grants.title} />
         <div className={styles.split}>
@@ -144,7 +150,7 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
         </div>
         <p className={styles.bottomLine}>{t.grants.bottom}</p>
       </>;
-    case 7:
+    case 8:
       return <>
         <PillarHead number={4} category={t.hub.pillars[3].title} title={t.residencies.title} />
         <div className={styles.split}>
@@ -153,7 +159,7 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
         </div>
         <p className={styles.bottomLine}>{t.residencies.bottom}</p>
       </>;
-    case 8:
+    case 9:
       return <>
         <PillarHead number={5} category={t.hub.pillars[4].title} title={t.events.title} />
         <div className={styles.eventsLayout}>
@@ -162,9 +168,9 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
         </div>
         <p className={styles.eventsNote}>{t.events.partnerIntro}</p>
       </>;
-    case 9:
+    case 10:
       return <>
-        <SlideHead number="09" category={t.space.category} title={t.space.title} />
+        <SlideHead number="11" category={t.space.category} title={t.space.title} />
         <p className={styles.spaceLead}>{t.space.statement}</p>
         <div className={styles.spaceGallery}>{t.space.images.map((item) => <figure key={item.src}>
           <div className={styles.spacePhoto}><Image src={item.src} alt={item.alt} fill sizes="(max-width: 640px) 100vw, 33vw" unoptimized /></div>
@@ -172,16 +178,16 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
         </figure>)}</div>
         <p className={styles.spaceNote}>{t.space.note}</p>
       </>;
-    case 10:
+    case 11:
       return <>
-        <SlideHead number="10" category={t.budget.category} title={t.budget.title} />
+        <SlideHead number="12" category={t.budget.category} title={t.budget.title} />
         <p className={styles.budgetIntro}>{t.budget.intro}</p>
         <ul className={styles.budgetList}>{t.budget.areas.map((area) => <li key={area}>{area}</li>)}</ul>
         <p className={styles.note}>{t.budget.note}</p>
       </>;
-    case 11:
+    case 12:
       return <>
-        <SlideHead number="11" category={t.plan.category} title={t.plan.title} />
+        <SlideHead number="13" category={t.plan.category} title={t.plan.title} />
         <div className={styles.planTracks}>
           {[t.plan.school, t.plan.hub].map((track) => <section className={styles.planTrack} key={track.label} aria-label={track.label}>
             <strong className={styles.planTrackLabel}>{track.label}</strong>
@@ -192,7 +198,7 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
         <div className={styles.planMilestones}>{t.plan.milestones.map((milestone) => <div key={milestone.date}><strong>{milestone.date}</strong><span>{milestone.label}</span></div>)}</div>
         <p className={styles.planNote}>{t.plan.note}</p>
       </>;
-    case 12:
+    case 13:
       return <>
         <div className={styles.endCopy}>
           <p className={styles.eyebrow}>{t.close.eyebrow}</p>
