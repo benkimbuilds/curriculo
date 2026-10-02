@@ -49,7 +49,7 @@ export const deckCopy = {
       category: "Dónde queda el valor", title: "El talento crea valor. El ecosistema local no siempre participa.",
       points: [
         { title: "El talento más destacado se va", body: "Cuando quienes más destacan se trasladan, el capital, la riqueza, el conocimiento y la cultura que generan crecen en otros mercados." },
-        { title: "Trabajo local, poco beneficio", body: "Muchos de quienes se quedan trabajan para empresas extranjeras bajo esquemas de offshoring o contratos, y a menudo no participan en el valor que ayudan a crear." },
+        { title: "Trabajo local, poco beneficio", body: "Muchos de quienes se quedan trabajan para empresas extranjeras bajo esquemas de offshoring o contrato, a menudo sin acciones ni participación en el beneficio económico de su crecimiento." },
       ],
       bottom: "Nuestro talento impulsa el crecimiento global, pero menos valor vuelve al ecosistema local.",
     },
@@ -213,7 +213,7 @@ export const deckCopy = {
       category: "Where value goes", title: "Talent creates value. The local ecosystem does not always share in it.",
       points: [
         { title: "Top talent leaves", body: "When leading builders move away, the capital, wealth, knowledge, and culture they generate grow in other markets." },
-        { title: "Local work, limited upside", body: "Many who stay work for foreign companies through offshoring or contract models, often without a meaningful share of the value they help create." },
+        { title: "Local work, limited upside", body: "Many who stay work for foreign companies through offshoring or contract models, often without equity or a share in those companies' financial upside." },
       ],
       bottom: "Our talent contributes to global growth, but less value flows back to the local ecosystem.",
     },
