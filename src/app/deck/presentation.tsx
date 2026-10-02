@@ -16,6 +16,11 @@ const partners = [
   { name: "Google", src: "/deck/logos/google.png", width: 544, height: 184 },
   { name: "NVIDIA", src: "/deck/logos/nvidia.svg", width: 256, height: 59 },
 ];
+const workshopOrganizations = [
+  { name: "PwC", src: "/deck/logos/pwc.svg", width: 300, height: 200 },
+  { name: "BBVA", src: "/deck/logos/bbva.svg", width: 600, height: 180 },
+  { name: "Walmart", src: "/deck/logos/walmart.svg", width: 1000, height: 190 },
+];
 
 export default function Deck() {
   const [index, setIndex] = useState(0);
@@ -172,7 +177,7 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
         <PillarHead number={5} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.events.title} goTo={goTo} />
         <div className={styles.eventsLayout}>
           <section className={styles.eventsProofCard}><Image className={styles.eventsProofLogo} src="/deck/logos/ai-builders-mexico.svg" width={393} height={95} alt="AI Builders México" /><strong className={styles.eventsProofValue}>5,000</strong><span className={styles.eventsProofLabel}>{t.events.community}</span><p>{t.events.cadence}</p></section>
-          <section className={styles.eventsProofCard}><Image className={`${styles.eventsProofLogo} ${styles.pwcLogo}`} src="/deck/logos/pwc.svg" width={300} height={200} alt="PwC" /><span className={styles.eventsProofLabel}>{t.events.trainingLabel}</span><p>{t.events.trainingBody}</p></section>
+          <section className={styles.eventsProofCard}><ul className={styles.workshopLogos}>{workshopOrganizations.map((organization) => <li key={organization.name}><Image src={organization.src} width={organization.width} height={organization.height} alt={organization.name} /></li>)}</ul><span className={styles.eventsProofLabel}>{t.events.trainingLabel}</span><p>{t.events.trainingBody}</p></section>
           <section className={styles.eventsProofCard}><span className={styles.eventsProofLabel}>{t.events.residencyLabel}</span><div className={styles.eventsResults}>{t.events.residencyResults.map((result) => <div key={result.value}><strong>{result.value}</strong><span>{result.label}</span></div>)}</div></section>
         </div>
         <div className={styles.eventsNetwork}><strong>{t.events.partnerLabel}</strong><ul className={styles.partnerLogos} aria-label={t.events.partnerLabel}>{partners.map((partner) => <li key={partner.name}><Image src={partner.src} width={partner.width} height={partner.height} alt={partner.name} /></li>)}</ul></div>

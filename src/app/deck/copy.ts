@@ -105,9 +105,9 @@ export const deckCopy = {
     events: {
       title: "Ya hemos hecho algo así.",
       community: "miembros de AI Builders México",
-      cadence: "Encuentros y talleres mensuales que podemos llevar a Utopías.",
+      cadence: "Decenas de talleres gratuitos en México y encuentros mensuales que podemos llevar a Utopías.",
       trainingLabel: "Formación corporativa en IA",
-      trainingBody: "Hemos ayudado a equipos a usar IA y construir productos.",
+      trainingBody: "Hemos ayudado a equipos de estas empresas a usar IA y construir productos.",
       residencyLabel: "Residencia de IA de AI Builders México",
       residencyResults: [
         { value: "10", label: "fundadores acompañados" },
@@ -269,9 +269,9 @@ export const deckCopy = {
     events: {
       title: "We've done something like this before.",
       community: "AI Builders México members",
-      cadence: "Monthly gatherings and workshops we can bring to Utopías.",
+      cadence: "Dozens of free workshops across Mexico, plus monthly gatherings we can bring to Utopías.",
       trainingLabel: "Corporate AI workshops",
-      trainingBody: "We have helped teams learn to use AI and build products.",
+      trainingBody: "We've helped teams at these companies learn to use AI and build products.",
       residencyLabel: "AI Builders México AI Residency",
       residencyResults: [
         { value: "10", label: "founders supported" },
