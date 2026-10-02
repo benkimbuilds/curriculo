@@ -7,6 +7,7 @@ import styles from "./presentation.module.css";
 
 type DeckText = (typeof deckCopy)[DeckLanguage];
 const slideCount = deckCopy.es.slides.length;
+const firstPillarSlide = 5;
 const partners = ["OpenAI", "Cursor", "SpaceX", "Vercel", "Google", "NVIDIA"];
 
 export default function Deck() {
@@ -75,7 +76,7 @@ export default function Deck() {
         </nav>
       ) : (
         <section className={`${styles.slide} ${index === 0 || index === 13 ? styles.cover : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`}>
-          <SlideContent index={index} t={t} />
+          <SlideContent index={index} t={t} goTo={goTo} />
         </section>
       )}
 
@@ -88,7 +89,7 @@ export default function Deck() {
   );
 }
 
-function SlideContent({ index, t }: { index: number; t: DeckText }) {
+function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (next: number) => void }) {
   switch (index) {
     case 0:
       return <>
@@ -127,14 +128,14 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
       </>;
     case 5:
       return <>
-        <PillarHead number={1} category={t.hub.pillars[0].title} title={t.academy.title} />
+        <PillarHead number={1} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.academy.title} goTo={goTo} />
         <div className={styles.academyHero}><p>{t.academy.promise}</p><strong>{t.academy.distinction}</strong></div>
         <div className={styles.threeColumns}>{t.academy.points.map((point, i) => <Statement key={i} number={`0${i + 1}`} title={point.title} body={point.body} />)}</div>
         <p className={styles.bottomLine}>{t.academy.bottom}</p>
       </>;
     case 6:
       return <>
-        <PillarHead number={2} category={t.hub.pillars[1].title} title={t.coworking.title} />
+        <PillarHead number={2} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.coworking.title} goTo={goTo} />
         <div className={styles.split}>
           <div className={styles.featurePanel}><span className={styles.featureNumber}>01 / 02</span><h3>{t.coworking.entry.title}</h3><p>{t.coworking.entry.body}</p></div>
           <div className={styles.featurePanel}><span className={styles.featureNumber}>02 / 02</span><h3>{t.coworking.next.title}</h3><p>{t.coworking.next.body}</p></div>
@@ -143,7 +144,7 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
       </>;
     case 7:
       return <>
-        <PillarHead number={3} category={t.hub.pillars[2].title} title={t.grants.title} />
+        <PillarHead number={3} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.grants.title} goTo={goTo} />
         <div className={styles.split}>
           <div className={styles.simplePanel}><span className={styles.dot} /><h3>{t.grants.need.title}</h3><p>{t.grants.need.body}</p><small>{t.grants.need.note}</small></div>
           <div className={styles.simplePanel}><span className={styles.dot} /><h3>{t.grants.teams.title}</h3><p>{t.grants.teams.body}</p><small>{t.grants.teams.note}</small></div>
@@ -152,7 +153,7 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
       </>;
     case 8:
       return <>
-        <PillarHead number={4} category={t.hub.pillars[3].title} title={t.residencies.title} />
+        <PillarHead number={4} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.residencies.title} goTo={goTo} />
         <div className={styles.split}>
           <div className={styles.featurePanel}><span className={styles.featureNumber}>01 / 02</span><h3>{t.residencies.invited.title}</h3><p>{t.residencies.invited.body}</p></div>
           <div className={styles.featurePanel}><span className={styles.featureNumber}>02 / 02</span><h3>{t.residencies.exchange.title}</h3><p>{t.residencies.exchange.body}</p></div>
@@ -161,7 +162,7 @@ function SlideContent({ index, t }: { index: number; t: DeckText }) {
       </>;
     case 9:
       return <>
-        <PillarHead number={5} category={t.hub.pillars[4].title} title={t.events.title} />
+        <PillarHead number={5} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.events.title} goTo={goTo} />
         <div className={styles.eventsLayout}>
           <div className={styles.eventsMetric}><strong>5,000</strong><span>{t.events.community}</span><p>{t.events.cadence}</p></div>
           <div className={styles.eventsPartners}><strong>{t.events.partnerLabel}</strong><ul className={styles.partnerNames} aria-label={t.events.partnerLabel}>{partners.map((partner) => <li key={partner}>{partner}</li>)}</ul></div>
@@ -220,8 +221,11 @@ function SlideHead({ number, category, title }: { number: string; category: stri
   return <div className={styles.slideHead}><p className={styles.eyebrow}>{number} / {category}</p><h2>{title}</h2></div>;
 }
 
-function PillarHead({ number, category, title }: { number: number; category: string; title: string }) {
-  return <div className={styles.slideHead}><p className={styles.eyebrow}>{String(number).padStart(2, "0")} / 05 · {category}</p><h2>{title}</h2></div>;
+function PillarHead({ number, labels, navLabel, title, goTo }: { number: number; labels: readonly { title: string }[]; navLabel: string; title: string; goTo: (next: number) => void }) {
+  return <div className={styles.slideHead}>
+    <nav className={styles.pillarRail} aria-label={navLabel}>{labels.map((pillar, i) => <button key={pillar.title} type="button" className={number === i + 1 ? styles.pillarRailActive : ""} aria-current={number === i + 1 ? "step" : undefined} onClick={() => goTo(firstPillarSlide + i)}><span>{String(i + 1).padStart(2, "0")}</span><strong>{pillar.title}</strong></button>)}</nav>
+    <h2>{title}</h2>
+  </div>;
 }
 
 function Statement({ number, title, body }: { number: string; title: string; body: string }) {
