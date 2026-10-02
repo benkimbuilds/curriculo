@@ -16,6 +16,7 @@ export const deckCopy = {
     slides: [
       { label: "Inicio", title: "El hub de innovación de la Ciudad de México." },
       { label: "El problema", title: "El talento está aquí. El camino para crear con tecnología está fragmentado." },
+      { label: "Dónde queda el valor", title: "El talento crea valor. El ecosistema local no siempre participa." },
       { label: "Reinversión", title: "Talento, conocimiento y capital: de aquí al mundo." },
       { label: "La tesis", title: "La innovación empieza cuando más personas pueden crear." },
       { label: "El Hub", title: "Un ecosistema, cinco motores." },
@@ -43,6 +44,14 @@ export const deckCopy = {
         { title: "Un lugar para soñar", body: "El talento local necesita un espacio cercano donde fundadores, ideas y culturas del mundo amplíen lo que parece posible." },
       ],
       bottom: "El resultado: ideas sin una ruta clara hacia empleo, empresas y reinversión local.",
+    },
+    valueLeakage: {
+      category: "Dónde queda el valor", title: "El talento crea valor. El ecosistema local no siempre participa.",
+      points: [
+        { title: "El talento más destacado se va", body: "Cuando quienes más destacan se trasladan, el capital, la riqueza, el conocimiento y la cultura que generan crecen en otros mercados." },
+        { title: "Trabajo local, poco beneficio", body: "Muchos de quienes se quedan trabajan para empresas extranjeras bajo esquemas de offshoring o contratos, y a menudo no participan en el valor que ayudan a crear." },
+      ],
+      bottom: "Nuestro talento impulsa el crecimiento global, pero menos valor vuelve al ecosistema local.",
     },
     reinvestment: {
       category: "Ciclo de reinversión", title: "Talento, conocimiento y capital: de aquí al mundo.",
@@ -171,6 +180,7 @@ export const deckCopy = {
     slides: [
       { label: "Opening", title: "Mexico City's innovation hub." },
       { label: "The problem", title: "The talent is here. The path to building with technology is fragmented." },
+      { label: "Where value goes", title: "Talent creates value. The local ecosystem does not always share in it." },
       { label: "Reinvestment", title: "Talent, knowledge, and capital: from here to the world." },
       { label: "Our thesis", title: "Innovation begins when more people can create." },
       { label: "The Hub", title: "One ecosystem, five engines." },
@@ -198,6 +208,14 @@ export const deckCopy = {
         { title: "A place to dream", body: "Local talent needs a nearby hub where global founders, ideas, and cultures expand what feels possible." },
       ],
       bottom: "The result: ideas without a clear path to jobs, companies, or local reinvestment.",
+    },
+    valueLeakage: {
+      category: "Where value goes", title: "Talent creates value. The local ecosystem does not always share in it.",
+      points: [
+        { title: "Top talent leaves", body: "When leading builders move away, the capital, wealth, knowledge, and culture they generate grow in other markets." },
+        { title: "Local work, limited upside", body: "Many who stay work for foreign companies through offshoring or contract models, often without a meaningful share of the value they help create." },
+      ],
+      bottom: "Our talent contributes to global growth, but less value flows back to the local ecosystem.",
     },
     reinvestment: {
       category: "Reinvestment cycle", title: "Talent, knowledge, and capital: from here to the world.",
