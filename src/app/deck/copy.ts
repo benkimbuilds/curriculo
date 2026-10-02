@@ -22,7 +22,7 @@ export const deckCopy = {
       { label: "El Hub", title: "Un ecosistema, cinco motores." },
       { label: "01 · Academia", title: "Aprender a aprender. Aprender construyendo." },
       { label: "02 · Coworking", title: "Un lugar para crear empresas en comunidad." },
-      { label: "03 · Grants y talento", title: "Retos locales y oportunidades de empleo." },
+      { label: "03 · Grants y empleo", title: "Grants para retos locales. Rutas hacia el empleo." },
       { label: "04 · Residencias", title: "Perspectivas globales, trabajo local." },
       { label: "05 · Eventos", title: "Eventos que conectan Utopías con el mundo tecnológico." },
       { label: "El espacio", title: "Que se sienta como una posibilidad nueva." },
@@ -76,7 +76,7 @@ export const deckCopy = {
       pillars: [
         { title: "Academia", body: "Escuela gratuita y de código abierto, con aprendizaje entre pares y proyectos semanales." },
         { title: "Coworking", body: "Un hogar gratuito para emprendedores seleccionados y egresados." },
-        { title: "Grants y talento", body: "Retos locales y una ruta hacia prácticas y empleo con empresas del hub y aliados." },
+        { title: "Grants y empleo", body: "Retos locales y una ruta hacia prácticas, co-ops y empleo con empresas seleccionadas." },
         { title: "Residencias", body: "Emprendedores de otras ciudades y países que llegan a intercambiar conocimiento." },
         { title: "Eventos", body: "Encuentros mensuales y talleres con voces de nuestra red de aliados tecnológicos." },
       ],
@@ -98,10 +98,10 @@ export const deckCopy = {
       bottom: "La academia abre la puerta; el coworking ofrece el siguiente lugar para construir.",
     },
     grants: {
-      title: "Retos locales y oportunidades de empleo.",
+      title: "Grants para retos locales. Rutas hacia el empleo.",
       need: { title: "Grants para retos locales", body: "Negocios y organizaciones identifican problemas para que estudiantes y emprendedores desarrollen soluciones.", note: "Capital sujeto a acuerdos con financiadores." },
-      teams: { title: "Puente al empleo", body: "Egresados pueden postularse a prácticas, co-ops y vacantes en empresas del hub o aliadas.", note: "La contratación depende de cada empresa." },
-      bottom: "Dos caminos para aplicar lo aprendido: crear una solución o integrarse a un equipo.",
+      teams: { title: "Pipeline de empleo", body: "Trabajaremos con empresas seleccionadas para conectar a egresados destacados con prácticas, co-ops y puestos de ingeniería en sus equipos.", note: "Las alianzas y contrataciones dependen de acuerdos con cada empresa." },
+      bottom: "Dos rutas para aplicar lo aprendido: resolver un reto local o integrarse a una empresa.",
     },
     residencies: {
       title: "Perspectivas globales, trabajo local.",
@@ -186,7 +186,7 @@ export const deckCopy = {
       { label: "The Hub", title: "One ecosystem, five engines." },
       { label: "01 · Academy", title: "Learn how to learn. Learn by building." },
       { label: "02 · Coworking", title: "A place to build companies with the community." },
-      { label: "03 · Grants & talent", title: "Local challenges and career opportunities." },
+      { label: "03 · Grants & employment", title: "Grants for local challenges. Paths into employment." },
       { label: "04 · Residencies", title: "Global perspective, local work." },
       { label: "05 · Events", title: "Events connecting Utopías to the tech world." },
       { label: "The space", title: "A place that feels like a new possibility." },
@@ -240,7 +240,7 @@ export const deckCopy = {
       pillars: [
         { title: "Academy", body: "A free, open-source school built around peer learning and weekly projects." },
         { title: "Coworking", body: "A free home for selected entrepreneurs and graduates." },
-        { title: "Grants & talent", body: "Local challenges and paths to internships or jobs with hub companies and talent partners." },
+        { title: "Grants & employment", body: "Local challenges and paths to internships, co-ops, and jobs with selected companies." },
         { title: "Residencies", body: "Entrepreneurs from other cities and countries who come to exchange knowledge." },
         { title: "Events", body: "Monthly gatherings and workshops with voices from our technology partner network." },
       ],
@@ -262,10 +262,10 @@ export const deckCopy = {
       bottom: "The Academy opens the door; coworking offers the next place to build.",
     },
     grants: {
-      title: "Local challenges and career opportunities.",
+      title: "Grants for local challenges. Paths into employment.",
       need: { title: "Grants for local challenges", body: "Businesses and organizations identify problems for students and entrepreneurs to solve.", note: "Capital depends on funding agreements." },
-      teams: { title: "Path to employment", body: "Graduates can apply for internships, co-ops, and jobs with hub companies or partner employers.", note: "Each company makes its own hiring decisions." },
-      bottom: "Two ways to apply new skills: build a solution or join a team.",
+      teams: { title: "Employment pipeline", body: "We will work with selected companies to connect strong graduates with internships, co-ops, and engineering roles on their teams.", note: "Partnerships and hiring depend on agreements with each company." },
+      bottom: "Two ways to apply new skills: solve a local challenge or join a company team.",
     },
     residencies: {
       title: "Global perspective, local work.",
