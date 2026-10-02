@@ -22,7 +22,7 @@ export const deckCopy = {
       { label: "01 · Academia", title: "Una escuela que enseña a aprender." },
       { label: "02 · Coworking", title: "Un tercer espacio para construir soluciones a los problemas de aquí." },
       { label: "03 · Grants y empleo", title: "Grants para problemas locales. Rutas claras hacia el empleo." },
-      { label: "04 · Residencias", title: "Soñar en grande. Crear desde México." },
+      { label: "04 · Residencias", title: "Residencias: un puente a mercados globales." },
       { label: "05 · Eventos", title: "Ya hemos hecho algo así." },
       { label: "El espacio", title: "Que se sienta como una posibilidad nueva." },
       { label: "Presupuesto", title: "US$50,000 para ponerlo en marcha." },
@@ -97,9 +97,9 @@ export const deckCopy = {
       bottom: "Tres caminos para egresados: resolver problemas locales, fundar una startup o sumarse a un equipo.",
     },
     residencies: {
-      title: "Soñar en grande. Crear desde México.",
+      title: "Residencias: un puente a mercados globales.",
       invited: { title: "Fundadores invitados", body: "Emprendedores de otras ciudades y países llegan a Iquiti para compartir cómo detectan oportunidades y crean para mercados globales." },
-      exchange: { title: "Intercambio cotidiano", body: "Al trabajar con equipos locales, comparten métodos, cultura y redes que ayudan a soñar en grande y convertir conocimiento local en productos para el mundo." },
+      exchange: { title: "Intercambio cultural e intelectual", body: "Al trabajar con equipos locales, comparten métodos, cultura y redes que ayudan a soñar en grande y convertir conocimiento local en productos para el mundo." },
       bottom: "La meta: crear empresas basadas en conocimiento en México, llegar a mercados globales y dejar más valor en manos de quienes construyen aquí.",
     },
     events: {
@@ -186,7 +186,7 @@ export const deckCopy = {
       { label: "01 · Academy", title: "A school that teaches how to learn." },
       { label: "02 · Coworking", title: "A third space to build solutions for the problems next door." },
       { label: "03 · Grants & employment", title: "Grants for local problems. Clear paths into employment." },
-      { label: "04 · Residencies", title: "Dream bigger. Build from Mexico." },
+      { label: "04 · Residencies", title: "Residencies: a bridge to global markets." },
       { label: "05 · Events", title: "We've done something like this before." },
       { label: "The space", title: "A place that feels like a new possibility." },
       { label: "Budget", title: "US$50,000 to launch it." },
@@ -261,9 +261,9 @@ export const deckCopy = {
       bottom: "Three paths for graduates: solve a local problem, launch a startup, or join a team.",
     },
     residencies: {
-      title: "Dream bigger. Build from Mexico.",
+      title: "Residencies: a bridge to global markets.",
       invited: { title: "Invited founders", body: "Entrepreneurs from other cities and countries join Iquiti to share how they spot opportunities and build for global markets." },
-      exchange: { title: "Everyday exchange", body: "Working alongside local teams, they share methods, culture, and networks that help builders dream bigger and turn local knowledge into products for the world." },
+      exchange: { title: "Cultural and intellectual exchange", body: "Working alongside local teams, they share methods, culture, and networks that help builders dream bigger and turn local knowledge into products for the world." },
       bottom: "The aim: build knowledge-based companies in Mexico, reach global markets, and keep more of the upside with the people building here.",
     },
     events: {
