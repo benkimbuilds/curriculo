@@ -65,7 +65,7 @@ export const deckCopy = {
     },
     thesis: {
       category: "Oportunidad y tesis", title: "Educación, innovación y emprendimiento. Un solo camino.",
-      statement: "Una escuela abierta y un hub en el mismo lugar convierten capacidad técnica en proyectos, trabajo y empresas nacidas en Coyoacán.",
+      statement: "Una escuela abierta y un hub en el mismo lugar convierten capacidad técnica en proyectos, trabajo y empresas nacidas en México.",
       points: [
         { title: "Escuela abierta", body: "Gratuita, autodidacta y entre pares; currículo de código abierto y una primera cohorte presencial de 150 personas durante 12 semanas." },
         { title: "Hub de innovación", body: "Coworking, retos, residencias y eventos donde aplicar lo aprendido y colaborar con emprendedores." },
@@ -229,7 +229,7 @@ export const deckCopy = {
     },
     thesis: {
       category: "Opportunity & thesis", title: "Education, innovation, entrepreneurship. One continuous path.",
-      statement: "An open school and a hub in one place turn technical ability into projects, careers, and companies rooted in Coyoacán.",
+      statement: "An open school and a hub in one place turn technical ability into projects, careers, and companies rooted in Mexico.",
       points: [
         { title: "Open school", body: "Free, self-directed, and peer-led; an open-source curriculum and a first in-person cohort of 150 people over 12 weeks." },
         { title: "Innovation hub", body: "Coworking, challenges, residencies, and events where learners apply their skills alongside entrepreneurs." },
