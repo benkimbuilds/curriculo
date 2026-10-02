@@ -170,10 +170,11 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
       return <>
         <PillarHead number={5} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.events.title} goTo={goTo} />
         <div className={styles.eventsLayout}>
-          <div className={styles.eventsMetric}><strong>5,000</strong><span>{t.events.community}</span><p>{t.events.cadence}</p></div>
-          <div className={styles.eventsPartners}><strong>{t.events.partnerLabel}</strong><ul className={styles.partnerNames} aria-label={t.events.partnerLabel}>{partners.map((partner) => <li key={partner}>{partner}</li>)}</ul></div>
+          <section className={styles.eventsProofCard}><strong className={styles.eventsProofValue}>5,000</strong><span className={styles.eventsProofLabel}>{t.events.community}</span><p>{t.events.cadence}</p></section>
+          <section className={styles.eventsProofCard}><strong className={styles.eventsProofValue}>PwC</strong><span className={styles.eventsProofLabel}>{t.events.trainingLabel}</span><p>{t.events.trainingBody}</p></section>
+          <section className={styles.eventsProofCard}><span className={styles.eventsProofLabel}>{t.events.residencyLabel}</span><div className={styles.eventsResults}>{t.events.residencyResults.map((result) => <div key={result.value}><strong>{result.value}</strong><span>{result.label}</span></div>)}</div></section>
         </div>
-        <p className={styles.eventsNote}>{t.events.partnerIntro}</p>
+        <div className={styles.eventsNetwork}><strong>{t.events.partnerLabel}</strong><ul className={styles.partnerNames} aria-label={t.events.partnerLabel}>{partners.map((partner) => <li key={partner}>{partner}</li>)}</ul><p className={styles.eventsNote}>{t.events.partnerIntro}</p></div>
       </>;
     case 11:
       return <>
