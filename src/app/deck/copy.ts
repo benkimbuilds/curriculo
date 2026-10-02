@@ -38,7 +38,7 @@ export const deckCopy = {
     problem: {
       category: "El problema", title: "El talento está aquí. El camino para crear con tecnología está fragmentado.",
       points: [
-        { title: "Formación desconectada del presente", body: "Faltan rutas accesibles para usar IA con criterio y construir productos que resuelvan problemas reales." },
+        { title: "La brecha de habilidades tecnológicas crece", body: "Mientras la IA multiplica lo que pueden lograr quienes saben usarla, el acceso al aprendizaje y la práctica para construir con ella no avanza al mismo ritmo." },
         { title: "El salto de las ideas al impacto", body: "Ese salto necesita proyectos, pares, espacio físico y apoyo. Sin ellos, las ideas difícilmente se convierten en soluciones útiles o empresas que crecen." },
         { title: "Un lugar para soñar", body: "El talento local necesita un espacio cercano donde fundadores, ideas y culturas del mundo amplíen lo que parece posible." },
       ],
@@ -193,7 +193,7 @@ export const deckCopy = {
     problem: {
       category: "The problem", title: "The talent is here. The path to building with technology is fragmented.",
       points: [
-        { title: "Training out of step", body: "Accessible paths to use AI thoughtfully and build products that solve real problems remain limited." },
+        { title: "The technical skills gap is widening", body: "As AI expands what skilled builders can achieve, access to the learning and practice needed to build with it is not keeping pace." },
         { title: "The leap from ideas to impact", body: "That leap needs projects, peers, physical space, and support. Without them, ideas rarely become useful solutions or growing companies." },
         { title: "A place to dream", body: "Local talent needs a nearby hub where global founders, ideas, and cultures expand what feels possible." },
       ],
