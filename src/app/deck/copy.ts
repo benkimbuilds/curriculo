@@ -27,7 +27,7 @@ export const deckCopy = {
       { label: "05 · Eventos", title: "La comunidad existe. Los resultados también." },
       { label: "El espacio", title: "Que se sienta como una posibilidad nueva." },
       { label: "Presupuesto", title: "US$50,000 para ponerlo en marcha." },
-      { label: "Plan y metas", title: "Una primera cohorte. Un hub de largo plazo." },
+      { label: "Plan y metas", title: "Dos formas de aprender. Un hub de largo plazo." },
       { label: "Cierre", title: "Construyamos el siguiente nodo." },
     ],
     cover: {
@@ -141,11 +141,11 @@ export const deckCopy = {
       note: "Áreas de inversión propuestas. Obra, mobiliario y capital para grants requieren acuerdos o recursos adicionales.",
     },
     plan: {
-      category: "Plan y metas", title: "Una primera cohorte. Un hub de largo plazo.",
+      category: "Plan y metas", title: "Dos formas de aprender. Un hub de largo plazo.",
       school: {
-        label: "Academia · primera cohorte",
-        metrics: [{ value: "150", label: "estudiantes" }, { value: "12", label: "semanas" }],
-        note: "El currículo abierto sigue disponible y permite nuevas cohortes.",
+        label: "Academia · dos modalidades",
+        inPerson: { label: "Presencial", value: "150", unit: "estudiantes", detail: "12 semanas · sesiones de 4 horas con mentoría." },
+        online: { label: "En línea", value: "1–5 mil", unit: "participantes · meta", detail: "Menor acompañamiento: menos mentoría e interacción entre pares." },
       },
       hub: {
         label: "Hub · metas propuestas para 12 meses",
@@ -199,7 +199,7 @@ export const deckCopy = {
       { label: "05 · Events", title: "The community is here. The results are real." },
       { label: "The space", title: "A place that feels like a new possibility." },
       { label: "Budget", title: "US$50,000 to launch it." },
-      { label: "Plan & targets", title: "A first cohort. A hub built to last." },
+      { label: "Plan & targets", title: "Two ways to learn. One hub built to last." },
       { label: "Closing", title: "Let's build the next node." },
     ],
     cover: {
@@ -313,11 +313,11 @@ export const deckCopy = {
       note: "Proposed uses of funds. Construction, furniture, and grant capital require additional agreements or resources.",
     },
     plan: {
-      category: "Plan & targets", title: "A first cohort. A hub built to last.",
+      category: "Plan & targets", title: "Two ways to learn. One hub built to last.",
       school: {
-        label: "Academy · first cohort",
-        metrics: [{ value: "150", label: "students" }, { value: "12", label: "weeks" }],
-        note: "The open curriculum stays available and supports future cohorts.",
+        label: "Academy · two formats",
+        inPerson: { label: "In person", value: "150", unit: "students", detail: "12 weeks · four-hour sessions with mentorship." },
+        online: { label: "Online", value: "1k–5k", unit: "learner target", detail: "Lower-touch: less mentorship and peer interaction." },
       },
       hub: {
         label: "Hub · proposed 12-month targets",

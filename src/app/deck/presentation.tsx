@@ -197,11 +197,19 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
       return <>
         <SlideHead number="14" category={t.plan.category} title={t.plan.title} />
         <div className={styles.planTracks}>
-          {[t.plan.school, t.plan.hub].map((track) => <section className={styles.planTrack} key={track.label} aria-label={track.label}>
-            <strong className={styles.planTrackLabel}>{track.label}</strong>
-            <div className={styles.planMetrics}>{track.metrics.map((metric) => <div key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>
-            <p>{track.note}</p>
-          </section>)}
+          <section className={styles.planTrack} aria-label={t.plan.school.label}>
+            <strong className={styles.planTrackLabel}>{t.plan.school.label}</strong>
+            <div className={styles.schoolFormats}>{[t.plan.school.inPerson, t.plan.school.online].map((format) => <div className={styles.schoolFormat} key={format.label}>
+              <strong className={styles.schoolFormatLabel}>{format.label}</strong>
+              <div className={styles.schoolFormatMetric}><strong>{format.value}</strong><span>{format.unit}</span></div>
+              <p>{format.detail}</p>
+            </div>)}</div>
+          </section>
+          <section className={styles.planTrack} aria-label={t.plan.hub.label}>
+            <strong className={styles.planTrackLabel}>{t.plan.hub.label}</strong>
+            <div className={styles.planMetrics}>{t.plan.hub.metrics.map((metric) => <div key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>
+            <p>{t.plan.hub.note}</p>
+          </section>
         </div>
         <div className={styles.planMilestones}>{t.plan.milestones.map((milestone) => <div key={milestone.date}><strong>{milestone.date}</strong><span>{milestone.label}</span></div>)}</div>
         <p className={styles.planNote}>{t.plan.note}</p>

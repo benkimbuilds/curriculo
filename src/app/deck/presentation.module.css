@@ -122,6 +122,14 @@
 .planTrack { display: flex; flex-direction: column; min-height: 15rem; padding: 1.2rem 1.5rem; border-top: 2px solid var(--purple); background: #f6f6f6; }
 .planTrack:nth-child(2) { border-top-color: var(--green); background: #f2faf3; }
 .planTrackLabel { color: var(--purple); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; }
+.schoolFormats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; flex: 1; margin-top: .9rem; }
+.schoolFormat { display: flex; flex-direction: column; min-width: 0; }
+.schoolFormat + .schoolFormat { border-left: 1px solid var(--line); padding-left: 1rem; }
+.schoolFormatLabel { color: var(--purple); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; }
+.schoolFormatMetric { margin-top: .5rem; }
+.schoolFormatMetric strong { display: block; white-space: nowrap; font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 300; letter-spacing: -.07em; line-height: 1; }
+.schoolFormatMetric span { display: block; margin-top: .2rem; font-size: .8rem; line-height: 1.2; }
+.schoolFormat p { padding-top: .6rem; }
 .planMetrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem 1rem; margin: .9rem 0; }
 .planMetrics div { display: flex; align-items: baseline; gap: .5rem; }
 .planMetrics strong { font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 300; letter-spacing: -.07em; line-height: 1; }
@@ -213,6 +221,8 @@
   .simplePanel { min-height: 13rem; }
   .academyHero { flex-direction: column; }
   .planTrack { min-height: auto; }
+  .schoolFormats { grid-template-columns: 1fr; }
+  .schoolFormat + .schoolFormat { border-left: 0; border-top: 1px solid var(--line); padding: 1rem 0 0; }
   .planMilestones { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .overview { grid-template-columns: repeat(2, 1fr); padding: 1rem; }
   .overview button { min-height: 6.5rem; }
