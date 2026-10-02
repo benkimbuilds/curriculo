@@ -24,7 +24,7 @@ export const deckCopy = {
       { label: "03 · Grants y empleo", title: "Grants para problemas locales. Rutas claras hacia el empleo." },
       { label: "04 · Residencias", title: "Residencias: un puente a mercados globales." },
       { label: "05 · Eventos", title: "Ya hemos hecho algo así." },
-      { label: "El espacio", title: "Que se sienta como una posibilidad nueva." },
+      { label: "El espacio", title: "Un lugar que te recuerda cada día que todo es posible." },
       { label: "Presupuesto", title: "US$50,000 para ponerlo en marcha." },
       { label: "Plan y metas", title: "Dos formas de aprender. Un hub de largo plazo." },
       { label: "Cierre", title: "Tejamos lo que sigue." },
@@ -122,7 +122,7 @@ export const deckCopy = {
       ],
     },
     space: {
-      category: "El espacio", title: "Que se sienta como una posibilidad nueva.",
+      category: "El espacio", title: "Un lugar que te recuerda cada día que todo es posible.",
       statement: "Un espacio que invite al asombro, al intercambio y a crear algo más grande que uno mismo.",
       images: [
         { src: "/deck/space-coworking.avif", caption: "Trabajo compartido", alt: "Referencia conceptual de mesas de coworking y gradas" },
@@ -193,7 +193,7 @@ export const deckCopy = {
       { label: "03 · Grants & employment", title: "Grants for local problems. Clear paths into employment." },
       { label: "04 · Residencies", title: "Residencies: a bridge to global markets." },
       { label: "05 · Events", title: "We've done something like this before." },
-      { label: "The space", title: "A place that feels like a new possibility." },
+      { label: "The space", title: "A place that reminds you every day that anything is possible." },
       { label: "Budget", title: "US$50,000 to launch it." },
       { label: "Plan & targets", title: "Two ways to learn. One hub built to last." },
       { label: "Closing", title: "Let's weave what comes next." },
@@ -291,7 +291,7 @@ export const deckCopy = {
       ],
     },
     space: {
-      category: "The space", title: "A place that feels like a new possibility.",
+      category: "The space", title: "A place that reminds you every day that anything is possible.",
       statement: "A space that invites wonder, exchange, and the creation of something bigger than any one person.",
       images: [
         { src: "/deck/space-coworking.avif", caption: "Shared workspace", alt: "Concept reference of coworking tables and stepped seating" },
