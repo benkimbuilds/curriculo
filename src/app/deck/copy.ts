@@ -79,7 +79,7 @@ export const deckCopy = {
       points: [
         { title: "Currículo de código abierto", body: "Una ruta autodidacta con recursos y metas claras que cualquiera puede seguir y adaptar." },
         { title: "Aprendizaje entre pares", body: "Estudiantes aprenden entre sí, resuelven problemas juntos y revisan los proyectos de sus pares." },
-        { title: "Aprender con proyectos", body: "Entregables y retroalimentación cada semana forman un portafolio para prácticas, co-ops, empleo o proyectos en el hub." },
+        { title: "Aprender con proyectos", body: "Proyectos reales dan práctica para crear empresas. La retroalimentación semanal forma un portafolio para prácticas, co-ops, empleo o proyectos en el hub." },
       ],
       bottom: "Primera cohorte: 150 estudiantes y 12 semanas para construir en comunidad.",
     },
@@ -243,7 +243,7 @@ export const deckCopy = {
       points: [
         { title: "Open-source curriculum", body: "A self-directed roadmap with resources and clear milestones anyone can follow and adapt." },
         { title: "Peer-to-peer learning", body: "Learners teach one another, solve problems together, and review their peers' projects." },
-        { title: "Project-based practice", body: "Weekly deliverables and feedback build a portfolio for internships, co-ops, jobs, or projects in the hub." },
+        { title: "Project-based practice", body: "Real-world projects give students the practice needed to build companies. Weekly feedback builds a portfolio for internships, co-ops, jobs, or hub projects." },
       ],
       bottom: "First cohort: 150 students and 12 weeks to build together.",
     },
