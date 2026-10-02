@@ -40,7 +40,7 @@ export const deckCopy = {
       points: [
         { title: "La brecha técnica crece", body: "La adopción digital avanza despacio y faltan rutas para usar IA y crear soluciones locales." },
         { title: "El salto de las ideas al impacto", body: "Sin proyectos, pares, espacio y apoyo, cuesta convertir lo aprendido en experiencia, trabajo o empresa." },
-        { title: "Falta un lugar para soñar en grande", body: "Faltan espacios cercanos que conecten al talento local con fundadores, ideas y culturas del mundo." },
+        { title: "Falta un lugar para soñar en grande", body: "Los sistemas y la cultura actuales limitan qué problemas resolvemos, qué mejoramos y quién se beneficia del progreso. Se pierden oportunidades de prosperidad compartida." },
         { title: "El valor se va", body: "Cuando el talento destacado migra, capital, riqueza, conocimiento y cultura crecen fuera. Contratistas locales de empresas extranjeras suelen quedar sin participación accionaria en los negocios que ayudan a crecer." },
       ],
       bottom: "El resultado: ideas sin una ruta clara hacia empleo, empresas y reinversión local.",
@@ -209,7 +209,7 @@ export const deckCopy = {
       points: [
         { title: "The technical skills gap widens", body: "Digital adoption moves slowly, and accessible paths to use AI and build local solutions remain limited." },
         { title: "The leap from ideas to impact", body: "Without projects, peers, space, and support, learning rarely becomes experience, work, or a company." },
-        { title: "No place to dream bigger", body: "Few nearby spaces connect local talent with founders, ideas, and cultures from around the world." },
+        { title: "No place to dream bigger", body: "Established systems and culture narrow which problems we solve, what we improve, and who benefits from progress. Opportunities for shared prosperity go unseen." },
         { title: "Value flows elsewhere", body: "When top talent leaves, capital, wealth, knowledge, and culture grow elsewhere. Local contractors for foreign companies often lack an equity stake in the businesses they help grow." },
       ],
       bottom: "The result: ideas without a clear path to jobs, companies, or local reinvestment.",
