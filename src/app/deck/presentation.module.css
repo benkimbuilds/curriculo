@@ -105,7 +105,7 @@
 .flow div { position: relative; display: flex; flex-direction: column; padding: 1.5rem; min-height: 17rem; background: #f6f6f6; }
 .flow div:last-child { background: var(--green); }
 .flow span { font-size: .75rem; color: var(--purple); font-weight: 700; }
-.flow strong { margin-top: auto; font-size: clamp(1.5rem, 2.5vw, 3rem); letter-spacing: -.04em; font-weight: 500; }
+.flow strong { margin-top: 1.35rem; min-height: 2.24em; font-size: clamp(1.5rem, 2.5vw, 3rem); line-height: 1.12; letter-spacing: -.04em; font-weight: 500; }
 .flow small { margin-top: .6rem; color: var(--muted); font-size: .9rem; }
 .spaceLead { max-width: 58rem; font-size: clamp(1.2rem, 1.7vw, 1.6rem); font-weight: 300; line-height: 1.35; letter-spacing: -.02em; }
 .spaceGallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
