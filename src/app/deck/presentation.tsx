@@ -8,7 +8,14 @@ import styles from "./presentation.module.css";
 type DeckText = (typeof deckCopy)[DeckLanguage];
 const slideCount = deckCopy.es.slides.length;
 const firstPillarSlide = 5;
-const partners = ["OpenAI", "Cursor", "SpaceX", "Vercel", "Google", "NVIDIA"];
+const partners = [
+  { name: "OpenAI", src: "/deck/logos/openai.svg", width: 86, height: 24 },
+  { name: "Cursor", src: "/deck/logos/cursor.svg", width: 224, height: 53 },
+  { name: "SpaceX AI", src: "/deck/logos/spacex-ai.svg", width: 205, height: 25 },
+  { name: "Vercel", src: "/deck/logos/vercel.svg", width: 262, height: 52 },
+  { name: "Google", src: "/deck/logos/google.png", width: 544, height: 184 },
+  { name: "NVIDIA", src: "/deck/logos/nvidia.svg", width: 256, height: 59 },
+];
 
 export default function Deck() {
   const [index, setIndex] = useState(0);
@@ -75,7 +82,7 @@ export default function Deck() {
           ))}
         </nav>
       ) : (
-        <section className={`${styles.slide} ${index === 0 || index === 13 ? styles.cover : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`}>
+        <section className={`${styles.slide} ${index === 0 || index === 13 ? styles.cover : ""} ${index === 9 ? styles.eventsSlide : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`}>
           <SlideContent index={index} t={t} goTo={goTo} />
         </section>
       )}
@@ -164,11 +171,11 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
       return <>
         <PillarHead number={5} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.events.title} goTo={goTo} />
         <div className={styles.eventsLayout}>
-          <section className={styles.eventsProofCard}><strong className={styles.eventsProofValue}>5,000</strong><span className={styles.eventsProofLabel}>{t.events.community}</span><p>{t.events.cadence}</p></section>
-          <section className={styles.eventsProofCard}><strong className={styles.eventsProofValue}>PwC</strong><span className={styles.eventsProofLabel}>{t.events.trainingLabel}</span><p>{t.events.trainingBody}</p></section>
+          <section className={styles.eventsProofCard}><Image className={styles.eventsProofLogo} src="/deck/logos/ai-builders-mexico.svg" width={393} height={95} alt="AI Builders México" /><strong className={styles.eventsProofValue}>5,000</strong><span className={styles.eventsProofLabel}>{t.events.community}</span><p>{t.events.cadence}</p></section>
+          <section className={styles.eventsProofCard}><Image className={`${styles.eventsProofLogo} ${styles.pwcLogo}`} src="/deck/logos/pwc.svg" width={300} height={200} alt="PwC" /><span className={styles.eventsProofLabel}>{t.events.trainingLabel}</span><p>{t.events.trainingBody}</p></section>
           <section className={styles.eventsProofCard}><span className={styles.eventsProofLabel}>{t.events.residencyLabel}</span><div className={styles.eventsResults}>{t.events.residencyResults.map((result) => <div key={result.value}><strong>{result.value}</strong><span>{result.label}</span></div>)}</div></section>
         </div>
-        <div className={styles.eventsNetwork}><strong>{t.events.partnerLabel}</strong><ul className={styles.partnerNames} aria-label={t.events.partnerLabel}>{partners.map((partner) => <li key={partner}>{partner}</li>)}</ul><p className={styles.eventsNote}>{t.events.partnerIntro}</p></div>
+        <div className={styles.eventsNetwork}><strong>{t.events.partnerLabel}</strong><ul className={styles.partnerLogos} aria-label={t.events.partnerLabel}>{partners.map((partner) => <li key={partner.name}><Image src={partner.src} width={partner.width} height={partner.height} alt={partner.name} /></li>)}</ul></div>
       </>;
     case 10:
       return <>
