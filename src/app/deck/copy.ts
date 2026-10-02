@@ -19,7 +19,7 @@ export const deckCopy = {
       { label: "Reinversión", title: "Talento, conocimiento y capital fluyen entre México y el mundo." },
       { label: "La tesis", title: "Educación, innovación y emprendimiento. Un ciclo regenerativo." },
       { label: "El Hub", title: "Un ecosistema, cinco motores." },
-      { label: "01 · Academia", title: "Aprender a aprender." },
+      { label: "01 · Academia", title: "Una escuela que enseña a aprender." },
       { label: "02 · Coworking", title: "Un tercer espacio para construir soluciones a los problemas de aquí." },
       { label: "03 · Grants y empleo", title: "Grants para retos locales. Rutas hacia el empleo." },
       { label: "04 · Residencias", title: "Soñar en grande. Crear desde México." },
@@ -74,7 +74,7 @@ export const deckCopy = {
       ],
     },
     academy: {
-      title: "Aprender a aprender.",
+      title: "Una escuela que enseña a aprender.",
       promise: "Gratuita. Código abierto. Presencial y en línea.", distinction: "Entre pares, sin clases magistrales.",
       points: [
         { title: "Currículo de código abierto", body: "Una ruta autodidacta con recursos y metas claras que cualquiera puede seguir y adaptar." },
@@ -183,7 +183,7 @@ export const deckCopy = {
       { label: "Reinvestment", title: "Talent, knowledge, and capital flow between Mexico and the world." },
       { label: "Our thesis", title: "Education, innovation, entrepreneurship. One regenerative cycle." },
       { label: "The Hub", title: "One ecosystem, five engines." },
-      { label: "01 · Academy", title: "Learn how to learn." },
+      { label: "01 · Academy", title: "A school that teaches how to learn." },
       { label: "02 · Coworking", title: "A third space to build solutions for the problems next door." },
       { label: "03 · Grants & employment", title: "Grants for local challenges. Paths into employment." },
       { label: "04 · Residencies", title: "Dream bigger. Build from Mexico." },
@@ -238,7 +238,7 @@ export const deckCopy = {
       ],
     },
     academy: {
-      title: "Learn how to learn.",
+      title: "A school that teaches how to learn.",
       promise: "Free. Open source. In person and online.", distinction: "Peer-led, with no lectures.",
       points: [
         { title: "Open-source curriculum", body: "A self-directed roadmap with resources and clear milestones anyone can follow and adapt." },
