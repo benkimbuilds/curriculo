@@ -39,7 +39,7 @@ export const deckCopy = {
       category: "El problema", title: "El talento está aquí. El camino para crear con tecnología está fragmentado.",
       points: [
         { title: "Formación desconectada del presente", body: "Faltan rutas accesibles para usar IA con criterio y construir productos que resuelvan problemas reales." },
-        { title: "Ideas sin continuidad", body: "Sin proyectos, pares, espacio físico y apoyo, cuesta convertir lo aprendido en experiencia o empresa." },
+        { title: "El salto de las ideas al impacto", body: "Ese salto necesita proyectos, pares, espacio físico y apoyo. Sin ellos, las ideas difícilmente se convierten en soluciones útiles o empresas que crecen." },
         { title: "Un lugar para soñar", body: "El talento local necesita un espacio cercano donde fundadores, ideas y culturas del mundo amplíen lo que parece posible." },
       ],
       bottom: "El resultado: ideas sin una ruta clara hacia empleo, empresas y reinversión local.",
@@ -194,7 +194,7 @@ export const deckCopy = {
       category: "The problem", title: "The talent is here. The path to building with technology is fragmented.",
       points: [
         { title: "Training out of step", body: "Accessible paths to use AI thoughtfully and build products that solve real problems remain limited." },
-        { title: "Ideas without continuity", body: "Without projects, peers, physical space, and support, learning is hard to turn into experience or a company." },
+        { title: "The leap from ideas to impact", body: "That leap needs projects, peers, physical space, and support. Without them, ideas rarely become useful solutions or growing companies." },
         { title: "A place to dream", body: "Local talent needs a nearby hub where global founders, ideas, and cultures expand what feels possible." },
       ],
       bottom: "The result: ideas without a clear path to jobs, companies, or local reinvestment.",
