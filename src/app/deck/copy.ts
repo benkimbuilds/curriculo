@@ -93,8 +93,8 @@ export const deckCopy = {
     grants: {
       title: "Grants para retos locales. Rutas claras hacia el empleo.",
       need: { title: "Grants para retos locales", body: "Negocios y organizaciones identifican problemas para que estudiantes y emprendedores desarrollen soluciones.", note: "Capital sujeto a acuerdos con financiadores." },
-      teams: { title: "Pipeline de empleo", body: "Trabajaremos con empresas seleccionadas para conectar a egresados destacados con prácticas, co-ops y puestos de ingeniería en sus equipos.", note: "Las alianzas y contrataciones dependen de acuerdos con cada empresa." },
-      bottom: "Dos rutas para aplicar lo aprendido: resolver un reto local o integrarse a una empresa.",
+      teams: { title: "Startups y empleo", body: "Egresados pueden fundar sus propias startups. Emprendedores del hub pueden contratarlos; empresas aliadas pueden ofrecer prácticas, co-ops y puestos de ingeniería.", note: "Las alianzas y contrataciones dependen de acuerdos con cada empresa." },
+      bottom: "Tres caminos para egresados: resolver retos locales, fundar una startup o sumarse a un equipo.",
     },
     residencies: {
       title: "Soñar en grande. Crear desde México.",
@@ -257,8 +257,8 @@ export const deckCopy = {
     grants: {
       title: "Grants for local challenges. Clear paths into employment.",
       need: { title: "Grants for local challenges", body: "Businesses and organizations identify problems for students and entrepreneurs to solve.", note: "Capital depends on funding agreements." },
-      teams: { title: "Employment pipeline", body: "We will work with selected companies to connect strong graduates with internships, co-ops, and engineering roles on their teams.", note: "Partnerships and hiring depend on agreements with each company." },
-      bottom: "Two ways to apply new skills: solve a local challenge or join a company team.",
+      teams: { title: "Startups and employment", body: "Graduates can launch their own startups. Entrepreneurs in the hub can hire them; selected partner companies can offer internships, co-ops, and engineering roles.", note: "Partnerships and hiring depend on agreements with each company." },
+      bottom: "Three paths for graduates: solve a local challenge, launch a startup, or join a team.",
     },
     residencies: {
       title: "Dream bigger. Build from Mexico.",
