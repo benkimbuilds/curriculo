@@ -18,7 +18,7 @@ export const deckCopy = {
       { label: "El problema", title: "El talento está aquí. El camino para crear con tecnología está fragmentado." },
       { label: "Dónde queda el valor", title: "El talento crea valor. El ecosistema local no siempre participa." },
       { label: "Reinversión", title: "Talento, conocimiento y capital: de aquí al mundo." },
-      { label: "La tesis", title: "La innovación empieza cuando más personas pueden crear." },
+      { label: "La tesis", title: "Educación, innovación y emprendimiento. Un solo camino." },
       { label: "El Hub", title: "Un ecosistema, cinco motores." },
       { label: "01 · Academia", title: "Aprender a aprender. Aprender construyendo." },
       { label: "02 · Coworking", title: "Un lugar para crear empresas en comunidad." },
@@ -64,7 +64,7 @@ export const deckCopy = {
       bottom: "El aprendizaje puede abrir paso a empleos y empresas que reinviertan en la siguiente generación.",
     },
     thesis: {
-      category: "Oportunidad y tesis", title: "La innovación empieza cuando más personas pueden crear.",
+      category: "Oportunidad y tesis", title: "Educación, innovación y emprendimiento. Un solo camino.",
       statement: "Una escuela abierta y un hub en el mismo lugar convierten capacidad técnica en proyectos, trabajo y empresas nacidas en Coyoacán.",
       points: [
         { title: "Escuela abierta", body: "Gratuita, autodidacta y entre pares; currículo de código abierto y una primera cohorte presencial de 150 personas durante 12 semanas." },
@@ -182,7 +182,7 @@ export const deckCopy = {
       { label: "The problem", title: "The talent is here. The path to building with technology is fragmented." },
       { label: "Where value goes", title: "Talent creates value. The local ecosystem does not always share in it." },
       { label: "Reinvestment", title: "Talent, knowledge, and capital: from here to the world." },
-      { label: "Our thesis", title: "Innovation begins when more people can create." },
+      { label: "Our thesis", title: "Education, innovation, entrepreneurship. One continuous path." },
       { label: "The Hub", title: "One ecosystem, five engines." },
       { label: "01 · Academy", title: "Learn how to learn. Learn by building." },
       { label: "02 · Coworking", title: "A place to build companies with the community." },
@@ -228,7 +228,7 @@ export const deckCopy = {
       bottom: "Learning can lead to jobs and companies that reinvest in the next generation.",
     },
     thesis: {
-      category: "Opportunity & thesis", title: "Innovation begins when more people can create.",
+      category: "Opportunity & thesis", title: "Education, innovation, entrepreneurship. One continuous path.",
       statement: "An open school and a hub in one place turn technical ability into projects, careers, and companies rooted in Coyoacán.",
       points: [
         { title: "Open school", body: "Free, self-directed, and peer-led; an open-source curriculum and a first in-person cohort of 150 people over 12 weeks." },
