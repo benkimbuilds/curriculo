@@ -7,7 +7,7 @@ import styles from "./presentation.module.css";
 
 type DeckText = (typeof deckCopy)[DeckLanguage];
 const slideCount = deckCopy.es.slides.length;
-const firstPillarSlide = 5;
+const firstPillarSlide = 4;
 const partners = [
   { name: "OpenAI", src: "/deck/logos/openai.svg", width: 86, height: 24 },
   { name: "Cursor", src: "/deck/logos/cursor.svg", width: 224, height: 53 },
@@ -87,7 +87,7 @@ export default function Deck() {
           ))}
         </nav>
       ) : (
-        <section className={`${styles.slide} ${index === 0 || index === 13 ? styles.cover : ""} ${index === 5 || index === 7 || index === 8 || index === 10 ? styles.wideTitleSlide : ""} ${index === 8 ? styles.residencySlide : ""} ${index === 9 ? styles.eventsSlide : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`}>
+        <section className={`${styles.slide} ${index === 0 || index === slideCount - 1 ? styles.cover : ""} ${index === 4 || index === 6 || index === 7 || index === 9 ? styles.wideTitleSlide : ""} ${index === 7 ? styles.residencySlide : ""} ${index === 8 ? styles.eventsSlide : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`}>
           <SlideContent index={index} t={t} goTo={goTo} />
         </section>
       )}
@@ -120,32 +120,26 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
       </>;
     case 2:
       return <>
-        <SlideHead number="03" category={t.reinvestment.category} title={t.reinvestment.title} />
-        <div className={styles.flow}>{t.reinvestment.steps.map((step, i) => <div key={i}><span>{`0${i + 1}`}</span><strong>{step.title}</strong><small>{step.body}</small></div>)}</div>
-        <p className={styles.bottomLine}>{t.reinvestment.bottom}</p>
-      </>;
-    case 3:
-      return <>
-        <SlideHead number="04" category={t.thesis.category} title={t.thesis.title} />
+        <SlideHead number="03" category={t.thesis.category} title={t.thesis.title} />
         <div className={styles.thesisLayout}>
           <p className={styles.bigStatement}>{t.thesis.statement}</p>
           <div className={styles.verticalRule} aria-hidden="true" />
           <div className={styles.thesisList}>{t.thesis.points.map((point) => <p key={point.title}><strong>{point.title}</strong><span>{point.body}</span></p>)}</div>
         </div>
       </>;
-    case 4:
+    case 3:
       return <>
-        <SlideHead number="05" category={t.hub.category} title={t.hub.title} />
+        <SlideHead number="04" category={t.hub.category} title={t.hub.title} />
         <div className={styles.pillarGrid}>{t.hub.pillars.map((pillar, i) => <Pillar key={i} number={`0${i + 1}`} title={pillar.title} body={pillar.body} />)}</div>
       </>;
-    case 5:
+    case 4:
       return <>
         <PillarHead number={1} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.academy.title} goTo={goTo} />
         <div className={styles.academyHero}><p>{t.academy.promise}</p><strong>{t.academy.distinction}</strong></div>
         <div className={styles.academyColumns}>{t.academy.points.map((point, i) => <Statement key={i} number={`0${i + 1}`} title={point.title} body={point.body} />)}</div>
         <p className={styles.bottomLine}>{t.academy.bottom}</p>
       </>;
-    case 6:
+    case 5:
       return <>
         <PillarHead number={2} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.coworking.title} goTo={goTo} />
         <div className={styles.split}>
@@ -154,7 +148,7 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
         </div>
         <p className={styles.bottomLine}>{t.coworking.bottom}</p>
       </>;
-    case 7:
+    case 6:
       return <>
         <PillarHead number={3} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.grants.title} goTo={goTo} />
         <div className={styles.split}>
@@ -163,7 +157,7 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
         </div>
         <p className={styles.bottomLine}>{t.grants.bottom}</p>
       </>;
-    case 8:
+    case 7:
       return <>
         <PillarHead number={4} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.residencies.title} goTo={goTo} />
         <div className={styles.split}>
@@ -172,13 +166,13 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
         </div>
         <p className={styles.bottomLine}>{t.residencies.bottom}</p>
       </>;
-    case 9:
+    case 8:
       return <>
         <PillarHead number={5} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.events.title} goTo={goTo} />
         <div className={styles.eventsLayout}>
           <section className={styles.eventsProofCard}><Image className={styles.eventsProofLogo} src="/deck/logos/ai-builders-mexico.svg" width={393} height={95} alt="AI Builders México" /><strong className={styles.eventsProofValue}>5,000</strong><span className={styles.eventsProofLabel}>{t.events.community}</span><p>{t.events.cadence}</p></section>
           <section className={styles.eventsProofCard}><ul className={styles.workshopLogos}>{workshopOrganizations.map((organization) => <li key={organization.name}><Image src={organization.src} width={organization.width} height={organization.height} alt={organization.name} /></li>)}</ul><span className={styles.eventsProofLabel}>{t.events.trainingLabel}</span><p>{t.events.trainingBody}</p></section>
-          <section className={styles.eventsProofCard}><span className={styles.eventsProofLabel}>{t.events.residencyLabel}</span><div className={styles.eventsResults}>{t.events.residencyResults.map((result) => <div key={result.value}><strong>{result.value}</strong><span>{result.label}</span></div>)}</div></section>
+          <section className={styles.eventsProofCard}><span className={styles.eventsProofLabel}>{t.events.residencyLabel}</span><div className={styles.eventsMentors}><strong>{t.events.residencyMentors.value}</strong><span>{t.events.residencyMentors.label}</span></div><div className={styles.eventsResults}>{t.events.residencyResults.map((result) => <div key={result.value}><strong>{result.value}</strong><span>{result.label}</span></div>)}</div></section>
         </div>
         <div className={styles.eventsNetwork}><strong>{t.events.partnerLabel}</strong><ul className={styles.partnerLogos} aria-label={t.events.partnerLabel}>{partners.map((partner) => <li key={partner.name}><Image src={partner.src} width={partner.width} height={partner.height} alt={partner.name} /></li>)}</ul></div>
         <section className={styles.eventsPeople} aria-label={t.events.peopleLabel}>
@@ -186,9 +180,9 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
           {t.events.people.map((person) => <div key={person.name}><h3>{person.name}</h3><p>{person.detail}</p></div>)}
         </section>
       </>;
-    case 10:
+    case 9:
       return <>
-        <SlideHead number="11" category={t.space.category} title={t.space.title} />
+        <SlideHead number="10" category={t.space.category} title={t.space.title} />
         <p className={styles.spaceLead}>{t.space.statement}</p>
         <div className={styles.spaceGallery}>{t.space.images.map((item) => <figure key={item.src}>
           <div className={styles.spacePhoto}><Image src={item.src} alt={item.alt} fill sizes="(max-width: 640px) 100vw, 33vw" unoptimized /></div>
@@ -196,16 +190,16 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
         </figure>)}</div>
         <p className={styles.spaceNote}>{t.space.note}</p>
       </>;
-    case 11:
+    case 10:
       return <>
-        <SlideHead number="12" category={t.budget.category} title={t.budget.title} />
+        <SlideHead number="11" category={t.budget.category} title={t.budget.title} />
         <p className={styles.budgetIntro}>{t.budget.intro}</p>
         <ul className={styles.budgetList}>{t.budget.areas.map((area) => <li key={area}>{area}</li>)}</ul>
         <p className={styles.note}>{t.budget.note}</p>
       </>;
-    case 12:
+    case 11:
       return <>
-        <SlideHead number="13" category={t.plan.category} title={t.plan.title} />
+        <SlideHead number="12" category={t.plan.category} title={t.plan.title} />
         <div className={styles.planTracks}>
           <section className={styles.planTrack} aria-label={t.plan.school.label}>
             <strong className={styles.planTrackLabel}>{t.plan.school.label}</strong>
@@ -224,7 +218,7 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
         <div className={styles.planMilestones}>{t.plan.milestones.map((milestone) => <div key={milestone.date}><strong>{milestone.date}</strong><span>{milestone.label}</span></div>)}</div>
         <p className={styles.planNote}>{t.plan.note}</p>
       </>;
-    case 13:
+    case 12:
       return <>
         <div className={styles.endCopy}>
           <p className={styles.eyebrow}>{t.close.eyebrow}</p>

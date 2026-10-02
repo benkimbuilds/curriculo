@@ -16,15 +16,14 @@ export const deckCopy = {
     slides: [
       { label: "Inicio", title: "El hub de innovación de la Ciudad de México." },
       { label: "El problema", title: "El talento está aquí. El camino para crear con tecnología está fragmentado." },
-      { label: "Reinversión", title: "Talento, conocimiento y capital fluyen entre México y el mundo." },
       { label: "La tesis", title: "Educación, innovación y emprendimiento. Un ciclo regenerativo." },
       { label: "El Hub", title: "Un ecosistema, cinco motores." },
       { label: "01 · Academia", title: "Una escuela que enseña a aprender." },
       { label: "02 · Coworking", title: "Un tercer espacio para construir soluciones a los problemas de aquí." },
       { label: "03 · Grants y empleo", title: "Grants para problemas locales. Rutas claras hacia el empleo." },
       { label: "04 · Residencias", title: "Residencias: un puente a mercados globales." },
-      { label: "05 · Eventos", title: "Ya hemos hecho algo así." },
-      { label: "El espacio", title: "Un lugar que te recuerda cada día que todo es posible." },
+      { label: "05 · Comunidad", title: "Ya hemos hecho algo así." },
+      { label: "El espacio", title: "Un lugar que empieza con la sensación de que todo es posible." },
       { label: "Presupuesto", title: "US$50,000 para ponerlo en marcha." },
       { label: "Plan y metas", title: "Dos formas de aprender. Un hub de largo plazo." },
       { label: "Cierre", title: "Tejamos lo que sigue." },
@@ -38,22 +37,12 @@ export const deckCopy = {
     problem: {
       category: "El problema", title: "El talento está aquí. El camino para crear con tecnología está fragmentado.",
       points: [
-        { title: "La brecha técnica crece", body: "La adopción digital avanza despacio y faltan rutas para usar IA y crear soluciones locales." },
-        { title: "El salto de las ideas al impacto", body: "Sin proyectos, pares, espacio y apoyo, cuesta convertir lo aprendido en experiencia, trabajo o empresa. La débil conexión entre formación y empleadores deja al talento no reconocido sin acceso a oportunidades laborales." },
-        { title: "Falta un lugar para soñar en grande", body: "Los sistemas y la cultura actuales limitan qué problemas resolvemos, qué mejoramos y quién se beneficia del progreso. Se pierden oportunidades de prosperidad compartida." },
-        { title: "El valor se va", body: "Cuando el talento destacado migra, capital, riqueza, conocimiento y cultura crecen fuera. Contratistas locales de empresas extranjeras suelen quedar sin participación accionaria en los negocios que ayudan a crecer." },
+        { title: "La brecha técnica crece", body: "La adopción digital avanza despacio y faltan rutas accesibles para aprender tecnología e IA." },
+        { title: "El salto de las ideas al impacto", body: "La débil conexión entre nuestra comunidad y las rutas hacia el conocimiento, el empleo y las oportunidades sofoca la innovación y la creatividad antes de que puedan florecer." },
+        { title: "Falta un lugar para soñar en grande", body: "Los sistemas y la cultura actuales limitan qué problemas resolvemos y nuestra capacidad de participar con autonomía en los mercados globales." },
+        { title: "El valor se va", body: "Cuando el talento destacado migra, capital, riqueza, conocimiento y cultura crecen fuera. Los empleados de empresas extranjeras a menudo no participan del mayor valor económico que ayudan a crear." },
       ],
       bottom: "El resultado: ideas sin una ruta clara hacia empleo, empresas y reinversión local.",
-    },
-    reinvestment: {
-      category: "Ciclo de reinversión", title: "Talento, conocimiento y capital fluyen entre México y el mundo.",
-      steps: [
-        { title: "Formación abierta", body: "Aprenden a usar IA y tecnología para crear productos y negocios, a su ritmo y con pares." },
-        { title: "Proyectos en el hub", body: "El coworking, los retos y fundadores visitantes conectan perspectivas globales con proyectos locales." },
-        { title: "Empleo y empresas", body: "Egresados pueden unirse a empresas del hub o aliadas; los nuevos equipos también pueden contratar localmente." },
-        { title: "Reinversión", body: "Empresas que crecen pueden contratar y formar a otros. Un evento de liquidez podría financiar la siguiente generación." },
-      ],
-      bottom: "El aprendizaje puede abrir paso a empleos y empresas que reinviertan en la siguiente generación.",
     },
     thesis: {
       category: "Oportunidad y tesis", title: "Educación, innovación y emprendimiento. Un ciclo regenerativo.",
@@ -70,7 +59,7 @@ export const deckCopy = {
         { title: "Coworking", body: "Un hogar gratuito para emprendedores seleccionados y egresados." },
         { title: "Grants y empleo", body: "Retos locales y una ruta hacia prácticas, co-ops y empleo con empresas seleccionadas." },
         { title: "Residencias", body: "Emprendedores de otras ciudades y países que comparten métodos y perspectivas sobre mercados globales." },
-        { title: "Eventos", body: "Encuentros mensuales y talleres con voces de nuestra red de aliados tecnológicos." },
+        { title: "Comunidad", body: "Una comunidad de 5,000 personas que conecta talento, emprendedores y aliados mediante encuentros y talleres." },
       ],
     },
     academy: {
@@ -98,9 +87,9 @@ export const deckCopy = {
     },
     residencies: {
       title: "Residencias: un puente a mercados globales.",
-      invited: { title: "Fundadores invitados", body: "Emprendedores de otras ciudades y países llegan a Iquiti para compartir cómo detectan oportunidades y crean para mercados globales." },
-      exchange: { title: "Intercambio cultural e intelectual", body: "Al trabajar con equipos locales, comparten métodos, cultura y redes que pueden transformar nuestra forma de soñar." },
-      bottom: "La meta: crear empresas basadas en conocimiento en México, llegar a mercados globales y dejar más valor en manos de quienes construyen aquí.",
+      invited: { title: "Fundadores invitados", body: "Emprendedores visitantes de otras ciudades y países llegan a Iquiti para compartir cómo detectan oportunidades y crean para mercados globales." },
+      exchange: { title: "Intercambio cultural e intelectual", body: "Los fundadores visitantes dan charlas a nuestra comunidad. Compartir el mismo espacio puede cambiar cómo pensamos, soñamos y vemos el mundo." },
+      bottom: "Emprendedores exitosos que visitan la Ciudad de México comparten su experiencia con nuestra comunidad a cambio de espacio de coworking y acceso al hub.",
     },
     events: {
       title: "Ya hemos hecho algo así.",
@@ -114,6 +103,7 @@ export const deckCopy = {
         { value: "8", label: "lanzaron negocios" },
         { value: "5", label: "monetizaron en 3 semanas" },
       ],
+      residencyMentors: { value: "6", label: "mentores globales" },
       partnerLabel: "Red para eventos en Utopías",
       peopleLabel: "Historias por integrar",
       people: [
@@ -122,8 +112,8 @@ export const deckCopy = {
       ],
     },
     space: {
-      category: "El espacio", title: "Un lugar que te recuerda cada día que todo es posible.",
-      statement: "Un espacio que invite al asombro, al intercambio y a crear algo más grande que cualquier persona, empresa o misión.",
+      category: "El espacio", title: "Un lugar que empieza con la sensación de que todo es posible.",
+      statement: "Un espacio que invite al asombro, al intercambio y a crear algo más grande que cualquier persona, empresa o misión. Queremos recordarte cada día que todo es posible.",
       images: [
         { src: "/deck/space-coworking.avif", caption: "Trabajo compartido", alt: "Referencia conceptual de mesas de coworking y gradas" },
         { src: "/deck/space-projects.avif", caption: "Aprendizaje entre pares", alt: "Referencia conceptual de grupos trabajando en mesas de proyecto" },
@@ -185,15 +175,14 @@ export const deckCopy = {
     slides: [
       { label: "Opening", title: "Mexico City's innovation hub." },
       { label: "The problem", title: "The talent is here. The path to building with technology is fragmented." },
-      { label: "Reinvestment", title: "Talent, knowledge, and capital flow between Mexico and the world." },
       { label: "Our thesis", title: "Education, innovation, entrepreneurship. One regenerative cycle." },
       { label: "The Hub", title: "One ecosystem, five engines." },
       { label: "01 · Academy", title: "A school that teaches how to learn." },
       { label: "02 · Coworking", title: "A third space to build solutions for the problems next door." },
       { label: "03 · Grants & employment", title: "Grants for local problems. Clear paths into employment." },
       { label: "04 · Residencies", title: "Residencies: a bridge to global markets." },
-      { label: "05 · Events", title: "We've done something like this before." },
-      { label: "The space", title: "A place that reminds you every day that anything is possible." },
+      { label: "05 · Community", title: "We've done something like this before." },
+      { label: "The space", title: "A place that starts with a feeling that anything is possible." },
       { label: "Budget", title: "US$50,000 to launch it." },
       { label: "Plan & targets", title: "Two ways to learn. One hub built to last." },
       { label: "Closing", title: "Let's weave what comes next." },
@@ -207,22 +196,12 @@ export const deckCopy = {
     problem: {
       category: "The problem", title: "The talent is here. The path to building with technology is fragmented.",
       points: [
-        { title: "The technical skills gap widens", body: "Digital adoption moves slowly, and accessible paths to use AI and build local solutions remain limited." },
-        { title: "The leap from ideas to impact", body: "Without projects, peers, space, and support, learning rarely becomes experience, work, or a company. Weak links between learning programs and employers keep overlooked talent disconnected from work opportunities." },
-        { title: "No place to dream bigger", body: "Established systems and culture narrow which problems we solve, what we improve, and who benefits from progress. Opportunities for shared prosperity go unseen." },
-        { title: "Value flows elsewhere", body: "When top talent leaves, capital, wealth, knowledge, and culture grow elsewhere. Local contractors for foreign companies often lack an equity stake in the businesses they help grow." },
+        { title: "The technical skills gap widens", body: "Digital adoption moves slowly, and accessible paths to learn technology and AI remain limited." },
+        { title: "The leap from ideas to impact", body: "Weak connectivity between our community and pathways to knowledge, employment, and opportunity kills innovation and creativity before they have a chance to flourish." },
+        { title: "No place to dream bigger", body: "Established systems and culture narrow which problems we solve and limit our ability to participate in global markets on our own terms." },
+        { title: "Value flows elsewhere", body: "When top talent leaves, capital, wealth, knowledge, and culture grow elsewhere. Employees of foreign companies often lack participation in significant economic upside." },
       ],
       bottom: "The result: ideas without a clear path to jobs, companies, or local reinvestment.",
-    },
-    reinvestment: {
-      category: "Reinvestment cycle", title: "Talent, knowledge, and capital flow between Mexico and the world.",
-      steps: [
-        { title: "Open learning", body: "People learn to use AI and technology to build products and businesses, at their own pace and with peers." },
-        { title: "Projects in the hub", body: "Coworking, challenges, and visiting founders connect global perspectives with local projects." },
-        { title: "Jobs and ventures", body: "Graduates can join hub companies or partner employers; new teams can also hire locally." },
-        { title: "Reinvestment", body: "Growing companies can hire and train others. A liquidity event could help fund the next generation." },
-      ],
-      bottom: "Learning can lead to jobs and companies that reinvest in the next generation.",
     },
     thesis: {
       category: "Opportunity & thesis", title: "Education, innovation, entrepreneurship. One regenerative cycle.",
@@ -239,7 +218,7 @@ export const deckCopy = {
         { title: "Coworking", body: "A free home for selected entrepreneurs and graduates." },
         { title: "Grants & employment", body: "Local challenges and paths to internships, co-ops, and jobs with selected companies." },
         { title: "Residencies", body: "Entrepreneurs from other cities and countries who share methods and perspectives on global markets." },
-        { title: "Events", body: "Monthly gatherings and workshops with voices from our technology partner network." },
+        { title: "Community", body: "A community of 5,000 connecting talent, founders, and partners through gatherings and workshops." },
       ],
     },
     academy: {
@@ -267,9 +246,9 @@ export const deckCopy = {
     },
     residencies: {
       title: "Residencies: a bridge to global markets.",
-      invited: { title: "Invited founders", body: "Entrepreneurs from other cities and countries join Iquiti to share how they spot opportunities and build for global markets." },
-      exchange: { title: "Cultural and intellectual exchange", body: "Working alongside local teams, they share methods, culture, and networks that can shape the way we dream." },
-      bottom: "The aim: build knowledge-based companies in Mexico, reach global markets, and keep more of the upside with the people building here.",
+      invited: { title: "Invited founders", body: "Visiting entrepreneurs from other cities and countries join Iquiti to share how they spot opportunities and build for global markets." },
+      exchange: { title: "Cultural and intellectual exchange", body: "Visiting founders give talks to our community. Sharing the same room can shift how we think, dream, and see the world." },
+      bottom: "Successful entrepreneurs visiting Mexico City share their experience with our community in exchange for coworking space and access to the hub.",
     },
     events: {
       title: "We've done something like this before.",
@@ -283,6 +262,7 @@ export const deckCopy = {
         { value: "8", label: "launched businesses" },
         { value: "5", label: "monetized by week 3" },
       ],
+      residencyMentors: { value: "6", label: "global mentors" },
       partnerLabel: "Network for Utopías events",
       peopleLabel: "Stories to add",
       people: [
@@ -291,8 +271,8 @@ export const deckCopy = {
       ],
     },
     space: {
-      category: "The space", title: "A place that reminds you every day that anything is possible.",
-      statement: "A space that invites wonder, exchange, and the creation of something bigger than any one person, company, or mission.",
+      category: "The space", title: "A place that starts with a feeling that anything is possible.",
+      statement: "A space that invites wonder, exchange, and the creation of something bigger than any one person, company, or mission. We want to remind you every day that anything is possible.",
       images: [
         { src: "/deck/space-coworking.avif", caption: "Shared workspace", alt: "Concept reference of coworking tables and stepped seating" },
         { src: "/deck/space-projects.avif", caption: "Peer learning", alt: "Concept reference of groups working around project tables" },

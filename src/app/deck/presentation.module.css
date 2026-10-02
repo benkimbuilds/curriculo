@@ -106,6 +106,9 @@
 .eventsProofValue { color: var(--purple); font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 300; letter-spacing: -.07em; line-height: 1; }
 .eventsProofLabel, .eventsNetwork > strong, .eventsPeople > strong { color: var(--purple); font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
 .eventsProofCard p { margin-top: auto; font-size: clamp(.9rem, 1.15vw, 1.1rem); line-height: 1.4; }
+.eventsMentors { display: flex; align-items: baseline; gap: .4rem; margin-top: .75rem; color: var(--purple); }
+.eventsMentors strong { font-size: clamp(1.5rem, 2vw, 2rem); font-weight: 400; line-height: 1; }
+.eventsMentors span { font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
 .eventsResults { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; margin-top: auto; }
 .eventsResults strong { display: block; font-size: clamp(2.2rem, 3vw, 3.4rem); font-weight: 400; line-height: 1; }
 .eventsResults span { display: block; margin-top: .45rem; font-size: .72rem; line-height: 1.3; }
@@ -119,12 +122,6 @@
 .simplePanel small { margin-top: 1rem; color: var(--muted); }
 .academyHero { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1.4rem 0; font-size: clamp(1.1rem, 1.5vw, 1.55rem); }
 .academyHero strong { color: var(--purple); font-weight: 500; }
-.flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; }
-.flow div { position: relative; display: flex; flex-direction: column; padding: 1.5rem; min-height: 17rem; background: #f6f6f6; }
-.flow div:last-child { background: var(--green); }
-.flow span { font-size: .75rem; color: var(--purple); font-weight: 700; }
-.flow strong { margin-top: 1.35rem; min-height: 2.24em; font-size: clamp(1.5rem, 2.5vw, 3rem); line-height: 1.12; letter-spacing: -.04em; font-weight: 500; }
-.flow small { margin-top: .6rem; color: var(--muted); font-size: .9rem; }
 .spaceLead { max-width: 58rem; font-size: clamp(1.2rem, 1.7vw, 1.6rem); font-weight: 300; line-height: 1.35; letter-spacing: -.02em; }
 .spaceGallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
 .spaceGallery figure { min-width: 0; margin: 0; }
@@ -180,7 +177,7 @@
   .deckName { display: none; }
   .slide { gap: 1.8rem; }
   .problemColumns, .academyColumns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .pillarGrid, .flow { grid-template-columns: repeat(2, 1fr); }
+  .pillarGrid { grid-template-columns: repeat(2, 1fr); }
   .eventsLayout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .eventsProofCard:last-child { grid-column: 1 / -1; }
   .partnerLogos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -189,7 +186,7 @@
   .pillar:nth-child(even) { border-right: 0; }
   .pillar:nth-child(-n+4) { border-bottom: 1px solid var(--line); }
   .pillar:last-child { grid-column: 1 / -1; min-height: 8rem; }
-  .pillar, .flow div { min-height: 11rem; }
+  .pillar { min-height: 11rem; }
   .coverGraphic { right: -6rem; opacity: .15; }
   .overview { grid-template-columns: repeat(3, 1fr); }
 }
@@ -203,7 +200,6 @@
   .featurePanel { min-height: 15rem; }
   .simplePanel { min-height: 14rem; }
   .eventsProofCard { min-height: 11rem; padding: 1.25rem; }
-  .flow div { min-height: 13rem; }
   .planTrack { min-height: 12rem; }
 }
 @media (max-width: 640px) {
@@ -231,8 +227,6 @@
   .pillarGrid { grid-template-columns: 1fr; }
   .pillarGrid .pillar { border-right: 0; border-bottom: 1px solid var(--line); }
   .pillarGrid .pillar:last-child { grid-column: auto; border-bottom: 0; }
-  .flow { grid-template-columns: 1fr 1fr; }
-  .flow { grid-template-columns: 1fr; }
   .pillar { min-height: 10rem; padding: 1rem; }
   .pillar h3 { min-height: 0; font-size: 1.3rem; }
   .pillar p { font-size: .85rem; }
