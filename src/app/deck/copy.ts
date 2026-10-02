@@ -17,7 +17,7 @@ export const deckCopy = {
       { label: "Inicio", title: "El hub de innovación de la Ciudad de México." },
       { label: "El problema", title: "El talento está aquí. El camino para crear con tecnología está fragmentado." },
       { label: "Reinversión", title: "Talento, conocimiento y capital: de aquí al mundo." },
-      { label: "La tesis", title: "Educación, innovación y emprendimiento. Un solo camino." },
+      { label: "La tesis", title: "Educación, innovación y emprendimiento. Un ciclo regenerativo." },
       { label: "El Hub", title: "Un ecosistema, cinco motores." },
       { label: "01 · Academia", title: "Aprender a aprender. Aprender construyendo." },
       { label: "02 · Coworking", title: "Un lugar para crear empresas en comunidad." },
@@ -56,7 +56,7 @@ export const deckCopy = {
       bottom: "El aprendizaje puede abrir paso a empleos y empresas que reinviertan en la siguiente generación.",
     },
     thesis: {
-      category: "Oportunidad y tesis", title: "Educación, innovación y emprendimiento. Un solo camino.",
+      category: "Oportunidad y tesis", title: "Educación, innovación y emprendimiento. Un ciclo regenerativo.",
       statement: "Una escuela abierta y un hub en el mismo lugar convierten capacidad técnica en proyectos, trabajo y empresas nacidas en México.",
       points: [
         { title: "Escuela abierta", body: "Gratuita, autodidacta y entre pares; currículo de código abierto y una primera cohorte presencial de 150 personas durante 12 semanas." },
@@ -181,7 +181,7 @@ export const deckCopy = {
       { label: "Opening", title: "Mexico City's innovation hub." },
       { label: "The problem", title: "The talent is here. The path to building with technology is fragmented." },
       { label: "Reinvestment", title: "Talent, knowledge, and capital: from here to the world." },
-      { label: "Our thesis", title: "Education, innovation, entrepreneurship. One continuous path." },
+      { label: "Our thesis", title: "Education, innovation, entrepreneurship. One regenerative cycle." },
       { label: "The Hub", title: "One ecosystem, five engines." },
       { label: "01 · Academy", title: "Learn how to learn. Learn by building." },
       { label: "02 · Coworking", title: "A place to build companies with the community." },
@@ -220,7 +220,7 @@ export const deckCopy = {
       bottom: "Learning can lead to jobs and companies that reinvest in the next generation.",
     },
     thesis: {
-      category: "Opportunity & thesis", title: "Education, innovation, entrepreneurship. One continuous path.",
+      category: "Opportunity & thesis", title: "Education, innovation, entrepreneurship. One regenerative cycle.",
       statement: "An open school and a hub in one place turn technical ability into projects, careers, and companies rooted in Mexico.",
       points: [
         { title: "Open school", body: "Free, self-directed, and peer-led; an open-source curriculum and a first in-person cohort of 150 people over 12 weeks." },
