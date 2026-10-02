@@ -28,7 +28,7 @@ export const deckCopy = {
       { label: "El espacio", title: "Que se sienta como una posibilidad nueva." },
       { label: "Presupuesto", title: "US$50,000 para ponerlo en marcha." },
       { label: "Plan y metas", title: "Dos formas de aprender. Un hub de largo plazo." },
-      { label: "Cierre", title: "Construyamos el siguiente nodo." },
+      { label: "Cierre", title: "Tejamos lo que sigue." },
     ],
     cover: {
       eyebrow: "Iquiti · Centro de Innovación y Academia de Tecnología",
@@ -167,8 +167,8 @@ export const deckCopy = {
     },
     close: {
       eyebrow: "Iquiti · Coyoacán, Ciudad de México",
-      title: "Construyamos el", emphasis: "siguiente nodo.",
-      lead: "Un punto de partida para que el talento local cree soluciones, trayectorias profesionales y empresas con tecnología.",
+      title: "Tejamos", emphasis: "lo que sigue.",
+      lead: "Iquiti significa «tejer» en náhuatl. Conectamos escuela, hub y comunidad para que el talento cree proyectos, empleos y empresas desde México para el mundo.",
     },
   },
   en: {
@@ -200,7 +200,7 @@ export const deckCopy = {
       { label: "The space", title: "A place that feels like a new possibility." },
       { label: "Budget", title: "US$50,000 to launch it." },
       { label: "Plan & targets", title: "Two ways to learn. One hub built to last." },
-      { label: "Closing", title: "Let's build the next node." },
+      { label: "Closing", title: "Let's weave what comes next." },
     ],
     cover: {
       eyebrow: "Iquiti · Innovation Hub and Technology Academy",
@@ -339,8 +339,8 @@ export const deckCopy = {
     },
     close: {
       eyebrow: "Iquiti · Coyoacán, Mexico City",
-      title: "Let's build the", emphasis: "next node.",
-      lead: "A starting point for local talent to create solutions, careers, and companies with technology.",
+      title: "Let's weave", emphasis: "what comes next.",
+      lead: "Iquiti means “to weave” in Nahuatl. We connect school, hub, and community so talent can build projects, careers, and companies from Mexico for the world.",
     },
   },
 } as const;

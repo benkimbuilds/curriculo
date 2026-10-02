@@ -56,6 +56,7 @@
 .coverCopy, .endCopy { max-width: 63rem; position: relative; z-index: 1; }
 .cover h1, .cover h2 { max-width: 14ch; font-size: clamp(3.3rem, 7.4vw, 8.5rem); }
 .cover h1 em, .cover h2 em { color: var(--green); font-style: normal; }
+.endCopy h2 em { display: block; }
 .lead { max-width: 35rem; margin-top: 2.4rem !important; font-size: clamp(1.1rem, 1.6vw, 1.5rem); line-height: 1.45; }
 .coverGraphic { position: absolute; right: -4rem; top: 50%; width: min(42vw, 39rem); transform: translateY(-50%); opacity: .25; }
 .coverGraphic img { display: block; width: 100%; height: auto; filter: brightness(0) invert(1); }
