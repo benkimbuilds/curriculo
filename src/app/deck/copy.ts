@@ -123,7 +123,7 @@ export const deckCopy = {
     },
     space: {
       category: "El espacio", title: "Un lugar que te recuerda cada día que todo es posible.",
-      statement: "Un espacio que invite al asombro, al intercambio y a crear algo más grande que uno mismo.",
+      statement: "Un espacio que invite al asombro, al intercambio y a crear algo más grande que cualquier persona, empresa o misión.",
       images: [
         { src: "/deck/space-coworking.avif", caption: "Trabajo compartido", alt: "Referencia conceptual de mesas de coworking y gradas" },
         { src: "/deck/space-projects.avif", caption: "Aprendizaje entre pares", alt: "Referencia conceptual de grupos trabajando en mesas de proyecto" },
@@ -292,7 +292,7 @@ export const deckCopy = {
     },
     space: {
       category: "The space", title: "A place that reminds you every day that anything is possible.",
-      statement: "A space that invites wonder, exchange, and the creation of something bigger than any one person.",
+      statement: "A space that invites wonder, exchange, and the creation of something bigger than any one person, company, or mission.",
       images: [
         { src: "/deck/space-coworking.avif", caption: "Shared workspace", alt: "Concept reference of coworking tables and stepped seating" },
         { src: "/deck/space-projects.avif", caption: "Peer learning", alt: "Concept reference of groups working around project tables" },
