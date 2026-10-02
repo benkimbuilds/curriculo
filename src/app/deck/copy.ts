@@ -99,7 +99,7 @@ export const deckCopy = {
     residencies: {
       title: "Residencias: un puente a mercados globales.",
       invited: { title: "Fundadores invitados", body: "Emprendedores de otras ciudades y países llegan a Iquiti para compartir cómo detectan oportunidades y crean para mercados globales." },
-      exchange: { title: "Intercambio cultural e intelectual", body: "Al trabajar con equipos locales, comparten métodos, cultura y redes que ayudan a soñar en grande y convertir conocimiento local en productos para el mundo." },
+      exchange: { title: "Intercambio cultural e intelectual", body: "Al trabajar con equipos locales, comparten métodos, cultura y redes que pueden transformar nuestra forma de soñar." },
       bottom: "La meta: crear empresas basadas en conocimiento en México, llegar a mercados globales y dejar más valor en manos de quienes construyen aquí.",
     },
     events: {
@@ -263,7 +263,7 @@ export const deckCopy = {
     residencies: {
       title: "Residencies: a bridge to global markets.",
       invited: { title: "Invited founders", body: "Entrepreneurs from other cities and countries join Iquiti to share how they spot opportunities and build for global markets." },
-      exchange: { title: "Cultural and intellectual exchange", body: "Working alongside local teams, they share methods, culture, and networks that help builders dream bigger and turn local knowledge into products for the world." },
+      exchange: { title: "Cultural and intellectual exchange", body: "Working alongside local teams, they share methods, culture, and networks that can shape the way we dream." },
       bottom: "The aim: build knowledge-based companies in Mexico, reach global markets, and keep more of the upside with the people building here.",
     },
     events: {
