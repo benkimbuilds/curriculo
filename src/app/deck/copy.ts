@@ -115,6 +115,11 @@ export const deckCopy = {
         { value: "5", label: "monetizaron en 3 semanas" },
       ],
       partnerLabel: "Red para eventos en Utopías",
+      peopleLabel: "Historias por integrar",
+      people: [
+        { name: "Bernardo", detail: "Su historia y papel en el proyecto, por definir." },
+        { name: "Luisa", detail: "Su historia y papel en el proyecto, por definir." },
+      ],
     },
     space: {
       category: "El espacio", title: "Que se sienta como una posibilidad nueva.",
@@ -279,6 +284,11 @@ export const deckCopy = {
         { value: "5", label: "monetized by week 3" },
       ],
       partnerLabel: "Network for Utopías events",
+      peopleLabel: "Stories to add",
+      people: [
+        { name: "Bernardo", detail: "Story and role in the project to be defined." },
+        { name: "Luisa", detail: "Story and role in the project to be defined." },
+      ],
     },
     space: {
       category: "The space", title: "A place that feels like a new possibility.",
