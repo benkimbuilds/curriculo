@@ -82,7 +82,7 @@ export const deckCopy = {
         { title: "Aprender con proyectos", body: "Proyectos reales dan práctica para crear empresas. La retroalimentación semanal forma un portafolio para prácticas, co-ops, empleo o proyectos en el hub." },
         { title: "Mentores voluntarios", body: "Planeamos reunir a 10–20 mentores voluntarios que dediquen unas horas semanales a consultas sobre métodos para resolver problemas y autonomía, no contenidos aislados." },
       ],
-      bottom: "Primera cohorte: 150 estudiantes y 12 semanas para construir en comunidad.",
+      bottom: "150 estudiantes presenciales durante 12 semanas. En línea, hasta 5,000 personas a su propio ritmo.",
     },
     coworking: {
       title: "Un lugar para crear empresas en comunidad.",
@@ -138,7 +138,7 @@ export const deckCopy = {
       school: {
         label: "Academia · dos modalidades",
         inPerson: { label: "Presencial", value: "150", unit: "estudiantes", detail: "12 semanas · sesiones de 4 horas con mentoría." },
-        online: { label: "En línea", value: "1–5 mil", unit: "participantes · meta", detail: "Menor acompañamiento: menos mentoría e interacción entre pares." },
+        online: { label: "En línea", value: "5,000", unit: "meta máxima de participantes", detail: "A su propio ritmo y con menos mentoría e interacción entre pares." },
       },
       hub: {
         label: "Hub · metas propuestas para 12 meses",
@@ -247,7 +247,7 @@ export const deckCopy = {
         { title: "Project-based practice", body: "Real-world projects give students the practice needed to build companies. Weekly feedback builds a portfolio for internships, co-ops, jobs, or hub projects." },
         { title: "Volunteer mentors", body: "We plan for 10–20 volunteer mentors to set aside a few hours each week for office hours on problem-solving methods and self-reliance, not isolated facts." },
       ],
-      bottom: "First cohort: 150 students and 12 weeks to build together.",
+      bottom: "150 in-person students over 12 weeks. Online, up to 5,000 people learning at their own pace.",
     },
     coworking: {
       title: "A place to build companies with the community.",
@@ -303,7 +303,7 @@ export const deckCopy = {
       school: {
         label: "Academy · two formats",
         inPerson: { label: "In person", value: "150", unit: "students", detail: "12 weeks · four-hour sessions with mentorship." },
-        online: { label: "Online", value: "1k–5k", unit: "learner target", detail: "Lower-touch: less mentorship and peer interaction." },
+        online: { label: "Online", value: "5,000", unit: "maximum learner target", detail: "Self-paced, with less mentorship and peer interaction." },
       },
       hub: {
         label: "Hub · proposed 12-month targets",
