@@ -16,7 +16,7 @@ export const deckCopy = {
     slides: [
       { label: "Inicio", title: "El hub de innovación de la Ciudad de México." },
       { label: "El problema", title: "El talento está aquí. El camino para crear con tecnología está fragmentado." },
-      { label: "Reinversión", title: "Talento, conocimiento y capital: de aquí al mundo." },
+      { label: "Reinversión", title: "Talento, conocimiento y capital fluyen entre México y el mundo." },
       { label: "La tesis", title: "Educación, innovación y emprendimiento. Un ciclo regenerativo." },
       { label: "El Hub", title: "Un ecosistema, cinco motores." },
       { label: "01 · Academia", title: "Aprender a aprender." },
@@ -46,10 +46,10 @@ export const deckCopy = {
       bottom: "El resultado: ideas sin una ruta clara hacia empleo, empresas y reinversión local.",
     },
     reinvestment: {
-      category: "Ciclo de reinversión", title: "Talento, conocimiento y capital: de aquí al mundo.",
+      category: "Ciclo de reinversión", title: "Talento, conocimiento y capital fluyen entre México y el mundo.",
       steps: [
         { title: "Formación abierta", body: "Aprenden a usar IA y tecnología para crear productos y negocios, a su ritmo y con pares." },
-        { title: "Proyectos en el hub", body: "El coworking, los retos y emprendedores residentes ayudan a llevar esas habilidades a soluciones reales." },
+        { title: "Proyectos en el hub", body: "El coworking, los retos y fundadores visitantes conectan perspectivas globales con proyectos locales." },
         { title: "Empleo y empresas", body: "Egresados pueden unirse a empresas del hub o aliadas; los nuevos equipos también pueden contratar localmente." },
         { title: "Reinversión", body: "Empresas que crecen pueden contratar y formar a otros. Un evento de liquidez podría financiar la siguiente generación." },
       ],
@@ -180,7 +180,7 @@ export const deckCopy = {
     slides: [
       { label: "Opening", title: "Mexico City's innovation hub." },
       { label: "The problem", title: "The talent is here. The path to building with technology is fragmented." },
-      { label: "Reinvestment", title: "Talent, knowledge, and capital: from here to the world." },
+      { label: "Reinvestment", title: "Talent, knowledge, and capital flow between Mexico and the world." },
       { label: "Our thesis", title: "Education, innovation, entrepreneurship. One regenerative cycle." },
       { label: "The Hub", title: "One ecosystem, five engines." },
       { label: "01 · Academy", title: "Learn how to learn." },
@@ -210,10 +210,10 @@ export const deckCopy = {
       bottom: "The result: ideas without a clear path to jobs, companies, or local reinvestment.",
     },
     reinvestment: {
-      category: "Reinvestment cycle", title: "Talent, knowledge, and capital: from here to the world.",
+      category: "Reinvestment cycle", title: "Talent, knowledge, and capital flow between Mexico and the world.",
       steps: [
         { title: "Open learning", body: "People learn to use AI and technology to build products and businesses, at their own pace and with peers." },
-        { title: "Projects in the hub", body: "Coworking, challenges, and resident founders help turn those skills into real solutions." },
+        { title: "Projects in the hub", body: "Coworking, challenges, and visiting founders connect global perspectives with local projects." },
         { title: "Jobs and ventures", body: "Graduates can join hub companies or partner employers; new teams can also hire locally." },
         { title: "Reinvestment", body: "Growing companies can hire and train others. A liquidity event could help fund the next generation." },
       ],
