@@ -130,7 +130,7 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
       return <>
         <PillarHead number={1} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.academy.title} goTo={goTo} />
         <div className={styles.academyHero}><p>{t.academy.promise}</p><strong>{t.academy.distinction}</strong></div>
-        <div className={styles.threeColumns}>{t.academy.points.map((point, i) => <Statement key={i} number={`0${i + 1}`} title={point.title} body={point.body} />)}</div>
+        <div className={styles.academyColumns}>{t.academy.points.map((point, i) => <Statement key={i} number={`0${i + 1}`} title={point.title} body={point.body} />)}</div>
         <p className={styles.bottomLine}>{t.academy.bottom}</p>
       </>;
     case 6:

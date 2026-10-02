@@ -62,13 +62,13 @@
 .coverGraphic img { display: block; width: 100%; height: auto; filter: brightness(0) invert(1); }
 
 .threeColumns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 3vw, 3rem); }
-.problemColumns { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.75rem, 2vw, 2rem); }
+.problemColumns, .academyColumns { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.75rem, 2vw, 2rem); }
 .statement { padding-top: 1rem; border-top: 1px solid var(--line); }
 .statement span, .pillar span { color: var(--purple); font-size: .75rem; font-weight: 700; }
 .statement h3 { margin: 2.1rem 0 .8rem; font-size: clamp(1.45rem, 2.3vw, 2.3rem); font-weight: 500; letter-spacing: -.04em; }
 .statement p, .pillar p, .featurePanel p, .simplePanel p { max-width: 27rem; color: var(--muted); font-size: clamp(.95rem, 1.25vw, 1.18rem); line-height: 1.5; }
-.problemColumns .statement h3 { min-height: 2.3em; margin: 1.5rem 0 .6rem; font-size: clamp(1.25rem, 1.85vw, 1.9rem); line-height: 1.15; }
-.problemColumns .statement p { font-size: clamp(.9rem, 1.05vw, 1.05rem); line-height: 1.4; }
+.problemColumns .statement h3, .academyColumns .statement h3 { min-height: 2.3em; margin: 1.5rem 0 .6rem; font-size: clamp(1.25rem, 1.85vw, 1.9rem); line-height: 1.15; }
+.problemColumns .statement p, .academyColumns .statement p { font-size: clamp(.9rem, 1.05vw, 1.05rem); line-height: 1.4; }
 .thesisLayout { display: grid; grid-template-columns: minmax(0, 1.25fr) 1px minmax(0, .8fr); gap: clamp(2rem, 5vw, 6rem); align-items: stretch; }
 .bigStatement { font-size: clamp(1.75rem, 3vw, 3.4rem); line-height: 1.25; letter-spacing: -.035em; font-weight: 300; }
 .verticalRule { background: var(--line); }
@@ -166,7 +166,7 @@
 @media (max-width: 900px) {
   .deckName { display: none; }
   .slide { gap: 1.8rem; }
-  .problemColumns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .problemColumns, .academyColumns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pillarGrid, .flow { grid-template-columns: repeat(2, 1fr); }
   .eventsLayout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .eventsProofCard:last-child { grid-column: 1 / -1; }
@@ -208,10 +208,10 @@
   .cover { justify-content: center; }
   .cover h1, .cover h2 { font-size: clamp(3rem, 13vw, 5rem); }
   .coverGraphic { width: 85vw; right: -35vw; }
-  .threeColumns, .problemColumns, .split, .thesisLayout, .eventsLayout, .planTracks, .spaceGallery { grid-template-columns: 1fr; }
+  .threeColumns, .problemColumns, .academyColumns, .split, .thesisLayout, .eventsLayout, .planTracks, .spaceGallery { grid-template-columns: 1fr; }
   .verticalRule { display: none; }
   .statement h3 { margin-top: 1rem; }
-  .problemColumns .statement h3 { min-height: 0; margin-top: 1rem; }
+  .problemColumns .statement h3, .academyColumns .statement h3 { min-height: 0; margin-top: 1rem; }
   .statement { padding-top: .7rem; }
   .pillarGrid { grid-template-columns: 1fr; }
   .pillarGrid .pillar { border-right: 0; border-bottom: 1px solid var(--line); }
