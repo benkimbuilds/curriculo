@@ -38,7 +38,7 @@ export const deckCopy = {
     problem: {
       category: "El problema", title: "El talento está aquí. El camino para crear con tecnología está fragmentado.",
       points: [
-        { title: "La brecha de habilidades tecnológicas crece", body: "Mientras la IA multiplica lo que pueden lograr quienes saben usarla, el acceso al aprendizaje y la práctica para construir con ella no avanza al mismo ritmo." },
+        { title: "La brecha de habilidades tecnológicas crece", body: "En nuestro mercado, la adopción digital avanza despacio. La creación de soluciones locales va aún más rezagada." },
         { title: "El salto de las ideas al impacto", body: "Ese salto necesita proyectos, pares, espacio físico y apoyo. Sin ellos, las ideas difícilmente se convierten en soluciones útiles o empresas que crecen." },
         { title: "Un lugar para soñar", body: "El talento local necesita un espacio cercano donde fundadores, ideas y culturas del mundo amplíen lo que parece posible." },
       ],
@@ -193,7 +193,7 @@ export const deckCopy = {
     problem: {
       category: "The problem", title: "The talent is here. The path to building with technology is fragmented.",
       points: [
-        { title: "The technical skills gap is widening", body: "As AI expands what skilled builders can achieve, access to the learning and practice needed to build with it is not keeping pace." },
+        { title: "The technical skills gap is widening", body: "In our market, digital adoption is slow. Building local solutions is slower still." },
         { title: "The leap from ideas to impact", body: "That leap needs projects, peers, physical space, and support. Without them, ideas rarely become useful solutions or growing companies." },
         { title: "A place to dream", body: "Local talent needs a nearby hub where global founders, ideas, and cultures expand what feels possible." },
       ],
