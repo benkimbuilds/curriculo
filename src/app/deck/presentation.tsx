@@ -82,7 +82,7 @@ export default function Deck() {
           ))}
         </nav>
       ) : (
-        <section className={`${styles.slide} ${index === 0 || index === 13 ? styles.cover : ""} ${index === 5 ? styles.academySlide : ""} ${index === 9 ? styles.eventsSlide : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`}>
+        <section className={`${styles.slide} ${index === 0 || index === 13 ? styles.cover : ""} ${index === 5 || index === 7 ? styles.wideTitleSlide : ""} ${index === 9 ? styles.eventsSlide : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`}>
           <SlideContent index={index} t={t} goTo={goTo} />
         </section>
       )}
