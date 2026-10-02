@@ -68,7 +68,7 @@
 .pillarGrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--line); }
 .pillar { min-height: 17rem; padding: 1.5rem; border-right: 1px solid var(--line); display: flex; flex-direction: column; }
 .pillar:last-child { border-right: 0; }
-.pillar h3 { margin: 2rem 0 .75rem; font-size: clamp(1.4rem, 1.9vw, 2.2rem); font-weight: 500; letter-spacing: -.04em; }
+.pillar h3 { min-height: 2.2em; margin: 2rem 0 .75rem; font-size: clamp(1.4rem, 1.9vw, 2.2rem); font-weight: 500; letter-spacing: -.04em; }
 .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .featurePanel { min-height: 20rem; background: #f6f6f6; padding: clamp(1.5rem, 3vw, 3.5rem); display: flex; flex-direction: column; }
 .featurePanel:nth-child(2) { background: var(--purple); color: #fff; }
@@ -187,7 +187,7 @@
   .flow { grid-template-columns: 1fr 1fr; }
   .flow { grid-template-columns: 1fr; }
   .pillar { min-height: 10rem; padding: 1rem; }
-  .pillar h3 { font-size: 1.3rem; }
+  .pillar h3 { min-height: 0; font-size: 1.3rem; }
   .pillar p { font-size: .85rem; }
   .featurePanel { min-height: 13rem; }
   .eventsLayout { min-height: auto; }
