@@ -39,7 +39,7 @@ export const deckCopy = {
       category: "El problema", title: "El talento está aquí. El camino para crear con tecnología está fragmentado.",
       points: [
         { title: "La brecha técnica crece", body: "La adopción digital avanza despacio y faltan rutas para usar IA y crear soluciones locales." },
-        { title: "El salto de las ideas al impacto", body: "Sin proyectos, pares, espacio y apoyo, cuesta convertir lo aprendido en experiencia, trabajo o empresa." },
+        { title: "El salto de las ideas al impacto", body: "Sin proyectos, pares, espacio y apoyo, cuesta convertir lo aprendido en experiencia, trabajo o empresa. La débil conexión entre formación y empleadores deja al talento no reconocido sin acceso a oportunidades laborales." },
         { title: "Falta un lugar para soñar en grande", body: "Los sistemas y la cultura actuales limitan qué problemas resolvemos, qué mejoramos y quién se beneficia del progreso. Se pierden oportunidades de prosperidad compartida." },
         { title: "El valor se va", body: "Cuando el talento destacado migra, capital, riqueza, conocimiento y cultura crecen fuera. Contratistas locales de empresas extranjeras suelen quedar sin participación accionaria en los negocios que ayudan a crecer." },
       ],
@@ -208,7 +208,7 @@ export const deckCopy = {
       category: "The problem", title: "The talent is here. The path to building with technology is fragmented.",
       points: [
         { title: "The technical skills gap widens", body: "Digital adoption moves slowly, and accessible paths to use AI and build local solutions remain limited." },
-        { title: "The leap from ideas to impact", body: "Without projects, peers, space, and support, learning rarely becomes experience, work, or a company." },
+        { title: "The leap from ideas to impact", body: "Without projects, peers, space, and support, learning rarely becomes experience, work, or a company. Weak links between learning programs and employers keep overlooked talent disconnected from work opportunities." },
         { title: "No place to dream bigger", body: "Established systems and culture narrow which problems we solve, what we improve, and who benefits from progress. Opportunities for shared prosperity go unseen." },
         { title: "Value flows elsewhere", body: "When top talent leaves, capital, wealth, knowledge, and culture grow elsewhere. Local contractors for foreign companies often lack an equity stake in the businesses they help grow." },
       ],
