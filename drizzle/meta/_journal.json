@@ -43,6 +43,13 @@
       "when": 1789251906559,
       "tag": "0005_talented_radioactive_man",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1791092495828,
+      "tag": "0006_strange_warbird",
+      "breakpoints": true
     }
   ]
 }

@@ -580,6 +580,54 @@ export const peerFeedback = pgTable(
   (table) => [unique("peer_feedback_reviewer_unique").on(table.submissionId, table.reviewerUserId)],
 );
 
+export const galleryStars = pgTable(
+  "gallery_stars",
+  {
+    submissionId: uuid("submission_id")
+      .notNull()
+      .references(() => submissions.id, { onDelete: "cascade" }),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    primaryKey({ columns: [table.submissionId, table.userId], name: "gallery_stars_pk" }),
+    index("gallery_stars_submission_idx").on(table.submissionId),
+  ],
+);
+
+export const galleryComments = pgTable(
+  "gallery_comments",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    submissionId: uuid("submission_id")
+      .notNull()
+      .references(() => submissions.id, { onDelete: "cascade" }),
+    authorUserId: uuid("author_user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    body: text("body").notNull(),
+    moderationStatus: varchar("moderation_status", { length: 20 }).default("visible").notNull(),
+    ...timestamps,
+  },
+  (table) => [
+    check(
+      "gallery_comments_body_length",
+      sql`char_length(btrim(${table.body})) >= 2 and char_length(btrim(${table.body})) <= 600`,
+    ),
+    check(
+      "gallery_comments_moderation_status",
+      sql`${table.moderationStatus} in ('visible', 'hidden', 'removed')`,
+    ),
+    index("gallery_comments_submission_idx").on(
+      table.submissionId,
+      table.moderationStatus,
+      table.createdAt,
+    ),
+  ],
+);
+
 export const contentReports = pgTable("content_reports", {
   id: uuid("id").defaultRandom().primaryKey(),
   reporterUserId: uuid("reporter_user_id")
@@ -698,6 +746,8 @@ export const schema = {
   evaluationResults,
   evaluationOverrides,
   peerFeedback,
+  galleryStars,
+  galleryComments,
   contentReports,
   moderationActions,
   interventionNotes,

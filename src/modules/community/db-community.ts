@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, inArray, or } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, or, sql } from "drizzle-orm";
 
 import { db, type Database } from "@/db";
 import {
@@ -6,6 +6,8 @@ import {
   cohorts,
   enrollments,
   featureFlags,
+  galleryComments,
+  galleryStars,
   moderationActions,
   organizations,
   peerFeedback,
@@ -38,17 +40,32 @@ import type {
   ReportReason,
   ReportStatus,
 } from "./types";
+import { CommunityDomainError } from "./types";
 import { decideGalleryAccess } from "./visibility";
 
 export interface GalleryListItem {
   id: string;
   title: string;
   author: string;
+  authorBio: string | null;
+  authorGithubUsername: string | null;
   week: number;
   description: string;
   technology: string;
   reviewCount: number;
+  starCount: number;
+  commentCount: number;
+  viewerHasStarred: boolean;
   visibility: GalleryEntry["visibility"];
+}
+
+export interface GalleryCommentView {
+  id: string;
+  body: string;
+  createdAt: Date;
+  authorId: string;
+  authorName: string;
+  canDelete: boolean;
 }
 
 export interface GalleryProjectDetail extends GalleryListItem {
@@ -60,6 +77,7 @@ export interface GalleryProjectDetail extends GalleryListItem {
   rubricVersionId: string;
   rubricCriteria: readonly { id: string; title: string; description: string }[];
   feedback: readonly PeerFeedback[];
+  comments: readonly GalleryCommentView[];
 }
 
 export interface CommunityRequestContext {
@@ -209,6 +227,8 @@ type SubmissionGalleryRow = {
   accountName: string;
   ownerVerified: boolean;
   ownerIsMinor: boolean | null;
+  bio: string | null;
+  githubUsername: string | null;
 };
 
 async function loadSubmissionRows(
@@ -238,6 +258,8 @@ async function loadSubmissionRows(
       accountName: user.name,
       ownerVerified: user.emailVerified,
       ownerIsMinor: profiles.isMinor,
+      bio: profiles.bio,
+      githubUsername: profiles.githubUsername,
     })
     .from(submissions)
     .innerJoin(enrollments, eq(enrollments.id, submissions.enrollmentId))
@@ -293,6 +315,81 @@ function toGalleryEntry(
     rubricVersionId: extractRubricVersion(row.snapshot, project.rubricVersionId),
     rubricCriterionIds: project.rubricCriteria.map(({ id }) => id),
   };
+}
+
+function publicAuthorProfile(row: SubmissionGalleryRow): {
+  authorBio: string | null;
+  authorGithubUsername: string | null;
+} {
+  const visible = row.profileVisible === true && row.ownerIsMinor === false;
+  if (!visible) return { authorBio: null, authorGithubUsername: null };
+  const bio = row.bio?.trim() || null;
+  const githubUsername = row.githubUsername?.trim() || null;
+  return { authorBio: bio, authorGithubUsername: githubUsername };
+}
+
+async function loadEngagementForSubmissions(
+  database: Database,
+  submissionIds: readonly string[],
+  viewerId: string,
+): Promise<{
+  starCounts: Map<string, number>;
+  commentCounts: Map<string, number>;
+  starredByViewer: Set<string>;
+}> {
+  const starCounts = new Map<string, number>();
+  const commentCounts = new Map<string, number>();
+  const starredByViewer = new Set<string>();
+  if (!submissionIds.length) return { starCounts, commentCounts, starredByViewer };
+
+  const [starRows, commentRows, viewerStars] = await Promise.all([
+    database
+      .select({
+        submissionId: galleryStars.submissionId,
+        count: sql<number>`count(*)::int`,
+      })
+      .from(galleryStars)
+      .where(inArray(galleryStars.submissionId, [...submissionIds]))
+      .groupBy(galleryStars.submissionId),
+    database
+      .select({
+        submissionId: galleryComments.submissionId,
+        count: sql<number>`count(*)::int`,
+      })
+      .from(galleryComments)
+      .where(
+        and(
+          inArray(galleryComments.submissionId, [...submissionIds]),
+          eq(galleryComments.moderationStatus, "visible"),
+        ),
+      )
+      .groupBy(galleryComments.submissionId),
+    database
+      .select({ submissionId: galleryStars.submissionId })
+      .from(galleryStars)
+      .where(
+        and(
+          inArray(galleryStars.submissionId, [...submissionIds]),
+          eq(galleryStars.userId, viewerId),
+        ),
+      ),
+  ]);
+
+  for (const row of starRows) starCounts.set(row.submissionId, Number(row.count));
+  for (const row of commentRows) commentCounts.set(row.submissionId, Number(row.count));
+  for (const row of viewerStars) starredByViewer.add(row.submissionId);
+  return { starCounts, commentCounts, starredByViewer };
+}
+
+function assertCommentBody(raw: string): string {
+  const body = raw.trim().replace(/\s+/g, " ");
+  if (body.length < 2 || body.length > 600) {
+    throw new CommunityDomainError("invalid_feedback", "COMMENT_LENGTH");
+  }
+  if (/(https?:\/\/|www\.|@[\w.-]+\.[a-z]{2,}|\+?\d[\d\s().-]{7,}\d)/i.test(body)) {
+    throw new CommunityDomainError("invalid_feedback", "COMMENT_UNSAFE");
+  }
+  return body;
 }
 
 export class DrizzleGalleryRepository implements GalleryRepository {
@@ -484,18 +581,25 @@ export async function listGalleryForViewer(
   for (const row of feedbackRows) {
     reviewCounts.set(row.submissionId, (reviewCounts.get(row.submissionId) ?? 0) + 1);
   }
+  const engagement = await loadEngagementForSubmissions(database, ids, userId);
   return {
     enabled: true,
     entries: visibleRows.map((row) => {
       const metadata = projectMetadata(row.projectId);
+      const authorProfile = publicAuthorProfile(row);
       return {
         id: row.id,
         title: metadata.title,
         author: row.chosenName || row.accountName,
+        authorBio: authorProfile.authorBio,
+        authorGithubUsername: authorProfile.authorGithubUsername,
         week: metadata.week,
         description: metadata.description,
         technology: metadata.technology,
         reviewCount: reviewCounts.get(row.id) ?? 0,
+        starCount: engagement.starCounts.get(row.id) ?? 0,
+        commentCount: engagement.commentCounts.get(row.id) ?? 0,
+        viewerHasStarred: engagement.starredByViewer.has(row.id),
         visibility: toGalleryEntry(row, moderation.get(row.id) ?? "visible").visibility,
       };
     }),
@@ -526,6 +630,29 @@ export async function getGalleryProjectForViewer(
     .where(eq(peerFeedback.submissionId, submissionId))
     .orderBy(asc(peerFeedback.submittedAt));
   const metadata = projectMetadata(row.projectId);
+  const authorProfile = publicAuthorProfile(row);
+  const engagement = await loadEngagementForSubmissions(database, [submissionId], userId);
+  const commentRows = await database
+    .select({
+      id: galleryComments.id,
+      body: galleryComments.body,
+      createdAt: galleryComments.createdAt,
+      authorId: galleryComments.authorUserId,
+      chosenName: profiles.chosenName,
+      accountName: user.name,
+      profileVisible: profiles.profileVisible,
+      isMinor: profiles.isMinor,
+    })
+    .from(galleryComments)
+    .innerJoin(user, eq(user.id, galleryComments.authorUserId))
+    .leftJoin(profiles, eq(profiles.userId, galleryComments.authorUserId))
+    .where(
+      and(
+        eq(galleryComments.submissionId, submissionId),
+        eq(galleryComments.moderationStatus, "visible"),
+      ),
+    )
+    .orderBy(asc(galleryComments.createdAt));
   return {
     enabled: true,
     project: {
@@ -533,10 +660,15 @@ export async function getGalleryProjectForViewer(
       ownerId: row.ownerId,
       title: metadata.title,
       author: row.chosenName || row.accountName,
+      authorBio: authorProfile.authorBio,
+      authorGithubUsername: authorProfile.authorGithubUsername,
       week: metadata.week,
       description: metadata.description,
       technology: metadata.technology,
       reviewCount: storedFeedback.length,
+      starCount: engagement.starCounts.get(row.id) ?? 0,
+      commentCount: engagement.commentCounts.get(row.id) ?? 0,
+      viewerHasStarred: engagement.starredByViewer.has(row.id),
       visibility: entry.visibility,
       repositoryUrl: row.repositoryUrl,
       deploymentUrl: row.deploymentUrl,
@@ -548,8 +680,130 @@ export async function getGalleryProjectForViewer(
         const parsed = parseFeedback(item);
         return parsed ? [parsed] : [];
       }),
+      comments: commentRows.map((comment) => {
+        const identityVisible = comment.profileVisible === true && comment.isMinor === false;
+        return {
+          id: comment.id,
+          body: comment.body,
+          createdAt: comment.createdAt,
+          authorId: comment.authorId,
+          authorName: identityVisible
+            ? comment.chosenName || comment.accountName
+            : "Miembro verificado",
+          canDelete: comment.authorId === userId,
+        };
+      }),
     },
   };
+}
+
+export async function toggleGalleryStar(
+  userId: string,
+  submissionId: string,
+  database: Database = db,
+): Promise<{ starred: boolean }> {
+  const context = await requireCommunityContext(userId, "gallery:read", database);
+  if (!context.flags.galleryEnabled) {
+    throw new CommunityDomainError("feature_disabled", "Gallery disabled");
+  }
+  if (!context.viewer.emailVerified) {
+    throw new AuthorizationDeniedError("gallery:interact");
+  }
+  const [row] = await loadSubmissionRows(database, context.organizationId, [submissionId]);
+  if (!row) throw new ResourceNotFoundError("Gallery project");
+  const moderation = await loadModerationByTarget(database, [submissionId]);
+  const entry = toGalleryEntry(row, moderation.get(row.id) ?? "visible");
+  if (!decideGalleryAccess(context.viewer, entry, context.flags).allowed) {
+    throw new AuthorizationDeniedError("gallery:read");
+  }
+  if (row.ownerId === userId) {
+    throw new CommunityDomainError("forbidden", "OWN_PROJECT_STAR");
+  }
+  const [existing] = await database
+    .select({ submissionId: galleryStars.submissionId })
+    .from(galleryStars)
+    .where(and(eq(galleryStars.submissionId, submissionId), eq(galleryStars.userId, userId)))
+    .limit(1);
+  if (existing) {
+    await database
+      .delete(galleryStars)
+      .where(and(eq(galleryStars.submissionId, submissionId), eq(galleryStars.userId, userId)));
+    return { starred: false };
+  }
+  await database.insert(galleryStars).values({ submissionId, userId });
+  return { starred: true };
+}
+
+export async function createGalleryComment(
+  userId: string,
+  submissionId: string,
+  rawBody: string,
+  database: Database = db,
+): Promise<{ id: string }> {
+  const context = await requireCommunityContext(userId, "gallery:read", database);
+  if (!context.flags.galleryEnabled) {
+    throw new CommunityDomainError("feature_disabled", "Gallery disabled");
+  }
+  if (!context.viewer.emailVerified) {
+    throw new AuthorizationDeniedError("gallery:interact");
+  }
+  const body = assertCommentBody(rawBody);
+  const [row] = await loadSubmissionRows(database, context.organizationId, [submissionId]);
+  if (!row) throw new ResourceNotFoundError("Gallery project");
+  const moderation = await loadModerationByTarget(database, [submissionId]);
+  const entry = toGalleryEntry(row, moderation.get(row.id) ?? "visible");
+  if (!decideGalleryAccess(context.viewer, entry, context.flags).allowed) {
+    throw new AuthorizationDeniedError("gallery:read");
+  }
+  const recent = await database
+    .select({ id: galleryComments.id, body: galleryComments.body, createdAt: galleryComments.createdAt })
+    .from(galleryComments)
+    .where(
+      and(
+        eq(galleryComments.authorUserId, userId),
+        eq(galleryComments.submissionId, submissionId),
+      ),
+    )
+    .orderBy(desc(galleryComments.createdAt))
+    .limit(5);
+  if (recent[0]?.body.trim() === body) {
+    throw new CommunityDomainError("invalid_feedback", "COMMENT_DUPLICATE");
+  }
+  const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000);
+  const recentCount = recent.filter((item) => item.createdAt >= tenMinutesAgo).length;
+  if (recentCount >= 5) {
+    throw new CommunityDomainError("invalid_feedback", "COMMENT_RATE_LIMIT");
+  }
+  const id = crypto.randomUUID();
+  await database.insert(galleryComments).values({
+    id,
+    submissionId,
+    authorUserId: userId,
+    body,
+    moderationStatus: "visible",
+  });
+  return { id };
+}
+
+export async function removeOwnGalleryComment(
+  userId: string,
+  commentId: string,
+  database: Database = db,
+): Promise<{ submissionId: string }> {
+  const [comment] = await database
+    .select()
+    .from(galleryComments)
+    .where(eq(galleryComments.id, commentId))
+    .limit(1);
+  if (!comment) throw new ResourceNotFoundError("Comment");
+  if (comment.authorUserId !== userId) {
+    throw new AuthorizationDeniedError("gallery:comment-delete");
+  }
+  await database
+    .update(galleryComments)
+    .set({ moderationStatus: "removed", updatedAt: new Date() })
+    .where(eq(galleryComments.id, commentId));
+  return { submissionId: comment.submissionId };
 }
 
 export interface ModerationQueueItem {
