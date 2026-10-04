@@ -94,6 +94,19 @@ export function Spark(props: IconProps) {
   return <IconBase {...props}><path d="M12 3c.7 4.6 2.4 6.3 7 7-4.6.7-6.3 2.4-7 7-.7-4.6-2.4-6.3-7-7 4.6-.7 6.3-2.4 7-7Zm6 13c.3 2 1 2.7 3 3-2 .3-2.7 1-3 3-.3-2-1-2.7-3-3 2-.3 2.7-1 3-3Z" fill="currentColor" /></IconBase>;
 }
 
+export function Star(props: IconProps) {
+  return (
+    <IconBase {...props}>
+      <path
+        d="m12 3.2 2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 15.5 7.2 18.1l.9-5.4-3.9-3.8 5.4-.8L12 3.2Z"
+        stroke="currentColor"
+        strokeLinejoin="round"
+        strokeWidth="1.7"
+      />
+    </IconBase>
+  );
+}
+
 export function User(props: IconProps) {
   return <IconBase {...props}><circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.7" /><path d="M4.5 21c.5-4.4 3-6.5 7.5-6.5s7 2.1 7.5 6.5" stroke="currentColor" strokeLinecap="round" strokeWidth="1.7" /></IconBase>;
 }
