@@ -18,7 +18,7 @@ export function HeaderSurfaceSync({ headerId }: { headerId: string }) {
       const rect = header.getBoundingClientRect();
       const probe = rect.top + rect.height / 2;
       const regions = document.querySelectorAll<HTMLElement>(
-        "main > section[data-surface], body > footer[data-surface]",
+        "main section[data-surface], footer[data-surface]",
       );
       for (const region of regions) {
         const r = region.getBoundingClientRect();

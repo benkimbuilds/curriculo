@@ -233,7 +233,7 @@ body:not(:has([data-iquiti-home], [data-iquiti-curriculo])) :is(input[type="chec
 .admin-language-gate, .community-notice, .moderation-note { background: #f6f6f6; border: 1px solid var(--line); border-radius: 16px; }
 .admin-language-gate p, .admin-language-gate > svg, .community-notice p, .community-notice > svg { color: #666; }
 .moderation-card__subject { background: #fafafa; border-radius: 12px; }
-.gallery-card { border-radius: 18px; }
+.gallery-card { border-radius: 0; }
 .gallery-card__preview { background: #f1f1f1; }
 .preview-word { color: #333; font-weight: 400; }
 .preview-word em { color: #888; }

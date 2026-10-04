@@ -2,9 +2,15 @@ import Link from "next/link";
 
 import { VisibilityBadge } from "@/components/community/visibility-badge";
 import { ArrowRight, Message, Star } from "@/components/icons";
-import { Avatar } from "@/components/ui";
+import { Avatar, StatusPill } from "@/components/ui";
 import { toggleGalleryStarAction } from "@/modules/community/db-actions";
 import type { GalleryVisibility } from "@/modules/community/types";
+
+import {
+  GALLERY_DETAIL_BASE,
+  GALLERY_LIST_HREF,
+  type GallerySurface,
+} from "./gallery/gallery-shared";
 
 export type ProjectCardData = {
   id: string;
@@ -17,6 +23,7 @@ export type ProjectCardData = {
   initialsColor: "clay" | "blue" | "green" | "yellow" | "violet";
   tag: string;
   visibility: GalleryVisibility;
+  isDemo?: boolean;
   starCount: number;
   commentCount: number;
   viewerHasStarred: boolean;
@@ -30,10 +37,20 @@ function commentLabel(count: number) {
   return count === 1 ? "1 comentario" : `${count} comentarios`;
 }
 
-export function ProjectCard({ project }: { project: ProjectCardData }) {
+export function ProjectCard({
+  project,
+  surface = "community",
+}: {
+  project: ProjectCardData;
+  surface?: GallerySurface;
+}) {
+  const interactive = surface === "community";
+  const detailHref = `${GALLERY_DETAIL_BASE[surface]}/${project.id}`;
+  const listHref = GALLERY_LIST_HREF[surface];
+
   return (
     <article className="gallery-card">
-      <Link className={`gallery-card__preview gallery-card__preview--${project.accent}`} href={`/galeria/${project.id}`}>
+      <Link className={`gallery-card__preview gallery-card__preview--${project.accent}`} href={detailHref}>
         <span className="gallery-card__meta">
           <span>Semana {String(project.week).padStart(2, "0")}</span>
           <span>{project.tag}</span>
@@ -48,10 +65,13 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
       </Link>
       <div className="gallery-card__body">
         <div className="gallery-card__top">
-          <VisibilityBadge visibility={project.visibility} />
+          <div className="gallery-card__badges">
+            {project.isDemo ? <StatusPill tone="info">Demo</StatusPill> : null}
+            {interactive ? <VisibilityBadge visibility={project.visibility} /> : null}
+          </div>
         </div>
         <h2>
-          <Link href={`/galeria/${project.id}`}>{project.title}</Link>
+          <Link href={detailHref}>{project.title}</Link>
         </h2>
         <p>{project.description}</p>
         <div className="gallery-card__author">
@@ -62,19 +82,25 @@ export function ProjectCard({ project }: { project: ProjectCardData }) {
           </span>
         </div>
         <div className="gallery-card__engagement">
-          <form action={toggleGalleryStarAction}>
-            <input name="submissionId" type="hidden" value={project.id} />
-            <input name="returnTo" type="hidden" value="/galeria" />
-            <button
-              aria-label={project.viewerHasStarred ? "Quitar estrella" : "Destacar proyecto"}
-              aria-pressed={project.viewerHasStarred}
-              className={`gallery-star${project.viewerHasStarred ? " is-active" : ""}`}
-              type="submit"
-            >
+          {interactive ? (
+            <form action={toggleGalleryStarAction}>
+              <input name="submissionId" type="hidden" value={project.id} />
+              <input name="returnTo" type="hidden" value={listHref} />
+              <button
+                aria-label={project.viewerHasStarred ? "Quitar estrella" : "Destacar proyecto"}
+                aria-pressed={project.viewerHasStarred}
+                className={`gallery-star${project.viewerHasStarred ? " is-active" : ""}`}
+                type="submit"
+              >
+                <Star /> {starLabel(project.starCount)}
+              </button>
+            </form>
+          ) : (
+            <span className="gallery-star gallery-star--readonly" aria-label={starLabel(project.starCount)}>
               <Star /> {starLabel(project.starCount)}
-            </button>
-          </form>
-          <Link className="gallery-card__comments" href={`/galeria/${project.id}#comentarios`}>
+            </span>
+          )}
+          <Link className="gallery-card__comments" href={`${detailHref}#comentarios`}>
             <Message /> {commentLabel(project.commentCount)}
           </Link>
         </div>
