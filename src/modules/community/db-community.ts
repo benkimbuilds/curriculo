@@ -52,6 +52,7 @@ export interface GalleryListItem {
   week: number;
   description: string;
   technology: string;
+  isDemo: boolean;
   reviewCount: number;
   starCount: number;
   commentCount: number;
@@ -116,6 +117,31 @@ function projectMetadata(projectId: string) {
 
 function extractRubricVersion(snapshot: Record<string, unknown>, fallback: string): string {
   return typeof snapshot.rubricVersion === "string" ? snapshot.rubricVersion : fallback;
+}
+
+function galleryDisplayFromSnapshot(
+  projectId: string,
+  snapshot: Record<string, unknown>,
+) {
+  const metadata = projectMetadata(projectId);
+  const isDemo = snapshot.isDemo === true;
+  return {
+    ...metadata,
+    isDemo,
+    title:
+      isDemo && typeof snapshot.galleryTitle === "string"
+        ? snapshot.galleryTitle
+        : metadata.title,
+    description:
+      isDemo && typeof snapshot.galleryDescription === "string"
+        ? snapshot.galleryDescription
+        : metadata.description,
+    technology:
+      isDemo && typeof snapshot.galleryTechnology === "string"
+        ? snapshot.galleryTechnology
+        : metadata.technology,
+    rubricVersionId: extractRubricVersion(snapshot, metadata.rubricVersionId),
+  };
 }
 
 function moderationStatusFor(
@@ -300,7 +326,7 @@ function toGalleryEntry(
   row: SubmissionGalleryRow,
   moderationStatus: ModerationStatus,
 ): GalleryEntry {
-  const project = projectMetadata(row.projectId);
+  const project = galleryDisplayFromSnapshot(row.projectId, row.snapshot);
   return {
     id: row.id,
     ownerId: row.ownerId,
@@ -312,7 +338,7 @@ function toGalleryEntry(
       : "private",
     moderationStatus,
     published: row.ownerVerified,
-    rubricVersionId: extractRubricVersion(row.snapshot, project.rubricVersionId),
+    rubricVersionId: project.rubricVersionId,
     rubricCriterionIds: project.rubricCriteria.map(({ id }) => id),
   };
 }
@@ -331,7 +357,7 @@ function publicAuthorProfile(row: SubmissionGalleryRow): {
 async function loadEngagementForSubmissions(
   database: Database,
   submissionIds: readonly string[],
-  viewerId: string,
+  viewerId?: string,
 ): Promise<{
   starCounts: Map<string, number>;
   commentCounts: Map<string, number>;
@@ -364,15 +390,17 @@ async function loadEngagementForSubmissions(
         ),
       )
       .groupBy(galleryComments.submissionId),
-    database
-      .select({ submissionId: galleryStars.submissionId })
-      .from(galleryStars)
-      .where(
-        and(
-          inArray(galleryStars.submissionId, [...submissionIds]),
-          eq(galleryStars.userId, viewerId),
-        ),
-      ),
+    viewerId
+      ? database
+          .select({ submissionId: galleryStars.submissionId })
+          .from(galleryStars)
+          .where(
+            and(
+              inArray(galleryStars.submissionId, [...submissionIds]),
+              eq(galleryStars.userId, viewerId),
+            ),
+          )
+      : Promise.resolve([] as { submissionId: string }[]),
   ]);
 
   for (const row of starRows) starCounts.set(row.submissionId, Number(row.count));
@@ -585,7 +613,7 @@ export async function listGalleryForViewer(
   return {
     enabled: true,
     entries: visibleRows.map((row) => {
-      const metadata = projectMetadata(row.projectId);
+      const metadata = galleryDisplayFromSnapshot(row.projectId, row.snapshot);
       const authorProfile = publicAuthorProfile(row);
       return {
         id: row.id,
@@ -596,6 +624,7 @@ export async function listGalleryForViewer(
         week: metadata.week,
         description: metadata.description,
         technology: metadata.technology,
+        isDemo: metadata.isDemo,
         reviewCount: reviewCounts.get(row.id) ?? 0,
         starCount: engagement.starCounts.get(row.id) ?? 0,
         commentCount: engagement.commentCounts.get(row.id) ?? 0,
@@ -629,7 +658,7 @@ export async function getGalleryProjectForViewer(
     .from(peerFeedback)
     .where(eq(peerFeedback.submissionId, submissionId))
     .orderBy(asc(peerFeedback.submittedAt));
-  const metadata = projectMetadata(row.projectId);
+  const metadata = galleryDisplayFromSnapshot(row.projectId, row.snapshot);
   const authorProfile = publicAuthorProfile(row);
   const engagement = await loadEngagementForSubmissions(database, [submissionId], userId);
   const commentRows = await database
@@ -665,6 +694,7 @@ export async function getGalleryProjectForViewer(
       week: metadata.week,
       description: metadata.description,
       technology: metadata.technology,
+      isDemo: metadata.isDemo,
       reviewCount: storedFeedback.length,
       starCount: engagement.starCounts.get(row.id) ?? 0,
       commentCount: engagement.commentCounts.get(row.id) ?? 0,
@@ -693,6 +723,159 @@ export async function getGalleryProjectForViewer(
           canDelete: comment.authorId === userId,
         };
       }),
+    },
+  };
+}
+
+function isPublicShowcaseCandidate(
+  row: SubmissionGalleryRow,
+  moderationStatus: ModerationStatus,
+): boolean {
+  if (moderationStatus !== "visible") return false;
+  if (!row.ownerVerified) return false;
+  if (row.profileVisible !== true || row.ownerIsMinor !== false) return false;
+  return galleryDisplayFromSnapshot(row.projectId, row.snapshot).isDemo;
+}
+
+function mapListItem(
+  row: SubmissionGalleryRow,
+  moderationStatus: ModerationStatus,
+  engagement: {
+    starCounts: Map<string, number>;
+    commentCounts: Map<string, number>;
+    starredByViewer: Set<string>;
+  },
+  reviewCount = 0,
+): GalleryListItem {
+  const metadata = galleryDisplayFromSnapshot(row.projectId, row.snapshot);
+  const authorProfile = publicAuthorProfile(row);
+  return {
+    id: row.id,
+    title: metadata.title,
+    author: row.chosenName || row.accountName,
+    authorBio: authorProfile.authorBio,
+    authorGithubUsername: authorProfile.authorGithubUsername,
+    week: metadata.week,
+    description: metadata.description,
+    technology: metadata.technology,
+    isDemo: metadata.isDemo,
+    reviewCount,
+    starCount: engagement.starCounts.get(row.id) ?? 0,
+    commentCount: engagement.commentCounts.get(row.id) ?? 0,
+    viewerHasStarred: engagement.starredByViewer.has(row.id),
+    visibility: toGalleryEntry(row, moderationStatus).visibility,
+  };
+}
+
+async function loadVisibleComments(
+  database: Database,
+  submissionId: string,
+  viewerId?: string,
+): Promise<GalleryCommentView[]> {
+  const commentRows = await database
+    .select({
+      id: galleryComments.id,
+      body: galleryComments.body,
+      createdAt: galleryComments.createdAt,
+      authorId: galleryComments.authorUserId,
+      chosenName: profiles.chosenName,
+      accountName: user.name,
+      profileVisible: profiles.profileVisible,
+      isMinor: profiles.isMinor,
+    })
+    .from(galleryComments)
+    .innerJoin(user, eq(user.id, galleryComments.authorUserId))
+    .leftJoin(profiles, eq(profiles.userId, galleryComments.authorUserId))
+    .where(
+      and(
+        eq(galleryComments.submissionId, submissionId),
+        eq(galleryComments.moderationStatus, "visible"),
+      ),
+    )
+    .orderBy(asc(galleryComments.createdAt));
+
+  return commentRows.map((comment) => {
+    const identityVisible = comment.profileVisible === true && comment.isMinor === false;
+    return {
+      id: comment.id,
+      body: comment.body,
+      createdAt: comment.createdAt,
+      authorId: comment.authorId,
+      authorName: identityVisible
+        ? comment.chosenName || comment.accountName
+        : "Miembro verificado",
+      canDelete: Boolean(viewerId && comment.authorId === viewerId),
+    };
+  });
+}
+
+export async function listPublicGalleryProjects(
+  database: Database = db,
+): Promise<{ entries: GalleryListItem[] }> {
+  const organizationId = await resolveDefaultOrganizationId(database);
+  const allRows = await loadSubmissionRows(database, organizationId);
+  const seenProjects = new Set<string>();
+  const rows = allRows.filter((row) => {
+    const key = `${row.ownerId}:${row.projectId}`;
+    if (seenProjects.has(key)) return false;
+    seenProjects.add(key);
+    return true;
+  });
+  const moderation = await loadModerationByTarget(database, rows.map(({ id }) => id));
+  const visibleRows = rows.filter((row) =>
+    isPublicShowcaseCandidate(row, moderation.get(row.id) ?? "visible"),
+  );
+  const ids = visibleRows.map(({ id }) => id);
+  const engagement = await loadEngagementForSubmissions(database, ids);
+  return {
+    entries: visibleRows.map((row) =>
+      mapListItem(row, moderation.get(row.id) ?? "visible", engagement),
+    ),
+  };
+}
+
+export async function getPublicGalleryProject(
+  submissionId: string,
+  database: Database = db,
+): Promise<{ project: GalleryProjectDetail | null }> {
+  const organizationId = await resolveDefaultOrganizationId(database);
+  const [row] = await loadSubmissionRows(database, organizationId, [submissionId]);
+  if (!row) return { project: null };
+  const moderation = await loadModerationByTarget(database, [submissionId]);
+  const moderationStatus = moderation.get(row.id) ?? "visible";
+  if (!isPublicShowcaseCandidate(row, moderationStatus)) return { project: null };
+
+  const entry = toGalleryEntry(row, moderationStatus);
+  const metadata = galleryDisplayFromSnapshot(row.projectId, row.snapshot);
+  const authorProfile = publicAuthorProfile(row);
+  const engagement = await loadEngagementForSubmissions(database, [submissionId]);
+  const comments = await loadVisibleComments(database, submissionId);
+
+  return {
+    project: {
+      id: row.id,
+      ownerId: row.ownerId,
+      title: metadata.title,
+      author: row.chosenName || row.accountName,
+      authorBio: authorProfile.authorBio,
+      authorGithubUsername: authorProfile.authorGithubUsername,
+      week: metadata.week,
+      description: metadata.description,
+      technology: metadata.technology,
+      isDemo: metadata.isDemo,
+      reviewCount: 0,
+      starCount: engagement.starCounts.get(row.id) ?? 0,
+      commentCount: engagement.commentCounts.get(row.id) ?? 0,
+      viewerHasStarred: false,
+      visibility: entry.visibility,
+      repositoryUrl: row.repositoryUrl,
+      deploymentUrl: row.deploymentUrl,
+      commitSha: row.commitSha,
+      submittedAt: row.submittedAt,
+      rubricVersionId: entry.rubricVersionId,
+      rubricCriteria: metadata.rubricCriteria,
+      feedback: [],
+      comments,
     },
   };
 }
@@ -850,7 +1033,7 @@ export async function listModerationQueue(
   return reports.flatMap((report) => {
     const row = rowById.get(report.targetId);
     if (!row) return [];
-    const metadata = projectMetadata(row.projectId);
+    const metadata = galleryDisplayFromSnapshot(row.projectId, row.snapshot);
     return [{
       id: report.id,
       targetId: report.targetId,

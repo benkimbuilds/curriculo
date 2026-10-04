@@ -5,11 +5,8 @@ import { Centro } from "@/components/sections/centro";
 import { Faq } from "@/components/sections/faq";
 import { Galeria } from "@/components/sections/galeria";
 import { Hero } from "@/components/sections/hero";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
-import { SkipLink } from "@/components/layout/skip-link";
+import { SiteShell } from "@/components/layout/site-shell";
 import { platformCta } from "@/components/layout/platform-cta";
-import { MotionRoot } from "@/components/motion/motion-root";
 import { site } from "@/config/site";
 import { faqItems } from "@/content/faq";
 import { getCurrentSession } from "@/modules/auth/session";
@@ -74,10 +71,8 @@ export default async function Home() {
   const accountLabel = accountLink?.label ?? platformCta.shortLabel;
 
   return (
-    <div data-iquiti-home>
+    <SiteShell page="home" platformHref={accountHref} platformLabel={accountLabel}>
       <StructuredData />
-      <SkipLink />
-      <SiteHeader platformHref={accountHref} platformLabel={accountLabel} />
       <main id="contenido" tabIndex={-1} className="outline-none">
         <Hero />
         <Centro />
@@ -86,8 +81,6 @@ export default async function Home() {
         <Galeria />
         <Faq />
       </main>
-      <SiteFooter platformHref={accountHref} />
-      <MotionRoot />
-    </div>
+    </SiteShell>
   );
 }

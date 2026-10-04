@@ -5,6 +5,6 @@ export const primaryNav: NavItem[] = [
   { label: "Currículo", href: "/curriculo" },
   { label: "Academia", href: "/#academia" },
   { label: "Aliados", href: "/#aliados" },
-  { label: "Galería", href: "/#galeria" },
+  { label: "Proyectos", href: "/proyectos" },
   { label: "Preguntas", href: "/#faq" },
 ];

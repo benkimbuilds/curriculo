@@ -209,6 +209,8 @@ export async function toggleGalleryStarAction(formData: FormData): Promise<void>
   }
   revalidatePath("/galeria");
   revalidatePath(`/galeria/${submissionId}`);
+  revalidatePath("/proyectos");
+  revalidatePath(`/proyectos/ver/${submissionId}`);
   redirect(withQuery(returnTo, "estrella", "1"));
 }
 
@@ -228,6 +230,8 @@ export async function createGalleryCommentAction(
   }
   revalidatePath("/galeria");
   revalidatePath(`/galeria/${submissionId}`);
+  revalidatePath("/proyectos");
+  revalidatePath(`/proyectos/ver/${submissionId}`);
   redirect(`/galeria/${submissionId}?comentario=1`);
 }
 
@@ -236,6 +240,8 @@ export async function removeOwnGalleryCommentAction(commentId: string): Promise<
   const { submissionId } = await removeOwnGalleryComment(session.user.id, commentId);
   revalidatePath("/galeria");
   revalidatePath(`/galeria/${submissionId}`);
+  revalidatePath("/proyectos");
+  revalidatePath(`/proyectos/ver/${submissionId}`);
   redirect(`/galeria/${submissionId}?comentario=eliminado`);
 }
 
