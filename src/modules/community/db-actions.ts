@@ -11,12 +11,15 @@ import { AuthorizationDeniedError } from "@/shared/errors";
 
 import { PeerFeedbackService } from "./feedback-service";
 import {
+  createGalleryComment,
   cryptoCommunityIds,
   DrizzleContentReportRepository,
   DrizzleGalleryRepository,
   DrizzlePeerFeedbackRepository,
+  removeOwnGalleryComment,
   requireCommunityContext,
   systemCommunityClock,
+  toggleGalleryStar,
 } from "./db-community";
 import { getOwnProfile } from "./db-profile";
 import { ModerationService } from "./moderation-service";
@@ -25,6 +28,7 @@ import type {
   ReportReason,
   RubricFeedbackMark,
 } from "./types";
+import { CommunityDomainError } from "./types";
 
 export async function updateProfileAction(formData: FormData): Promise<void> {
   const session = await requireCurrentSession();
@@ -113,6 +117,7 @@ export async function submitStructuredFeedbackAction(
     criteria,
     nextSteps,
   });
+  revalidatePath("/galeria");
   revalidatePath(`/galeria/${submissionId}`);
   redirect(`/galeria/${submissionId}?retroalimentacion=1`);
 }
@@ -187,4 +192,55 @@ export async function moderateReportAction(
     throw new Error("INVALID_MODERATION_DECISION");
   }
   revalidatePath("/staff/moderacion");
+}
+
+export async function toggleGalleryStarAction(formData: FormData): Promise<void> {
+  const session = await requireCurrentSession();
+  const submissionId = String(formData.get("submissionId") ?? "");
+  const returnTo = String(formData.get("returnTo") ?? `/galeria/${submissionId}`);
+  if (!submissionId) throw new Error("MISSING_SUBMISSION");
+  try {
+    await toggleGalleryStar(session.user.id, submissionId);
+  } catch (error) {
+    if (error instanceof CommunityDomainError && error.message === "OWN_PROJECT_STAR") {
+      redirect(withQuery(returnTo, "estrella", "propia"));
+    }
+    throw error;
+  }
+  revalidatePath("/galeria");
+  revalidatePath(`/galeria/${submissionId}`);
+  redirect(withQuery(returnTo, "estrella", "1"));
+}
+
+export async function createGalleryCommentAction(
+  submissionId: string,
+  formData: FormData,
+): Promise<void> {
+  const session = await requireCurrentSession();
+  const body = String(formData.get("body") ?? "");
+  try {
+    await createGalleryComment(session.user.id, submissionId, body);
+  } catch (error) {
+    if (error instanceof CommunityDomainError) {
+      redirect(`/galeria/${submissionId}?comentario=error`);
+    }
+    throw error;
+  }
+  revalidatePath("/galeria");
+  revalidatePath(`/galeria/${submissionId}`);
+  redirect(`/galeria/${submissionId}?comentario=1`);
+}
+
+export async function removeOwnGalleryCommentAction(commentId: string): Promise<void> {
+  const session = await requireCurrentSession();
+  const { submissionId } = await removeOwnGalleryComment(session.user.id, commentId);
+  revalidatePath("/galeria");
+  revalidatePath(`/galeria/${submissionId}`);
+  redirect(`/galeria/${submissionId}?comentario=eliminado`);
+}
+
+function withQuery(path: string, key: string, value: string): string {
+  const url = new URL(path, "https://curriculo.local");
+  url.searchParams.set(key, value);
+  return `${url.pathname}${url.search}`;
 }
