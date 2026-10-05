@@ -49,18 +49,14 @@ export function ProjectCard({
             </div>
           </div>
         ) : null}
-        <p className="gallery-card__yc">
-          <Link href={detailHref}>
-            <strong>{project.title}</strong>
-            {project.tagline ? (
-              <>
-                <span aria-hidden="true"> — </span>
-                <span className="gallery-card__yc-blurb">{project.tagline}</span>
-              </>
-            ) : null}
-          </Link>
-        </p>
-        <p>{project.description}</p>
+        {project.tagline ? (
+          <p className="gallery-card__oneliner">
+            <Link href={detailHref}>{project.tagline}</Link>
+          </p>
+        ) : (
+          <p className="gallery-card__oneliner gallery-card__oneliner--empty" aria-hidden="true" />
+        )}
+        <p className="gallery-card__description">{project.description}</p>
         <div className="gallery-card__author">
           <Avatar color={project.initialsColor} name={project.author} size="sm" />
           <span>
