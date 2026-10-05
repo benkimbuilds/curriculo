@@ -1,24 +1,28 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { MOTION_BOOT_TIMEOUT } from "@/lib/motion/boot";
-
-declare global {
-  interface Window {
-    __iqMotion?: boolean;
-  }
-}
 
 /**
  * Orquestador único de motion (isla cliente mínima). Las secciones siguen siendo Server Components
- * y solo declaran `data-reveal`. GSAP se descarga después de hidratar; si no llega a tiempo, el
- * contenido se muestra sin animación (fail-open).
+ * y solo declaran `data-reveal`. Activa motion en el cliente (sin <script> en el layout — React 19
+ * no ejecuta scripts inline de componentes). GSAP se descarga después; si no llega a tiempo, el
+ * contenido se muestra sin animación (fail-open). Sin JS: nunca se oculta nada.
  */
 export function MotionRoot() {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = document.documentElement;
-    if (root.dataset.motion !== "on") return; // reducido, sin soporte o el fail-open ya actuó
-    window.__iqMotion = true; // este componente toma el control del fail-open del arranque
+    try {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        root.dataset.motion = "off";
+        return;
+      }
+    } catch {
+      root.dataset.motion = "off";
+      return;
+    }
+
+    root.dataset.motion = "on";
 
     let stop: (() => void) | undefined;
     let cancelled = false;

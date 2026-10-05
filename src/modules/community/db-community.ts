@@ -46,6 +46,7 @@ import { decideGalleryAccess } from "./visibility";
 export interface GalleryListItem {
   id: string;
   title: string;
+  tagline: string | null;
   author: string;
   authorBio: string | null;
   authorGithubUsername: string | null;
@@ -132,6 +133,10 @@ function galleryDisplayFromSnapshot(
       isDemo && typeof snapshot.galleryTitle === "string"
         ? snapshot.galleryTitle
         : metadata.title,
+    tagline:
+      isDemo && typeof snapshot.galleryTagline === "string"
+        ? snapshot.galleryTagline
+        : null,
     description:
       isDemo && typeof snapshot.galleryDescription === "string"
         ? snapshot.galleryDescription
@@ -618,6 +623,7 @@ export async function listGalleryForViewer(
       return {
         id: row.id,
         title: metadata.title,
+        tagline: metadata.tagline,
         author: row.chosenName || row.accountName,
         authorBio: authorProfile.authorBio,
         authorGithubUsername: authorProfile.authorGithubUsername,
@@ -688,6 +694,7 @@ export async function getGalleryProjectForViewer(
       id: row.id,
       ownerId: row.ownerId,
       title: metadata.title,
+      tagline: metadata.tagline,
       author: row.chosenName || row.accountName,
       authorBio: authorProfile.authorBio,
       authorGithubUsername: authorProfile.authorGithubUsername,
@@ -752,6 +759,7 @@ function mapListItem(
   return {
     id: row.id,
     title: metadata.title,
+    tagline: metadata.tagline,
     author: row.chosenName || row.accountName,
     authorBio: authorProfile.authorBio,
     authorGithubUsername: authorProfile.authorGithubUsername,
@@ -856,6 +864,7 @@ export async function getPublicGalleryProject(
       id: row.id,
       ownerId: row.ownerId,
       title: metadata.title,
+      tagline: metadata.tagline,
       author: row.chosenName || row.accountName,
       authorBio: authorProfile.authorBio,
       authorGithubUsername: authorProfile.authorGithubUsername,

@@ -61,7 +61,11 @@ export function SiteHeader({
           <ButtonLink href={platformHref} size="sm" className="hidden sm:inline-flex">
             {platformLabel}
           </ButtonLink>
-          <MobileMenu items={navItems} cta={{ ...platformCta, href: platformHref, shortLabel: platformLabel }} />
+          <MobileMenu
+            brandName={site.shortName}
+            cta={{ ...platformCta, href: platformHref, shortLabel: platformLabel }}
+            items={navItems}
+          />
         </div>
       </div>
     </header>
