@@ -39,8 +39,8 @@ export function GalleryActionToasts({
     if (!hasToast) return;
     if (feedbackSubmitted) toast.success("Revisión enviada", { id: "gallery-feedback" });
     if (reported) toast.success("Reporte recibido", { id: "gallery-report" });
-    if (starred) toast.success("Proyecto destacado", { id: "gallery-star" });
-    if (ownStarBlocked) toast.message("No puedes destacar tu propio proyecto", { id: "gallery-star-own" });
+    if (starred) toast.success("Crees en este proyecto", { id: "gallery-star" });
+    if (ownStarBlocked) toast.message("No puedes creer en tu propio proyecto", { id: "gallery-star-own" });
     if (commentPosted) toast.success("Comentario publicado", { id: "gallery-comment" });
     if (commentRemoved) toast.success("Comentario eliminado", { id: "gallery-comment-removed" });
     if (commentError) toast.error("No se pudo publicar el comentario", { id: "gallery-comment-error" });

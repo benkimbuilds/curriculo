@@ -1,37 +1,18 @@
 import Link from "next/link";
 
 import { VisibilityBadge } from "@/components/community/visibility-badge";
-import { ArrowRight, Message, Star } from "@/components/icons";
+import { ArrowRight, Message } from "@/components/icons";
 import { Avatar, StatusPill } from "@/components/ui";
-import { toggleGalleryStarAction } from "@/modules/community/db-actions";
-import type { GalleryVisibility } from "@/modules/community/types";
 
+import { GalleryStarButton } from "./gallery/gallery-star-button";
 import {
   GALLERY_DETAIL_BASE,
   GALLERY_LIST_HREF,
   type GallerySurface,
+  type ProjectCardData,
 } from "./gallery/gallery-shared";
 
-export type ProjectCardData = {
-  id: string;
-  title: string;
-  author: string;
-  authorBio: string | null;
-  week: number;
-  description: string;
-  accent: "yellow" | "clay" | "blue" | "green" | "violet";
-  initialsColor: "clay" | "blue" | "green" | "yellow" | "violet";
-  tag: string;
-  visibility: GalleryVisibility;
-  isDemo?: boolean;
-  starCount: number;
-  commentCount: number;
-  viewerHasStarred: boolean;
-};
-
-function starLabel(count: number) {
-  return count === 1 ? "1 estrella" : `${count} estrellas`;
-}
+export type { ProjectCardData };
 
 function commentLabel(count: number) {
   return count === 1 ? "1 comentario" : `${count} comentarios`;
@@ -51,55 +32,53 @@ export function ProjectCard({
   return (
     <article className="gallery-card">
       <Link className={`gallery-card__preview gallery-card__preview--${project.accent}`} href={detailHref}>
-        <span className="gallery-card__meta">
-          <span>Semana {String(project.week).padStart(2, "0")}</span>
-          <span>{project.tag}</span>
-        </span>
-        <span className="preview-word">
-          {project.title.split(" ")[0]}
-          <em>.</em>
-        </span>
+        <h2 className="preview-word">
+          {project.title}
+          <em aria-hidden="true">.</em>
+        </h2>
         <span className="gallery-card__visit">
           Ver proyecto <ArrowRight />
         </span>
       </Link>
       <div className="gallery-card__body">
-        <div className="gallery-card__top">
-          <div className="gallery-card__badges">
-            {project.isDemo ? <StatusPill tone="info">Demo</StatusPill> : null}
-            {interactive ? <VisibilityBadge visibility={project.visibility} /> : null}
+        {(project.isDemo || interactive) ? (
+          <div className="gallery-card__top">
+            <div className="gallery-card__badges">
+              {project.isDemo ? <StatusPill tone="info">Demo</StatusPill> : null}
+              {interactive ? <VisibilityBadge visibility={project.visibility} /> : null}
+            </div>
           </div>
-        </div>
-        <h2>
-          <Link href={detailHref}>{project.title}</Link>
-        </h2>
+        ) : null}
+        <p className="gallery-card__yc">
+          <Link href={detailHref}>
+            <strong>{project.title}</strong>
+            {project.tagline ? (
+              <>
+                <span aria-hidden="true"> — </span>
+                <span className="gallery-card__yc-blurb">{project.tagline}</span>
+              </>
+            ) : null}
+          </Link>
+        </p>
         <p>{project.description}</p>
         <div className="gallery-card__author">
           <Avatar color={project.initialsColor} name={project.author} size="sm" />
           <span>
             <strong>{project.author}</strong>
+            <small className="gallery-card__week">
+              Semana {String(project.week).padStart(2, "0")} · {project.tag}
+            </small>
             <small>{project.authorBio || "Proyecto compartido del programa"}</small>
           </span>
         </div>
         <div className="gallery-card__engagement">
-          {interactive ? (
-            <form action={toggleGalleryStarAction}>
-              <input name="submissionId" type="hidden" value={project.id} />
-              <input name="returnTo" type="hidden" value={listHref} />
-              <button
-                aria-label={project.viewerHasStarred ? "Quitar estrella" : "Destacar proyecto"}
-                aria-pressed={project.viewerHasStarred}
-                className={`gallery-star${project.viewerHasStarred ? " is-active" : ""}`}
-                type="submit"
-              >
-                <Star /> {starLabel(project.starCount)}
-              </button>
-            </form>
-          ) : (
-            <span className="gallery-star gallery-star--readonly" aria-label={starLabel(project.starCount)}>
-              <Star /> {starLabel(project.starCount)}
-            </span>
-          )}
+          <GalleryStarButton
+            interactive={interactive}
+            returnTo={listHref}
+            starCount={project.starCount}
+            starred={project.viewerHasStarred}
+            submissionId={project.id}
+          />
           <Link className="gallery-card__comments" href={`${detailHref}#comentarios`}>
             <Message /> {commentLabel(project.commentCount)}
           </Link>
