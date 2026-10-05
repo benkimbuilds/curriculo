@@ -44,7 +44,7 @@ export default async function PublicProjectDetailPage({
     <SiteShell page="proyectos" platformHref={accountHref} platformLabel={accountLabel}>
       <main id="contenido" tabIndex={-1} className="outline-none pt-header">
         <section data-surface="white">
-          <div className="app-content app-content--narrow">
+          <div className="app-content">
             <GalleryProjectDetailView
               backHref="/proyectos"
               backLabel="Volver a proyectos"

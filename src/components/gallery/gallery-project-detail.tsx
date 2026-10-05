@@ -6,17 +6,21 @@ import {
 } from "@/components/community/review-labels";
 import { VisibilityBadge } from "@/components/community/visibility-badge";
 import { BackLink } from "@/components/back-link";
-import { Check, ExternalLink, GitBranch, Shield, Star } from "@/components/icons";
+import { Check, ExternalLink, GitBranch, Message, Shield } from "@/components/icons";
 import { Avatar, StatusPill } from "@/components/ui";
 import {
   reportGalleryEntryAction,
   submitStructuredFeedbackAction,
-  toggleGalleryStarAction,
 } from "@/modules/community/db-actions";
 import type { GalleryProjectDetail } from "@/modules/community/db-community";
 
 import { CommentThread } from "./comment-thread";
-import { GALLERY_DETAIL_BASE, type GallerySurface } from "./gallery-shared";
+import { GalleryStarButton } from "./gallery-star-button";
+import {
+  GALLERY_DETAIL_BASE,
+  galleryAccentForId,
+  type GallerySurface,
+} from "./gallery-shared";
 import { StructuredReviews } from "./structured-reviews";
 
 export function GalleryProjectDetailView({
@@ -44,110 +48,68 @@ export function GalleryProjectDetailView({
     timeZone: "America/Mexico_City",
   }).format(project.submittedAt);
   const detailPath = `${GALLERY_DETAIL_BASE[surface]}/${project.id}`;
+  const accent = galleryAccentForId(project.id);
+  const commentLabel =
+    project.commentCount === 1 ? "1 comentario" : `${project.commentCount} comentarios`;
 
   return (
-    <div className={`community-detail${interactive ? "" : " community-detail--public"}`}>
+    <div className={`project-detail${interactive ? "" : " project-detail--public"}`}>
       <BackLink href={backHref}>{backLabel}</BackLink>
 
-      <header className="community-detail__hero">
-        <div className="community-detail__author">
-          <Avatar color="yellow" name={project.author} size="lg" />
-          <div>
-            <p className="eyebrow">Proyecto compartido</p>
-            <h1>{project.title}</h1>
-            <p className="community-detail__byline">
-              <strong>{project.author}</strong>
-              <span aria-hidden="true">·</span>
-              <span>Semana {project.week}</span>
-              <span aria-hidden="true">·</span>
-              <span>{project.technology}</span>
-            </p>
-            {project.authorBio ? <p className="community-detail__bio">{project.authorBio}</p> : null}
-            {project.authorGithubUsername ? (
-              <a
-                className="community-detail__github"
-                href={`https://github.com/${project.authorGithubUsername}`}
-                rel="noreferrer"
-                target="_blank"
-              >
-                <GitBranch /> github.com/{project.authorGithubUsername} <ExternalLink />
-              </a>
-            ) : null}
-          </div>
-        </div>
-        <div className="community-detail__pills">
-          {project.isDemo ? <StatusPill tone="info">Demo</StatusPill> : null}
-          <StatusPill tone="good">
-            <Check /> Aprobado
-          </StatusPill>
-          {interactive ? <VisibilityBadge visibility={project.visibility} /> : null}
+      <header className={`project-detail__hero project-detail__hero--${accent}`}>
+        <div className="project-detail__hero-copy">
+          <h1 className="project-detail__title">
+            {project.title}
+            <em aria-hidden="true">.</em>
+          </h1>
+          {project.tagline ? <p className="project-detail__tagline">{project.tagline}</p> : null}
         </div>
       </header>
 
-      <section className="project-showcase">
-        <div className="project-showcase__browser">
-          <span className="browser-chrome">
-            <i />
-            <i />
-            <i />
-          </span>
-          <div>
-            <p>Semana {String(project.week).padStart(2, "0")}</p>
-            <h2>
-              {project.title}
-              <em>.</em>
-            </h2>
-            <span>{project.technology}</span>
-          </div>
+      <div className="project-detail__actions">
+        <div className="project-detail__engagement">
+          <GalleryStarButton
+            disabled={isOwner}
+            interactive={interactive}
+            returnTo={detailPath}
+            size="lg"
+            starCount={project.starCount}
+            starred={project.viewerHasStarred}
+            submissionId={project.id}
+          />
+          <a className="project-detail__comments" href="#comentarios">
+            <Message /> {commentLabel}
+          </a>
         </div>
-        <div className="project-showcase__actions">
-          <div className="project-showcase__engagement">
-            {interactive ? (
-              <form action={toggleGalleryStarAction}>
-                <input name="submissionId" type="hidden" value={project.id} />
-                <input name="returnTo" type="hidden" value={detailPath} />
-                <button
-                  aria-pressed={project.viewerHasStarred}
-                  className={`gallery-star gallery-star--lg${project.viewerHasStarred ? " is-active" : ""}`}
-                  disabled={isOwner}
-                  type="submit"
-                >
-                  <Star />{" "}
-                  {project.viewerHasStarred ? "Destacado" : "Destacar"} · {project.starCount}
-                </button>
-              </form>
-            ) : (
-              <span
-                aria-label={`${project.starCount} estrellas`}
-                className="gallery-star gallery-star--lg gallery-star--readonly"
-              >
-                <Star /> {project.starCount} estrellas
-              </span>
-            )}
-            <a className="gallery-card__comments" href="#comentarios">
-              {project.commentCount === 1 ? "1 comentario" : `${project.commentCount} comentarios`}
+        <div className="project-detail__links">
+          {project.deploymentUrl ? (
+            <a
+              className="button button--primary"
+              href={project.deploymentUrl}
+              rel="noreferrer"
+              target="_blank"
+            >
+              Abrir proyecto <ExternalLink />
             </a>
-          </div>
-          <div>
-            {project.deploymentUrl ? (
-              <a className="button button--primary" href={project.deploymentUrl} rel="noreferrer" target="_blank">
-                Abrir proyecto <ExternalLink />
-              </a>
-            ) : null}
-            <a className="button button--ghost" href={project.repositoryUrl} rel="noreferrer" target="_blank">
-              <GitBranch /> Ver código
-            </a>
-          </div>
+          ) : null}
+          <a
+            className="button button--ghost"
+            href={project.repositoryUrl}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <GitBranch /> Ver código
+          </a>
         </div>
-      </section>
+      </div>
 
       {!interactive ? (
-        <aside className="community-notice community-notice--compact gallery-public-cta">
+        <aside className="community-notice community-notice--compact project-detail__cta">
           <Shield />
           <div>
             <strong>Vista pública</strong>
             <p>
-              Aquí puedes explorar el proyecto. Para destacar, comentar o publicar el tuyo,{" "}
+              Aquí puedes explorar el proyecto. Para creer, comentar o publicar el tuyo,{" "}
               <Link className="text-link" href="/registro">
                 únete a la comunidad
               </Link>
@@ -157,40 +119,55 @@ export function GalleryProjectDetailView({
         </aside>
       ) : null}
 
-      <div className="project-detail-grid">
-        <article className="panel reflection">
-          <p className="eyebrow">Objetivo del programa</p>
-          <h2>Qué resolvió este proyecto</h2>
-          <p>{project.description}</p>
-          <div className="reflection__meta">
-            <span>Proyecto del programa · Semana {project.week}</span>
-            <span>Compartido el {submittedLabel}</span>
+      <div className="project-detail__profile">
+        <aside className="project-detail__profile-side">
+          <Avatar color={accent} name={project.author} size="lg" />
+          <div className="project-detail__profile-identity">
+            <p className="eyebrow">Emprendedor</p>
+            <h2>{project.author}</h2>
+            <small className="project-detail__week">
+              Semana {String(project.week).padStart(2, "0")} · {project.technology}
+            </small>
+            {project.authorBio ? <p className="project-detail__bio">{project.authorBio}</p> : null}
+            {project.authorGithubUsername ? (
+              <a
+                className="project-detail__github"
+                href={`https://github.com/${project.authorGithubUsername}`}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <GitBranch /> {project.authorGithubUsername} <ExternalLink />
+              </a>
+            ) : null}
           </div>
-        </article>
-        <aside className="panel project-facts">
-          <h3>Sobre la entrega</h3>
-          <dl>
-            <div>
-              <dt>Semana</dt>
-              <dd>{project.week}</dd>
-            </div>
-            <div>
-              <dt>Tecnología</dt>
-              <dd>{project.technology}</dd>
-            </div>
-            <div>
-              <dt>Versión</dt>
-              <dd>
-                <code>{project.commitSha.slice(0, 12)}</code>
-              </dd>
-            </div>
+          <div className="project-detail__pills">
+            {project.isDemo ? <StatusPill tone="info">Demo</StatusPill> : null}
+            <StatusPill tone="good">
+              <Check /> Aprobado
+            </StatusPill>
+            {interactive ? <VisibilityBadge visibility={project.visibility} /> : null}
+          </div>
+          <dl className="project-detail__facts">
             <div>
               <dt>Compartido</dt>
               <dd>{submittedLabel}</dd>
             </div>
+            <div>
+              <dt>Código</dt>
+              <dd>
+                <a
+                  className="project-detail__commit"
+                  href={project.repositoryUrl}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  <code>{project.commitSha.slice(0, 7)}</code>
+                </a>
+              </dd>
+            </div>
           </dl>
           {interactive && !isOwner && reportProject ? (
-            <details className="report-disclosure">
+            <details className="project-detail__report">
               <summary>
                 <Shield /> Reportar contenido
               </summary>
@@ -214,62 +191,80 @@ export function GalleryProjectDetailView({
             </details>
           ) : null}
         </aside>
-      </div>
 
-      <CommentThread comments={project.comments} readonly={!interactive} submissionId={project.id} />
+        <div className="project-detail__profile-main">
+          <section className="project-detail__story">
+            <p className="eyebrow">El proyecto</p>
+            <p>{project.description}</p>
+          </section>
 
-      {interactive ? (
-        <details className="panel feedback-section feedback-section--optional">
-          <summary>
-            <span className="eyebrow">Opcional</span>
-            <strong>Evaluación técnica con rúbrica</strong>
-          </summary>
-          <div className="community-notice community-notice--compact">
-            <Shield />
-            <div>
-              <strong>Separado de los comentarios</strong>
-              <p>Esta sección usa solo marcas de rúbrica y siguientes pasos. No sustituye la conversación abierta.</p>
-            </div>
-          </div>
+          <CommentThread
+            comments={project.comments}
+            readonly={!interactive}
+            submissionId={project.id}
+          />
 
-          {isOwner ? (
-            <p className="feedback-intro">Estas son las selecciones técnicas de quienes revisaron tu proyecto.</p>
-          ) : hasReviewed ? (
-            <p className="feedback-intro">Ya registraste una evaluación técnica para este intento.</p>
-          ) : submitFeedback ? (
-            <form action={submitFeedback} className="feedback-form">
-              {project.rubricCriteria.map((criterion) => (
-                <fieldset key={criterion.id}>
-                  <legend>{criterion.title}</legend>
-                  <p className="form-hint">{criterion.description}</p>
-                  <div className="choice-row">
-                    {RUBRIC_MARK_OPTIONS.map(([value, label]) => (
-                      <label className="choice-chip" key={value}>
-                        <input name={`criterion:${criterion.id}`} required type="radio" value={value} /> {label}
-                      </label>
+          {interactive ? (
+            <details className="project-detail__rubric">
+              <summary>
+                <span className="eyebrow">Opcional</span>
+                <strong>Evaluación técnica con rúbrica</strong>
+                <span className="project-detail__rubric-hint">
+                  Separada de Creo y de los comentarios
+                </span>
+              </summary>
+              <div className="project-detail__rubric-body">
+                {isOwner ? (
+                  <p className="feedback-intro">
+                    Estas son las selecciones técnicas de quienes revisaron tu proyecto.
+                  </p>
+                ) : hasReviewed ? (
+                  <p className="feedback-intro">
+                    Ya registraste una evaluación técnica para este intento.
+                  </p>
+                ) : submitFeedback ? (
+                  <form action={submitFeedback} className="feedback-form">
+                    {project.rubricCriteria.map((criterion) => (
+                      <fieldset key={criterion.id}>
+                        <legend>{criterion.title}</legend>
+                        <p className="form-hint">{criterion.description}</p>
+                        <div className="choice-row">
+                          {RUBRIC_MARK_OPTIONS.map(([value, label]) => (
+                            <label className="choice-chip" key={value}>
+                              <input
+                                name={`criterion:${criterion.id}`}
+                                required
+                                type="radio"
+                                value={value}
+                              />{" "}
+                              {label}
+                            </label>
+                          ))}
+                        </div>
+                      </fieldset>
                     ))}
-                  </div>
-                </fieldset>
-              ))}
-              <fieldset>
-                <legend>Siguientes pasos concretos</legend>
-                <div className="choice-row">
-                  {NEXT_STEP_OPTIONS.map(([value, label]) => (
-                    <label className="choice-chip" key={value}>
-                      <input name="nextSteps" type="checkbox" value={value} /> {label}
-                    </label>
-                  ))}
-                </div>
-              </fieldset>
-              <button className="button button--primary" type="submit">
-                Enviar evaluación
-              </button>
-            </form>
-          ) : null}
+                    <fieldset>
+                      <legend>Siguientes pasos concretos</legend>
+                      <div className="choice-row">
+                        {NEXT_STEP_OPTIONS.map(([value, label]) => (
+                          <label className="choice-chip" key={value}>
+                            <input name="nextSteps" type="checkbox" value={value} /> {label}
+                          </label>
+                        ))}
+                      </div>
+                    </fieldset>
+                    <button className="button button--primary" type="submit">
+                      Enviar evaluación
+                    </button>
+                  </form>
+                ) : null}
 
-          <StructuredReviews criteria={project.rubricCriteria} feedback={project.feedback} />
-        </details>
-      ) : null}
+                <StructuredReviews criteria={project.rubricCriteria} feedback={project.feedback} />
+              </div>
+            </details>
+          ) : null}
+        </div>
+      </div>
     </div>
   );
 }
