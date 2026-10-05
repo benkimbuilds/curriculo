@@ -32,7 +32,12 @@ export function SiteShell({
           : undefined;
 
   return (
-    <div data-iquiti-site {...pageAttr}>
+    <div
+      className="min-h-svh bg-bg text-fg"
+      data-iquiti-site
+      data-surface="white"
+      {...pageAttr}
+    >
       <SkipLink />
       <SiteHeader platformHref={platformHref} platformLabel={platformLabel} />
       {children}

@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import localFont from "next/font/local";
-import Script from "next/script";
 import { ToastProvider } from "@/components/toast-provider";
-import { motionBootScript } from "@/lib/motion/boot";
 import "./globals.css";
 import "./aibuilders-theme.css";
 
@@ -27,7 +25,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html className={manrope.variable} data-scroll-behavior="smooth" lang="es-MX" suppressHydrationWarning>
       <body>
-        <Script id="iq-motion-boot" strategy="beforeInteractive">{motionBootScript}</Script>
         {children}
         <ToastProvider />
       </body>

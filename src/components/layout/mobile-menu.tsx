@@ -3,20 +3,20 @@
 import { useEffect, useId, useRef } from "react";
 import { buttonClasses } from "@/components/ui/button";
 import { Close, Menu } from "@/components/ui/icons";
-import { site } from "@/config/site";
 import type { NavItem } from "@/content/navigation";
 import { cn } from "@/lib/cn";
 
 type MobileMenuProps = {
   items: NavItem[];
   cta: { href: string; shortLabel: string };
+  brandName: string;
 };
 
 /**
  * Menú móvil con <dialog> modal nativo: trampa de foco, Esc, fondo inerte y retorno de foco
  * los resuelve el navegador. El scroll del documento se bloquea por CSS (html:has(dialog[open])).
  */
-export function MobileMenu({ items, cta }: MobileMenuProps) {
+export function MobileMenu({ items, cta, brandName }: MobileMenuProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
 
@@ -56,7 +56,7 @@ export function MobileMenu({ items, cta }: MobileMenuProps) {
             <p id={titleId} className="type-meta text-fg-subtle">
               {/* A la vista solo la marca; el diálogo conserva un nombre accesible que dice qué es. */}
               <span className="sr-only">Menú de </span>
-              {site.shortName}
+              {brandName}
             </p>
             <button
               type="button"
