@@ -1,7 +1,27 @@
 import type { GalleryListItem } from "@/modules/community/db-community";
-import type { ProjectCardData } from "@/components/project-card";
+import type { GalleryVisibility } from "@/modules/community/types";
 
 export type GallerySurface = "community" | "public";
+
+export type GalleryAccent = "yellow" | "clay" | "blue" | "green" | "violet";
+
+export type ProjectCardData = {
+  id: string;
+  title: string;
+  tagline: string | null;
+  author: string;
+  authorBio: string | null;
+  week: number;
+  description: string;
+  accent: GalleryAccent;
+  initialsColor: GalleryAccent;
+  tag: string;
+  visibility: GalleryVisibility;
+  isDemo?: boolean;
+  starCount: number;
+  commentCount: number;
+  viewerHasStarred: boolean;
+};
 
 export const GALLERY_DETAIL_BASE = {
   community: "/galeria",
@@ -13,20 +33,26 @@ export const GALLERY_LIST_HREF = {
   public: "/proyectos",
 } as const;
 
-const accents: ProjectCardData["accent"][] = ["yellow", "clay", "blue", "green", "violet"];
+const accents: GalleryAccent[] = ["yellow", "clay", "blue", "green", "violet"];
+
+export function galleryAccentForId(id: string): GalleryAccent {
+  let hash = 0;
+  for (let index = 0; index < id.length; index += 1) {
+    hash = (hash + id.charCodeAt(index) * (index + 1)) % accents.length;
+  }
+  return accents[hash] ?? "yellow";
+}
 
 export function filterGalleryEntries(
   entries: readonly GalleryListItem[],
-  query: { buscar?: string; semana?: string },
+  query: { buscar?: string },
 ): GalleryListItem[] {
   const search = query.buscar?.trim().toLocaleLowerCase("es-MX") ?? "";
-  const week = Number(query.semana);
+  if (!search) return [...entries];
   return entries.filter(
     (entry) =>
-      (!search ||
-        entry.title.toLocaleLowerCase("es-MX").includes(search) ||
-        entry.author.toLocaleLowerCase("es-MX").includes(search)) &&
-      (!Number.isInteger(week) || week < 1 || entry.week === week),
+      entry.title.toLocaleLowerCase("es-MX").includes(search) ||
+      entry.author.toLocaleLowerCase("es-MX").includes(search),
   );
 }
 
@@ -36,6 +62,7 @@ export function mapGalleryEntriesToCards(
   return entries.map((entry, index) => ({
     id: entry.id,
     title: entry.title,
+    tagline: entry.tagline,
     author: entry.author,
     authorBio: entry.authorBio,
     week: entry.week,

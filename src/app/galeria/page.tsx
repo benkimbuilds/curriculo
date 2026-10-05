@@ -14,7 +14,7 @@ import { GalleryActionToasts } from "./[id]/gallery-action-toasts";
 export default async function GalleryPage({
   searchParams,
 }: {
-  searchParams: Promise<{ buscar?: string; semana?: string; estrella?: string }>;
+  searchParams: Promise<{ buscar?: string; estrella?: string }>;
 }) {
   const session = await getCurrentSession();
   if (!session) redirect("/iniciar-sesion");

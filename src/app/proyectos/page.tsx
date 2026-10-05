@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 export default async function PublicProjectsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ buscar?: string; semana?: string }>;
+  searchParams: Promise<{ buscar?: string }>;
 }) {
   const session = await getCurrentSession();
   const accountLink = session
