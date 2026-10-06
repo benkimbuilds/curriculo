@@ -26,7 +26,7 @@ export const deckCopy = {
       { label: "El espacio", title: "Un lugar que empieza con la sensación de que todo es posible." },
       { label: "Presupuesto de lanzamiento", title: "Dónde va el financiamiento." },
       { label: "Plan y metas", title: "Dos formas de aprender. Un hub de largo plazo." },
-      { label: "Cierre", title: "Tejamos lo que sigue." },
+      { label: "Cierre", title: "Aquí empieza el tejido." },
     ],
     cover: {
       eyebrow: "Instituto del Emprendedor",
@@ -42,20 +42,21 @@ export const deckCopy = {
         { title: "Mercados locales sin productos propios", body: "Faltan apps y servicios locales de calidad. Con el talento que ya está aquí, México podría tener su propio Thumbtack, Platzi o marketplace, hechos para resolver problemas de aquí." },
         { title: "Los mercados globales se llevan el talento", body: "Hoy aportamos afuera casi solo con personas, no con productos ni empresas. Eso tiene que cambiar: crear desde México para competir en lo global, no solo abastecer de talento." },
       ],
-      bottom: "El resultado: un ciclo roto. Talento sin empresas. Empresas sin capital. Capital que no regresa.",
+      cycleAlt: "El resultado: un ciclo roto. Talento sin empresas. Empresas sin capital. Capital que no regresa.",
     },
     thesis: {
       category: "Oportunidad y tesis", title: "Educación, innovación y emprendimiento. Un ciclo regenerativo.",
       statement: "Una escuela abierta y un hub en el mismo lugar convierten capacidad técnica en proyectos, trabajo y empresas nacidas en México.",
       points: [
-        { title: "Escuela abierta", body: "Gratuita, autodidacta y entre pares; currículo de código abierto y una primera cohorte presencial de 150 personas durante 12 semanas." },
-        { title: "Hub de innovación", body: "Coworking, retos, residencias y eventos donde aplicar lo aprendido y colaborar con emprendedores." },
+        { title: "Currículo Open Source", body: "Autodidacta: aprendes con otros estudiantes. Contenido de código abierto. Primer cohort presencial: 150 personas durante 12 semanas." },
+        { title: "Hub de innovación", body: "Coworking, retos, residencias y eventos para aplicar lo aprendido junto a emprendedores." },
       ],
+      cycleAlt: "El resultado: un ciclo regenerativo. Talento que construye. Empresas que crecen. Capital que regresa.",
     },
     hub: {
       category: "Solución", title: "Un ecosistema, cinco motores.",
       pillars: [
-        { title: "Academia", body: "Escuela gratuita y de código abierto, con aprendizaje entre pares y proyectos semanales." },
+        { title: "Academia", body: "Escuela gratuita y de código abierto, con proyectos semanales y aprendizaje entre estudiantes." },
         { title: "Coworking", body: "Un hogar gratuito para emprendedores seleccionados y egresados." },
         { title: "Fondos a la innovación y empleo", body: "Retos locales y una ruta hacia prácticas, co-ops (cooperativas) y empleo con empresas seleccionadas." },
         { title: "Residencias", body: "Emprendedores de otras ciudades y países que comparten métodos y perspectivas sobre mercados globales." },
@@ -64,10 +65,10 @@ export const deckCopy = {
     },
     academy: {
       title: "Una escuela que enseña a aprender.",
-      promise: "Gratuita. Código abierto. Presencial y en línea.", distinction: "Entre pares, sin clases magistrales.",
+      promise: "Gratuita. Código abierto. Presencial y en línea.", distinction: "Aprendes con otros estudiantes, sin clases magistrales.",
       points: [
         { title: "Currículo de código abierto", body: "Una ruta autodidacta con recursos y metas claras que cualquiera puede seguir y adaptar, inspirada en las escuelas 42 y The Odin Project." },
-        { title: "Aprendizaje entre pares", body: "Estudiantes aprenden entre sí, resuelven problemas juntos y revisan los proyectos de sus pares." },
+        { title: "Aprendizaje entre estudiantes", body: "Estudiantes aprenden entre sí, resuelven problemas juntos y revisan los proyectos de otros." },
         { title: "Aprender con proyectos", body: "Proyectos reales dan práctica para crear empresas. La retroalimentación semanal forma un portafolio para prácticas, co-ops (cooperativas), empleo o proyectos en el hub." },
         { title: "Mentores voluntarios", body: "Planeamos reunir a 10–20 mentores voluntarios que dediquen unas horas semanales a consultas sobre métodos para resolver problemas y autonomía, no contenidos aislados." },
       ],
@@ -109,7 +110,7 @@ export const deckCopy = {
       statement: "Un espacio que invite al asombro, al intercambio y a crear algo más grande que cualquier persona, empresa o misión. Queremos recordarte cada día que todo es posible.",
       images: [
         { src: "/deck/space-coworking.avif", caption: "Trabajo compartido", alt: "Referencia conceptual de mesas de coworking y gradas" },
-        { src: "/deck/space-projects.avif", caption: "Aprendizaje entre pares", alt: "Referencia conceptual de grupos trabajando en mesas de proyecto" },
+        { src: "/deck/space-projects.avif", caption: "Aprendizaje entre estudiantes", alt: "Referencia conceptual de grupos trabajando en mesas de proyecto" },
         { src: "/deck/space-events.avif", caption: "Encuentros y talleres", alt: "Referencia conceptual de un espacio abierto para charlas y talleres" },
       ],
       note: "Referencias conceptuales; diseño final por definir.",
@@ -132,7 +133,7 @@ export const deckCopy = {
       school: {
         label: "Academia · dos modalidades",
         inPerson: { label: "Presencial", value: "150", unit: "estudiantes", detail: "12 semanas · sesiones de 4 horas con mentoría." },
-        online: { label: "En línea", value: "5,000", unit: "meta máxima de participantes", detail: "A su propio ritmo y con menos mentoría e interacción entre pares." },
+        online: { label: "En línea", value: "5,000", unit: "meta máxima de participantes", detail: "A su propio ritmo y con menos mentoría e interacción entre estudiantes." },
       },
       hub: {
         label: "Hub · metas propuestas para 12 meses",
@@ -153,9 +154,9 @@ export const deckCopy = {
       note: "Metas indicativas, sujetas a capacidad del espacio, equipo y financiamiento de los retos locales.",
     },
     close: {
-      eyebrow: "Iquiti · Coyoacán, Ciudad de México",
-      title: "Tejamos", emphasis: "lo que sigue.",
-      lead: "Iquiti significa «tejer» en náhuatl. Conectamos escuela, hub y comunidad para que el talento cree proyectos, empleos y empresas desde México para el mundo.",
+      eyebrow: "Coyoacán, Ciudad de México",
+      title: "Aquí empieza", emphasis: "el tejido.",
+      lead: "Iquiti significa «tejer» en náhuatl. Conectamos educación, hub y comunidad para que el talento cree proyectos, empleos y empresas desde México para el mundo.",
     },
   },
   en: {
@@ -185,7 +186,7 @@ export const deckCopy = {
       { label: "The space", title: "A place that starts with a feeling that anything is possible." },
       { label: "Launch budget", title: "Where the funding goes." },
       { label: "Plan & targets", title: "Two ways to learn. One hub built to last." },
-      { label: "Closing", title: "Let's weave what comes next." },
+      { label: "Closing", title: "This is where the weave begins." },
     ],
     cover: {
       eyebrow: "Instituto del Emprendedor",
@@ -201,20 +202,21 @@ export const deckCopy = {
         { title: "Local markets without local products", body: "Quality local apps and services are missing. With the talent already here, Mexico could have its own Thumbtack, Platzi, or marketplace, built to solve problems here." },
         { title: "Global markets take the talent", body: "Today we contribute abroad mostly with people, not products or companies. That has to change: build from Mexico to compete globally, not only supply talent." },
       ],
-      bottom: "The result: a broken cycle. Talent without companies. Companies without capital. Capital that doesn't return.",
+      cycleAlt: "The result: a broken cycle. Talent without companies. Companies without capital. Capital that doesn't return.",
     },
     thesis: {
       category: "Opportunity & thesis", title: "Education, innovation, entrepreneurship. One regenerative cycle.",
       statement: "An open school and a hub in one place turn technical ability into projects, careers, and companies rooted in Mexico.",
       points: [
-        { title: "Open school", body: "Free, self-directed, and peer-led; an open-source curriculum and a first in-person cohort of 150 people over 12 weeks." },
-        { title: "Innovation hub", body: "Coworking, challenges, residencies, and events where learners apply their skills alongside entrepreneurs." },
+        { title: "Open Source Curriculum", body: "Self-directed: you learn with other students. Open-source content. First in-person cohort: 150 people over 12 weeks." },
+        { title: "Innovation hub", body: "Coworking, challenges, residencies, and events to apply what you've learned alongside entrepreneurs." },
       ],
+      cycleAlt: "The result: a regenerative cycle. Talent that builds. Companies that grow. Capital that returns.",
     },
     hub: {
       category: "Solution", title: "One ecosystem, five engines.",
       pillars: [
-        { title: "Academy", body: "A free, open-source school built around peer learning and weekly projects." },
+        { title: "Academy", body: "A free, open-source school with weekly projects and learning among students." },
         { title: "Coworking", body: "A free home for selected entrepreneurs and graduates." },
         { title: "Grants & employment", body: "Local challenges and paths to internships, co-ops, and jobs with selected companies." },
         { title: "Residencies", body: "Entrepreneurs from other cities and countries who share methods and perspectives on global markets." },
@@ -223,10 +225,10 @@ export const deckCopy = {
     },
     academy: {
       title: "A school that teaches how to learn.",
-      promise: "Free. Open source. In person and online.", distinction: "Peer-led, with no lectures.",
+      promise: "Free. Open source. In person and online.", distinction: "You learn with other students, with no lectures.",
       points: [
         { title: "Open-source curriculum", body: "A self-directed roadmap with resources and clear milestones anyone can follow and adapt, modeled on the 42 schools and The Odin Project." },
-        { title: "Peer-to-peer learning", body: "Learners teach one another, solve problems together, and review their peers' projects." },
+        { title: "Learning among students", body: "Students learn from one another, solve problems together, and review each other's projects." },
         { title: "Project-based practice", body: "Real-world projects give students the practice needed to build companies. Weekly feedback builds a portfolio for internships, co-ops, jobs, or hub projects." },
         { title: "Volunteer mentors", body: "We plan for 10–20 volunteer mentors to set aside a few hours each week for office hours on problem-solving methods and self-reliance, not isolated facts." },
       ],
@@ -268,7 +270,7 @@ export const deckCopy = {
       statement: "A space that invites wonder, exchange, and the creation of something bigger than any one person, company, or mission. We want to remind you every day that anything is possible.",
       images: [
         { src: "/deck/space-coworking.avif", caption: "Shared workspace", alt: "Concept reference of coworking tables and stepped seating" },
-        { src: "/deck/space-projects.avif", caption: "Peer learning", alt: "Concept reference of groups working around project tables" },
+        { src: "/deck/space-projects.avif", caption: "Learning among students", alt: "Concept reference of groups working around project tables" },
         { src: "/deck/space-events.avif", caption: "Gatherings and workshops", alt: "Concept reference of an open space for talks and workshops" },
       ],
       note: "Concept references; final design to be determined.",
@@ -291,7 +293,7 @@ export const deckCopy = {
       school: {
         label: "Academy · two formats",
         inPerson: { label: "In person", value: "150", unit: "students", detail: "12 weeks · four-hour sessions with mentorship." },
-        online: { label: "Online", value: "5,000", unit: "maximum learner target", detail: "Self-paced, with less mentorship and peer interaction." },
+        online: { label: "Online", value: "5,000", unit: "maximum learner target", detail: "Self-paced, with less mentorship and interaction among students." },
       },
       hub: {
         label: "Hub · proposed 12-month targets",
@@ -312,9 +314,9 @@ export const deckCopy = {
       note: "Indicative targets, subject to space capacity, staffing, and grant funding.",
     },
     close: {
-      eyebrow: "Iquiti · Coyoacán, Mexico City",
-      title: "Let's weave", emphasis: "what comes next.",
-      lead: "Iquiti means “to weave” in Nahuatl. We connect school, hub, and community so talent can build projects, careers, and companies from Mexico for the world.",
+      eyebrow: "Coyoacán, Mexico City",
+      title: "This is where", emphasis: "the weave begins.",
+      lead: "Iquiti means “to weave” in Nahuatl. We connect education, hub, and community so talent can build projects, careers, and companies from Mexico for the world.",
     },
   },
 } as const;

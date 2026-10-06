@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Deck from "./presentation";
 
 export const metadata: Metadata = {
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function DeckPage() {
-  return <Deck />;
+  return (
+    <Suspense fallback={null}>
+      <Deck />
+    </Suspense>
+  );
 }
