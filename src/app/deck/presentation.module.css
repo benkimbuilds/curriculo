@@ -291,11 +291,11 @@
 .academyHero { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 1.4rem 0; font-size: clamp(1.1rem, 1.5vw, 1.55rem); }
 .academyHero strong { color: var(--purple); font-weight: 500; }
 .spaceLead { max-width: 58rem; font-size: clamp(1.2rem, 1.7vw, 1.6rem); font-weight: 300; line-height: 1.35; letter-spacing: -.02em; }
-.spaceGallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.spaceGallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
 .spaceGallery figure { min-width: 0; margin: 0; }
 .spacePhoto { position: relative; overflow: hidden; aspect-ratio: 16 / 10; background: #ededed; }
 .spacePhoto img { object-fit: cover; }
-.spaceGallery figcaption { border-bottom: 1px solid var(--line); padding: .65rem 0; font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.spaceGallery figcaption { border-bottom: 1px solid var(--line); padding: .45rem 0; font-size: .68rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
 .spaceNote { color: var(--muted); font-size: .7rem; line-height: 1.4; }
 .budgetIntro { max-width: 57rem; font-size: clamp(1rem, 1.5vw, 1.4rem); color: var(--muted); line-height: 1.45; }
 .budgetList { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
