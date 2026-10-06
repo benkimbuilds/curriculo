@@ -2,7 +2,8 @@
 
 import { AnimatedGradient } from "@/components/ui/animated-gradient";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { deckCopy, type DeckLanguage } from "./copy";
 import styles from "./presentation.module.css";
 
@@ -18,18 +19,37 @@ const partners = [
   { name: "NVIDIA", src: "/deck/logos/nvidia.svg", width: 256, height: 59 },
 ];
 
+function clampSlide(index: number) {
+  return Math.max(0, Math.min(slideCount - 1, index));
+}
+
+function slideFromParam(value: string | null) {
+  if (!value) return 0;
+  const parsed = Number.parseInt(value, 10);
+  if (!Number.isFinite(parsed)) return 0;
+  return clampSlide(parsed - 1);
+}
+
 export default function Deck() {
-  const [index, setIndex] = useState(0);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+  const index = useMemo(() => slideFromParam(searchParams.get("slide")), [searchParams]);
   const [overview, setOverview] = useState(false);
   const [language, setLanguage] = useState<DeckLanguage>("es");
   const t = deckCopy[language];
-  const footerLabel = index === 0 ? "Iquiti" : index === slideCount - 1 ? t.close.eyebrow : t.slides[index].label;
+  const footerLabel = index === 0 || index === slideCount - 1 ? "Iquiti" : t.slides[index].label;
   const networkStage = Math.max(0, Math.min(t.hub.pillars.length, index - firstPillarSlide + 1));
   const networkHidden = overview || index === 0 || index === slideCount - 1;
   const goTo = useCallback((next: number) => {
-    setIndex(Math.max(0, Math.min(slideCount - 1, next)));
+    const clamped = clampSlide(next);
+    const params = new URLSearchParams(searchParams.toString());
+    if (clamped <= 0) params.delete("slide");
+    else params.set("slide", String(clamped + 1));
+    const query = params.toString();
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
     setOverview(false);
-  }, []);
+  }, [pathname, router, searchParams]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -37,12 +57,10 @@ export default function Deck() {
       if (event.key === " " && event.target instanceof HTMLElement && event.target.closest("button")) return;
       if (["ArrowRight", "ArrowDown", "PageDown", " "].includes(event.key)) {
         event.preventDefault();
-        setIndex((current) => Math.min(slideCount - 1, current + 1));
-        setOverview(false);
+        goTo(index + 1);
       } else if (["ArrowLeft", "ArrowUp", "PageUp"].includes(event.key)) {
         event.preventDefault();
-        setIndex((current) => Math.max(0, current - 1));
-        setOverview(false);
+        goTo(index - 1);
       } else if (event.key === "Home") {
         event.preventDefault();
         goTo(0);
@@ -57,7 +75,7 @@ export default function Deck() {
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [goTo]);
+  }, [goTo, index]);
 
   return (
     <main data-iquiti-home lang={language === "es" ? "es-MX" : "en"} className={styles.deck} aria-label={t.ui.deck}>
@@ -86,13 +104,13 @@ export default function Deck() {
           ))}
         </nav>
       ) : (
-        <section className={`${styles.slide} ${index === 0 || index === slideCount - 1 ? styles.cover : ""} ${index >= firstPillarSlide && index < firstPillarSlide + 5 ? styles.pillarSlide : ""} ${index === 4 || index === 5 || index === 6 || index === 7 || index === 9 ? styles.wideTitleSlide : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`}>
+        <section className={`${styles.slide} ${index === 0 || index === slideCount - 1 ? styles.cover : ""} ${index === 1 ? styles.problemSlide : ""} ${index === 2 ? styles.thesisSlide : ""} ${index === 3 ? styles.hubSlide : ""} ${index >= firstPillarSlide && index < firstPillarSlide + 5 ? styles.pillarSlide : ""} ${index === 4 || index === 5 || index === 6 || index === 7 || index === 9 ? styles.wideTitleSlide : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`}>
           <SlideContent index={index} t={t} goTo={goTo} />
         </section>
       )}
 
-      <NetworkGraphic stage={networkStage} hidden={networkHidden} animate={index === 2} problemPulse={index === 1} />
-      <NetworkGraphic stage={networkStage} hidden={networkHidden} animate={index === 2} problemPulse={index === 1} compact />
+      <NetworkGraphic stage={networkStage} hidden={networkHidden || index === 1 || index === 2} animate={false} />
+      <NetworkGraphic stage={networkStage} hidden={networkHidden || index === 1 || index === 2} animate={false} compact />
 
       <footer className={styles.controls}>
         <div className={styles.progress}><span>{String(index + 1).padStart(2, "0")} / {String(slideCount).padStart(2, "0")}</span><div aria-hidden="true"><i style={{ width: `${((index + 1) / slideCount) * 100}%` }} /></div><span>{footerLabel}</span></div>
@@ -129,13 +147,38 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
       </>;
     case 1:
       return <>
-        <SlideHead number="02" category={t.problem.category} title={t.problem.title} />
+        <div className={styles.problemHero}>
+          <SlideHead number="02" category={t.problem.category} title={t.problem.title} />
+          <figure className={styles.problemCycle}>
+            <Image
+              src="/deck/ciclo_roto.png"
+              alt={t.problem.cycleAlt}
+              width={1672}
+              height={941}
+              className={styles.problemCycleImage}
+              priority
+              unoptimized
+            />
+          </figure>
+        </div>
         <div className={styles.problemColumns}>{t.problem.points.map((point, i) => <Statement key={i} number={`0${i + 1}`} title={point.title} body={point.body} />)}</div>
-        <p className={`${styles.bottomLine} ${styles.problemBottom}`}>{t.problem.bottom}</p>
       </>;
     case 2:
       return <>
-        <SlideHead number="03" category={t.thesis.category} title={t.thesis.title} />
+        <div className={styles.problemHero}>
+          <SlideHead number="03" category={t.thesis.category} title={t.thesis.title} />
+          <figure className={styles.problemCycle}>
+            <Image
+              src="/deck/ciclo_regenerativo.png"
+              alt={t.thesis.cycleAlt}
+              width={1672}
+              height={941}
+              className={styles.problemCycleImage}
+              priority
+              unoptimized
+            />
+          </figure>
+        </div>
         <div className={styles.thesisLayout}>
           <p className={styles.bigStatement}>{t.thesis.statement}</p>
           <div className={styles.verticalRule} aria-hidden="true" />
@@ -145,7 +188,20 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
     case 3:
       return <>
         <SlideHead number="04" category={t.hub.category} title={t.hub.title} />
-        <div className={styles.pillarGrid}>{t.hub.pillars.map((pillar, i) => <Pillar key={i} number={`0${i + 1}`} title={pillar.title} body={pillar.body} />)}</div>
+        <div className={styles.pillarGrid}>
+          {t.hub.pillars.map((pillar, i) => (
+            <button
+              key={pillar.title}
+              type="button"
+              className={styles.pillar}
+              onClick={() => goTo(firstPillarSlide + i)}
+            >
+              <span>{`0${i + 1}`}</span>
+              <h3>{pillar.title}</h3>
+              <p>{pillar.body}</p>
+            </button>
+          ))}
+        </div>
       </>;
     case 4:
       return <>
@@ -230,10 +286,26 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
       </>;
     case 12:
       return <>
+        <div className={styles.coverGradient} aria-hidden="true">
+          <AnimatedGradient
+            variant="mist"
+            speed={0.35}
+            opacity={1}
+            className={styles.coverGradientCanvas}
+          />
+          <div className={styles.coverGradientVeil} />
+        </div>
         <div className={styles.endCopy}>
-          <p className={styles.eyebrow}>{t.close.eyebrow}</p>
+          <p className={`${styles.eyebrow} ${styles.coverEyebrow}`}>
+            <span className={styles.coverEyebrowLogo} role="img" aria-label="Iquiti" />
+            <span aria-hidden="true">·</span>
+            <span>{t.close.eyebrow}</span>
+          </p>
           <h2>{t.close.title} <em>{t.close.emphasis}</em></h2>
-          <p className={styles.lead}>{t.close.lead}</p>
+          <p className={styles.lead}>
+            {t.close.lead}{" "}
+            <span className={styles.closeHeart} aria-hidden="true">❤️</span>
+          </p>
         </div>
         <BrandGraphic />
       </>;
@@ -262,8 +334,8 @@ const networkNodes = [
   { cx: 133, cy: 328, r: 9, activeAt: 5 },
 ];
 
-function NetworkGraphic({ stage, hidden, animate, problemPulse, compact = false }: { stage: number; hidden: boolean; animate: boolean; problemPulse: boolean; compact?: boolean }) {
-  return <div className={`${styles.networkGraphic} ${compact ? styles.networkGraphicMobile : ""}`} data-hidden={hidden} data-animate={animate} data-problem-pulse={problemPulse} aria-hidden="true">
+function NetworkGraphic({ stage, hidden, animate, compact = false }: { stage: number; hidden: boolean; animate: boolean; compact?: boolean }) {
+  return <div className={`${styles.networkGraphic} ${compact ? styles.networkGraphicMobile : ""}`} data-hidden={hidden} data-animate={animate} aria-hidden="true">
     <svg viewBox="0 0 492 494" fill="none">
       <g stroke="currentColor" strokeWidth={compact ? 10 : 4} strokeLinecap="round" strokeLinejoin="round">
         {networkLinks.map((path, i) => <path key={path} className={styles.networkLink} data-link={i + 1} pathLength={1} d={path} style={{ opacity: stage > i ? 1 : 0, strokeDashoffset: stage > i ? 0 : 1 }} />)}

@@ -100,25 +100,55 @@
 .slideHead h2, .cover h1, .cover h2 { max-width: 16ch; margin: 0; font-size: clamp(2.8rem, 5.8vw, 6.3rem); line-height: .98; letter-spacing: -.055em; font-weight: 500; text-wrap: balance; }
 .slideHead h2 { max-width: 20ch; }
 .wideTitleSlide .slideHead h2 { max-width: none; }
+.problemSlide,
+.thesisSlide {
+  gap: clamp(1.3rem, 2.7vh, 2.4rem);
+  justify-content: flex-start;
+  padding-top: max(clamp(1.5rem, 3vh, 2.5rem), calc((100dvh - 52rem) / 4));
+  padding-bottom: clamp(1.5rem, 3vh, 2.5rem);
+}
+.problemHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .95fr);
+  gap: clamp(.5rem, 1.5vw, 1.25rem);
+  align-items: center;
+  min-width: 0;
+}
+.problemHero .slideHead {
+  min-width: 0;
+  max-width: none;
+}
+.problemSlide .slideHead h2,
+.thesisSlide .slideHead h2 {
+  max-width: none;
+  font-size: clamp(2.6rem, 5vw, 5.2rem);
+  line-height: .92;
+  letter-spacing: -.05em;
+}
+.hubSlide {
+  gap: clamp(1.3rem, 2.7vh, 2.4rem);
+  justify-content: flex-start;
+  padding-top: max(clamp(1.5rem, 3vh, 2.5rem), calc((100dvh - 42rem) / 4));
+  padding-bottom: clamp(1.5rem, 3vh, 2.5rem);
+}
+.hubSlide .slideHead h2 {
+  line-height: .92;
+}
+.problemSlide .eyebrow,
+.thesisSlide .eyebrow { margin-bottom: 1rem; }
+.problemCycle {
+  margin: 0;
+  min-width: 0;
+  width: 100%;
+}
+.problemCycleImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 .slide h3, .slide p { margin-block: 0; }
 .slide p { text-wrap: pretty; }
 .bottomLine { padding-top: 1.1rem; border-top: 1px solid var(--line); font-size: clamp(1rem, 1.5vw, 1.45rem); color: var(--purple); max-width: 54rem; }
-.problemBottom {
-  max-width: 42rem;
-  width: fit-content;
-  margin-top: auto;
-  margin-left: auto;
-  margin-right: 0;
-  padding-top: 1.6rem;
-  border-top: 0;
-  text-align: right;
-  font-size: clamp(1.15rem, 1.9vw, 1.7rem);
-  font-weight: 500;
-  line-height: 1.4;
-  letter-spacing: -.01em;
-  color: var(--purple);
-  opacity: .88;
-}
 .note { color: var(--muted); line-height: 1.5; letter-spacing: .03em; text-transform: none; }
 
 .cover { position: relative; isolation: isolate; background: var(--purple); color: #fff; overflow: hidden; }
@@ -162,6 +192,11 @@
 .cover h1, .cover h2 { max-width: 14ch; margin-inline: 0; margin-left: -0.04em; font-size: clamp(3.15rem, 7vw, 8rem); text-wrap: wrap; white-space: pre-line; text-align: left; }
 .cover h1 em, .cover h2 em { display: block; color: var(--green); font-style: normal; white-space: pre-line; }
 .endCopy h2 em { display: block; }
+.closeHeart {
+  font-style: normal;
+  font-size: 1em;
+  margin-left: .15em;
+}
 .lead { max-width: 42rem; margin-top: 1.8rem !important; font-size: clamp(1.2rem, 1.7vw, 1.55rem); line-height: 1.45; text-align: left; }
 .coverGraphic { position: absolute; right: -4rem; top: 50%; width: min(42vw, 39rem); transform: translateY(-50%); opacity: .25; }
 .coverGraphic img { display: block; width: 100%; height: auto; filter: brightness(0) invert(1); }
@@ -172,11 +207,6 @@
 .networkGraphic path, .networkGraphic circle { transition: opacity .4s ease; }
 .networkGraphic .networkLink, .networkGraphic .networkOrbit { stroke-dasharray: 1; transition: stroke-dashoffset 1.6s ease-in-out, opacity .2s ease; }
 .networkNode { transform-box: fill-box; transform-origin: center; }
-.networkGraphic[data-problem-pulse="true"] .networkNode { animation: disconnectedNodePulse 4.5s ease-in-out infinite; }
-.networkGraphic[data-problem-pulse="true"] .networkNode[data-node="2"] { animation-delay: .55s; }
-.networkGraphic[data-problem-pulse="true"] .networkNode[data-node="3"] { animation-delay: 1.1s; }
-.networkGraphic[data-problem-pulse="true"] .networkNode[data-node="4"] { animation-delay: 1.65s; }
-.networkGraphic[data-problem-pulse="true"] .networkNode[data-node="5"] { animation-delay: 2.2s; }
 .networkHub { transform-box: fill-box; transform-origin: center; }
 .networkGraphic[data-animate="true"] .networkLink[data-link="1"] { animation: networkLinkOne 10s linear infinite; }
 .networkGraphic[data-animate="true"] .networkLink[data-link="2"] { animation: networkLinkTwo 10s linear infinite; }
@@ -203,9 +233,31 @@
 .thesisList strong { color: var(--purple); font-size: 1.1rem; }
 .thesisList span { color: var(--muted); line-height: 1.45; }
 .pillarGrid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--line); }
-.pillar { min-height: 17rem; padding: 1.5rem; border-right: 1px solid var(--line); display: flex; flex-direction: column; }
+.pillar {
+  min-height: 17rem;
+  padding: 1.35rem 1.25rem;
+  border: 0;
+  border-right: 1px solid var(--line);
+  background: #fff;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  transition: background .2s ease;
+}
 .pillar:last-child { border-right: 0; }
-.pillar h3 { min-height: 2.2em; margin: 2rem 0 .75rem; font-size: clamp(1.4rem, 1.9vw, 2.2rem); font-weight: 500; letter-spacing: -.04em; }
+.pillar:hover { background: #f6f6f6; }
+.pillar:focus-visible { outline: 2px solid var(--purple); outline-offset: -2px; z-index: 1; }
+.pillar h3 {
+  min-height: 2.4em;
+  margin: 1.25rem 0 .65rem;
+  font-size: clamp(1.25rem, 1.7vw, 1.85rem);
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: 1.12;
+}
 .split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 .featurePanel { min-height: 20rem; background: #f6f6f6; padding: clamp(1.5rem, 3vw, 3.5rem); display: flex; flex-direction: column; }
 .featurePanel:nth-child(2) { background: var(--purple); color: #fff; }
@@ -290,7 +342,6 @@
 .srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
 
 @keyframes enter { from { opacity: .25; transform: translateY(.5rem); } to { opacity: 1; transform: translateY(0); } }
-@keyframes disconnectedNodePulse { 0%, 12%, 100% { opacity: .7; transform: scale(1); } 5% { opacity: 1; transform: scale(1.28); } }
 @keyframes networkLinkOne { 0%, 14% { opacity: 0; stroke-dashoffset: 1; } 15% { opacity: 1; stroke-dashoffset: 1; } 24%, 87% { opacity: 1; stroke-dashoffset: 0; } 94%, 100% { opacity: 0; stroke-dashoffset: 0; } }
 @keyframes networkLinkTwo { 0%, 23% { opacity: 0; stroke-dashoffset: 1; } 24% { opacity: 1; stroke-dashoffset: 1; } 34%, 87% { opacity: 1; stroke-dashoffset: 0; } 94%, 100% { opacity: 0; stroke-dashoffset: 0; } }
 @keyframes networkLinkThree { 0%, 32% { opacity: 0; stroke-dashoffset: 1; } 33% { opacity: 1; stroke-dashoffset: 1; } 43%, 87% { opacity: 1; stroke-dashoffset: 0; } 94%, 100% { opacity: 0; stroke-dashoffset: 0; } }
@@ -302,7 +353,6 @@
   .slide { animation: none; }
   .progress i, .networkGraphic, .networkGraphic path, .networkGraphic circle { transition: none; }
   .networkGraphic .networkLink, .networkGraphic .networkOrbit { transition: none; }
-  .networkGraphic[data-problem-pulse="true"] .networkNode { animation: none; }
   .networkGraphic[data-animate="true"] .networkLink, .networkGraphic[data-animate="true"] .networkHub, .networkGraphic[data-animate="true"] .networkOrbit { animation: none !important; }
   .networkGraphic[data-animate="true"] .networkLink, .networkGraphic[data-animate="true"] .networkHub { opacity: 1 !important; stroke-dashoffset: 0 !important; }
   .networkGraphic[data-animate="true"] .networkOrbit { opacity: .5 !important; stroke-dashoffset: 0 !important; }
@@ -310,6 +360,8 @@
 @media (max-width: 900px) {
   .deckName { display: none; }
   .slide { gap: 1.8rem; }
+  .problemHero { grid-template-columns: 1fr; gap: 1rem; }
+  .problemCycle { width: min(100%, 24rem); }
   .problemColumns, .academyColumns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pillarGrid { grid-template-columns: repeat(2, 1fr); }
   .eventsLayout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -333,6 +385,8 @@
   .networkGraphicMobile { display: block; right: calc(clamp(1.25rem, 3vw, 3.75rem) + 5.1rem + .9rem); bottom: .45rem; width: 4rem; opacity: .65; }
   .slideHead h2 { font-size: clamp(2.8rem, 5vw, 4.3rem); }
   .eyebrow { margin-bottom: .7rem; }
+  .problemSlide .slideHead h2,
+  .thesisSlide .slideHead h2 { font-size: clamp(2.35rem, 4.2vw, 4rem); }
   .budgetList li { gap: 1rem; padding-block: .35rem; }
   .budgetList strong { font-size: 1.15rem; line-height: 1.15; }
   .budgetList span { font-size: .9rem; line-height: 1.3; }
@@ -364,6 +418,8 @@
   .networkGraphic:not(.networkGraphicMobile) { display: none; }
   .networkGraphicMobile { display: block; right: calc(1.25rem + 5.1rem + .9rem); bottom: .65rem; width: 2.75rem; opacity: .68; }
   .threeColumns, .problemColumns, .academyColumns, .split, .thesisLayout, .eventsLayout, .planTracks, .spaceGallery { grid-template-columns: 1fr; }
+  .problemHero { gap: 1rem; }
+  .problemCycle { width: min(100%, 20rem); max-width: 74vw; }
   .verticalRule { display: none; }
   .statement h3 { margin-top: 1rem; }
   .problemColumns .statement h3, .academyColumns .statement h3 { min-height: 0; margin-top: 1rem; }
