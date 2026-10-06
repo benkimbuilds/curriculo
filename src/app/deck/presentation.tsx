@@ -237,7 +237,13 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
         <PillarHead number={5} labels={t.hub.pillars} navLabel={t.ui.pillarNav} title={t.events.title} goTo={goTo} />
         <div className={styles.eventsLayout}>
           <section className={styles.eventsProofCard}><Image className={styles.eventsProofLogo} src="/deck/logos/ai-builders-mexico.svg" width={393} height={95} alt="AI Builders México" /><strong className={styles.eventsProofValue}>5,000</strong><span className={styles.eventsProofLabel}>{t.events.community}</span><p>{t.events.cadence}</p></section>
-          <section className={styles.eventsProofCard}><span className={styles.eventsProofLabel}>{t.events.residencyLabel}</span><div className={styles.eventsMentors}><strong>{t.events.residencyMentors.value}</strong><span>{t.events.residencyMentors.label}</span></div><div className={styles.eventsResults}>{t.events.residencyResults.map((result) => <div key={result.value}><strong>{result.value}</strong><span>{result.label}</span></div>)}</div></section>
+          <section className={styles.eventsProofCard}>
+            <div className={styles.residencyTop}>
+              <span className={styles.eventsProofLabel}>{t.events.residencyLabel}</span>
+              <div className={styles.eventsMentors}><strong>{t.events.residencyMentors.value}</strong><span>{t.events.residencyMentors.label}</span></div>
+            </div>
+            <div className={styles.eventsResults}>{t.events.residencyResults.map((result) => <div key={result.value}><strong>{result.value}</strong><span>{result.label}</span></div>)}</div>
+          </section>
         </div>
         <div className={styles.eventsNetwork}><strong>{t.events.partnerLabel}</strong><ul className={styles.partnerLogos} aria-label={t.events.partnerLabel}>{partners.map((partner) => <li key={partner.name}><Image src={partner.src} width={partner.width} height={partner.height} alt={partner.name} /></li>)}</ul></div>
         <div className={styles.communityGallery}>

@@ -86,7 +86,7 @@
 }
 
 .slide { flex: 1; min-height: 0; width: 100%; padding: clamp(2rem, 4vw, 4rem) clamp(1.25rem, 6vw, 7rem); display: flex; flex-direction: column; justify-content: safe center; gap: clamp(1.5rem, 3vh, 3rem); overflow-y: auto; animation: enter .3s ease-out; }
-.pillarSlide { justify-content: flex-start; padding-top: max(clamp(2rem, 4vw, 4rem), calc((100dvh - 53rem) / 2)); }
+.pillarSlide { justify-content: flex-start; padding-top: max(clamp(2rem, 4vw, 4rem), calc((100dvh - 53rem) / 2)); padding-bottom: clamp(1.5rem, 3vh, 3rem); }
 .slideHead { flex: none; }
 .pillarRail { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin-bottom: .55rem; border: 1px solid var(--line); }
 .pillarRail button { display: flex; align-items: center; gap: .45rem; min-width: 0; border: 0; border-right: 1px solid var(--line); background: #fff; color: var(--muted); padding: .4rem .55rem; text-align: left; cursor: pointer; font-size: .65rem; letter-spacing: .04em; text-transform: uppercase; }
@@ -262,15 +262,19 @@
 .eventsProofValue { color: var(--purple); font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 300; letter-spacing: -.07em; line-height: 1; }
 .eventsProofLabel, .eventsNetwork > strong { color: var(--purple); font-size: .7rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
 .eventsProofCard p { margin-top: auto; font-size: clamp(.9rem, 1.15vw, 1.1rem); line-height: 1.4; }
-.eventsMentors { display: flex; align-items: baseline; gap: .4rem; margin-top: .75rem; color: var(--purple); }
-.eventsMentors strong { font-size: clamp(1.5rem, 2vw, 2rem); font-weight: 400; line-height: 1; }
-.eventsMentors span { font-size: .72rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
-.eventsResults { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; margin-top: auto; }
+.residencyTop { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.eventsMentors { display: flex; align-items: baseline; gap: .35rem; flex: none; color: var(--purple); }
+.eventsMentors strong { font-size: clamp(1.8rem, 2.4vw, 2.6rem); font-weight: 300; line-height: 1; }
+.eventsMentors span { max-width: 7rem; font-size: .62rem; font-weight: 700; line-height: 1.2; letter-spacing: .05em; text-transform: uppercase; }
+.eventsResults { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: auto; padding-top: .65rem; border-top: 1px solid #58387740; }
+.eventsResults > div { min-width: 0; padding-inline: clamp(.4rem, 1vw, 1rem); border-right: 1px solid #58387740; }
+.eventsResults > div:first-child { padding-left: 0; }
+.eventsResults > div:last-child { padding-right: 0; border-right: 0; }
 .eventsResults strong { display: block; font-size: clamp(2.2rem, 3vw, 3.4rem); font-weight: 400; line-height: 1; }
-.eventsResults span { display: block; margin-top: .45rem; font-size: .72rem; line-height: 1.3; }
+.eventsResults span { display: block; margin-top: .35rem; font-size: .72rem; line-height: 1.25; }
 .eventsNetwork { display: grid; grid-template-columns: 1fr; gap: .85rem; padding-top: .9rem; border-top: 1px solid var(--line); }
 .communityGallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .7rem; }
-.communityPhoto { position: relative; min-width: 0; height: clamp(6rem, 14vh, 12rem); overflow: hidden; background: #f6f6f6; }
+.communityPhoto { position: relative; min-width: 0; height: clamp(7rem, 20vh, 15rem); overflow: hidden; background: #f6f6f6; }
 .communityPhoto img { object-fit: cover; object-position: center 40%; }
 .communityPhoto:last-child img { object-position: center 42%; }
 .simplePanel { border-top: 2px solid var(--purple); padding: 1.5rem 0; min-height: 17rem; display: flex; flex-direction: column; align-items: flex-start; }
@@ -355,7 +359,7 @@
   .progress { gap: .5rem; }
   .progress div { width: 3.5rem; }
 }
-@media (max-height: 800px) and (min-width: 641px) {
+@media (max-height: 865px) and (min-width: 641px) {
   .slide { padding-block: .6rem; gap: .75rem; }
   .pillarSlide { padding-top: .6rem; }
   .closingLineSlide .bottomLine { max-width: none; }
@@ -374,7 +378,9 @@
   .pillar { min-height: 13rem; }
   .featurePanel { min-height: 15rem; padding: 1rem; }
   .simplePanel { min-height: 14rem; padding-block: 1rem; }
-  .eventsProofCard { min-height: 11rem; padding: 1.25rem; }
+  .eventsProofCard { min-height: 11rem; padding: .75rem; }
+  .eventsNetwork { gap: .4rem; }
+  .communityPhoto { height: clamp(7rem, 19vh, 10rem); }
   .planTrack { min-height: 12rem; }
 }
 @media (max-width: 640px) {
@@ -421,4 +427,221 @@
   .planMilestones { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .overview { grid-template-columns: repeat(2, 1fr); padding: 1rem; }
   .overview button { min-height: 6.5rem; }
+}
+
+@media (min-width: 901px) and (min-height: 866px) and (max-height: 1000px) {
+  .slide { padding-block: 1.5rem; gap: 1.1rem; }
+  .pillarSlide { padding-top: clamp(2rem, 5vh, 3rem); }
+  .slideHead h2 { font-size: clamp(2.8rem, 5vw, 4.8rem); }
+  .closingLineSlide .bottomLine { max-width: none; }
+  .closingLineSlide .simplePanel,
+  .closingLineSlide .featurePanel { padding-block: .8rem; }
+  .closingLineSlide .simplePanel h3 { margin: 1.1rem 0 .5rem; }
+  .closingLineSlide .featurePanel h3 { margin-bottom: .5rem; line-height: 1.05; }
+  .featurePanel { min-height: 17rem; padding: 1.25rem; }
+  .simplePanel { min-height: 15rem; padding-block: 1rem; }
+  .budgetList li { gap: 1rem; padding-block: .5rem; }
+  .budgetList strong { font-size: 1.3rem; line-height: 1.2; }
+  .budgetList span { font-size: 1rem; line-height: 1.35; }
+  .budgetIntro { font-size: 1.05rem; }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (max-height: 749px) {
+  .slide { gap: .65rem; padding-block: .5rem; }
+  .pillarSlide,
+  .problemSlide,
+  .thesisSlide,
+  .hubSlide { padding-top: .5rem; }
+  .problemSlide,
+  .thesisSlide,
+  .hubSlide { padding-bottom: .5rem; }
+  .problemHero { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: .75rem; }
+  .problemCycle { width: 100%; max-width: none; }
+  .problemSlide .slideHead h2,
+  .thesisSlide .slideHead h2 { font-size: clamp(2rem, 4vw, 2.7rem); line-height: .95; }
+  .problemColumns,
+  .academyColumns { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .6rem; }
+  .problemColumns .statement,
+  .academyColumns .statement { padding-top: .45rem; }
+  .problemColumns .statement h3,
+  .academyColumns .statement h3 { font-size: 1.05rem; line-height: 1.1; min-height: 2.2em; margin: .6rem 0 .3rem; }
+  .problemColumns .statement p,
+  .academyColumns .statement p { font-size: .8rem; line-height: 1.3; }
+  .thesisLayout { gap: .8rem; }
+  .bigStatement { font-size: 1.35rem; line-height: 1.2; }
+  .thesisList { gap: .4rem; }
+  .thesisList p { padding-bottom: .4rem; gap: .2rem; }
+  .thesisList strong { font-size: .85rem; }
+  .thesisList span { font-size: .8rem; line-height: 1.25; }
+  .hubSlide .slideHead h2 { font-size: 2.8rem; }
+  .pillarGrid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .pillarGrid .pillar { min-height: 15rem; padding: .7rem .5rem; border-bottom: 0; border-right: 1px solid var(--line); }
+  .pillarGrid .pillar:nth-child(even) { border-right: 1px solid var(--line); }
+  .pillarGrid .pillar:last-child { grid-column: auto; border-right: 0; min-height: 15rem; }
+  .pillarGrid .pillar h3 { font-size: 1rem; min-height: 2.2em; margin: .7rem 0 .35rem; }
+  .pillarGrid .pillar p { font-size: .8rem; line-height: 1.3; }
+  .academyHero { font-size: 1rem; padding: .65rem 0; }
+  .pillarSlide .slideHead h2 { font-size: clamp(2.1rem, 4.5vw, 3.5rem); line-height: .98; }
+  .closingLineSlide { gap: 1rem; }
+  .closingLineSlide .simplePanel { padding-block: .25rem; min-height: 0; }
+  .closingLineSlide .simplePanel h3 { margin: .65rem 0 .4rem; font-size: clamp(1.45rem, 2.2vw, 2rem); line-height: 1.12; }
+  .closingLineSlide .simplePanel p { line-height: 1.4; }
+  .closingLineSlide .simplePanel small { margin-top: .6rem; line-height: 1.25; }
+  .closingLineSlide .bottomLine { padding-top: .7rem; font-size: clamp(.95rem, 1.3vw, 1.15rem); }
+  .pillarSlide .bottomLine { max-width: none; }
+  .eventsNetwork { gap: .5rem; padding-top: .5rem; }
+  .partnerLogos { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .5rem; }
+  .partnerLogos img { max-height: 2rem; }
+  .partnerLogos li:first-child img { width: 5.75rem; max-height: none; }
+  .partnerLogos li:last-child img { max-height: 2rem; }
+  .eventsProofCard { min-height: 9rem; padding: .75rem; }
+  .eventsProofValue { font-size: 2.5rem; }
+  .eventsResults strong { font-size: 1.8rem; }
+  .communityPhoto { height: clamp(8rem, 20vh, 10rem); }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (max-height: 620px) {
+  .chrome { min-height: 4.25rem; }
+  .controls { min-height: 3.8rem; }
+  .slide { gap: .4rem; padding-block: .35rem; }
+  .academyHero { padding: .35rem 0; font-size: .9rem; }
+  .academyColumns .statement h3 { font-size: .95rem; min-height: 2em; margin: .4rem 0 .2rem; }
+  .academyColumns .statement p { font-size: .72rem; line-height: 1.25; }
+  .pillarSlide .bottomLine { padding-top: .45rem; font-size: .9rem; line-height: 1.25; }
+  .eventsProofCard { padding: .5rem; min-height: 8rem; }
+  .eventsProofValue { font-size: 2.2rem; }
+  .eventsProofCard p { font-size: .8rem; line-height: 1.3; }
+  .residencyTop { gap: .5rem; }
+  .eventsMentors span { max-width: 5rem; font-size: .55rem; }
+  .eventsResults { padding-top: .3rem; }
+  .eventsResults span { font-size: .65rem; }
+  .eventsNetwork { gap: .25rem; padding-top: .3rem; }
+  .partnerLogos img { max-height: 1.8rem; }
+  .partnerLogos li:first-child img { width: 5rem; max-height: none; }
+  .partnerLogos li:last-child img { max-height: 1.8rem; }
+  .communityPhoto { height: clamp(6.5rem, 18vh, 7.5rem); }
+  .planTrack { padding: .55rem .9rem; min-height: 0; }
+  .schoolFormats { margin-top: .4rem; gap: .5rem; }
+  .schoolFormat + .schoolFormat { padding-left: .5rem; }
+  .schoolFormatMetric { margin-top: .2rem; }
+  .schoolFormat p { padding-top: .3rem; }
+  .planMetrics { margin: .4rem 0; gap: .4rem; }
+  .planMilestones { gap: .5rem; }
+  .planMilestones div { gap: .2rem; padding-top: .2rem; }
+  .planMilestones span { font-size: .76rem; line-height: 1.2; }
+  .planNote { font-size: .65rem; line-height: 1.2; }
+  .budgetList li { padding-block: .25rem; }
+}
+
+@media (min-width: 768px) and (max-width: 900px) and (min-height: 750px) {
+  .slide { gap: 1.2rem; padding-block: 1.25rem; }
+  .pillarSlide,
+  .problemSlide,
+  .thesisSlide,
+  .hubSlide { padding-top: 1.25rem; }
+  .problemSlide,
+  .thesisSlide,
+  .hubSlide { padding-bottom: 1.25rem; }
+  .problemHero { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 1rem; }
+  .problemCycle { width: 100%; max-width: none; }
+  .problemColumns,
+  .academyColumns { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; }
+  .problemColumns .statement h3,
+  .academyColumns .statement h3 { font-size: 1.2rem; margin: 1rem 0 .5rem; }
+  .problemColumns .statement p,
+  .academyColumns .statement p { font-size: .85rem; line-height: 1.3; }
+  .pillarGrid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .pillarGrid .pillar { min-height: 16rem; padding: 1rem .65rem; border-bottom: 0; border-right: 1px solid var(--line); }
+  .pillarGrid .pillar:nth-child(even) { border-right: 1px solid var(--line); }
+  .pillarGrid .pillar:last-child { grid-column: auto; border-right: 0; min-height: 16rem; }
+  .pillarGrid .pillar h3 { font-size: 1.1rem; min-height: 2.2em; margin: 1rem 0 .5rem; }
+  .pillarGrid .pillar p { font-size: .85rem; line-height: 1.35; }
+  .academyHero { padding: .85rem 0; font-size: 1.05rem; }
+  .partnerLogos { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .65rem; }
+  .eventsNetwork { gap: .5rem; }
+  .communityPhoto { height: clamp(9rem, 20vh, 12rem); }
+  .budgetList li { padding-block: .45rem; gap: 1rem; }
+  .budgetList strong { font-size: 1.25rem; line-height: 1.2; }
+  .budgetList span { font-size: .95rem; line-height: 1.35; }
+}
+
+@media (min-width: 901px) and (min-height: 1001px) and (max-height: 1150px),
+       (min-width: 1500px) and (min-height: 1151px) and (max-height: 1300px),
+       (min-width: 1700px) and (min-height: 1151px) and (max-height: 1400px) {
+  .slide { padding-block: 3rem; gap: 1.25rem; }
+  .pillarSlide { padding-top: 3rem; }
+  .slideHead h2 { font-size: clamp(2.8rem, 5vw, 5rem); }
+  .closingLineSlide .bottomLine { max-width: none; }
+  .featurePanel { padding: 2rem; }
+  .simplePanel { padding-block: 1rem; }
+  .budgetList li { padding-block: .75rem; }
+}
+
+@media (min-width: 1700px) and (min-height: 1151px) and (max-height: 1400px) {
+  .pillarSlide { padding-top: clamp(3rem, 8vh, 7rem); }
+}
+
+@media (min-width: 1025px) and (max-height: 720px) {
+  .slide { gap: .5rem; padding-block: .35rem; }
+  .pillarSlide { padding-top: .35rem; }
+  .slideHead h2 { font-size: clamp(2.3rem, 3.8vw, 3.4rem); }
+  .problemSlide .slideHead h2,
+  .thesisSlide .slideHead h2 { font-size: clamp(2rem, 3vw, 3rem); }
+  .problemCycle { width: min(100%, 20rem); }
+  .problemColumns .statement h3,
+  .academyColumns .statement h3 { font-size: clamp(1.1rem, 1.5vw, 1.5rem); min-height: 2em; margin: .6rem 0 .3rem; }
+  .problemColumns .statement p,
+  .academyColumns .statement p { font-size: clamp(.8rem, 1vw, .95rem); line-height: 1.3; }
+  .bigStatement { font-size: clamp(1.4rem, 2vw, 2rem); line-height: 1.2; }
+  .thesisList { gap: .5rem; }
+  .thesisList p { padding-bottom: .5rem; }
+  .academyHero { padding: .5rem 0; font-size: 1rem; }
+  .pillarSlide .bottomLine { padding-top: .6rem; font-size: clamp(.95rem, 1.3vw, 1.15rem); line-height: 1.3; max-width: none; }
+  .closingLineSlide .simplePanel { min-height: 0; padding-block: .25rem; }
+  .closingLineSlide .simplePanel h3 { font-size: clamp(1.4rem, 2vw, 2rem); margin: .6rem 0 .4rem; }
+  .closingLineSlide .simplePanel small { margin-top: .6rem; }
+  .closingLineSlide .featurePanel { min-height: 0; padding: .75rem; }
+  .closingLineSlide .featurePanel h3 { font-size: clamp(1.75rem, 2.4vw, 2.5rem); margin-bottom: .5rem; }
+  .closingLineSlide .featurePanel p { font-size: .9rem; line-height: 1.35; }
+  .eventsProofCard { min-height: 0; padding: .5rem; }
+  .eventsProofValue { font-size: 2.5rem; }
+  .eventsNetwork { gap: .3rem; padding-top: .3rem; }
+  .partnerLogos { gap: .75rem; }
+  .partnerLogos img { max-height: 2rem; }
+  .partnerLogos li:first-child img { width: 6rem; max-height: none; }
+  .partnerLogos li:last-child img { max-height: 2rem; }
+  .communityPhoto { height: clamp(6.5rem, calc(60vh - 255px), 11rem); }
+  .spacePhoto { height: clamp(8rem, 25vh, 12rem); aspect-ratio: auto; }
+  .spaceLead { font-size: 1.1rem; line-height: 1.3; }
+  .planTrack { min-height: 0; padding: .75rem 1rem; }
+  .schoolFormats { margin-top: .4rem; }
+  .planMetrics { margin: .4rem 0; gap: .4rem; }
+  .planMilestones div { gap: .2rem; padding-top: .3rem; }
+}
+
+@media (min-width: 1025px) and (max-height: 620px) {
+  .chrome { min-height: 4.25rem; }
+  .controls { min-height: 3.8rem; }
+  .planTrack { padding-block: .55rem; }
+  .schoolFormats { margin-top: .3rem; }
+  .planMetrics { margin: .3rem 0; }
+  .planMilestones div { padding-top: .2rem; }
+  .planNote { font-size: .65rem; line-height: 1.2; }
+}
+
+@media (min-width: 1025px) and (max-height: 580px) {
+  .chrome { min-height: 3.75rem; }
+  .controls { min-height: 3.4rem; }
+  .slide { gap: .3rem; padding-block: .25rem; }
+  .problemCycle { width: min(100%, 17rem); }
+  .featurePanel { min-height: 13rem; }
+  .communityPhoto { height: clamp(5.5rem, calc(60vh - 260px), 7rem); }
+}
+
+@media (min-width: 768px) and (max-width: 900px) and (max-height: 900px),
+       (min-width: 901px) and (max-width: 1280px) and (max-height: 800px) {
+  .overview { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5rem; padding: 1rem; }
+  .overview button { min-height: 5.5rem; padding: .7rem; }
+  .overview strong { font-size: .9rem; }
+  .overview small { display: none; }
 }

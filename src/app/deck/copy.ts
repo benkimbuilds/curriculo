@@ -98,11 +98,11 @@ export const deckCopy = {
       cadence: "Decenas de talleres gratuitos en México y encuentros mensuales que podemos llevar a Utopías.",
       residencyLabel: "Residencia de IA de AI Builders México",
       residencyResults: [
-        { value: "10", label: "fundadores acompañados" },
+        { value: "10", label: "seleccionados entre 300 postulaciones" },
         { value: "8", label: "lanzaron negocios" },
-        { value: "5", label: "monetizaron en 3 semanas" },
+        { value: "4", label: "monetizaron en 3 semanas" },
       ],
-      residencyMentors: { value: "6", label: "mentores globales" },
+      residencyMentors: { value: "7", label: "mentores internacionales" },
       partnerLabel: "Red para eventos en Utopías",
       gallery: [
         { src: "/deck/community/community-group.png", alt: "Integrantes de la comunidad reunidos en un encuentro" },
@@ -259,16 +259,16 @@ export const deckCopy = {
       bottom: "Successful entrepreneurs visiting Mexico City share their experience with our community in exchange for coworking space and access to the hub.",
     },
     events: {
-      title: "We've done something like this before.",
+      title: "We've done this before.",
       community: "AI Builders México members",
       cadence: "Dozens of free workshops across Mexico, plus monthly gatherings we can bring to Utopías.",
       residencyLabel: "AI Builders México AI Residency",
       residencyResults: [
-        { value: "10", label: "founders supported" },
+        { value: "10", label: "selected from 300 applications" },
         { value: "8", label: "launched businesses" },
-        { value: "5", label: "monetized by week 3" },
+        { value: "4", label: "monetized by week 3" },
       ],
-      residencyMentors: { value: "6", label: "global mentors" },
+      residencyMentors: { value: "7", label: "international mentors" },
       partnerLabel: "Network for Utopías events",
       gallery: [
         { src: "/deck/community/community-group.png", alt: "Community members gathered at an event" },
