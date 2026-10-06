@@ -168,7 +168,7 @@ export function PhotoArc({ items, className }: PhotoArcProps) {
     >
       <div ref={stageRef} className="photo-arc-stage">
         <ul className="photo-arc-track" aria-label="Fotografías">
-          {items.map((item) => (
+          {items.map((item, index) => (
             <li key={item.id} data-arc-card className="photo-arc-card group/card">
               {item.image ? (
                 <Image
@@ -177,6 +177,7 @@ export function PhotoArc({ items, className }: PhotoArcProps) {
                   fill
                   sizes="(min-width: 75rem) 15.5rem, (min-width: 40rem) 46vw, 70vw"
                   quality={90}
+                  priority={index === 0}
                   draggable={false}
                   className="object-cover saturate-[0.35] contrast-[1.08] transition-[filter,transform] duration-(--iq-duration-slow) ease-out motion-safe:group-hover/card:scale-[1.02] group-hover/card:saturate-100"
                 />

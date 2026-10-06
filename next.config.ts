@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  images: {
+    // Allowlist de calidades para next/image (Next 16). Incluye 90 para la galería.
+    qualities: [75, 90],
+  },
   async headers() {
     return [
       {
