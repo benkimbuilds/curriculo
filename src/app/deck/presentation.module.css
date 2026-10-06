@@ -103,6 +103,22 @@
 .slide h3, .slide p { margin-block: 0; }
 .slide p { text-wrap: pretty; }
 .bottomLine { padding-top: 1.1rem; border-top: 1px solid var(--line); font-size: clamp(1rem, 1.5vw, 1.45rem); color: var(--purple); max-width: 54rem; }
+.problemBottom {
+  max-width: 42rem;
+  width: fit-content;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: 0;
+  padding-top: 1.6rem;
+  border-top: 0;
+  text-align: right;
+  font-size: clamp(1.15rem, 1.9vw, 1.7rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -.01em;
+  color: var(--purple);
+  opacity: .88;
+}
 .note { color: var(--muted); line-height: 1.5; letter-spacing: .03em; text-transform: none; }
 
 .cover { position: relative; isolation: isolate; background: var(--purple); color: #fff; overflow: hidden; }
@@ -343,6 +359,7 @@
   .pillarRail button strong { white-space: normal; }
   .cover { justify-content: center; }
   .cover h1, .cover h2 { font-size: clamp(3rem, 13vw, 5rem); }
+  .lead { margin-top: 1.4rem !important; }
   .coverGraphic { width: 85vw; right: -35vw; }
   .networkGraphic:not(.networkGraphicMobile) { display: none; }
   .networkGraphicMobile { display: block; right: calc(1.25rem + 5.1rem + .9rem); bottom: .65rem; width: 2.75rem; opacity: .68; }

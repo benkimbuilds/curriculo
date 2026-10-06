@@ -131,7 +131,7 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
       return <>
         <SlideHead number="02" category={t.problem.category} title={t.problem.title} />
         <div className={styles.problemColumns}>{t.problem.points.map((point, i) => <Statement key={i} number={`0${i + 1}`} title={point.title} body={point.body} />)}</div>
-        <p className={styles.bottomLine}>{t.problem.bottom}</p>
+        <p className={`${styles.bottomLine} ${styles.problemBottom}`}>{t.problem.bottom}</p>
       </>;
     case 2:
       return <>
