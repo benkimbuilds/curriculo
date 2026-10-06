@@ -175,9 +175,10 @@ export function PhotoArc({ items, className }: PhotoArcProps) {
                   src={item.image.src}
                   alt={item.image.alt || item.caption}
                   fill
-                  sizes="(min-width: 75rem) 18vw, 70vw"
+                  sizes="(min-width: 75rem) 15.5rem, (min-width: 40rem) 46vw, 70vw"
+                  quality={90}
                   draggable={false}
-                  className="object-cover grayscale-[0.85] contrast-[1.05] transition-[filter,scale] duration-(--iq-duration-slow) ease-out motion-safe:group-hover/card:scale-[1.02] group-hover/card:grayscale-0"
+                  className="object-cover saturate-[0.35] contrast-[1.08] transition-[filter,transform] duration-(--iq-duration-slow) ease-out motion-safe:group-hover/card:scale-[1.02] group-hover/card:saturate-100"
                 />
               ) : (
                 <div role="img" aria-label={item.caption} className="grid-lines absolute inset-0" />
