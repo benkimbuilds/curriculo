@@ -59,9 +59,11 @@ export function Hero() {
             style={{ animationDelay: "400ms" }}
           >
             <ButtonLink href={hero.primaryCta.href}>{hero.primaryCta.label}</ButtonLink>
+            {/* CTA Academia de Tecnología oculto por ahora
             <ButtonLink href={hero.secondaryCta.href} variant="secondary" className="bg-bg">
               {hero.secondaryCta.label}
             </ButtonLink>
+            */}
           </div>
         </div>
 
