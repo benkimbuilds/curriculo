@@ -3,7 +3,7 @@
 import { AnimatedGradient } from "@/components/ui/animated-gradient";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type TouchEvent } from "react";
 import { deckCopy, type DeckLanguage } from "./copy";
 import styles from "./presentation.module.css";
 
@@ -36,6 +36,8 @@ export default function Deck() {
   const router = useRouter();
   const index = useMemo(() => slideFromParam(searchParams.get("slide")), [searchParams]);
   const [overview, setOverview] = useState(false);
+  const [presenting, setPresenting] = useState(false);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
   const [language, setLanguage] = useState<DeckLanguage>("es");
   const t = deckCopy[language];
   const footerLabel = index === 0 || index === slideCount - 1 ? "Iquiti" : t.slides[index].label;
@@ -67,17 +69,40 @@ export default function Deck() {
         goTo(slideCount - 1);
       } else if (event.key.toLowerCase() === "o") {
         setOverview((current) => !current);
+      } else if (event.key.toLowerCase() === "p") {
+        event.preventDefault();
+        if (!event.repeat) {
+          setPresenting((current) => !current);
+          setOverview(false);
+        }
       } else if (event.key === "Escape") {
         setOverview(false);
+        setPresenting(false);
       }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [goTo, index]);
 
+  const onTouchStart = (event: TouchEvent<HTMLElement>) => {
+    if (!presenting || event.touches.length !== 1) return;
+    touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+  };
+
+  const onTouchEnd = (event: TouchEvent<HTMLElement>) => {
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!presenting || !start || event.changedTouches.length !== 1) return;
+    const deltaX = event.changedTouches[0].clientX - start.x;
+    const deltaY = event.changedTouches[0].clientY - start.y;
+    if (Math.abs(deltaX) > 60 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+      goTo(index + (deltaX < 0 ? 1 : -1));
+    }
+  };
+
   return (
-    <main data-iquiti-home lang={language === "es" ? "es-MX" : "en"} className={styles.deck} aria-label={t.ui.deck}>
-      <header className={styles.chrome}>
+    <main data-iquiti-home lang={language === "es" ? "es-MX" : "en"} className={`${styles.deck} ${presenting ? styles.presenting : ""}`} aria-label={t.ui.deck}>
+      {!presenting && <header className={styles.chrome}>
         <div className={styles.brand} aria-label="Iquiti">
           <Image src="/brand/iquiti/logotipo-Iquiti.svg" width={800} height={296} alt="Iquiti" priority />
         </div>
@@ -87,9 +112,15 @@ export default function Deck() {
             <button type="button" className={language === "es" ? styles.languageActive : ""} aria-pressed={language === "es"} onClick={() => setLanguage("es")}>ES</button>
             <button type="button" className={language === "en" ? styles.languageActive : ""} aria-pressed={language === "en"} onClick={() => setLanguage("en")}>EN</button>
           </div>
+          <button type="button" className={`${styles.overviewButton} ${styles.presentButton}`} onClick={() => { setOverview(false); setPresenting(true); }} aria-label={t.ui.presentAria} title={`${t.ui.presentAria} (P)`}>
+            <span>{t.ui.present}</span>
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M7 2H2v5M13 2h5v5M2 13v5h5M18 13v5h-5" /></svg>
+          </button>
           <button type="button" className={styles.overviewButton} onClick={() => setOverview((current) => !current)} aria-expanded={overview} aria-label={t.ui.overviewAria}><span>{t.ui.overview}</span></button>
         </div>
-      </header>
+      </header>}
+
+      {presenting && <button type="button" className={styles.presentationExit} onClick={() => setPresenting(false)} aria-label={t.ui.exitPresentation} title={`${t.ui.exitPresentation} (Esc)`}>×</button>}
 
       {overview ? (
         <nav className={styles.overview} aria-label={t.ui.overviewNav}>
@@ -102,15 +133,15 @@ export default function Deck() {
           ))}
         </nav>
       ) : (
-        <section className={`${styles.slide} ${index === 0 || index === slideCount - 1 ? styles.cover : ""} ${index === 1 ? styles.problemSlide : ""} ${index === 2 ? styles.thesisSlide : ""} ${index === 3 ? styles.hubSlide : ""} ${index >= firstPillarSlide && index < firstPillarSlide + 5 ? styles.pillarSlide : ""} ${index === 6 || index === 7 ? styles.closingLineSlide : ""} ${index === 4 || index === 5 || index === 6 || index === 7 || index === 9 ? styles.wideTitleSlide : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`}>
+        <section className={`${styles.slide} ${index === 0 || index === slideCount - 1 ? styles.cover : ""} ${index === 1 ? styles.problemSlide : ""} ${index === 2 ? styles.thesisSlide : ""} ${index === 3 ? styles.hubSlide : ""} ${index >= firstPillarSlide && index < firstPillarSlide + 5 ? styles.pillarSlide : ""} ${index === 7 ? styles.residencySlide : ""} ${index === 8 ? styles.communitySlide : ""} ${index === 6 || index === 7 ? styles.closingLineSlide : ""} ${index === 4 || index === 5 || index === 6 || index === 7 || index === 9 ? styles.wideTitleSlide : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`} onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} onTouchCancel={() => { touchStart.current = null; }}>
           <SlideContent index={index} t={t} goTo={goTo} />
         </section>
       )}
 
-      <footer className={styles.controls}>
+      {!presenting && <footer className={styles.controls}>
         <div className={styles.progress}><span>{String(index + 1).padStart(2, "0")} / {String(slideCount).padStart(2, "0")}</span><div aria-hidden="true"><i style={{ width: `${((index + 1) / slideCount) * 100}%` }} /></div><span>{footerLabel}</span></div>
         <div className={styles.navigation}><button type="button" onClick={() => goTo(index - 1)} disabled={index === 0} aria-label={t.ui.previous}>←</button><button type="button" onClick={() => goTo(index + 1)} disabled={index === slideCount - 1} aria-label={t.ui.next}>→</button></div>
-      </footer>
+      </footer>}
       <span className={styles.srOnly} aria-live="polite">{t.ui.slide} {index + 1} {t.ui.of} {slideCount}: {t.slides[index].label}</span>
     </main>
   );
@@ -310,10 +341,7 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
             <span>{t.close.eyebrow}</span>
           </p>
           <h2>{t.close.title} <em>{t.close.emphasis}</em></h2>
-          <p className={styles.lead}>
-            {t.close.lead}{" "}
-            <span className={styles.closeHeart} aria-hidden="true">❤️</span>
-          </p>
+          <p className={styles.lead}>{t.close.lead}</p>
         </div>
         <BrandGraphic />
       </>;
