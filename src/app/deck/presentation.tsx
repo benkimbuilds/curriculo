@@ -174,9 +174,6 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
           <section className={styles.eventsProofCard}><span className={styles.eventsProofLabel}>{t.events.residencyLabel}</span><div className={styles.eventsMentors}><strong>{t.events.residencyMentors.value}</strong><span>{t.events.residencyMentors.label}</span></div><div className={styles.eventsResults}>{t.events.residencyResults.map((result) => <div key={result.value}><strong>{result.value}</strong><span>{result.label}</span></div>)}</div></section>
         </div>
         <div className={styles.eventsNetwork}><strong>{t.events.partnerLabel}</strong><ul className={styles.partnerLogos} aria-label={t.events.partnerLabel}>{partners.map((partner) => <li key={partner.name}><Image src={partner.src} width={partner.width} height={partner.height} alt={partner.name} /></li>)}</ul></div>
-        <section className={styles.eventsPeople}>
-          {t.events.people.map((person) => <div key={person.name}><h3>{person.name}</h3><p>{person.detail}</p></div>)}
-        </section>
       </>;
     case 9:
       return <>

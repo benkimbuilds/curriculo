@@ -2,7 +2,7 @@ export const deckCopy = {
   es: {
     ui: {
       deck: "Presentación de Iquiti",
-      location: "Centro de Innovación · Ciudad de México",
+      location: "Instituto del Emprendedor · Ciudad de México",
       language: "Cambiar a inglés",
       overview: "Índice",
       overviewAria: "Ver índice de diapositivas",
@@ -20,7 +20,7 @@ export const deckCopy = {
       { label: "Solución", title: "Un ecosistema, cinco motores." },
       { label: "01 · Academia", title: "Una escuela que enseña a aprender." },
       { label: "02 · Coworking", title: "Un tercer espacio para construir soluciones a los problemas de aquí." },
-      { label: "03 · Grants y empleo", title: "Grants para problemas locales. Rutas claras hacia el empleo." },
+      { label: "03 · Fondos a la innovación y empleo", title: "Fondos a la innovación para problemas locales. Rutas claras hacia el empleo." },
       { label: "04 · Residencias", title: "Residencias: un puente a mercados globales." },
       { label: "05 · Comunidad", title: "Ya hemos hecho algo así." },
       { label: "El espacio", title: "Un lugar que empieza con la sensación de que todo es posible." },
@@ -29,7 +29,7 @@ export const deckCopy = {
       { label: "Cierre", title: "Tejamos lo que sigue." },
     ],
     cover: {
-      eyebrow: "Iquiti · Centro de Innovación y Academia de Tecnología",
+      eyebrow: "Iquiti · Instituto del Emprendedor",
       title: "El hub de innovación de la",
       emphasis: "Ciudad de México.",
       lead: "Un lugar para que el talento de México aprenda, construya y emprenda.",
@@ -38,8 +38,8 @@ export const deckCopy = {
       category: "El problema", title: "El talento está aquí. El camino para crear con tecnología está fragmentado.",
       points: [
         { title: "La brecha técnica crece", body: "La adopción digital avanza despacio y faltan rutas accesibles para aprender tecnología e IA." },
-        { title: "El salto de las ideas al impacto", body: "Nos faltan rutas consolidadas para desarrollar fluidez técnica y capacidad emprendedora, y para reinvertir capital." },
-        { title: "Participación en mercados globales", body: "Los sistemas y la cultura actuales limitan qué problemas resolvemos y nuestra capacidad de participar con autonomía en los mercados globales." },
+        { title: "El salto de las ideas al impacto", body: "Nos faltan rutas consolidadas para desarrollar fluidez técnica y capacidad emprendedora y para reinvertir capital." },
+        { title: "Participación en mercados globales", body: "Los sistemas actuales limitan qué problemas resolvemos y nuestra capacidad de participar con autonomía en los mercados globales." },
         { title: "El valor se va", body: "Cuando el talento destacado migra, capital, riqueza, conocimiento y cultura crecen fuera. Los empleados de empresas extranjeras a menudo no participan del mayor valor económico que ayudan a crear." },
       ],
       bottom: "El resultado: ideas y talento sin una ruta clara hacia empleo, nuevas startups o reinversión local.",
@@ -57,7 +57,7 @@ export const deckCopy = {
       pillars: [
         { title: "Academia", body: "Escuela gratuita y de código abierto, con aprendizaje entre pares y proyectos semanales." },
         { title: "Coworking", body: "Un hogar gratuito para emprendedores seleccionados y egresados." },
-        { title: "Grants y empleo", body: "Retos locales y una ruta hacia prácticas, co-ops y empleo con empresas seleccionadas." },
+        { title: "Fondos a la innovación y empleo", body: "Retos locales y una ruta hacia prácticas, co-ops (cooperativas) y empleo con empresas seleccionadas." },
         { title: "Residencias", body: "Emprendedores de otras ciudades y países que comparten métodos y perspectivas sobre mercados globales." },
         { title: "Comunidad", body: "Una comunidad de 5,000 personas que conecta talento, emprendedores y aliados mediante encuentros y talleres." },
       ],
@@ -68,7 +68,7 @@ export const deckCopy = {
       points: [
         { title: "Currículo de código abierto", body: "Una ruta autodidacta con recursos y metas claras que cualquiera puede seguir y adaptar, inspirada en las escuelas 42 y The Odin Project." },
         { title: "Aprendizaje entre pares", body: "Estudiantes aprenden entre sí, resuelven problemas juntos y revisan los proyectos de sus pares." },
-        { title: "Aprender con proyectos", body: "Proyectos reales dan práctica para crear empresas. La retroalimentación semanal forma un portafolio para prácticas, co-ops, empleo o proyectos en el hub." },
+        { title: "Aprender con proyectos", body: "Proyectos reales dan práctica para crear empresas. La retroalimentación semanal forma un portafolio para prácticas, co-ops (cooperativas), empleo o proyectos en el hub." },
         { title: "Mentores voluntarios", body: "Planeamos reunir a 10–20 mentores voluntarios que dediquen unas horas semanales a consultas sobre métodos para resolver problemas y autonomía, no contenidos aislados." },
       ],
       bottom: "150 estudiantes presenciales durante 12 semanas. En línea, hasta 5,000 personas a su propio ritmo.",
@@ -80,9 +80,9 @@ export const deckCopy = {
       bottom: "La academia abre la puerta; el coworking ofrece el siguiente lugar para construir.",
     },
     grants: {
-      title: "Grants para problemas locales. Rutas claras hacia el empleo.",
-      need: { title: "Grants para problemas locales", body: "Negocios y organizaciones identifican problemas para que estudiantes y emprendedores desarrollen soluciones.", note: "Capital sujeto a acuerdos con financiadores." },
-      teams: { title: "Startups y empleo", body: "Egresados pueden fundar sus propias startups. Emprendedores del hub pueden contratarlos; empresas aliadas pueden ofrecer prácticas, co-ops y puestos de ingeniería.", note: "Las alianzas y contrataciones dependen de acuerdos con cada empresa." },
+      title: "Fondos a la innovación para problemas locales. Rutas claras hacia el empleo.",
+      need: { title: "Fondos a la innovación para problemas locales", body: "Negocios y organizaciones identifican problemas para que estudiantes y emprendedores desarrollen soluciones.", note: "Capital sujeto a acuerdos con financiadores." },
+      teams: { title: "Startups y empleo", body: "Egresados pueden fundar sus propias startups. Emprendedores del hub pueden contratarlos; empresas aliadas pueden ofrecer prácticas, co-ops (cooperativas) y puestos de ingeniería.", note: "Las alianzas y contrataciones dependen de acuerdos con cada empresa." },
       bottom: "Tres caminos para egresados: resolver problemas locales, fundar una startup o sumarse a un equipo.",
     },
     residencies: {
@@ -103,10 +103,6 @@ export const deckCopy = {
       ],
       residencyMentors: { value: "6", label: "mentores globales" },
       partnerLabel: "Red para eventos en Utopías",
-      people: [
-        { name: "Bernardo", detail: "Su historia y papel en el proyecto, por definir." },
-        { name: "Luisa", detail: "Su historia y papel en el proyecto, por definir." },
-      ],
     },
     space: {
       category: "El espacio", title: "Un lugar que empieza con la sensación de que todo es posible.",
@@ -129,7 +125,7 @@ export const deckCopy = {
         { title: "Operación de cohorte y comunidad", body: "Convocar y acompañar a la cohorte presencial y organizar la comunidad." },
         { title: "Producción y seguimiento", body: "Producir talleres y encuentros, y medir los resultados del programa." },
       ],
-      note: "Obra, mobiliario y capital para grants requieren acuerdos o recursos adicionales.",
+      note: "Obra, mobiliario y capital destinado a fondos a la innovación requieren acuerdos o recursos adicionales.",
     },
     plan: {
       category: "Plan y metas", title: "Dos formas de aprender. Un hub de largo plazo.",
@@ -154,7 +150,7 @@ export const deckCopy = {
         { date: "ABR 2027", label: "Primera muestra de proyectos" },
         { date: "CONTINUO", label: "Coworking, residencias, retos y eventos" },
       ],
-      note: "Metas indicativas, sujetas a capacidad del espacio, equipo y financiamiento de grants.",
+      note: "Metas indicativas, sujetas a capacidad del espacio, equipo y financiamiento de los retos locales.",
     },
     close: {
       eyebrow: "Iquiti · Coyoacán, Ciudad de México",
@@ -165,7 +161,7 @@ export const deckCopy = {
   en: {
     ui: {
       deck: "Iquiti presentation",
-      location: "Innovation Hub · Mexico City",
+      location: "Instituto del Emprendedor · Mexico City",
       language: "Switch to Spanish",
       overview: "Overview",
       overviewAria: "Show slide overview",
@@ -192,7 +188,7 @@ export const deckCopy = {
       { label: "Closing", title: "Let's weave what comes next." },
     ],
     cover: {
-      eyebrow: "Iquiti · Innovation Hub and Technology Academy",
+      eyebrow: "Iquiti · Instituto del Emprendedor",
       title: "Mexico City's",
       emphasis: "innovation hub.",
       lead: "A place for Mexico's talent to learn, build, and start companies.",
@@ -202,7 +198,7 @@ export const deckCopy = {
       points: [
         { title: "The technical skills gap widens", body: "Digital adoption moves slowly, and accessible paths to learn technology and AI remain limited." },
         { title: "The leap from ideas to impact", body: "We lack established pathways to build technical fluency, entrepreneurial savvy, and capital reinvestment." },
-        { title: "Global Market Participation", body: "Established systems and culture narrow which problems we solve and limit our ability to participate in global markets on our own terms." },
+        { title: "Global Market Participation", body: "Established systems narrow which problems we solve and limit our ability to participate in global markets on our own terms." },
         { title: "Value flows elsewhere", body: "When top talent leaves, capital, wealth, knowledge, and culture grow elsewhere. Employees of foreign companies often lack participation in significant economic upside." },
       ],
       bottom: "The result: ideas and talent without a clear path to jobs, new startups, or local reinvestment.",
@@ -266,10 +262,6 @@ export const deckCopy = {
       ],
       residencyMentors: { value: "6", label: "global mentors" },
       partnerLabel: "Network for Utopías events",
-      people: [
-        { name: "Bernardo", detail: "Story and role in the project to be defined." },
-        { name: "Luisa", detail: "Story and role in the project to be defined." },
-      ],
     },
     space: {
       category: "The space", title: "A place that starts with a feeling that anything is possible.",
