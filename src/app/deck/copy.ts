@@ -29,10 +29,10 @@ export const deckCopy = {
       { label: "Cierre", title: "Tejamos lo que sigue." },
     ],
     cover: {
-      eyebrow: "Iquiti · Instituto del Emprendedor",
-      title: "El hub de innovación de la",
+      eyebrow: "Instituto del Emprendedor",
+      title: "El hub de\ninnovación de la",
       emphasis: "Ciudad de México.",
-      lead: "Un lugar para que el talento de México aprenda, construya y emprenda.",
+      lead: "Coworking, comunidad y un currículo open source con mentoría para construir empresas en México.",
     },
     problem: {
       category: "El problema", title: "El talento está aquí. El camino para crear con tecnología está fragmentado.",
@@ -188,10 +188,10 @@ export const deckCopy = {
       { label: "Closing", title: "Let's weave what comes next." },
     ],
     cover: {
-      eyebrow: "Iquiti · Instituto del Emprendedor",
+      eyebrow: "Instituto del Emprendedor",
       title: "Mexico City's",
       emphasis: "innovation hub.",
-      lead: "A place for Mexico's talent to learn, build, and start companies.",
+      lead: "Coworking, community, and an open-source curriculum with mentorship to build companies in Mexico.",
     },
     problem: {
       category: "The problem", title: "The talent is here. The path to building with technology is fragmented.",
