@@ -67,10 +67,11 @@ export default function Deck() {
         </div>
         <div className={styles.chromeRight}>
           <span className={styles.deckName}>{t.ui.location}</span>
-          <button type="button" className={styles.languageButton} onClick={() => setLanguage(language === "es" ? "en" : "es")} aria-label={t.ui.language}>
-            <strong>{language.toUpperCase()}</strong><span aria-hidden="true">↔</span><span>{language === "es" ? "EN" : "ES"}</span>
-          </button>
-          <button type="button" className={styles.overviewButton} onClick={() => setOverview((current) => !current)} aria-expanded={overview} aria-label={t.ui.overviewAria}>{t.ui.overview}</button>
+          <div className={styles.languageToggle} role="group" aria-label={t.ui.language}>
+            <button type="button" className={language === "es" ? styles.languageActive : ""} aria-pressed={language === "es"} onClick={() => setLanguage("es")}>ES</button>
+            <button type="button" className={language === "en" ? styles.languageActive : ""} aria-pressed={language === "en"} onClick={() => setLanguage("en")}>EN</button>
+          </div>
+          <button type="button" className={styles.overviewButton} onClick={() => setOverview((current) => !current)} aria-expanded={overview} aria-label={t.ui.overviewAria}><span>{t.ui.overview}</span></button>
         </div>
       </header>
 

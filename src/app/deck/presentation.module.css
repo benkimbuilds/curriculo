@@ -23,14 +23,68 @@
 .chrome { min-height: 4.75rem; border-bottom: 1px solid var(--line); }
 .brand, .chromeRight, .navigation, .progress { display: flex; align-items: center; }
 .brand img { width: 5.3rem; height: auto; }
-.deckName, .languageButton, .overviewButton, .eyebrow, .progress, .featureNumber, .note { font-size: .68rem; letter-spacing: .11em; text-transform: uppercase; }
-.chromeRight { gap: 2rem; }
-.deckName { color: var(--muted); }
-.languageButton { display: flex; align-items: center; gap: .45rem; border: 0; background: transparent; color: var(--muted); cursor: pointer; padding: .55rem .2rem; white-space: nowrap; }
-.languageButton strong { color: var(--purple); font-weight: 700; }
-.languageButton:hover { color: var(--purple); }
-.overviewButton { border: 1px solid var(--line); border-radius: 100px; background: #fff; padding: .55rem .95rem; cursor: pointer; color: var(--ink); }
-.overviewButton:hover { border-color: var(--purple); }
+.deckName, .languageToggle, .overviewButton, .eyebrow, .progress, .featureNumber, .note { font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; }
+.chromeRight { gap: .75rem; }
+.deckName { color: var(--muted); margin-right: .5rem; }
+.languageToggle,
+.overviewButton {
+  box-sizing: border-box;
+  height: 1.9rem;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: #f6f6f6;
+  padding: 2px;
+}
+.languageToggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  overflow: hidden;
+}
+.languageToggle button,
+.overviewButton span {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  border: 0;
+  border-radius: 100px;
+  padding: 0 .7rem;
+  font-size: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  font-weight: 600;
+  line-height: 1;
+  transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+}
+.languageToggle button {
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.languageToggle button:hover { color: var(--purple); }
+.languageToggle .languageActive,
+.languageToggle .languageActive:hover {
+  background: #fff;
+  color: var(--purple);
+  box-shadow: 0 1px 2px #00000014;
+}
+.overviewButton {
+  cursor: pointer;
+  color: var(--purple);
+}
+.overviewButton span {
+  background: #fff;
+  color: var(--purple);
+  box-shadow: 0 1px 2px #00000014;
+  font-size: .58rem;
+  letter-spacing: .1em;
+}
+.overviewButton:hover span { background: #fff; color: var(--ink); }
+.overviewButton[aria-expanded="true"] span {
+  background: var(--purple);
+  color: #fff;
+  box-shadow: none;
+}
 
 .slide { flex: 1; min-height: 0; width: 100%; padding: clamp(2rem, 4vw, 4rem) clamp(1.25rem, 6vw, 7rem); display: flex; flex-direction: column; justify-content: safe center; gap: clamp(1.5rem, 3vh, 3rem); overflow-y: auto; animation: enter .3s ease-out; }
 .pillarSlide { justify-content: flex-start; padding-top: max(clamp(2rem, 4vw, 4rem), calc((100dvh - 53rem) / 2)); }
