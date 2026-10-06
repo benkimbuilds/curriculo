@@ -109,11 +109,11 @@ export const deckCopy = {
       category: "El espacio", title: "Un lugar que empieza con la sensación de que todo es posible.",
       statement: "Un espacio que invite al asombro, al intercambio y a crear algo más grande que cualquier persona, empresa o misión. Queremos recordarte cada día que todo es posible.",
       images: [
-        { src: "/deck/space-coworking.avif", caption: "Trabajo compartido", alt: "Referencia conceptual de mesas de coworking y gradas" },
-        { src: "/deck/space-projects.avif", caption: "Aprendizaje entre estudiantes", alt: "Referencia conceptual de grupos trabajando en mesas de proyecto" },
-        { src: "/deck/space-events.avif", caption: "Encuentros y talleres", alt: "Referencia conceptual de un espacio abierto para charlas y talleres" },
+        { src: "/images/galeria/instituto/visor-1.webp", caption: "Aprender, construir, conectar", alt: "Vista del espacio Iquiti con el lema Aprender Construir Conectar y mesa circular de trabajo" },
+        { src: "/images/galeria/comunidad/comunidad-4.webp", caption: "Colaboración", alt: "Dos personas trabajando juntas en una mesa compartida" },
+        { src: "/images/galeria/comunidad/comunidad-8.webp", caption: "Encuentros y comunidad", alt: "Comunidad reunida en las gradas del hub" },
       ],
-      note: "Referencias conceptuales; diseño final por definir.",
+      note: "Concepto del espacio Iquiti, pensado para asombro, intercambio y creación. Referencias conceptuales; diseño final por definir.",
     },
     budget: {
       category: "Presupuesto de lanzamiento", title: "Dónde va el financiamiento.",
@@ -269,11 +269,11 @@ export const deckCopy = {
       category: "The space", title: "A place that starts with a feeling that anything is possible.",
       statement: "A space that invites wonder, exchange, and the creation of something bigger than any one person, company, or mission. We want to remind you every day that anything is possible.",
       images: [
-        { src: "/deck/space-coworking.avif", caption: "Shared workspace", alt: "Concept reference of coworking tables and stepped seating" },
-        { src: "/deck/space-projects.avif", caption: "Learning among students", alt: "Concept reference of groups working around project tables" },
-        { src: "/deck/space-events.avif", caption: "Gatherings and workshops", alt: "Concept reference of an open space for talks and workshops" },
+        { src: "/images/galeria/instituto/visor-1.webp", caption: "Learn, build, connect", alt: "View of the Iquiti space with the Learn Build Connect motto and circular work table" },
+        { src: "/images/galeria/comunidad/comunidad-4.webp", caption: "Collaboration", alt: "Two people working together at a shared table" },
+        { src: "/images/galeria/comunidad/comunidad-8.webp", caption: "Gatherings and community", alt: "Community gathered on the hub's stepped seating" },
       ],
-      note: "Concept references; final design to be determined.",
+      note: "Iquiti space concept—designed for wonder, exchange, and creation. Concept references; final design to be determined.",
     },
     budget: {
       category: "Launch budget", title: "Where the funding goes.",

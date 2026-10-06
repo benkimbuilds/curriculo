@@ -407,7 +407,7 @@
 }
 .photo-arc-card {
   position: relative;
-  flex: 0 0 clamp(12rem, 46vw, 16rem);
+  flex: 0 0 clamp(12rem, 46vw, 15.5rem);
   aspect-ratio: 3 / 4;
   scroll-snap-align: center;
   overflow: hidden;
@@ -417,10 +417,13 @@
 .photo-arc-card img {
   user-select: none;
   -webkit-user-drag: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 [data-arc="live"] .photo-arc-stage {
   position: relative;
-  height: clamp(20rem, 46vw, 30rem);
+  height: clamp(20rem, 42vw, 28rem);
   perspective: 1250px;
   perspective-origin: 50% 42%;
   touch-action: pan-y;
@@ -438,7 +441,8 @@
   top: 50%;
   left: 50%;
   flex: none;
-  width: clamp(11.5rem, 20vw, 17.5rem);
+  /* Tope ~15.5rem: el recorte 3:4 de las fuentes (~744px) basta en pantallas 3x */
+  width: clamp(11.5rem, 18vw, 15.5rem);
   transform-style: preserve-3d;
   will-change: transform;
 }
