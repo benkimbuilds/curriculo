@@ -58,7 +58,7 @@ export const deckCopy = {
       pillars: [
         { title: "Academia", body: "Escuela gratuita y de código abierto, con proyectos semanales y aprendizaje entre estudiantes." },
         { title: "Coworking", body: "Un hogar gratuito para emprendedores seleccionados y egresados." },
-        { title: "Fondos a la innovación y empleo", body: "Retos locales y una ruta hacia prácticas, co-ops (cooperativas) y empleo con empresas seleccionadas." },
+        { title: "Fondos a la innovación y empleo", body: "Retos locales y una ruta hacia prácticas profesionales y empleos con empresas aliadas." },
         { title: "Residencias", body: "Emprendedores de otras ciudades y países que comparten métodos y perspectivas sobre mercados globales." },
         { title: "Comunidad", body: "Una comunidad de 5,000 personas que conecta talento, emprendedores y aliados mediante encuentros y talleres." },
       ],
@@ -104,6 +104,12 @@ export const deckCopy = {
       ],
       residencyMentors: { value: "6", label: "mentores globales" },
       partnerLabel: "Red para eventos en Utopías",
+      gallery: [
+        { src: "/deck/community/community-group.png", alt: "Integrantes de la comunidad reunidos en un encuentro" },
+        { src: "/deck/community/community-founders.png", alt: "Tres participantes posan durante un evento de la comunidad" },
+        { src: "/deck/community/community-audience.png", alt: "Participantes escuchan una charla en un encuentro" },
+        { src: "/deck/community/community-exchange.png", alt: "Una participante comparte un momento con otros miembros de la comunidad" },
+      ],
     },
     space: {
       category: "El espacio", title: "Un lugar que empieza con la sensación de que todo es posible.",
@@ -218,7 +224,7 @@ export const deckCopy = {
       pillars: [
         { title: "Academy", body: "A free, open-source school with weekly projects and learning among students." },
         { title: "Coworking", body: "A free home for selected entrepreneurs and graduates." },
-        { title: "Grants & employment", body: "Local challenges and paths to internships, co-ops, and jobs with selected companies." },
+        { title: "Grants & employment", body: "Local challenges and paths to internships and jobs with partner companies." },
         { title: "Residencies", body: "Entrepreneurs from other cities and countries who share methods and perspectives on global markets." },
         { title: "Community", body: "A community of 5,000 connecting talent, founders, and partners through gatherings and workshops." },
       ],
@@ -264,6 +270,12 @@ export const deckCopy = {
       ],
       residencyMentors: { value: "6", label: "global mentors" },
       partnerLabel: "Network for Utopías events",
+      gallery: [
+        { src: "/deck/community/community-group.png", alt: "Community members gathered at an event" },
+        { src: "/deck/community/community-founders.png", alt: "Three participants pose at a community event" },
+        { src: "/deck/community/community-audience.png", alt: "Participants listen to a talk at a gathering" },
+        { src: "/deck/community/community-exchange.png", alt: "A participant shares a moment with other community members" },
+      ],
     },
     space: {
       category: "The space", title: "A place that starts with a feeling that anything is possible.",

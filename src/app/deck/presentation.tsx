@@ -39,8 +39,6 @@ export default function Deck() {
   const [language, setLanguage] = useState<DeckLanguage>("es");
   const t = deckCopy[language];
   const footerLabel = index === 0 || index === slideCount - 1 ? "Iquiti" : t.slides[index].label;
-  const networkStage = Math.max(0, Math.min(t.hub.pillars.length, index - firstPillarSlide + 1));
-  const networkHidden = overview || index === 0 || index === slideCount - 1;
   const goTo = useCallback((next: number) => {
     const clamped = clampSlide(next);
     const params = new URLSearchParams(searchParams.toString());
@@ -104,13 +102,10 @@ export default function Deck() {
           ))}
         </nav>
       ) : (
-        <section className={`${styles.slide} ${index === 0 || index === slideCount - 1 ? styles.cover : ""} ${index === 1 ? styles.problemSlide : ""} ${index === 2 ? styles.thesisSlide : ""} ${index === 3 ? styles.hubSlide : ""} ${index >= firstPillarSlide && index < firstPillarSlide + 5 ? styles.pillarSlide : ""} ${index === 4 || index === 5 || index === 6 || index === 7 || index === 9 ? styles.wideTitleSlide : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`}>
+        <section className={`${styles.slide} ${index === 0 || index === slideCount - 1 ? styles.cover : ""} ${index === 1 ? styles.problemSlide : ""} ${index === 2 ? styles.thesisSlide : ""} ${index === 3 ? styles.hubSlide : ""} ${index >= firstPillarSlide && index < firstPillarSlide + 5 ? styles.pillarSlide : ""} ${index === 6 || index === 7 ? styles.closingLineSlide : ""} ${index === 4 || index === 5 || index === 6 || index === 7 || index === 9 ? styles.wideTitleSlide : ""}`} aria-roledescription={t.ui.slide} aria-label={`${index + 1} ${t.ui.of} ${slideCount}: ${t.slides[index].label}`} key={`${index}-${language}`}>
           <SlideContent index={index} t={t} goTo={goTo} />
         </section>
       )}
-
-      <NetworkGraphic stage={networkStage} hidden={networkHidden || index === 1 || index === 2} animate={false} />
-      <NetworkGraphic stage={networkStage} hidden={networkHidden || index === 1 || index === 2} animate={false} compact />
 
       <footer className={styles.controls}>
         <div className={styles.progress}><span>{String(index + 1).padStart(2, "0")} / {String(slideCount).padStart(2, "0")}</span><div aria-hidden="true"><i style={{ width: `${((index + 1) / slideCount) * 100}%` }} /></div><span>{footerLabel}</span></div>
@@ -245,6 +240,13 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
           <section className={styles.eventsProofCard}><span className={styles.eventsProofLabel}>{t.events.residencyLabel}</span><div className={styles.eventsMentors}><strong>{t.events.residencyMentors.value}</strong><span>{t.events.residencyMentors.label}</span></div><div className={styles.eventsResults}>{t.events.residencyResults.map((result) => <div key={result.value}><strong>{result.value}</strong><span>{result.label}</span></div>)}</div></section>
         </div>
         <div className={styles.eventsNetwork}><strong>{t.events.partnerLabel}</strong><ul className={styles.partnerLogos} aria-label={t.events.partnerLabel}>{partners.map((partner) => <li key={partner.name}><Image src={partner.src} width={partner.width} height={partner.height} alt={partner.name} /></li>)}</ul></div>
+        <div className={styles.communityGallery}>
+          {t.events.gallery.map((photo) => (
+            <div className={styles.communityPhoto} key={photo.src}>
+              <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 640px) 50vw, 25vw" />
+            </div>
+          ))}
+        </div>
       </>;
     case 9:
       return <>
@@ -318,35 +320,6 @@ function BrandGraphic() {
   return <div className={styles.coverGraphic} aria-hidden="true"><Image src="/brand/iquiti/logo-graphic.svg" width={492} height={494} alt="" /></div>;
 }
 
-const networkLinks = [
-  "M52 211 C100 175 170 160 278 198",
-  "M278 198 V25",
-  "M278 198 C330 230 380 246 422 266",
-  "M422 266 C342 291 273 363 264 425",
-  "M264 425 C224 362 184 336 133 328 C83 315 53 290 52 211",
-];
-
-const networkNodes = [
-  { cx: 278, cy: 198, r: 9, activeAt: 1 },
-  { cx: 278, cy: 25, r: 9, activeAt: 2 },
-  { cx: 422, cy: 266, r: 11, activeAt: 3 },
-  { cx: 264, cy: 425, r: 9, activeAt: 4 },
-  { cx: 133, cy: 328, r: 9, activeAt: 5 },
-];
-
-function NetworkGraphic({ stage, hidden, animate, compact = false }: { stage: number; hidden: boolean; animate: boolean; compact?: boolean }) {
-  return <div className={`${styles.networkGraphic} ${compact ? styles.networkGraphicMobile : ""}`} data-hidden={hidden} data-animate={animate} aria-hidden="true">
-    <svg viewBox="0 0 492 494" fill="none">
-      <g stroke="currentColor" strokeWidth={compact ? 10 : 4} strokeLinecap="round" strokeLinejoin="round">
-        {networkLinks.map((path, i) => <path key={path} className={styles.networkLink} data-link={i + 1} pathLength={1} d={path} style={{ opacity: stage > i ? 1 : 0, strokeDashoffset: stage > i ? 0 : 1 }} />)}
-        <path className={styles.networkOrbit} pathLength={1} d="M52 211C66 195 94 178 108 149C122 120 130 94 162 78C210 55 235 69 278 102C309 126 339 139 371 143C404 147 432 148 451 174C473 203 460 241 422 266" style={{ opacity: stage === 5 ? .5 : 0, strokeDashoffset: stage === 5 ? 0 : 1 }} />
-      </g>
-      {networkNodes.map((node) => <circle key={node.activeAt} className={styles.networkNode} data-node={node.activeAt} cx={node.cx} cy={node.cy} r={compact ? Math.max(node.r, 18) : node.r} fill="currentColor" style={{ opacity: stage >= node.activeAt ? 1 : .85 }} />)}
-      <circle className={styles.networkHub} cx="52" cy="211" r={compact ? 45 : 35} fill="currentColor" style={{ opacity: stage >= 1 ? 1 : 0 }} />
-    </svg>
-  </div>;
-}
-
 function SlideHead({ number, category, title }: { number: string; category: string; title: string }) {
   return <div className={styles.slideHead}><p className={styles.eyebrow}>{number} / {category}</p><h2>{title}</h2></div>;
 }
@@ -360,8 +333,4 @@ function PillarHead({ number, labels, navLabel, title, goTo }: { number: number;
 
 function Statement({ number, title, body }: { number: string; title: string; body: string }) {
   return <div className={styles.statement}><span>{number}</span><h3>{title}</h3><p>{body}</p></div>;
-}
-
-function Pillar({ number, title, body }: { number: string; title: string; body: string }) {
-  return <div className={styles.pillar}><span>{number}</span><h3>{title}</h3><p>{body}</p></div>;
 }

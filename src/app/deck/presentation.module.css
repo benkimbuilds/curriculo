@@ -1,5 +1,4 @@
 .deck {
-  position: relative;
   --ink: #161616;
   --muted: #5e5e5e;
   --line: #dcdcdc;
@@ -200,21 +199,6 @@
 .lead { max-width: 42rem; margin-top: 1.8rem !important; font-size: clamp(1.2rem, 1.7vw, 1.55rem); line-height: 1.45; text-align: left; }
 .coverGraphic { position: absolute; right: -4rem; top: 50%; width: min(42vw, 39rem); transform: translateY(-50%); opacity: .25; }
 .coverGraphic img { display: block; width: 100%; height: auto; filter: brightness(0) invert(1); }
-.networkGraphic { position: absolute; right: clamp(1rem, 2vw, 2rem); bottom: calc(4.4rem + clamp(.75rem, 2vw, 1.75rem)); width: clamp(10rem, 16vw, 17rem); color: var(--purple); opacity: .34; pointer-events: none; z-index: 1; transition: opacity .35s ease; }
-.networkGraphic[data-hidden="true"] { opacity: 0; }
-.networkGraphicMobile { display: none; }
-.networkGraphic svg { display: block; width: 100%; height: auto; }
-.networkGraphic path, .networkGraphic circle { transition: opacity .4s ease; }
-.networkGraphic .networkLink, .networkGraphic .networkOrbit { stroke-dasharray: 1; transition: stroke-dashoffset 1.6s ease-in-out, opacity .2s ease; }
-.networkNode { transform-box: fill-box; transform-origin: center; }
-.networkHub { transform-box: fill-box; transform-origin: center; }
-.networkGraphic[data-animate="true"] .networkLink[data-link="1"] { animation: networkLinkOne 10s linear infinite; }
-.networkGraphic[data-animate="true"] .networkLink[data-link="2"] { animation: networkLinkTwo 10s linear infinite; }
-.networkGraphic[data-animate="true"] .networkLink[data-link="3"] { animation: networkLinkThree 10s linear infinite; }
-.networkGraphic[data-animate="true"] .networkLink[data-link="4"] { animation: networkLinkFour 10s linear infinite; }
-.networkGraphic[data-animate="true"] .networkLink[data-link="5"] { animation: networkLinkFive 10s linear infinite; }
-.networkGraphic[data-animate="true"] .networkOrbit { animation: networkOrbitReveal 10s linear infinite; }
-.networkGraphic[data-animate="true"] .networkHub { animation: networkHubPulse 10s ease-in-out infinite; }
 
 .threeColumns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 3vw, 3rem); }
 .problemColumns, .academyColumns { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(.75rem, 2vw, 2rem); }
@@ -265,11 +249,12 @@
 .featureNumber { color: var(--purple); }
 .featurePanel:nth-child(2) .featureNumber { color: var(--green); }
 .featurePanel h3 { margin: auto 0 1rem; font-size: clamp(2rem, 3.4vw, 4rem); font-weight: 400; letter-spacing: -.045em; }
-.partnerLogos { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1rem; list-style: none; margin: 0; padding: 0; }
+.partnerLogos { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1.4rem; list-style: none; margin: 0; padding: 0; }
 .partnerLogos li { min-width: 0; display: flex; align-items: center; justify-content: center; }
-.partnerLogos img { display: block; width: auto; max-width: 100%; height: auto; max-height: 2.1rem; object-fit: contain; }
+.partnerLogos img { display: block; width: auto; max-width: 100%; height: auto; max-height: 2.6rem; object-fit: contain; }
+.partnerLogos li:first-child img { width: 7.25rem; max-height: none; }
 .partnerLogos li:nth-child(5) img { filter: brightness(0); }
-.partnerLogos li:last-child img { transform: scale(2.5); }
+.partnerLogos li:last-child img { max-height: 2.1rem; transform: scale(2.5); }
 .eventsLayout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
 .eventsProofCard { display: flex; flex-direction: column; min-height: 13rem; padding: clamp(1.25rem, 2vw, 2rem); background: #f6f6f6; }
 .eventsProofCard:last-child { background: var(--green); }
@@ -283,7 +268,11 @@
 .eventsResults { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; margin-top: auto; }
 .eventsResults strong { display: block; font-size: clamp(2.2rem, 3vw, 3.4rem); font-weight: 400; line-height: 1; }
 .eventsResults span { display: block; margin-top: .45rem; font-size: .72rem; line-height: 1.3; }
-.eventsNetwork { display: grid; grid-template-columns: 13rem minmax(0, 1fr); align-items: center; gap: 1rem; padding-top: .9rem; border-top: 1px solid var(--line); }
+.eventsNetwork { display: grid; grid-template-columns: 1fr; gap: .85rem; padding-top: .9rem; border-top: 1px solid var(--line); }
+.communityGallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .7rem; }
+.communityPhoto { position: relative; min-width: 0; height: clamp(6rem, 14vh, 12rem); overflow: hidden; background: #f6f6f6; }
+.communityPhoto img { object-fit: cover; object-position: center 40%; }
+.communityPhoto:last-child img { object-position: center 42%; }
 .simplePanel { border-top: 2px solid var(--purple); padding: 1.5rem 0; min-height: 17rem; display: flex; flex-direction: column; align-items: flex-start; }
 .dot { width: 1rem; height: 1rem; background: var(--green); border: 1px solid var(--purple); border-radius: 50%; }
 .simplePanel h3 { margin: 1.75rem 0 .75rem; font-size: clamp(1.6rem, 2.5vw, 2.8rem); font-weight: 500; letter-spacing: -.04em; }
@@ -342,20 +331,9 @@
 .srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
 
 @keyframes enter { from { opacity: .25; transform: translateY(.5rem); } to { opacity: 1; transform: translateY(0); } }
-@keyframes networkLinkOne { 0%, 14% { opacity: 0; stroke-dashoffset: 1; } 15% { opacity: 1; stroke-dashoffset: 1; } 24%, 87% { opacity: 1; stroke-dashoffset: 0; } 94%, 100% { opacity: 0; stroke-dashoffset: 0; } }
-@keyframes networkLinkTwo { 0%, 23% { opacity: 0; stroke-dashoffset: 1; } 24% { opacity: 1; stroke-dashoffset: 1; } 34%, 87% { opacity: 1; stroke-dashoffset: 0; } 94%, 100% { opacity: 0; stroke-dashoffset: 0; } }
-@keyframes networkLinkThree { 0%, 32% { opacity: 0; stroke-dashoffset: 1; } 33% { opacity: 1; stroke-dashoffset: 1; } 43%, 87% { opacity: 1; stroke-dashoffset: 0; } 94%, 100% { opacity: 0; stroke-dashoffset: 0; } }
-@keyframes networkLinkFour { 0%, 41% { opacity: 0; stroke-dashoffset: 1; } 42% { opacity: 1; stroke-dashoffset: 1; } 52%, 87% { opacity: 1; stroke-dashoffset: 0; } 94%, 100% { opacity: 0; stroke-dashoffset: 0; } }
-@keyframes networkLinkFive { 0%, 50% { opacity: 0; stroke-dashoffset: 1; } 51% { opacity: 1; stroke-dashoffset: 1; } 61%, 87% { opacity: 1; stroke-dashoffset: 0; } 94%, 100% { opacity: 0; stroke-dashoffset: 0; } }
-@keyframes networkOrbitReveal { 0%, 60% { opacity: 0; stroke-dashoffset: 1; } 69%, 87% { opacity: .5; stroke-dashoffset: 0; } 94%, 100% { opacity: 0; stroke-dashoffset: 0; } }
-@keyframes networkHubPulse { 0%, 8% { opacity: 0; transform: scale(.65); } 14%, 65% { opacity: 1; transform: scale(1); } 71% { opacity: 1; transform: scale(1.06); } 76% { opacity: 1; transform: scale(1); } 81% { opacity: 1; transform: scale(1.04); } 87% { opacity: 1; transform: scale(1); } 94%, 100% { opacity: 0; transform: scale(.65); } }
 @media (prefers-reduced-motion: reduce) {
   .slide { animation: none; }
-  .progress i, .networkGraphic, .networkGraphic path, .networkGraphic circle { transition: none; }
-  .networkGraphic .networkLink, .networkGraphic .networkOrbit { transition: none; }
-  .networkGraphic[data-animate="true"] .networkLink, .networkGraphic[data-animate="true"] .networkHub, .networkGraphic[data-animate="true"] .networkOrbit { animation: none !important; }
-  .networkGraphic[data-animate="true"] .networkLink, .networkGraphic[data-animate="true"] .networkHub { opacity: 1 !important; stroke-dashoffset: 0 !important; }
-  .networkGraphic[data-animate="true"] .networkOrbit { opacity: .5 !important; stroke-dashoffset: 0 !important; }
+  .progress i { transition: none; }
 }
 @media (max-width: 900px) {
   .deckName { display: none; }
@@ -371,7 +349,6 @@
   .pillar:last-child { grid-column: 1 / -1; min-height: 8rem; }
   .pillar { min-height: 11rem; }
   .coverGraphic { right: -6rem; opacity: .15; }
-  .networkGraphic { width: clamp(8rem, 18vw, 12rem); opacity: .28; }
   .overview { grid-template-columns: repeat(3, 1fr); }
 }
 @media (min-width: 641px) and (max-width: 760px) {
@@ -381,8 +358,11 @@
 @media (max-height: 800px) and (min-width: 641px) {
   .slide { padding-block: .6rem; gap: .75rem; }
   .pillarSlide { padding-top: .6rem; }
-  .networkGraphic:not(.networkGraphicMobile) { display: none; }
-  .networkGraphicMobile { display: block; right: calc(clamp(1.25rem, 3vw, 3.75rem) + 5.1rem + .9rem); bottom: .45rem; width: 4rem; opacity: .65; }
+  .closingLineSlide .bottomLine { max-width: none; }
+  .closingLineSlide .simplePanel,
+  .closingLineSlide .featurePanel { padding-block: .5rem; }
+  .closingLineSlide .simplePanel h3 { margin: 1rem 0 .5rem; }
+  .closingLineSlide .featurePanel h3 { margin-bottom: .5rem; line-height: 1.05; }
   .slideHead h2 { font-size: clamp(2.8rem, 5vw, 4.3rem); }
   .eyebrow { margin-bottom: .7rem; }
   .problemSlide .slideHead h2,
@@ -415,9 +395,9 @@
   .cover h1, .cover h2 { font-size: clamp(3rem, 13vw, 5rem); }
   .lead { margin-top: 1.4rem !important; }
   .coverGraphic { width: 85vw; right: -35vw; }
-  .networkGraphic:not(.networkGraphicMobile) { display: none; }
-  .networkGraphicMobile { display: block; right: calc(1.25rem + 5.1rem + .9rem); bottom: .65rem; width: 2.75rem; opacity: .68; }
   .threeColumns, .problemColumns, .academyColumns, .split, .thesisLayout, .eventsLayout, .planTracks, .spaceGallery { grid-template-columns: 1fr; }
+  .partnerLogos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .communityGallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .problemHero { gap: 1rem; }
   .problemCycle { width: min(100%, 20rem); max-width: 74vw; }
   .verticalRule { display: none; }
