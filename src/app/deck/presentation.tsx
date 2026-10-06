@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatedGradient } from "@/components/ui/animated-gradient";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { deckCopy, type DeckLanguage } from "./copy";
@@ -22,7 +23,7 @@ export default function Deck() {
   const [overview, setOverview] = useState(false);
   const [language, setLanguage] = useState<DeckLanguage>("es");
   const t = deckCopy[language];
-  const footerLabel = index === 0 ? t.cover.eyebrow : index === slideCount - 1 ? t.close.eyebrow : t.slides[index].label;
+  const footerLabel = index === 0 ? "Iquiti" : index === slideCount - 1 ? t.close.eyebrow : t.slides[index].label;
   const networkStage = Math.max(0, Math.min(t.hub.pillars.length, index - firstPillarSlide + 1));
   const networkHidden = overview || index === 0 || index === slideCount - 1;
   const goTo = useCallback((next: number) => {
@@ -105,8 +106,21 @@ function SlideContent({ index, t, goTo }: { index: number; t: DeckText; goTo: (n
   switch (index) {
     case 0:
       return <>
+        <div className={styles.coverGradient} aria-hidden="true">
+          <AnimatedGradient
+            variant="mist"
+            speed={0.35}
+            opacity={1}
+            className={styles.coverGradientCanvas}
+          />
+          <div className={styles.coverGradientVeil} />
+        </div>
         <div className={styles.coverCopy}>
-          <p className={styles.eyebrow}>{t.cover.eyebrow}</p>
+          <p className={`${styles.eyebrow} ${styles.coverEyebrow}`}>
+            <span className={styles.coverEyebrowLogo} role="img" aria-label="Iquiti" />
+            <span aria-hidden="true">·</span>
+            <span>{t.cover.eyebrow}</span>
+          </p>
           <h1>{t.cover.title} <em>{t.cover.emphasis}</em></h1>
           <p className={styles.lead}>{t.cover.lead}</p>
         </div>

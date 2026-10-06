@@ -52,13 +52,47 @@
 .note { color: var(--muted); line-height: 1.5; letter-spacing: .03em; text-transform: none; }
 
 .cover { position: relative; isolation: isolate; background: var(--purple); color: #fff; overflow: hidden; }
-.cover::after { content: ""; position: absolute; inset: auto -10% -38% 30%; height: 85%; border: 1px solid #ffffff30; border-radius: 50%; z-index: -1; }
-.cover .eyebrow { color: var(--green); }
+.cover::after { content: ""; position: absolute; inset: auto -10% -38% 30%; height: 85%; border: 1px solid #ffffff30; border-radius: 50%; z-index: 0; pointer-events: none; }
+.coverGradient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.coverGradientCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.72;
+}
+.coverGradientVeil {
+  position: absolute;
+  inset: 0;
+  /* Keep copy side calm; let mist breathe on the right */
+  background:
+    linear-gradient(90deg, #583877f2 0%, #583877a8 28%, #58387733 58%, #58387714 100%),
+    radial-gradient(ellipse 55% 70% at 78% 55%, #b2f3bd14 0%, transparent 70%);
+  opacity: 0.85;
+  pointer-events: none;
+}
+.cover .eyebrow { color: var(--green); font-size: clamp(.78rem, 1.05vw, .95rem); }
+.coverEyebrow { display: flex; align-items: flex-end; gap: .35rem; }
+.coverEyebrowLogo {
+  display: block;
+  flex: none;
+  height: clamp(1.45rem, 2.15vw, 2rem);
+  aspect-ratio: 800 / 296;
+  background: var(--green);
+  mask: url("/brand/iquiti/logotipo-Iquiti.svg") center / contain no-repeat;
+  -webkit-mask: url("/brand/iquiti/logotipo-Iquiti.svg") center / contain no-repeat;
+}
 .coverCopy, .endCopy { max-width: 63rem; position: relative; z-index: 1; }
-.cover h1, .cover h2 { max-width: 14ch; font-size: clamp(3.3rem, 7.4vw, 8.5rem); }
-.cover h1 em, .cover h2 em { color: var(--green); font-style: normal; }
+.cover h1, .cover h2 { max-width: 14ch; margin-inline: 0; margin-left: -0.04em; font-size: clamp(3.15rem, 7vw, 8rem); text-wrap: wrap; white-space: pre-line; text-align: left; }
+.cover h1 em, .cover h2 em { display: block; color: var(--green); font-style: normal; white-space: pre-line; }
 .endCopy h2 em { display: block; }
-.lead { max-width: 35rem; margin-top: 2.4rem !important; font-size: clamp(1.1rem, 1.6vw, 1.5rem); line-height: 1.45; }
+.lead { max-width: 42rem; margin-top: 1.8rem !important; font-size: clamp(1.2rem, 1.7vw, 1.55rem); line-height: 1.45; text-align: left; }
 .coverGraphic { position: absolute; right: -4rem; top: 50%; width: min(42vw, 39rem); transform: translateY(-50%); opacity: .25; }
 .coverGraphic img { display: block; width: 100%; height: auto; filter: brightness(0) invert(1); }
 .networkGraphic { position: absolute; right: clamp(1rem, 2vw, 2rem); bottom: calc(4.4rem + clamp(.75rem, 2vw, 1.75rem)); width: clamp(10rem, 16vw, 17rem); color: var(--purple); opacity: .34; pointer-events: none; z-index: 1; transition: opacity .35s ease; }
