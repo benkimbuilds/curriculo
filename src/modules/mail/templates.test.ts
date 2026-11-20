@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { passwordResetEmail, verificationEmail, welcomeEmail } from "./templates";
+import {
+  cohortInvitationEmail,
+  passwordResetEmail,
+  verificationEmail,
+  welcomeEmail,
+} from "./templates";
 
 describe("mail templates", () => {
   it("escapes user and URL values in HTML", () => {
@@ -32,9 +37,22 @@ describe("mail templates", () => {
 
   it("keeps password reset on the same shell", () => {
     const message = passwordResetEmail("Diego", "https://example.test/reset/token");
-    expect(message.subject).toBe("Restablece tu contraseña");
+    expect(message.subject).toContain("Restablece tu contraseña");
     expect(message.html).toContain("Restablecer contraseña");
+    expect(message.html).toContain("recupera tu acceso");
     expect(message.html).toContain("iquiti.mx");
+    expect(message.html).toContain("#583877");
+    expect(message.html).toContain("border-radius:999px");
     expect(message.text).toContain("https://example.test/reset/token");
+  });
+
+  it("renders cohort invitations on the same shell", () => {
+    const message = cohortInvitationEmail("Cohorte Alpha <test>", "https://example.test/registro");
+    expect(message.subject).toContain("Invitación a Cohorte Alpha <test>");
+    expect(message.html).toContain("Cohorte Alpha &lt;test&gt;");
+    expect(message.html).not.toContain("Cohorte Alpha <test>");
+    expect(message.html).toContain("Continuar registro");
+    expect(message.html).toContain("iquiti.mx");
+    expect(message.text).toContain("https://example.test/registro");
   });
 });

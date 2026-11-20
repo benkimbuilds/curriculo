@@ -193,29 +193,67 @@ export function passwordResetEmail(name: string, url: string): MailTemplate {
   const safeFirst = escapeHtml(firstName);
 
   const innerHtml = [
-    bodyParagraph(`Hola ${safeFirst},`),
-    bodyParagraph("Recibimos una solicitud para restablecer la contraseña de tu cuenta en Iquiti."),
-    bodyParagraph("Si no lo solicitaste, ignora este mensaje. Tu acceso no cambiará.", true),
+    bodyParagraph(
+      "Recibimos una solicitud para cambiar la contraseña de tu cuenta. Si fuiste tú, continúa con el enlace de abajo.",
+    ),
+    bodyParagraph(`Hola ${safeFirst}, recupera tu acceso a <strong style="color:#000000; font-weight:600;">Iquiti</strong>.`),
+    bodyParagraph("Si no lo pediste, ignora este mensaje. Tu cuenta no cambia.", true),
   ].join("");
 
   return {
-    subject: "Restablece tu contraseña",
+    subject: "Restablece tu contraseña — Iquiti",
     text: [
-      `Hola ${firstName},`,
+      "Recibimos una solicitud para cambiar la contraseña de tu cuenta. Si fuiste tú, continúa con el enlace de abajo.",
       "",
-      "Usa este enlace para restablecer tu contraseña:",
+      `Hola ${firstName}, recupera tu acceso a Iquiti.`,
+      "",
       url,
       "",
-      "Si no lo solicitaste, ignora este mensaje.",
+      "Si no lo pediste, ignora este mensaje. Tu cuenta no cambia.",
       "",
       "iquiti.mx",
     ].join("\n"),
     html: renderTransactionalEmailLayout({
-      eyebrow: "Cuenta",
+      eyebrow: "Iquiti Academia",
       title: "Restablece tu contraseña",
       innerHtml,
       ctaHtml: primaryCta(url, "Restablecer contraseña"),
       footerRightLabel: "Seguridad",
+    }),
+  };
+}
+
+export function cohortInvitationEmail(cohortName: string, signupUrl: string): MailTemplate {
+  const safeCohort = escapeHtml(cohortName);
+
+  const innerHtml = [
+    bodyParagraph(
+      "Te invitaron a una cohorte en Iquiti. Crea o verifica tu cuenta con este mismo correo y te agregaremos automáticamente.",
+    ),
+    bodyParagraph(
+      `Cohorte: <strong style="color:#000000; font-weight:600;">${safeCohort}</strong>.`,
+    ),
+    bodyParagraph("Usa el botón para continuar tu registro.", true),
+  ].join("");
+
+  return {
+    subject: `Invitación a ${cohortName} — Iquiti`,
+    text: [
+      "Te invitaron a una cohorte en Iquiti. Crea o verifica tu cuenta con este mismo correo y te agregaremos automáticamente.",
+      "",
+      `Cohorte: ${cohortName}`,
+      "",
+      "Usa este enlace para continuar tu registro:",
+      signupUrl,
+      "",
+      "iquiti.mx",
+    ].join("\n"),
+    html: renderTransactionalEmailLayout({
+      eyebrow: "Iquiti Academia",
+      title: "Te invitaron a una cohorte",
+      innerHtml,
+      ctaHtml: primaryCta(signupUrl, "Continuar registro"),
+      footerRightLabel: "Invitación",
     }),
   };
 }
