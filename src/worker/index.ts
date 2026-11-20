@@ -1,3 +1,5 @@
+import "@/db/load-env";
+
 import { pool } from "@/db";
 import { getEnvironment } from "@/shared/env";
 import { logger } from "@/shared/logger";
