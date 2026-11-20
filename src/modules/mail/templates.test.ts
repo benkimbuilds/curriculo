@@ -16,11 +16,17 @@ describe("mail templates", () => {
     expect(message.subject.toLowerCase()).toContain("verifica");
     expect(message.subject.toLowerCase()).toContain("bienvenida");
     expect(message.text).toContain("https://example.test/verify?token=abc");
-    expect(message.html).toContain("Hola, Ana Ruiz.");
-    expect(message.html).toContain("Te damos la bienvenida a Iquiti.");
+    expect(message.html).toContain("primer paso");
+    expect(message.html).toContain("tiempo que inviertas y compartas con la comunidad");
+    expect(message.html).toContain("Bienvenido a");
+    expect(message.html).toContain(">Iquiti</strong>, Ana.");
+    expect(message.html).not.toContain("ya está creada");
     expect(message.html).toContain("Verificar correo");
+    expect(message.html).toContain("iquiti.mx");
+    expect(message.html).toContain("Manrope");
     expect(message.html).toContain("#583877");
-    expect(message.html).toContain("Aprender. Construir. Conectar.");
+    expect(message.html).toContain("#B2F3BD");
+    expect(message.html).toContain("#3E2754");
     expect(message.html).toContain('href="https://example.test/verify?token=abc"');
   });
 
@@ -28,7 +34,7 @@ describe("mail templates", () => {
     const message = passwordResetEmail("Diego", "https://example.test/reset/token");
     expect(message.subject).toBe("Restablece tu contraseña");
     expect(message.html).toContain("Restablecer contraseña");
-    expect(message.html).toContain("Iquiti");
+    expect(message.html).toContain("iquiti.mx");
     expect(message.text).toContain("https://example.test/reset/token");
   });
 });

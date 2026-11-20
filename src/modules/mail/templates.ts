@@ -1,99 +1,137 @@
 /**
- * Plantillas transaccionales alineadas con la landing de Iquiti:
- * blanco, tipografía limpia, acento púrpura y CTA en píldora.
- * HTML table-based para clientes de correo.
+ * Plantillas transaccionales compatibles con clientes de correo.
+ * Colores y tipografía alineados a la landing Iquiti; solo tablas + inline CSS.
  */
 
+/** Tokens de marca (src/styles/tokens.css) — valores literales para email. */
 const brand = {
+  canvas: "#F6F6F6",
+  paper: "#FFFFFF",
+  paperFooter: "#F6F6F6",
+  line: "#EDEDED",
+  black: "#000000",
+  gray: "#3A3A3A",
+  muted: "#5E5E5E",
+  faint: "#7D7D7D",
   purple: "#583877",
   purpleDeep: "#3E2754",
   green: "#B2F3BD",
-  black: "#000000",
   white: "#FFFFFF",
-  gray: "#3A3A3A",
-  muted: "#5E5E5E",
-  line: "#EDEDED",
-  canvas: "#F6F6F6",
-  font: 'Manrope, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif',
+  /** Manrope no carga en Gmail; la pila cae a system sans como en la landing. */
+  sans: "Manrope, Helvetica Neue, Helvetica, Arial, sans-serif",
+  domain: "iquiti.mx",
 } as const;
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>'"]/g, (character) => {
-    const entities: Record<string, string> = {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      "'": "&#39;",
-      '"': "&quot;",
-    };
-    return entities[character] ?? character;
-  });
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
-type EmailDocumentInput = {
-  preview: string;
+type TransactionalEmailLayoutOptions = {
+  eyebrow: string;
   title: string;
-  bodyHtml: string;
+  innerHtml: string;
+  ctaHtml: string;
+  footerRightLabel: string;
 };
 
-function emailDocument({ preview, title, bodyHtml }: EmailDocumentInput): string {
-  const safePreview = escapeHtml(preview);
-  const safeTitle = escapeHtml(title);
+function renderTransactionalEmailLayout(options: TransactionalEmailLayoutOptions): string {
+  const e = escapeHtml;
+  const year = new Date().getFullYear();
 
   return `<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="light" />
-  <meta name="supported-color-schemes" content="light" />
-  <title>${safeTitle}</title>
-  <!--[if mso]><style>table,td{font-family:Arial,sans-serif!important}</style><![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Iquiti</title>
 </head>
-<body style="margin:0;padding:0;background:${brand.canvas};color:${brand.black};-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">
-  <div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;">${safePreview}</div>
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${brand.canvas};">
-    <tr>
-      <td align="center" style="padding:32px 16px;">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;background:${brand.white};border:1px solid ${brand.line};">
-          <tr>
-            <td style="height:4px;line-height:4px;font-size:0;background:${brand.purple};">&nbsp;</td>
-          </tr>
-          <tr>
-            <td style="padding:36px 36px 8px;font-family:${brand.font};">
-              <p style="margin:0 0 20px;color:${brand.muted};font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;">Academia de Tecnología</p>
-              <p style="margin:0;color:${brand.black};font-size:28px;font-weight:600;letter-spacing:-0.04em;line-height:1;text-transform:uppercase;">Iquiti</p>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding:28px 36px 40px;font-family:${brand.font};">
-              ${bodyHtml}
-            </td>
-          </tr>
-          <tr>
-            <td style="padding:0 36px 36px;font-family:${brand.font};border-top:1px solid ${brand.line};">
-              <p style="margin:24px 0 8px;color:${brand.black};font-size:13px;font-weight:500;letter-spacing:-0.01em;">Aprender. Construir. Conectar.</p>
-              <p style="margin:0;color:${brand.muted};font-size:12px;line-height:1.6;">Centro Iquiti · Ciudad de México</p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+<body bgcolor="${brand.canvas}" style="margin:0; padding:0; background-color:${brand.canvas};">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${brand.canvas}" style="background-color:${brand.canvas};">
+  <tr>
+    <td align="center" style="padding:40px 16px;">
+      <table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" bgcolor="${brand.paper}" style="width:100%; max-width:560px; background-color:${brand.paper}; border:1px solid ${brand.line};">
+
+        <tr>
+          <td style="padding:28px 40px; border-bottom:1px solid ${brand.line}; font-family:${brand.sans}; font-size:11px; font-weight:500; color:${brand.muted}; letter-spacing:0.14em; text-transform:uppercase;">
+            <span style="color:${brand.purple};">&#9679;</span>&nbsp;&nbsp;${brand.domain}
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:32px 40px 8px 40px;">
+            <p style="margin:0 0 8px 0; font-family:${brand.sans}; font-size:11px; font-weight:500; color:${brand.muted}; letter-spacing:0.14em; text-transform:uppercase;">${e(options.eyebrow)}</p>
+            <h1 style="margin:0; font-family:${brand.sans}; font-size:28px; font-weight:600; color:${brand.black}; letter-spacing:-0.03em; line-height:1.15;">${e(options.title)}</h1>
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:16px;">
+              <tr>
+                <td width="40" height="3" bgcolor="${brand.green}" style="width:40px; height:3px; font-size:0; line-height:0; background-color:${brand.green};">&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <tr>
+          <td style="padding:16px 40px 28px 40px; font-family:${brand.sans}; font-size:15px; color:${brand.gray}; line-height:1.7;">
+            ${options.innerHtml}
+          </td>
+        </tr>
+
+        ${options.ctaHtml}
+
+        <tr>
+          <td bgcolor="${brand.paperFooter}" style="padding:20px 40px; border-top:1px solid ${brand.line}; background-color:${brand.paperFooter};">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="font-family:${brand.sans}; font-size:11px; font-weight:500; color:${brand.faint}; letter-spacing:0.06em;">${brand.domain} &copy; ${year}</td>
+                <td align="right" style="font-family:${brand.sans}; font-size:11px; font-weight:500; color:${brand.faint}; letter-spacing:0.06em;">${e(options.footerRightLabel)}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
 </body>
 </html>`;
 }
 
-function primaryButton(href: string, label: string): string {
+/** Botón con tabla + bgcolor (púrpura de acción de la landing). */
+function primaryCta(
+  href: string,
+  label: string,
+  secondaryLabel = "o entra directo al link",
+): string {
   const safeHref = escapeHtml(href);
   const safeLabel = escapeHtml(label);
-  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 8px;">
-  <tr>
-    <td align="center" bgcolor="${brand.purple}" style="border-radius:999px;background:${brand.purple};">
-      <a href="${safeHref}" style="display:inline-block;padding:14px 28px;color:${brand.white};font-family:${brand.font};font-size:14px;font-weight:600;letter-spacing:0.02em;line-height:1;text-decoration:none;border-radius:999px;">${safeLabel}</a>
-    </td>
-  </tr>
-</table>`;
+  const safeSecondary = escapeHtml(secondaryLabel);
+
+  return `<tr>
+          <td style="padding:0 40px 16px 40px;">
+            <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td bgcolor="${brand.purple}" style="background-color:${brand.purple}; border-radius:999px;">
+                  <a href="${safeHref}" style="display:inline-block; padding:14px 24px; font-family:${brand.sans}; font-size:13px; font-weight:600; letter-spacing:0.02em; color:${brand.white}; text-decoration:none; border-radius:999px;">${safeLabel}</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 40px 36px 40px;">
+            <a href="${safeHref}" style="font-family:${brand.sans}; font-size:14px; font-weight:500; color:${brand.purpleDeep}; text-decoration:underline;">${safeSecondary}</a>
+          </td>
+        </tr>`;
+}
+
+function bodyParagraph(html: string, last = false): string {
+  const margin = last ? "0" : "0 0 14px 0";
+  return `<p style="margin:${margin}; font-family:${brand.sans}; font-size:15px; color:${brand.gray}; line-height:1.7;">${html}</p>`;
 }
 
 export type MailTemplate = {
@@ -102,35 +140,45 @@ export type MailTemplate = {
   html: string;
 };
 
+function firstNameOf(name: string): string {
+  return name.trim().split(/\s+/)[0] || name;
+}
+
 /** Correo de bienvenida / verificación para cuentas nuevas. */
 export function welcomeEmail(name: string, url: string): MailTemplate {
-  const safeName = escapeHtml(name);
-  const firstName = name.trim().split(/\s+/)[0] || name;
+  const firstName = firstNameOf(name);
+  const safeFirst = escapeHtml(firstName);
+
+  const innerHtml = [
+    bodyParagraph(
+      "Registrarte es el primer paso. Lo que construyas de aquí en adelante depende del tiempo que inviertas y compartas con la comunidad.",
+    ),
+    bodyParagraph(
+      `Bienvenido a <strong style="color:#000000; font-weight:600;">Iquiti</strong>, ${safeFirst}.`,
+    ),
+    bodyParagraph("Confirma tu correo y empieza.", true),
+  ].join("");
 
   return {
     subject: "Te damos la bienvenida a Iquiti — verifica tu correo",
     text: [
-      `Hola ${firstName},`,
+      "Registrarte es el primer paso. Lo que construyas de aquí en adelante depende del tiempo que inviertas y compartas con la comunidad.",
       "",
-      "Te damos la bienvenida a Iquiti.",
-      "Tu cuenta en la Academia de Tecnología ya está creada.",
-      "Confirma tu correo para entrar al programa:",
+      `Bienvenido a Iquiti, ${firstName}.`,
+      "",
+      "Confirma tu correo y empieza:",
       url,
       "",
       "Este enlace vence en una hora.",
       "",
-      "Aprender. Construir. Conectar.",
-      "Centro Iquiti",
+      "iquiti.mx",
     ].join("\n"),
-    html: emailDocument({
-      preview: "Confirma tu correo y empieza en la Academia de Tecnología.",
-      title: "Te damos la bienvenida a Iquiti",
-      bodyHtml: `
-        <h1 style="margin:0 0 16px;color:${brand.black};font-size:28px;font-weight:600;letter-spacing:-0.035em;line-height:1.15;">Hola, ${safeName}.</h1>
-        <p style="margin:0 0 12px;color:${brand.gray};font-size:16px;line-height:1.65;">Te damos la bienvenida a Iquiti. Tu cuenta en la Academia de Tecnología ya está creada. Confirma tu correo para entrar al programa.</p>
-        ${primaryButton(url, "Verificar correo")}
-        <p style="margin:20px 0 0;color:${brand.muted};font-size:13px;line-height:1.55;">El enlace es personal y vence en una hora. Si no creaste esta cuenta, puedes ignorar este mensaje.</p>
-      `.trim(),
+    html: renderTransactionalEmailLayout({
+      eyebrow: "Iquiti Academia",
+      title: "Te damos la bienvenida",
+      innerHtml,
+      ctaHtml: primaryCta(url, "Verificar correo"),
+      footerRightLabel: "Bienvenida",
     }),
   };
 }
@@ -141,8 +189,14 @@ export function verificationEmail(name: string, url: string): MailTemplate {
 }
 
 export function passwordResetEmail(name: string, url: string): MailTemplate {
-  const safeName = escapeHtml(name);
-  const firstName = name.trim().split(/\s+/)[0] || name;
+  const firstName = firstNameOf(name);
+  const safeFirst = escapeHtml(firstName);
+
+  const innerHtml = [
+    bodyParagraph(`Hola ${safeFirst},`),
+    bodyParagraph("Recibimos una solicitud para restablecer la contraseña de tu cuenta en Iquiti."),
+    bodyParagraph("Si no lo solicitaste, ignora este mensaje. Tu acceso no cambiará.", true),
+  ].join("");
 
   return {
     subject: "Restablece tu contraseña",
@@ -154,17 +208,14 @@ export function passwordResetEmail(name: string, url: string): MailTemplate {
       "",
       "Si no lo solicitaste, ignora este mensaje.",
       "",
-      "Centro Iquiti",
+      "iquiti.mx",
     ].join("\n"),
-    html: emailDocument({
-      preview: "Restablece tu contraseña de Academia Iquiti.",
+    html: renderTransactionalEmailLayout({
+      eyebrow: "Cuenta",
       title: "Restablece tu contraseña",
-      bodyHtml: `
-        <h1 style="margin:0 0 16px;color:${brand.black};font-size:28px;font-weight:600;letter-spacing:-0.035em;line-height:1.15;">Restablece tu contraseña</h1>
-        <p style="margin:0 0 12px;color:${brand.gray};font-size:16px;line-height:1.65;">Hola ${safeName}, recibimos una solicitud para cambiar la contraseña de tu cuenta.</p>
-        ${primaryButton(url, "Restablecer contraseña")}
-        <p style="margin:20px 0 0;color:${brand.muted};font-size:13px;line-height:1.55;">Si no lo solicitaste, ignora este mensaje. Tu acceso no cambiará.</p>
-      `.trim(),
+      innerHtml,
+      ctaHtml: primaryCta(url, "Restablecer contraseña"),
+      footerRightLabel: "Seguridad",
     }),
   };
 }
