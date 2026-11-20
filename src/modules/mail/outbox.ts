@@ -2,7 +2,7 @@ import { db, type Database } from "@/db";
 import { mailOutbox } from "@/db/schema";
 
 export type MailMessage = {
-  kind: "email_verification" | "password_reset" | "account_notification";
+  kind: "email_verification" | "password_reset" | "account_notification" | "cohort_invitation";
   to: string;
   subject: string;
   text: string;

@@ -11,13 +11,14 @@ import {
   cohortStaffAssignments,
   enrollments,
   announcements,
-  mailOutbox,
   roleAssignments,
   user,
   type Cohort,
 } from "@/db/schema";
 import { recordAuditEvent } from "@/modules/audit/service";
 import { loadAuthorizationContext, requirePermission } from "@/modules/authorization/service";
+import { enqueueMail } from "@/modules/mail/outbox";
+import { cohortInvitationEmail } from "@/modules/mail/templates";
 import { AuthorizationDeniedError, ResourceNotFoundError } from "@/shared/errors";
 import { getEnvironment } from "@/shared/env";
 
@@ -433,14 +434,19 @@ export async function inviteLearnerToCohort(
   const token = randomBytes(32).toString("base64url");
   const tokenHash = createHash("sha256").update(token).digest("hex");
   const environment = getEnvironment();
+  const invite = cohortInvitationEmail(cohort.name, `${environment.BETTER_AUTH_URL}/registro`);
   await database.transaction(async (transaction) => {
     await transaction.insert(cohortInvitations).values({ cohortId, email, tokenHash, invitedByUserId: actorUserId, expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60_000) });
-    await transaction.insert(mailOutbox).values({
-      kind: "cohort_invitation",
-      recipient: email,
-      subject: `Invitación a ${cohort.name}`,
-      textBody: `Crea o verifica tu cuenta con este mismo correo. Al verificarla, te agregaremos automáticamente a ${cohort.name}. Acceso: ${environment.BETTER_AUTH_URL}/registro`,
-    });
+    await enqueueMail(
+      {
+        kind: "cohort_invitation",
+        to: email,
+        subject: invite.subject,
+        text: invite.text,
+        html: invite.html,
+      },
+      transaction,
+    );
     await recordAuditEvent(transaction, { actorUserId, organizationId: cohort.organizationId, eventType: "cohort.invitation_created", subjectType: "cohort", subjectId: cohortId, metadata: { email } });
   });
   return { added: false };
