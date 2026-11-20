@@ -20,7 +20,7 @@ const environmentSchema = z
     SMTP_HOST: z.string().min(1).default("localhost"),
     SMTP_PORT: z.coerce.number().int().positive().default(1025),
     SMTP_SECURE: booleanString,
-    SMTP_FROM: z.string().min(1).default("Curriculo <no-reply@curriculo.local>"),
+    SMTP_FROM: z.string().min(1).default("Iquiti <no-reply@iquiti.local>"),
     SMTP_USER: z.string().optional(),
     SMTP_PASSWORD: z.string().optional(),
     DEFAULT_ORGANIZATION_SLUG: z.string().min(1).default("aibuilders-mexico"),
