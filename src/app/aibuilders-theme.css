@@ -80,20 +80,34 @@ body:not(:has([data-iquiti-home])) ::selection { background: #b2f3bd; color: #00
 
 /* Application surfaces retain their information hierarchy within the new palette. */
 .app-frame { background: #f6f6f6; }
-.sidebar { background: #fff; border-color: var(--line); }
+.sidebar {
+  background: #fff;
+  border: 0;
+  border-radius: 28px;
+  box-shadow: 0 12px 32px rgb(0 0 0 / 4%);
+  height: calc(100vh - 24px);
+  margin: 12px 0 12px 12px;
+  top: 12px;
+}
 .sidebar .logo { gap: 8px; }
 .sidebar .logo__mark { width: 4.25rem; }
 .sidebar .logo > small { font-size: 12px; letter-spacing: .04em; padding-left: 8px; }
-.sidebar__nav { border: 0; gap: 4px; }
-.sidebar__nav a { border: 0; border-radius: 999px; color: #3a3a3a; font-size: 14px; font-weight: 550; padding: 13px 12px; }
-.sidebar__nav a:first-child { background: transparent; color: #3a3a3a; }
-.sidebar__nav a:hover, .sidebar__nav a[aria-current="page"] { background: #f4f0f8; color: #3e2754; }
-.sidebar__nav > a > svg, .sidebar__nav .program-navigation__toggle > svg { flex: 0 0 19px; height: 19px; width: 19px; }
-.sidebar__nav a:first-child { font-weight: 550; }
-.sidebar__nav a:hover { background: #f4f0f8; color: #3e2754; }
-.sidebar__profile { padding-top: 20px; }
+.sidebar__nav { border: 0; gap: 6px; }
+.sidebar__nav a {
+  border: 0;
+  border-radius: 16px;
+  color: #3a3a3a;
+  font-size: 14px;
+  font-weight: 550;
+  padding: 12px 14px;
+}
+.sidebar__nav a:first-child { background: #f4f0f8; color: #3e2754; font-weight: 650; }
+.sidebar__nav a:hover,
+.sidebar__nav a[aria-current="page"] { background: #f4f0f8; color: #3e2754; }
+.sidebar__nav > a > svg,
+.sidebar__nav .program-navigation__toggle > svg { flex: 0 0 19px; height: 19px; width: 19px; }
+.app-topbar { padding-top: 20px; }
 .sidebar__nav { flex: 1; min-height: 0; overflow-y: auto; padding-bottom: 16px; }
-.sidebar__profile { flex-shrink: 0; }
 .program-navigation__toggle { align-items: center; background: transparent; border: 0; border-radius: 10px; color: #666; display: flex; font-size: 14px; font-weight: 550; gap: 11px; padding: 13px 12px; text-align: left; width: 100%; }
 .program-navigation__toggle:hover, .program-navigation__toggle.is-active { background: #f4f4f4; color: #111; }
 .program-navigation__chevron { margin-left: auto; flex-shrink: 0; transition: transform .15s ease; }
@@ -115,6 +129,20 @@ body:not(:has([data-iquiti-home])) ::selection { background: #b2f3bd; color: #00
 .page-intro h1, .dashboard-greeting h1, .lesson-header h1, .week-hero h1, .project-header h1 { font-size: clamp(40px, 4.5vw, 58px); font-weight: 650; letter-spacing: -.035em; line-height: 1.05; text-wrap: balance; }
 .dashboard-greeting { border-color: var(--line); }
 .panel, .continue-card, .week-card, .program-summary, .tip-card, .project-showcase { background: #fff; border: 1px solid var(--line); border-radius: 18px; }
+.activity-card,
+.continue-banner,
+.progress-tile,
+.dashboard-home__courses.panel {
+  background: #fff;
+  border: 0;
+  border-radius: 24px;
+  box-shadow: 0 12px 32px rgb(0 0 0 / 4%);
+}
+.continue-banner { border-radius: 28px; }
+.next-cta { background: #f7f7f7; border: 0; border-radius: 18px; }
+.course-progress-row.is-current,
+.dashboard-project-strip,
+.course-progress-row:hover { background: #f7f7f7; border: 0; border-radius: 16px; }
 .panel { padding: 28px; }
 .app-content > .panel { margin-bottom: 24px; }
 .lesson-row, .rubric-row, .cohort-table__row, .roster-table__row, .content-table__row, .week-card__footer, .gallery-card__footer, .project-facts dl div { border-color: var(--line); }
@@ -228,8 +256,9 @@ body:not(:has([data-iquiti-home], [data-iquiti-curriculo])) :is(input[type="chec
 .status--alert { background: #fbeceb; color: #7a2f2a; border-color: #e4b8b3; }
 .status--info, .status--neutral { background: #ececec; color: #2e2e2e; border-color: #c4c4c4; }
 .avatar--green, .avatar--clay, .avatar--blue, .avatar--yellow, .avatar--violet { background: #ededed; color: #555; }
-.account-menu > div { border-radius: 14px; }
-.account-menu > div a, .account-menu > div button { border-radius: 8px; }
+.account-menu > div { border: 0; border-radius: 18px; }
+.account-menu > div a, .account-menu > div button { border-radius: 12px; }
+.account-menu__trigger { border: 0; border-radius: 999px; box-shadow: 0 8px 24px rgb(0 0 0 / 4%); }
 .admin-language-gate, .community-notice, .moderation-note { background: #f6f6f6; border: 1px solid var(--line); border-radius: 16px; }
 .admin-language-gate p, .admin-language-gate > svg, .community-notice p, .community-notice > svg { color: #666; }
 .moderation-card__subject { background: #fafafa; border-radius: 12px; }

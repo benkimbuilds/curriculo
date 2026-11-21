@@ -72,10 +72,32 @@ export async function recordStudentLessonView(
   const ownedEnrollment = await requireOwnedEnrollment(input.userId, input.enrollmentId, database);
   const now = new Date();
   const position = Math.max(0, Math.min(100, Math.round(input.resumePosition ?? 0)));
+  const [existing] = await database
+    .select()
+    .from(lessonProgress)
+    .where(and(
+      eq(lessonProgress.enrollmentId, ownedEnrollment.id),
+      eq(lessonProgress.lessonId, lesson.id),
+      eq(lessonProgress.contentVersion, input.contentVersion),
+    ))
+    .limit(1);
+
+  if (existing && Math.abs(existing.resumePosition - position) < 5) {
+    return existing;
+  }
+
   const [record] = await database.insert(lessonProgress).values({ enrollmentId: ownedEnrollment.id, lessonId: lesson.id, contentVersion: input.contentVersion, state: "viewed", viewedAt: now, resumePosition: position })
-    .onConflictDoUpdate({ target: [lessonProgress.enrollmentId, lessonProgress.lessonId, lessonProgress.contentVersion], set: { viewedAt: now, resumePosition: position, updatedAt: now } }).returning();
+    .onConflictDoUpdate({
+      target: [lessonProgress.enrollmentId, lessonProgress.lessonId, lessonProgress.contentVersion],
+      set: {
+        viewedAt: existing?.viewedAt ?? now,
+        resumePosition: position,
+        updatedAt: now,
+        ...(existing?.state === "completed" || existing?.state === "passed" ? {} : { state: "viewed" as const }),
+      },
+    })
+    .returning();
   if (!record) throw new Error("No se pudo guardar la posición.");
-  await syncStudentCompletion({ userId: input.userId, enrollmentId: input.enrollmentId, contentVersion: input.contentVersion }, database);
   return record;
 }
 
