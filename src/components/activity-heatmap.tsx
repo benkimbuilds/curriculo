@@ -1,8 +1,14 @@
 import { formatInvestedTime, type StudentActivitySummary } from "@/app/programa/student-activity";
 
-export function ActivityHeatmap({ activity }: { activity: StudentActivitySummary }) {
+export function ActivityHeatmap({
+  activity,
+  compact = false,
+}: {
+  activity: StudentActivitySummary;
+  compact?: boolean;
+}) {
   return (
-    <section className="activity-card" aria-label="Registro de actividad">
+    <section className={`activity-card${compact ? " activity-card--compact" : ""}`} aria-label="Registro de actividad">
       <div className="activity-card__header">
         <div>
           <p className="eyebrow">Tu ritmo</p>
@@ -40,8 +46,8 @@ export function ActivityHeatmap({ activity }: { activity: StudentActivitySummary
       <div className="activity-card__footer">
         <p>
           {activity.activeDays === 0
-            ? "Aún no hay actividad registrada. Completa tu primera lección para empezar el mapa."
-            : `${activity.activeDays} día${activity.activeDays === 1 ? "" : "s"} activo${activity.activeDays === 1 ? "" : "s"} · ${activity.rangeLabel}`}
+            ? "Sin actividad todavía."
+            : `${activity.activeDays} día${activity.activeDays === 1 ? "" : "s"} activo${activity.activeDays === 1 ? "" : "s"}`}
           {activity.streakDays > 0 ? ` · Racha ${activity.streakDays}` : null}
         </p>
         <div className="activity-heatmap__legend" aria-hidden="true">

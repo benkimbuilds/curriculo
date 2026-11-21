@@ -2,104 +2,158 @@ import Link from "next/link";
 
 import { AppShell } from "@/components/app-shell";
 import { ActivityHeatmap } from "@/components/activity-heatmap";
-import { ArrowRight, BookOpen, Clock, GitBranch } from "@/components/icons";
-import { LessonRow, ProgressBar, StatusPill } from "@/components/ui";
-import { getStudentActivitySummary } from "@/app/programa/student-activity";
-import { getStudentProgressSummary, isLessonComplete, loadStudentContext } from "@/app/programa/student-data";
+import { ArrowRight, BookOpen, Check, Clock, GitBranch } from "@/components/icons";
+import { ProgressBar, StatusPill } from "@/components/ui";
+import { formatInvestedTime, getStudentActivitySummary } from "@/app/programa/student-activity";
+import { getStudentProgressSummary, isLessonComplete, isProjectComplete, loadStudentContext } from "@/app/programa/student-data";
 
 export default async function DashboardPage() {
   const context = await loadStudentContext("/dashboard");
   const summary = getStudentProgressSummary(context);
-  const activity = getStudentActivitySummary(context);
+  const activity = getStudentActivitySummary(context, { weeks: 20 });
   const currentWeek = summary.currentWeek ?? context.weeks[0];
   const currentLesson = summary.currentLesson ?? currentWeek.modules[0]?.lessons[0];
   const currentWeekLessons = currentWeek.modules.flatMap((module) => module.lessons).filter((lesson) => lesson.required);
-  const incompleteLessons = currentWeekLessons.filter((lesson) => !isLessonComplete(summary.lessonState.get(lesson.id)));
-  const nextLessons = incompleteLessons.slice(currentLesson ? 1 : 0, currentLesson ? 4 : 3);
   const completedInWeek = currentWeekLessons.filter((lesson) => isLessonComplete(summary.lessonState.get(lesson.id))).length;
   const latestSubmission = context.submissions
     .filter(({ projectId }) => projectId === currentWeek.project.id)
     .sort((left, right) => right.attempt - left.attempt)[0];
   const firstName = context.user.name.trim().split(/\s+/)[0] || context.user.name;
-  const today = new Intl.DateTimeFormat("es-MX", { weekday: "long", day: "numeric", month: "long", timeZone: "America/Mexico_City" }).format(new Date());
+  const today = new Intl.DateTimeFormat("es-MX", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    timeZone: "America/Mexico_City",
+  }).format(new Date());
   const currentSchedule = context.schedules.find(({ weekId }) => weekId === currentWeek.id);
+  const passedProjectIds = new Set(
+    context.submissions.filter(({ status }) => isProjectComplete(status)).map(({ projectId }) => projectId),
+  );
+  const submittedProjectIds = new Set(context.submissions.map(({ projectId }) => projectId));
+
+  const weekRows = context.weeks.map((week) => {
+    const lessons = week.modules.flatMap((module) => module.lessons).filter((lesson) => lesson.required);
+    const completeCount = lessons.filter((lesson) => isLessonComplete(summary.lessonState.get(lesson.id))).length;
+    const projectDone = passedProjectIds.has(week.project.id) || submittedProjectIds.has(week.project.id);
+    const percent = lessons.length ? Math.round((completeCount / lessons.length) * 100) : 0;
+    const isCurrent = week.week === currentWeek.week;
+    const isComplete = completeCount === lessons.length && passedProjectIds.has(week.project.id);
+    return { week, lessons, completeCount, projectDone, percent, isCurrent, isComplete };
+  });
+
+  const focusWeeks = (() => {
+    const currentIndex = weekRows.findIndex((row) => row.isCurrent);
+    const start = Math.max(0, currentIndex - 1);
+    return weekRows.slice(start, start + 4);
+  })();
 
   return (
     <AppShell userName={context.user.name}>
-      <div className="app-content">
+      <div className="app-content app-content--wide">
         <header className="dashboard-greeting">
           <p className="eyebrow">{today}</p>
           <h1>Hola, {firstName}</h1>
         </header>
 
-        <ActivityHeatmap activity={activity} />
+        {currentLesson ? (
+          <section className="continue-banner">
+            <div className="continue-banner__copy">
+              <div className="card-kicker">
+                <span>SEMANA {currentWeek.week}</span>
+                <StatusPill tone="warm">En curso</StatusPill>
+              </div>
+              <h2>{currentLesson.title}</h2>
+              <p>{currentLesson.summary}</p>
+              <ProgressBar
+                label={`${completedInWeek} de ${currentWeekLessons.length} lecciones completadas`}
+                value={currentWeekLessons.length ? Math.round((completedInWeek / currentWeekLessons.length) * 100) : 0}
+              />
+            </div>
+            <Link
+              className="button button--primary continue-banner__cta"
+              href={`/programa/semana/${currentWeek.week}/leccion/${currentLesson.id}`}
+            >
+              Continuar <ArrowRight />
+            </Link>
+          </section>
+        ) : null}
 
-        <div className="dashboard-grid">
-          <section className="panel">
+        <div className="dashboard-home">
+          <section className="panel dashboard-home__courses">
             <div className="panel__header">
               <div>
-                <p className="eyebrow">Tu semana</p>
-                <h2>Lo que sigue</h2>
+                <p className="eyebrow">Tu ruta</p>
+                <h2>Semanas en curso</h2>
               </div>
-              <Link className="text-link" href={`/programa/semana/${currentWeek.week}`}>
-                Ver semana <ArrowRight />
+              <Link className="text-link" href="/programa">
+                Ver mapa <ArrowRight />
               </Link>
             </div>
 
-            {currentLesson ? (
-              <div className="next-cta">
-                <div className="card-kicker">
-                  <span>SEMANA {currentWeek.week}</span>
-                  <StatusPill tone="warm">En curso</StatusPill>
-                </div>
-                <h3>{currentLesson.title}</h3>
-                <p>{currentLesson.summary}</p>
-                <ProgressBar
-                  label={`${completedInWeek} de ${currentWeekLessons.length} lecciones completadas`}
-                  value={currentWeekLessons.length ? Math.round((completedInWeek / currentWeekLessons.length) * 100) : 0}
-                />
+            <div className="course-progress-list">
+              {focusWeeks.map(({ week, lessons, completeCount, percent, isCurrent, isComplete }) => (
                 <Link
-                  className="button button--primary"
-                  href={`/programa/semana/${currentWeek.week}/leccion/${currentLesson.id}`}
+                  className={`course-progress-row${isCurrent ? " is-current" : ""}${isComplete ? " is-complete" : ""}`}
+                  href={`/programa/semana/${week.week}`}
+                  key={week.id}
                 >
-                  Continuar <ArrowRight />
+                  <span className="course-progress-row__mark">{String(week.week).padStart(2, "0")}</span>
+                  <div className="course-progress-row__body">
+                    <div className="course-progress-row__top">
+                      <strong>{week.title}</strong>
+                      {isComplete ? (
+                        <StatusPill tone="good">Completada</StatusPill>
+                      ) : isCurrent ? (
+                        <StatusPill tone="warm">En curso</StatusPill>
+                      ) : (
+                        <StatusPill tone="neutral">Disponible</StatusPill>
+                      )}
+                    </div>
+                    <div className="course-progress-row__meta">
+                      <span>
+                        <Clock /> {Math.round(week.estimatedMinutes / 60)} h estimadas
+                      </span>
+                      <span>
+                        <Check /> {completeCount}/{lessons.length} lecciones
+                      </span>
+                    </div>
+                    <ProgressBar value={percent} />
+                  </div>
                 </Link>
-              </div>
-            ) : null}
+              ))}
+            </div>
 
-            {nextLessons.length ? (
-              <div className="lesson-list">
-                {nextLessons.map((lesson) => (
-                  <LessonRow
-                    href={`/programa/semana/${currentWeek.week}/leccion/${lesson.id}`}
-                    key={lesson.id}
-                    meta={`${lesson.estimatedMinutes} min`}
-                    status="upcoming"
-                    title={lesson.title}
-                  />
-                ))}
+            <aside className="dashboard-project-strip">
+              <div>
+                <p className="eyebrow">Proyecto semanal</p>
+                <strong>{currentWeek.project.title}</strong>
+                <span>
+                  <GitBranch /> {latestSubmission ? `Intento ${latestSubmission.attempt}` : "Sin entrega"}
+                </span>
               </div>
-            ) : null}
+              <Link className="button button--secondary" href={`/proyectos/${currentWeek.week}/entrega`}>
+                {latestSubmission ? "Ver entrega" : "Entregar"} <ArrowRight />
+              </Link>
+            </aside>
           </section>
 
-          <aside className="panel project-mini">
-            <div className="project-mini__icon">
-              <GitBranch />
+          <aside className="dashboard-home__progress">
+            <ActivityHeatmap activity={activity} compact />
+
+            <div className="progress-tiles">
+              <article className="progress-tile">
+                <p>Avance del programa</p>
+                <strong>{summary.percent}%</strong>
+                <ProgressBar value={summary.percent} />
+              </article>
+              <article className="progress-tile">
+                <p>Tiempo invertido</p>
+                <strong>{formatInvestedTime(activity.totalMinutes)}</strong>
+                <small>
+                  {summary.completedLessons} lecciones · {summary.passedProjects} proyectos
+                </small>
+              </article>
             </div>
-            <p className="eyebrow">Proyecto semanal</p>
-            <h2>{currentWeek.project.title}</h2>
-            <p>{currentWeek.project.summary}</p>
-            <div className="mini-meta">
-              <span>
-                <Clock /> {Math.round(currentWeek.project.estimatedMinutes / 60)} h
-              </span>
-              <span>
-                <GitBranch /> {latestSubmission ? `Intento ${latestSubmission.attempt}` : "Sin entrega"}
-              </span>
-            </div>
-            <Link className="button button--secondary button--full" href={`/proyectos/${currentWeek.week}/entrega`}>
-              {latestSubmission ? "Ver entrega" : "Entregar proyecto"} <ArrowRight />
-            </Link>
           </aside>
         </div>
 
