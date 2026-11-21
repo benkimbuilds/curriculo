@@ -1,22 +1,21 @@
 import Link from "next/link";
 
 import { AppShell } from "@/components/app-shell";
+import { ActivityHeatmap } from "@/components/activity-heatmap";
 import { ArrowRight, BookOpen, Clock, GitBranch } from "@/components/icons";
 import { LessonRow, ProgressBar, StatusPill } from "@/components/ui";
+import { getStudentActivitySummary } from "@/app/programa/student-activity";
 import { getStudentProgressSummary, isLessonComplete, loadStudentContext } from "@/app/programa/student-data";
-import { listDirectMentors } from "@/modules/mentoring/service";
-import { resolveDefaultOrganizationId } from "@/modules/community/db-community";
 
 export default async function DashboardPage() {
   const context = await loadStudentContext("/dashboard");
   const summary = getStudentProgressSummary(context);
-  const directMentors = await listDirectMentors(await resolveDefaultOrganizationId(), context.user.id);
+  const activity = getStudentActivitySummary(context);
   const currentWeek = summary.currentWeek ?? context.weeks[0];
   const currentLesson = summary.currentLesson ?? currentWeek.modules[0]?.lessons[0];
   const currentWeekLessons = currentWeek.modules.flatMap((module) => module.lessons).filter((lesson) => lesson.required);
-  const nextLessons = currentWeekLessons
-    .filter((lesson) => !isLessonComplete(summary.lessonState.get(lesson.id)))
-    .slice(0, 3);
+  const incompleteLessons = currentWeekLessons.filter((lesson) => !isLessonComplete(summary.lessonState.get(lesson.id)));
+  const nextLessons = incompleteLessons.slice(currentLesson ? 1 : 0, currentLesson ? 4 : 3);
   const completedInWeek = currentWeekLessons.filter((lesson) => isLessonComplete(summary.lessonState.get(lesson.id))).length;
   const latestSubmission = context.submissions
     .filter(({ projectId }) => projectId === currentWeek.project.id)
@@ -31,50 +30,126 @@ export default async function DashboardPage() {
         <header className="dashboard-greeting">
           <p className="eyebrow">{today}</p>
           <h1>Hola, {firstName}</h1>
-          <p className="dashboard-greeting__lede">Continúa desde tu siguiente lección pendiente.</p>
-          <p className="dashboard-greeting__context">
-            <span>
-              {context.enrollment.mode === "facilitated" ? "Cohorte facilitada" : "Estudio autodidacta"}
-            </span>
-            {directMentors.length ? (
-              <>
-                <span aria-hidden="true">·</span>
-                <span>
-                  Mentor{" "}
-                  {directMentors.map((mentor, index) => (
-                    <span key={mentor.id}>
-                      {index > 0 ? ", " : null}
-                      <a href={`mailto:${mentor.email}`}>{mentor.name}</a>
-                    </span>
-                  ))}
-                </span>
-              </>
-            ) : (
-              <>
-                <span aria-hidden="true">·</span>
-                <span>Sin mentor asignado</span>
-              </>
-            )}
-          </p>
         </header>
 
-        {currentLesson ? <section className="continue-card">
-          <div className="continue-card__body"><div className="card-kicker"><span>SEMANA {currentWeek.week}</span><StatusPill tone="warm">En curso</StatusPill></div><h2>{currentLesson.title}</h2><p>{currentLesson.summary}</p><ProgressBar label={`${completedInWeek} de ${currentWeekLessons.length} lecciones completadas`} value={currentWeekLessons.length ? Math.round((completedInWeek / currentWeekLessons.length) * 100) : 0} /><Link className="button button--primary" href={`/programa/semana/${currentWeek.week}/leccion/${currentLesson.id}`}>Continuar <ArrowRight /></Link></div>
-        </section> : null}
+        <ActivityHeatmap activity={activity} />
 
         <div className="dashboard-grid">
-          <section className="panel"><div className="panel__header"><div><p className="eyebrow">Tu semana</p><h2>Lo que sigue</h2></div><Link className="text-link" href={`/programa/semana/${currentWeek.week}`}>Ver semana <ArrowRight /></Link></div>
-            <div className="lesson-list">{nextLessons.map((lesson, index) => <LessonRow href={`/programa/semana/${currentWeek.week}/leccion/${lesson.id}`} key={lesson.id} meta={`${lesson.estimatedMinutes} min`} status={index === 0 ? "current" : "upcoming"} title={lesson.title} />)}</div>
+          <section className="panel">
+            <div className="panel__header">
+              <div>
+                <p className="eyebrow">Tu semana</p>
+                <h2>Lo que sigue</h2>
+              </div>
+              <Link className="text-link" href={`/programa/semana/${currentWeek.week}`}>
+                Ver semana <ArrowRight />
+              </Link>
+            </div>
+
+            {currentLesson ? (
+              <div className="next-cta">
+                <div className="card-kicker">
+                  <span>SEMANA {currentWeek.week}</span>
+                  <StatusPill tone="warm">En curso</StatusPill>
+                </div>
+                <h3>{currentLesson.title}</h3>
+                <p>{currentLesson.summary}</p>
+                <ProgressBar
+                  label={`${completedInWeek} de ${currentWeekLessons.length} lecciones completadas`}
+                  value={currentWeekLessons.length ? Math.round((completedInWeek / currentWeekLessons.length) * 100) : 0}
+                />
+                <Link
+                  className="button button--primary"
+                  href={`/programa/semana/${currentWeek.week}/leccion/${currentLesson.id}`}
+                >
+                  Continuar <ArrowRight />
+                </Link>
+              </div>
+            ) : null}
+
+            {nextLessons.length ? (
+              <div className="lesson-list">
+                {nextLessons.map((lesson) => (
+                  <LessonRow
+                    href={`/programa/semana/${currentWeek.week}/leccion/${lesson.id}`}
+                    key={lesson.id}
+                    meta={`${lesson.estimatedMinutes} min`}
+                    status="upcoming"
+                    title={lesson.title}
+                  />
+                ))}
+              </div>
+            ) : null}
           </section>
-          <aside className="panel project-mini"><div className="project-mini__icon"><GitBranch /></div><p className="eyebrow">Proyecto semanal</p><h2>{currentWeek.project.title}</h2><p>{currentWeek.project.summary}</p><div className="mini-meta"><span><Clock /> {Math.round(currentWeek.project.estimatedMinutes / 60)} h</span><span><GitBranch /> {latestSubmission ? `Intento ${latestSubmission.attempt}` : "Sin entrega"}</span></div><Link className="button button--secondary button--full" href={`/proyectos/${currentWeek.week}/entrega`}>{latestSubmission ? "Ver entrega" : "Entregar proyecto"} <ArrowRight /></Link></aside>
+
+          <aside className="panel project-mini">
+            <div className="project-mini__icon">
+              <GitBranch />
+            </div>
+            <p className="eyebrow">Proyecto semanal</p>
+            <h2>{currentWeek.project.title}</h2>
+            <p>{currentWeek.project.summary}</p>
+            <div className="mini-meta">
+              <span>
+                <Clock /> {Math.round(currentWeek.project.estimatedMinutes / 60)} h
+              </span>
+              <span>
+                <GitBranch /> {latestSubmission ? `Intento ${latestSubmission.attempt}` : "Sin entrega"}
+              </span>
+            </div>
+            <Link className="button button--secondary button--full" href={`/proyectos/${currentWeek.week}/entrega`}>
+              {latestSubmission ? "Ver entrega" : "Entregar proyecto"} <ArrowRight />
+            </Link>
+          </aside>
         </div>
 
-        {currentSchedule?.dueAt || context.announcements.length ? <div className="dashboard-grid">
-          {currentSchedule?.dueAt ? <section className="panel"><p className="eyebrow">Calendario de cohorte</p><h2>Entrega de la semana {currentWeek.week}</h2><p>{new Intl.DateTimeFormat("es-MX", { dateStyle: "full", timeStyle: "short", timeZone: "America/Mexico_City" }).format(currentSchedule.dueAt)}</p></section> : null}
-          {context.announcements.length ? <section className="panel"><p className="eyebrow">Avisos</p><div className="attention-list">{context.announcements.slice(0, 3).map((announcement) => <article key={announcement.id}><strong>{announcement.title}</strong><p>{announcement.body}</p></article>)}</div></section> : null}
-        </div> : null}
+        {currentSchedule?.dueAt || context.announcements.length ? (
+          <div className="dashboard-grid">
+            {currentSchedule?.dueAt ? (
+              <section className="panel">
+                <p className="eyebrow">Calendario de cohorte</p>
+                <h2>Entrega de la semana {currentWeek.week}</h2>
+                <p>
+                  {new Intl.DateTimeFormat("es-MX", {
+                    dateStyle: "full",
+                    timeStyle: "short",
+                    timeZone: "America/Mexico_City",
+                  }).format(currentSchedule.dueAt)}
+                </p>
+              </section>
+            ) : null}
+            {context.announcements.length ? (
+              <section className="panel">
+                <p className="eyebrow">Avisos</p>
+                <div className="attention-list">
+                  {context.announcements.slice(0, 3).map((announcement) => (
+                    <article key={announcement.id}>
+                      <strong>{announcement.title}</strong>
+                      <p>{announcement.body}</p>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+          </div>
+        ) : null}
 
-        <section className="dashboard-bottom"><div><h2>Tu ruta completa</h2><p>{summary.completedLessons} de {summary.totalLessons} lecciones · {summary.passedProjects} proyectos aprobados.</p></div><div className="big-progress"><strong>{summary.percent}%</strong><ProgressBar value={summary.percent} /></div><Link className="button button--ghost" href="/programa"><BookOpen /> Ver mapa completo</Link></section>
+        <section className="dashboard-bottom">
+          <div>
+            <h2>Tu ruta completa</h2>
+            <p>
+              {summary.completedLessons} de {summary.totalLessons} lecciones · {summary.passedProjects} proyectos
+              aprobados.
+            </p>
+          </div>
+          <div className="big-progress">
+            <strong>{summary.percent}%</strong>
+            <ProgressBar value={summary.percent} />
+          </div>
+          <Link className="button button--ghost" href="/programa">
+            <BookOpen /> Ver mapa completo
+          </Link>
+        </section>
       </div>
     </AppShell>
   );

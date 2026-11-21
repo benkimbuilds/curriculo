@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 
 import { requireVerifiedSession } from "@/modules/auth/session";
-import { completeStudentLesson, recordStudentLessonView } from "./student-service";
+import { completeStudentLesson } from "./student-service";
 
 export type LessonActionState = { status: "idle" | "success" | "error"; message: string };
 
@@ -26,15 +26,5 @@ export async function completeLessonAction(
     return { status: "success", message: "Lección completada" };
   } catch {
     return { status: "error", message: "No pudimos guardar tu avance. Intenta de nuevo." };
-  }
-}
-
-export async function recordLessonViewAction(input: { enrollmentId: string; lessonId: string; week: number; contentVersion: string; resumePosition?: number }) {
-  try {
-    const currentSession = await requireVerifiedSession();
-    await recordStudentLessonView({ ...input, userId: currentSession.user.id });
-    return { ok: true };
-  } catch {
-    return { ok: false };
   }
 }

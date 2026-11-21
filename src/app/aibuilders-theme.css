@@ -114,7 +114,8 @@ body:not(:has([data-iquiti-home])) ::selection { background: #b2f3bd; color: #00
 .mobile-app-header .account-menu > div { position: static; box-shadow: none; margin-top: 8px; min-width: 0; }
 .page-intro h1, .dashboard-greeting h1, .lesson-header h1, .week-hero h1, .project-header h1 { font-size: clamp(40px, 4.5vw, 58px); font-weight: 650; letter-spacing: -.035em; line-height: 1.05; text-wrap: balance; }
 .dashboard-greeting { border-color: var(--line); }
-.panel, .continue-card, .week-card, .program-summary, .tip-card, .project-showcase { background: #fff; border: 1px solid var(--line); border-radius: 18px; }
+.panel, .continue-card, .week-card, .program-summary, .tip-card, .project-showcase, .activity-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; }
+.next-cta { background: #f7f7f7; border-color: var(--line); border-radius: 14px; }
 .panel { padding: 28px; }
 .app-content > .panel { margin-bottom: 24px; }
 .lesson-row, .rubric-row, .cohort-table__row, .roster-table__row, .content-table__row, .week-card__footer, .gallery-card__footer, .project-facts dl div { border-color: var(--line); }
