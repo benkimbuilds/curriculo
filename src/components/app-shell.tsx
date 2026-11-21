@@ -87,13 +87,36 @@ export async function AppShell({ children, userName }: { children: ReactNode; us
   const weeks = canViewLearning ? listCurriculumWeeks().map(({ week, title }) => ({ week, title, completed: completedWeeks.has(week) })) : [];
   const roleLabel = role === "student" ? "Estudiante" : role === "staff" ? "Mentor" : role === "editor" ? "Edición curricular" : "Administración";
   const displayName = userName ?? (role === "student" ? "Mi cuenta" : "Equipo");
-  const initials = displayName.split(/\s+/).map((part) => part[0]).join("").slice(0, 2).toUpperCase();
   return (
     <div className="app-frame">
       <a className="skip-link" href="#contenido">Saltar al contenido</a>
-      <AppSidebar initials={initials} links={links} roleLabel={roleLabel} showProfile={canViewLearning} userName={displayName} weeks={weeks} />
-      <header className="mobile-app-header"><Logo /><details><summary aria-label="Abrir navegación">Menú</summary><nav>{links.map(({ href, label }) => href === "/programa" ? <ProgramNavigation key={href} label={label} weeks={weeks} /> : <Link href={href} key={href}>{label}</Link>)}<AccountMenu showProfile={canViewLearning} /></nav></details></header>
-      <main className="app-main" id="contenido">{children}</main>
+      <AppSidebar links={links} roleLabel={roleLabel} weeks={weeks} />
+      <header className="mobile-app-header">
+        <Logo />
+        <div className="mobile-app-header__actions">
+          <AccountMenu roleLabel={roleLabel} showProfile={canViewLearning} userName={displayName} />
+          <details>
+            <summary aria-label="Abrir navegación">Menú</summary>
+            <nav>
+              {links.map(({ href, label }) =>
+                href === "/programa" ? (
+                  <ProgramNavigation key={href} label={label} weeks={weeks} />
+                ) : (
+                  <Link href={href} key={href}>
+                    {label}
+                  </Link>
+                ),
+              )}
+            </nav>
+          </details>
+        </div>
+      </header>
+      <main className="app-main" id="contenido">
+        <header className="app-topbar">
+          <AccountMenu roleLabel={roleLabel} showProfile={canViewLearning} userName={displayName} />
+        </header>
+        {children}
+      </main>
     </div>
   );
 }
