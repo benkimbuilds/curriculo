@@ -31,7 +31,7 @@ export default async function ProjectDetailPage({
 
   return (
     <AppShell userName={session.user.name}>
-      <div className="app-content">
+      <div className="app-content app-content--wide">
         <GalleryActionToasts
           commentError={query.comentario === "error"}
           commentPosted={query.comentario === "1"}
