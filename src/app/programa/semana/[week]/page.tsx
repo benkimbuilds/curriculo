@@ -30,7 +30,7 @@ export default async function WeekPage({ params }: { params: Promise<{ week: str
   const latestSubmission = context.submissions.filter(({ projectId }) => projectId === week.project.id).sort((left, right) => right.attempt - left.attempt)[0];
   return (
     <AppShell userName={context.user.name}>
-      <div className="app-content app-content--narrow">
+      <div className="app-content app-content--wide">
         <BackLink href="/programa">Volver al programa</BackLink>
         <header className={`week-hero week-hero--${color}`}><div><p className="eyebrow">SEMANA {number}</p><h1>{week.title}</h1><p>{week.summary}</p><div className="week-hero__meta"><span><Clock /> {Math.round(week.estimatedMinutes / 60)} h estimadas</span><span>{lessons.length} lecciones</span><span>1 proyecto</span></div></div><span className="week-hero__number">{String(number).padStart(2, "0")}</span></header>
         <div className="week-layout">

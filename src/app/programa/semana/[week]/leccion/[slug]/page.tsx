@@ -43,7 +43,7 @@ export default async function LessonPage({ params, searchParams }: {
   const content = week.lessonBodies[lesson.id];
   const headings = content.blocks.filter(block => block.type === "heading").slice(0, 16);
 
-  return <AppShell userName={context.user.name}><div className="lesson-page">
+  return <AppShell userName={context.user.name}><div className="lesson-page lesson-page--wide">
     {locale !== "en" ? <LessonProgressTracker contentVersion={week.contentVersion} enrollmentId={context.enrollment.id} initialPosition={progress?.resumePosition ?? 0} lessonId={lesson.id} week={weekNumber} /> : null}
     <header className="lesson-header">
       <BackLink href={source ? "/programa/biblioteca" : `/programa/semana/${weekNumber}`}>{source ? "Biblioteca completa" : `Semana ${weekNumber}`}</BackLink>

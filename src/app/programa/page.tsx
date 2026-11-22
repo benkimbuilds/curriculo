@@ -13,7 +13,7 @@ export default async function ProgramPage() {
   const submittedProjectIds = new Set(context.submissions.map(({ projectId }) => projectId));
   return (
     <AppShell userName={context.user.name}>
-      <div className="app-content">
+      <div className="app-content app-content--wide">
         <PageIntro description="Doce semanas para pasar de cero a construir aplicaciones web completas. Avanza a tu ritmo: aquí no hay fechas límite." eyebrow="Tu mapa de aprendizaje" title="Mi programa" />
         <section className="panel curriculum-scope"><h2>Una ruta guiada y el currículo completo</h2><p>El avance del programa mide las lecciones y los doce proyectos de la ruta guiada. La biblioteca reúne además {listOdinDocuments().length} lecciones y proyectos de Fundamentos y Full Stack JavaScript de The Odin Project, con adaptación a Next.js. Completar toda la biblioteca requiere tiempo adicional: doce semanas no equivalen a dominar todo el material.</p><Link className="button button--ghost" href="/programa/biblioteca">Explorar el currículo completo <ArrowRight /></Link></section>
         <div className="program-summary"><div><strong>{summary.percent}%</strong><span>del programa</span></div><ProgressBar value={summary.percent} /><div><strong>{summary.completedLessons}</strong><span>lecciones completas</span></div><div><strong>{submittedProjectIds.size}</strong><span>proyectos entregados</span></div></div>

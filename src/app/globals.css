@@ -755,6 +755,12 @@ input::placeholder, textarea::placeholder { color: #9aa39f; }
 
 /* Lesson reader */
 .lesson-page { margin: 0 auto; max-width: 1100px; padding: 48px 50px 90px; }
+.lesson-page--wide {
+  margin-inline: 0;
+  max-width: none;
+  padding: 24px clamp(28px, 4vw, 64px) 80px;
+  width: 100%;
+}
 .lesson-header { border-bottom: 1px solid var(--line); margin-bottom: 42px; padding-bottom: 34px; }
 .lesson-header__meta { color: var(--muted); display: flex; font-size: 9px; font-weight: 750; gap: 18px; letter-spacing: .1em; margin-bottom: 17px; }
 .lesson-header__meta span { align-items: center; display: flex; gap: 5px; }
