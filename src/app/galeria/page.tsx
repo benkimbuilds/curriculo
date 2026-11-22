@@ -26,7 +26,7 @@ export default async function GalleryPage({
 
   return (
     <AppShell userName={session.user.name}>
-      <div className="app-content">
+      <div className="app-content app-content--wide">
         <GalleryActionToasts
           listOnly
           ownStarBlocked={query.estrella === "propia"}

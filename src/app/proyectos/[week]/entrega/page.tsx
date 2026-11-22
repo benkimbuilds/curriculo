@@ -27,7 +27,7 @@ export default async function SubmissionPage({ params }: { params: Promise<{ wee
   const runBySubmission = new Map(runRows.map((run) => [run.submissionId, run]));
   return (
     <AppShell userName={context.user.name}>
-      <div className="app-content app-content--narrow">
+      <div className="app-content app-content--wide">
         <BackLink href={`/programa/semana/${week}`}>Volver a la semana {week}</BackLink>
         <header className="project-header"><div><p className="eyebrow">PROYECTO · SEMANA {weekNumber}</p><h1>{curriculumWeek.project.title}</h1><p>{curriculumWeek.project.summary}</p><div className="project-header__meta"><span><Clock /> {Math.round(curriculumWeek.project.estimatedMinutes / 60)} horas</span><span><GitBranch /> {curriculumWeek.project.collaboration === "individual" ? "Individual" : "Colaborativo"}</span>{weekNumber === 1 ? <StatusPill tone="info">Evaluación automática piloto</StatusPill> : <StatusPill tone="neutral">Revisión con rúbrica</StatusPill>}</div></div><div className="project-header__mark"><span>&lt;/&gt;</span></div></header>
         <div className="submission-layout">

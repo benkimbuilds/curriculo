@@ -16,7 +16,7 @@ export default async function ProfilePage({ searchParams }: { searchParams: Prom
 
   return (
     <AppShell userName={profile.chosenName}>
-      <div className="app-content app-content--narrow profile-page">
+      <div className="app-content app-content--wide profile-page">
         <header className="profile-hero">
           <Avatar color="green" name={profile.chosenName} size="lg" />
           <div className="profile-hero__copy">
