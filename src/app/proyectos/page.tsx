@@ -47,7 +47,7 @@ export default async function PublicProjectsPage({
     <SiteShell page="proyectos" platformHref={accountHref} platformLabel={accountLabel}>
       <main id="contenido" tabIndex={-1} className="outline-none pt-header">
         <section data-surface="white">
-          <div className="app-content">
+          <div className="app-content app-content--wide">
             <GalleryProjectsSection
               empty={{
                 title: "Pronto verás proyectos aquí",
