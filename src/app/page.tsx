@@ -6,11 +6,9 @@ import { Faq } from "@/components/sections/faq";
 import { Galeria } from "@/components/sections/galeria";
 import { Hero } from "@/components/sections/hero";
 import { SiteShell } from "@/components/layout/site-shell";
+import { platformCta } from "@/components/layout/platform-cta";
 import { site } from "@/config/site";
 import { faqItems } from "@/content/faq";
-import { resolvePublicAccountCta } from "@/modules/authorization/account-link";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Iquiti — Centro de Innovación y Academia de Tecnología",
@@ -54,16 +52,14 @@ function StructuredData() {
   );
 }
 
-export default async function Home() {
-  const { accountHref, accountLabel } = await resolvePublicAccountCta();
-
+export default function Home() {
   return (
-    <SiteShell page="home" platformHref={accountHref} platformLabel={accountLabel}>
+    <SiteShell page="home">
       <StructuredData />
       <main id="contenido" tabIndex={-1} className="outline-none">
         <Hero />
         <Centro />
-        <Academia platformHref={accountHref} />
+        <Academia platformHref={platformCta.href} />
         <Aliados />
         <Galeria />
         <Faq />

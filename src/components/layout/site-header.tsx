@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
-import { ButtonLink } from "@/components/ui/button";
 import { site } from "@/config/site";
 import { navItems } from "@/lib/nav";
 import { HeaderSurfaceSync } from "./header-surface-sync";
-import { MobileMenu } from "./mobile-menu";
+import { PublicHeaderCta } from "./public-header-cta";
 import { platformCta } from "./platform-cta";
 
 /**
@@ -57,16 +56,12 @@ export function SiteHeader({
           </ul>
         </nav>
 
-        <div className="flex items-center justify-end gap-2">
-          <ButtonLink href={platformHref} size="sm" className="hidden sm:inline-flex">
-            {platformLabel}
-          </ButtonLink>
-          <MobileMenu
-            brandName={site.shortName}
-            cta={{ ...platformCta, href: platformHref, shortLabel: platformLabel }}
-            items={navItems}
-          />
-        </div>
+        <PublicHeaderCta
+          brandName={site.shortName}
+          initialHref={platformHref}
+          initialLabel={platformLabel}
+          items={navItems}
+        />
       </div>
     </header>
   );
