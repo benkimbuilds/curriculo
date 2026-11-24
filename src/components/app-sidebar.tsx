@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
 import { useEffect, useState, type ComponentType } from "react";
 
@@ -10,6 +11,17 @@ import { Logo } from "./logo";
 import { ProgramNavigation } from "./program-navigation";
 
 const preferenceKey = "ruta:sidebar-collapsed";
+const exactMatchRoutes = new Set(["/dashboard", "/staff", "/admin"]);
+
+function isLinkActive(href: string, pathname: string): boolean {
+  if (href === "/programa") {
+    return pathname === "/programa" || pathname.startsWith("/programa/") || /^\/proyectos\/\d+\/entrega/.test(pathname);
+  }
+  if (exactMatchRoutes.has(href)) {
+    return pathname === href;
+  }
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 export type SidebarLink = {
   href: string;
@@ -36,6 +48,7 @@ export function AppSidebar({
   roleLabel: string;
   weeks: { week: number; title: string; completed?: boolean }[];
 }) {
+  const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
@@ -74,9 +87,10 @@ export function AppSidebar({
       <nav aria-label={`Área de ${roleLabel.toLowerCase()}`} className="sidebar__nav">
         {links.map(({ href, label, icon }) => {
           const Icon = icons[icon];
+          const active = isLinkActive(href, pathname);
           return href === "/programa" ? (
             collapsed ? (
-              <Link aria-label={label} href={href} key={href} title={label}>
+              <Link aria-current={active ? "page" : undefined} aria-label={label} href={href} key={href} title={label}>
                 <Icon />
                 <span>{label}</span>
               </Link>
@@ -84,7 +98,7 @@ export function AppSidebar({
               <ProgramNavigation key={href} label={label} weeks={weeks} />
             )
           ) : (
-            <Link href={href} key={href} title={collapsed ? label : undefined}>
+            <Link aria-current={active ? "page" : undefined} href={href} key={href} title={collapsed ? label : undefined}>
               <Icon />
               <span>{label}</span>
             </Link>
