@@ -6,14 +6,9 @@ import { Faq } from "@/components/sections/faq";
 import { Galeria } from "@/components/sections/galeria";
 import { Hero } from "@/components/sections/hero";
 import { SiteShell } from "@/components/layout/site-shell";
-import { platformCta } from "@/components/layout/platform-cta";
 import { site } from "@/config/site";
 import { faqItems } from "@/content/faq";
-import { getCurrentSession } from "@/modules/auth/session";
-import { getRoleHomeDestination } from "@/modules/authorization/navigation";
-import { loadAuthorizationContext } from "@/modules/authorization/service";
-import { resolveDefaultOrganizationId } from "@/modules/community/db-community";
-import { hasLearningEnrollment } from "@/app/programa/student-data";
+import { resolvePublicAccountCta } from "@/modules/authorization/account-link";
 
 export const dynamic = "force-dynamic";
 
@@ -60,15 +55,7 @@ function StructuredData() {
 }
 
 export default async function Home() {
-  const session = await getCurrentSession();
-  const accountLink = session
-    ? getRoleHomeDestination(
-        (await loadAuthorizationContext(session.user.id, await resolveDefaultOrganizationId())).organizationRoles,
-        await hasLearningEnrollment(session.user.id),
-      )
-    : undefined;
-  const accountHref = accountLink?.href ?? platformCta.href;
-  const accountLabel = accountLink?.label ?? platformCta.shortLabel;
+  const { accountHref, accountLabel } = await resolvePublicAccountCta();
 
   return (
     <SiteShell page="home" platformHref={accountHref} platformLabel={accountLabel}>

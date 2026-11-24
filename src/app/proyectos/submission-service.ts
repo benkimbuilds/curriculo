@@ -6,7 +6,7 @@ import { listCurriculumWeeks } from "@/modules/curriculum";
 import { WEEK_ONE_EVALUATOR_VERSION } from "@/modules/evaluation";
 import { createSubmissionSnapshot, SubmissionValidationError } from "@/modules/projects";
 import { ResourceNotFoundError } from "@/shared/errors";
-import { syncStudentCompletion } from "@/app/programa/student-service";
+import { syncStudentCompletion } from "@/app/(app)/programa/student-service";
 
 export interface CreateStudentSubmissionInput {
   userId: string;

@@ -1,4 +1,5 @@
 import { and, eq } from "drizzle-orm";
+import { cache } from "react";
 
 import { db, type Database } from "@/db";
 import {
@@ -15,10 +16,10 @@ import {
 } from "@/modules/authorization/policy";
 import { AuthorizationDeniedError } from "@/shared/errors";
 
-export async function loadAuthorizationContext(
+async function queryAuthorizationContext(
   userId: string,
   organizationId: string,
-  database: Database = db,
+  database: Database,
 ): Promise<AuthorizationContext> {
   const [account, roles, staffedCohorts, memberCohorts] = await Promise.all([
     database
@@ -56,6 +57,22 @@ export async function loadAuthorizationContext(
     staffedCohortIds: staffedCohorts.map(({ cohortId }) => cohortId),
     memberCohortIds: memberCohorts.map(({ cohortId }) => cohortId),
   };
+}
+
+const loadDefaultAuthorizationContext = cache(
+  (userId: string, organizationId: string) =>
+    queryAuthorizationContext(userId, organizationId, db),
+);
+
+export async function loadAuthorizationContext(
+  userId: string,
+  organizationId: string,
+  database: Database = db,
+): Promise<AuthorizationContext> {
+  if (database === db) {
+    return loadDefaultAuthorizationContext(userId, organizationId);
+  }
+  return queryAuthorizationContext(userId, organizationId, database);
 }
 
 export async function requirePermission(

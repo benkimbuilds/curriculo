@@ -1,20 +1,13 @@
 import type { Metadata } from "next";
 
-import { hasLearningEnrollment } from "@/app/programa/student-data";
 import { GalleryProjectsSection } from "@/components/gallery/gallery-projects-section";
 import {
   filterGalleryEntries,
   mapGalleryEntriesToCards,
 } from "@/components/gallery/gallery-shared";
 import { SiteShell } from "@/components/layout/site-shell";
-import { platformCta } from "@/components/layout/platform-cta";
-import { getCurrentSession } from "@/modules/auth/session";
-import { getRoleHomeDestination } from "@/modules/authorization/navigation";
-import { loadAuthorizationContext } from "@/modules/authorization/service";
-import {
-  listPublicGalleryProjects,
-  resolveDefaultOrganizationId,
-} from "@/modules/community/db-community";
+import { resolvePublicAccountCta } from "@/modules/authorization/account-link";
+import { listPublicGalleryProjects } from "@/modules/community/db-community";
 
 export const dynamic = "force-dynamic";
 
@@ -29,18 +22,11 @@ export default async function PublicProjectsPage({
 }: {
   searchParams: Promise<{ buscar?: string }>;
 }) {
-  const session = await getCurrentSession();
-  const accountLink = session
-    ? getRoleHomeDestination(
-        (await loadAuthorizationContext(session.user.id, await resolveDefaultOrganizationId()))
-          .organizationRoles,
-        await hasLearningEnrollment(session.user.id),
-      )
-    : undefined;
-  const accountHref = accountLink?.href ?? platformCta.href;
-  const accountLabel = accountLink?.label ?? platformCta.shortLabel;
-
-  const [{ entries }, query] = await Promise.all([listPublicGalleryProjects(), searchParams]);
+  const [{ accountHref, accountLabel }, { entries }, query] = await Promise.all([
+    resolvePublicAccountCta(),
+    listPublicGalleryProjects(),
+    searchParams,
+  ]);
   const projects = mapGalleryEntriesToCards(filterGalleryEntries(entries, query));
 
   return (

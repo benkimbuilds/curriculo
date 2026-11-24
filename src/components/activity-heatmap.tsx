@@ -1,4 +1,4 @@
-import { formatInvestedTime, type StudentActivitySummary } from "@/app/programa/student-activity";
+import { formatInvestedTime, type StudentActivitySummary } from "@/app/(app)/programa/student-activity";
 
 export function ActivityHeatmap({
   activity,

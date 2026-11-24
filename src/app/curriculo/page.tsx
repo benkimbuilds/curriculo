@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
 import { CurriculumOverview } from "@/components/curriculum-overview";
 import { SiteShell } from "@/components/layout/site-shell";
-import { platformCta } from "@/components/layout/platform-cta";
-import { getCurrentSession } from "@/modules/auth/session";
-import { getRoleHomeDestination } from "@/modules/authorization/navigation";
-import { loadAuthorizationContext } from "@/modules/authorization/service";
-import { resolveDefaultOrganizationId } from "@/modules/community/db-community";
-import { hasLearningEnrollment } from "@/app/programa/student-data";
+import { resolvePublicAccountCta } from "@/modules/authorization/account-link";
 import { listCurriculumWeeks } from "@/modules/curriculum";
 
 export const dynamic = "force-dynamic";
@@ -18,15 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CurriculoPage() {
-  const session = await getCurrentSession();
-  const accountLink = session
-    ? getRoleHomeDestination(
-        (await loadAuthorizationContext(session.user.id, await resolveDefaultOrganizationId())).organizationRoles,
-        await hasLearningEnrollment(session.user.id),
-      )
-    : undefined;
-  const accountHref = accountLink?.href ?? platformCta.href;
-  const accountLabel = accountLink?.label ?? platformCta.shortLabel;
+  const { accountHref, accountLabel } = await resolvePublicAccountCta();
   const weeks = listCurriculumWeeks({ locale: "es-MX" });
 
   return (

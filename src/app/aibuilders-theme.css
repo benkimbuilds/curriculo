@@ -101,9 +101,9 @@ body:not(:has([data-iquiti-home])) ::selection { background: #b2f3bd; color: #00
   font-weight: 550;
   padding: 12px 14px;
 }
-.sidebar__nav a:first-child { background: #f4f0f8; color: #3e2754; font-weight: 650; }
 .sidebar__nav a:hover,
 .sidebar__nav a[aria-current="page"] { background: #f4f0f8; color: #3e2754; }
+.sidebar__nav a[aria-current="page"] { font-weight: 650; }
 .sidebar__nav > a > svg,
 .sidebar__nav .program-navigation__toggle > svg { flex: 0 0 19px; height: 19px; width: 19px; }
 .app-topbar { padding-top: 20px; }

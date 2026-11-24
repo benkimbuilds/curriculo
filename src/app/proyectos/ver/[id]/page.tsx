@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { hasLearningEnrollment } from "@/app/programa/student-data";
 import { GalleryProjectDetailView } from "@/components/gallery/gallery-project-detail";
 import { SiteShell } from "@/components/layout/site-shell";
-import { platformCta } from "@/components/layout/platform-cta";
-import { getCurrentSession } from "@/modules/auth/session";
-import { getRoleHomeDestination } from "@/modules/authorization/navigation";
-import { loadAuthorizationContext } from "@/modules/authorization/service";
-import {
-  getPublicGalleryProject,
-  resolveDefaultOrganizationId,
-} from "@/modules/community/db-community";
+import { resolvePublicAccountCta } from "@/modules/authorization/account-link";
+import { getPublicGalleryProject } from "@/modules/community/db-community";
 
 export const dynamic = "force-dynamic";
 
@@ -25,19 +18,11 @@ export default async function PublicProjectDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const session = await getCurrentSession();
-  const accountLink = session
-    ? getRoleHomeDestination(
-        (await loadAuthorizationContext(session.user.id, await resolveDefaultOrganizationId()))
-          .organizationRoles,
-        await hasLearningEnrollment(session.user.id),
-      )
-    : undefined;
-  const accountHref = accountLink?.href ?? platformCta.href;
-  const accountLabel = accountLink?.label ?? platformCta.shortLabel;
-
   const { id } = await params;
-  const { project } = await getPublicGalleryProject(id);
+  const [{ accountHref, accountLabel }, { project }] = await Promise.all([
+    resolvePublicAccountCta(),
+    getPublicGalleryProject(id),
+  ]);
   if (!project) notFound();
 
   return (
