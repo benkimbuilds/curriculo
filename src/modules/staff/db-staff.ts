@@ -22,7 +22,7 @@ import { getCurriculumWeekById, getRequiredLessonIds } from "@/modules/curriculu
 import { resolveDefaultOrganizationId } from "@/modules/community/db-community";
 import { AuthorizationDeniedError, ResourceNotFoundError } from "@/shared/errors";
 import { recordAuditEvent } from "@/modules/audit/service";
-import { syncStudentCompletion } from "@/app/programa/student-service";
+import { syncStudentCompletion } from "@/app/(app)/programa/student-service";
 
 import { InterventionService } from "./intervention-service";
 import type {

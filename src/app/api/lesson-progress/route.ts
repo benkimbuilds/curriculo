@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getCurrentSession } from "@/modules/auth/session";
-import { recordStudentLessonView } from "@/app/programa/student-service";
+import { recordStudentLessonView } from "@/app/(app)/programa/student-service";
 
 export const dynamic = "force-dynamic";
 
