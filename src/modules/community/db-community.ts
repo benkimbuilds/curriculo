@@ -174,28 +174,49 @@ function mapViewer(userId: string, authorization: AuthorizationContext): Gallery
   };
 }
 
+const defaultOrganizationIdCache = new Map<string, string>();
+let communityFlagsCache: { value: CommunityFeatureFlags; expiresAt: number } | null = null;
+const COMMUNITY_FLAGS_TTL_MS = 30_000;
+
 export async function resolveDefaultOrganizationId(
   database: Database = db,
 ): Promise<string> {
+  const slug = getEnvironment().DEFAULT_ORGANIZATION_SLUG;
+  const canCache = database === db && process.env.NODE_ENV !== "test";
+  if (canCache) {
+    const cached = defaultOrganizationIdCache.get(slug);
+    if (cached) return cached;
+  }
   const [organization] = await database
     .select({ id: organizations.id })
     .from(organizations)
-    .where(eq(organizations.slug, getEnvironment().DEFAULT_ORGANIZATION_SLUG))
+    .where(eq(organizations.slug, slug))
     .limit(1);
   if (!organization) throw new ResourceNotFoundError("Organization");
+  if (canCache) {
+    defaultOrganizationIdCache.set(slug, organization.id);
+  }
   return organization.id;
 }
 
 export async function loadCommunityFlags(
   database: Database = db,
 ): Promise<CommunityFeatureFlags> {
+  const canCache = database === db && process.env.NODE_ENV !== "test";
+  if (canCache && communityFlagsCache && communityFlagsCache.expiresAt > Date.now()) {
+    return communityFlagsCache.value;
+  }
   const [flag] = await database
     .select({ enabled: featureFlags.enabled })
     .from(featureFlags)
     .where(eq(featureFlags.key, "social_features"))
     .limit(1);
   const enabled = getEnvironment().SOCIAL_FEATURES_ENABLED && flag?.enabled === true;
-  return { galleryEnabled: enabled, peerFeedbackEnabled: enabled };
+  const value = { galleryEnabled: enabled, peerFeedbackEnabled: enabled };
+  if (canCache) {
+    communityFlagsCache = { value, expiresAt: Date.now() + COMMUNITY_FLAGS_TTL_MS };
+  }
+  return value;
 }
 
 export async function requireCommunityContext(
@@ -204,12 +225,10 @@ export async function requireCommunityContext(
   database: Database = db,
 ): Promise<CommunityRequestContext> {
   const organizationId = await resolveDefaultOrganizationId(database);
-  const authorization = await requirePermission(
-    userId,
-    organizationId,
-    permission,
-    database,
-  );
+  const [authorization, flags] = await Promise.all([
+    requirePermission(userId, organizationId, permission, database),
+    loadCommunityFlags(database),
+  ]);
   const candidateCohortIds = [
     ...(authorization.memberCohortIds ?? []),
     ...(authorization.staffedCohortIds ?? []),
@@ -239,7 +258,7 @@ export async function requireCommunityContext(
     organizationId,
     authorization: scopedAuthorization,
     viewer: mapViewer(userId, scopedAuthorization),
-    flags: await loadCommunityFlags(database),
+    flags,
   };
 }
 

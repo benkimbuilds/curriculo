@@ -80,6 +80,12 @@ export const auth = betterAuth({
   session: {
     expiresIn: 60 * 60 * 24 * 7,
     updateAge: 60 * 60 * 24,
+    // Ventana máxima en la que una sesión revocada puede seguir aceptándose.
+    // La desactivación de cuentas sigue siendo inmediata (getCurrentSession revisa user.isActive).
+    cookieCache: {
+      enabled: true,
+      maxAge: 60,
+    },
   },
   verification: {
     storeIdentifier: "hashed",
