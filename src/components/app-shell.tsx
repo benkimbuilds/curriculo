@@ -1,12 +1,13 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { AccountMenu } from "./auth/account-menu";
+import { AppSessionProvider } from "./session/app-session-provider";
 import { AppSidebar, type SidebarLink } from "./app-sidebar";
 import { Logo } from "./logo";
 import { ProgramNavigation } from "./program-navigation";
 import { listCurriculumWeeks } from "@/modules/curriculum";
 import { getCurrentSession } from "@/modules/auth/session";
-import { hasLearningEnrollment, listCompletedWeekNumbers } from "@/app/programa/student-data";
+import { hasLearningEnrollment, listCompletedWeekNumbers } from "@/modules/enrollment/queries";
 import { loadAuthorizationContext } from "@/modules/authorization/service";
 import { hasPermission, type Permission, type PlatformRole } from "@/modules/authorization/policy";
 import { hasLearningAccess } from "@/modules/authorization/navigation";
@@ -62,14 +63,17 @@ export function resolveShellRole(roles: readonly PlatformRole[]): ShellRole {
 
 export async function AppShell({ children, userName }: { children: ReactNode; userName?: string }) {
   const currentSession = await getCurrentSession();
-  const authorization = currentSession
-    ? await loadAuthorizationContext(currentSession.user.id, await resolveDefaultOrganizationId())
-    : null;
+  const organizationId = currentSession ? await resolveDefaultOrganizationId() : null;
+  const [authorization, enrolled, completedWeekNumbers] = currentSession && organizationId
+    ? await Promise.all([
+        loadAuthorizationContext(currentSession.user.id, organizationId),
+        hasLearningEnrollment(currentSession.user.id),
+        listCompletedWeekNumbers(currentSession.user.id),
+      ])
+    : [null, false, [] as number[]];
   const roles = authorization?.organizationRoles ?? [];
   const role = resolveShellRole(roles);
-  const canViewLearning = currentSession
-    ? hasLearningAccess(roles, await hasLearningEnrollment(currentSession.user.id))
-    : false;
+  const canViewLearning = currentSession ? hasLearningAccess(roles, enrolled) : false;
   const teamLinks = role === "student"
     ? studentLinks
     : role === "editor"
@@ -83,40 +87,42 @@ export async function AppShell({ children, userName }: { children: ReactNode; us
     const permission = navigationPermissions[href];
     return !permission || Boolean(authorization && hasPermission(authorization, permission));
   });
-  const completedWeeks = currentSession && canViewLearning ? new Set(await listCompletedWeekNumbers(currentSession.user.id)) : new Set<number>();
+  const completedWeeks = canViewLearning ? new Set(completedWeekNumbers) : new Set<number>();
   const weeks = canViewLearning ? listCurriculumWeeks().map(({ week, title }) => ({ week, title, completed: completedWeeks.has(week) })) : [];
   const roleLabel = role === "student" ? "Estudiante" : role === "staff" ? "Mentor" : role === "editor" ? "Edición curricular" : "Administración";
-  const displayName = userName ?? (role === "student" ? "Mi cuenta" : "Equipo");
+  const displayName = userName ?? currentSession?.user.name ?? (role === "student" ? "Mi cuenta" : "Equipo");
   return (
-    <div className="app-frame">
-      <a className="skip-link" href="#contenido">Saltar al contenido</a>
-      <AppSidebar links={links} roleLabel={roleLabel} weeks={weeks} />
-      <header className="mobile-app-header">
-        <Logo />
-        <div className="mobile-app-header__actions">
-          <AccountMenu roleLabel={roleLabel} showProfile={canViewLearning} userName={displayName} />
-          <details>
-            <summary aria-label="Abrir navegación">Menú</summary>
-            <nav>
-              {links.map(({ href, label }) =>
-                href === "/programa" ? (
-                  <ProgramNavigation key={href} label={label} weeks={weeks} />
-                ) : (
-                  <Link href={href} key={href}>
-                    {label}
-                  </Link>
-                ),
-              )}
-            </nav>
-          </details>
-        </div>
-      </header>
-      <main className="app-main" id="contenido">
-        <header className="app-topbar">
-          <AccountMenu roleLabel={roleLabel} showProfile={canViewLearning} userName={displayName} />
+    <AppSessionProvider value={{ userName: displayName, roleLabel, showProfile: canViewLearning }}>
+      <div className="app-frame">
+        <a className="skip-link" href="#contenido">Saltar al contenido</a>
+        <AppSidebar links={links} roleLabel={roleLabel} weeks={weeks} />
+        <header className="mobile-app-header">
+          <Logo />
+          <div className="mobile-app-header__actions">
+            <AccountMenu />
+            <details>
+              <summary aria-label="Abrir navegación">Menú</summary>
+              <nav>
+                {links.map(({ href, label }) =>
+                  href === "/programa" ? (
+                    <ProgramNavigation key={href} label={label} weeks={weeks} />
+                  ) : (
+                    <Link href={href} key={href}>
+                      {label}
+                    </Link>
+                  ),
+                )}
+              </nav>
+            </details>
+          </div>
         </header>
-        {children}
-      </main>
-    </div>
+        <main className="app-main" id="contenido">
+          <header className="app-topbar">
+            <AccountMenu />
+          </header>
+          {children}
+        </main>
+      </div>
+    </AppSessionProvider>
   );
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import localFont from "next/font/local";
-import { ToastProvider } from "@/components/toast-provider";
+import { Providers } from "@/app/providers";
 import "./globals.css";
 import "./aibuilders-theme.css";
 
@@ -25,8 +25,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html className={manrope.variable} data-scroll-behavior="smooth" lang="es-MX" suppressHydrationWarning>
       <body>
-        {children}
-        <ToastProvider />
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { useAppSession } from "@/components/session/app-session-provider";
 import { authClient } from "@/modules/auth/client";
 
 function initialsFrom(name: string) {
@@ -15,18 +16,11 @@ function initialsFrom(name: string) {
     .toUpperCase();
 }
 
-export function AccountMenu({
-  showProfile = true,
-  userName,
-  roleLabel,
-}: {
-  showProfile?: boolean;
-  userName?: string;
-  roleLabel?: string;
-}) {
+export function AccountMenu() {
+  const { userName, roleLabel, showProfile } = useAppSession();
   const router = useRouter();
   const [pending, setPending] = useState(false);
-  const label = userName?.trim() || "Mi cuenta";
+  const label = userName.trim() || "Mi cuenta";
   const initials = initialsFrom(label);
 
   async function signOut() {
