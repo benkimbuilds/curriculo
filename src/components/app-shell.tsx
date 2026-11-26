@@ -30,11 +30,11 @@ const staffLinks: SidebarLink[] = [
 
 const adminLinks: SidebarLink[] = [
   { href: "/admin", label: "Resumen", icon: "summary" },
+  { href: "/admin/usuarios", label: "Usuarios", icon: "users" },
   { href: "/staff", label: "Cohortes", icon: "people" },
   { href: "/staff/mentoria", label: "Mentoría", icon: "message" },
   { href: "/staff/moderacion", label: "Moderación", icon: "shield" },
   { href: "/admin/curriculo", label: "Currículo", icon: "compass" },
-  { href: "/admin/usuarios", label: "Usuarios", icon: "users" },
 ];
 
 const editorLinks: SidebarLink[] = [{ href: "/admin/curriculo", label: "Currículo", icon: "compass" }];

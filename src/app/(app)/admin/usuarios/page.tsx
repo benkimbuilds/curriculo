@@ -62,6 +62,7 @@ export default async function AdminUsersPage({
     <div className="app-content app-content--wide">
       <header className="user-directory__header">
         <div>
+          <p className="eyebrow">Administración</p>
           <div className="user-directory__title-row">
             <h1>Usuarios</h1>
             <CountPill>
