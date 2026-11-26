@@ -31,7 +31,7 @@ type AdminSummaryTabsProps = {
 type TabId = "graficas" | "nuevos";
 
 const tabs: { id: TabId; label: string }[] = [
-  { id: "graficas", label: "Gráficas" },
+  { id: "graficas", label: "Operación" },
   { id: "nuevos", label: "Nuevos usuarios" },
 ];
 
@@ -46,13 +46,6 @@ export function AdminSummaryTabs({
 
   return (
     <section className="panel admin-summary__tabs-panel">
-      <div className="panel__header">
-        <div>
-          <p className="eyebrow">Operación</p>
-          <h2>Resumen</h2>
-        </div>
-      </div>
-
       <div className="admin-summary__tabs" role="tablist" aria-label="Secciones del resumen">
         {tabs.map((tab) => {
           const selected = activeTab === tab.id;
