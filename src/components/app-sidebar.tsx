@@ -3,12 +3,21 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ArrowLeft, ArrowRight, BookOpen } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useState, type ComponentType } from "react";
 
-import { Compass, Grid, Home, People, Shield, User } from "./icons";
+import { Compass, People, Shield } from "./icons";
 import { Logo } from "./logo";
 import { ProgramNavigation } from "./program-navigation";
+import {
+  SidebarComunidadIcon,
+  SidebarInicioIcon,
+  SidebarMentoriaIcon,
+  SidebarPerfilIcon,
+  SidebarProgramaIcon,
+  SidebarResumenIcon,
+  SidebarUsuariosIcon,
+} from "./sidebar-icons";
 
 const preferenceKey = "ruta:sidebar-collapsed";
 const exactMatchRoutes = new Set(["/dashboard", "/staff", "/admin"]);
@@ -26,17 +35,20 @@ function isLinkActive(href: string, pathname: string): boolean {
 export type SidebarLink = {
   href: string;
   label: string;
-  icon: "book" | "compass" | "grid" | "home" | "people" | "shield" | "user";
+  icon: "book" | "compass" | "grid" | "home" | "message" | "people" | "shield" | "summary" | "user" | "users";
 };
 
 const icons: Record<SidebarLink["icon"], ComponentType<{ className?: string }>> = {
-  book: BookOpen,
+  book: SidebarProgramaIcon,
   compass: Compass,
-  grid: Grid,
-  home: Home,
+  grid: SidebarComunidadIcon,
+  home: SidebarInicioIcon,
+  message: SidebarMentoriaIcon,
   people: People,
   shield: Shield,
-  user: User,
+  summary: SidebarResumenIcon,
+  user: SidebarPerfilIcon,
+  users: SidebarUsuariosIcon,
 };
 
 export function AppSidebar({
