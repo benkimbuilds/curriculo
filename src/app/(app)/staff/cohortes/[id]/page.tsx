@@ -107,7 +107,7 @@ export default async function CohortPage({
   const filterEstado = query.estado ?? "all";
 
   return (
-      <div className="app-content cohort-page">
+      <div className="app-content app-content--wide cohort-page">
         <BackLink href="/staff">Volver al resumen</BackLink>
         <PageIntro
           description={`${formatDate(cohort.startsAt, cohort.timezone)} – ${formatDate(cohort.endsAt, cohort.timezone)} · ${cohort.timezone}`}

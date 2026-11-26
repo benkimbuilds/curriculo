@@ -11,7 +11,7 @@ export default async function NewCohortPage() {
   if (!session) redirect("/iniciar-sesion");
   const organizationId = await resolveDefaultOrganizationId();
   const candidates = await listCohortCreationCandidates(organizationId);
-  return <div className="app-content app-content--narrow">
+  return <div className="app-content app-content--wide">
     <PageIntro eyebrow="Administración" title="Crear cohorte" description="Configura un grupo facilitado. El acceso autodidacta de cada persona permanece independiente." />
     <section className="panel settings-form"><CohortCreateForm candidates={candidates} /></section>
   </div>;

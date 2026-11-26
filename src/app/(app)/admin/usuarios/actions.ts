@@ -9,6 +9,7 @@ import { resolveDefaultOrganizationId } from "@/modules/community/db-community";
 import { grantOrganizationRole, revokeOrganizationRole } from "@/modules/cohorts/service";
 import { recordAuditEvent } from "@/modules/audit/service";
 import { requirePermission } from "@/modules/authorization/service";
+import { hardDeleteUserAsAdmin, resetUserPasswordAsAdmin } from "@/modules/admin/user-service";
 import { db } from "@/db";
 import { roleAssignments, session as authSession, user } from "@/db/schema";
 import { ApplicationError } from "@/shared/errors";
@@ -16,6 +17,16 @@ import { ApplicationError } from "@/shared/errors";
 const roleSchema = z.enum(["student", "instructor", "administrator", "curriculum_editor", "developer_administrator"]);
 export type UserRoleActionState = { status: "idle" | "success" | "error"; message: string };
 export type QuickUserActionState = UserRoleActionState;
+export type ResetPasswordActionState = {
+  status: "idle" | "success" | "error";
+  message: string;
+  temporaryPassword?: string;
+};
+export type HardDeleteUserActionState = {
+  status: "idle" | "success" | "error";
+  message: string;
+  deleted?: boolean;
+};
 
 export async function manageUserRoleAction(
   _previous: UserRoleActionState,
@@ -101,5 +112,92 @@ export async function quickUserAction(
     if (error instanceof z.ZodError) return { status: "error", message: "Revisa los datos de la cuenta." };
     if (error instanceof Error && error.message === "LAST_ADMINISTRATOR") return { status: "error", message: "No se puede quitar el último rol de administración." };
     return { status: "error", message: "No pudimos actualizar la cuenta. Inténtalo de nuevo." };
+  }
+}
+
+export async function resetUserPasswordAction(
+  _previous: ResetPasswordActionState,
+  formData: FormData,
+): Promise<ResetPasswordActionState> {
+  try {
+    const input = z
+      .object({
+        userId: z.string().uuid(),
+        mode: z.enum(["generate", "custom"]).default("generate"),
+        password: z.string().optional(),
+      })
+      .parse(Object.fromEntries(formData));
+
+    const session = await requireCurrentSession();
+    const organizationId = await resolveDefaultOrganizationId();
+
+    const result = await resetUserPasswordAsAdmin({
+      actorUserId: session.user.id,
+      organizationId,
+      targetUserId: input.userId,
+      password: input.mode === "custom" ? input.password : undefined,
+    });
+
+    revalidatePath(`/admin/usuarios/${input.userId}`);
+    return {
+      status: "success",
+      message: "Contraseña reiniciada y sesiones anteriores cerradas.",
+      temporaryPassword: result.temporaryPassword,
+    };
+  } catch (error) {
+    if (error instanceof ApplicationError) {
+      return { status: "error", message: error.message };
+    }
+    if (error instanceof z.ZodError) {
+      return { status: "error", message: "Revisa los datos de la contraseña." };
+    }
+    return { status: "error", message: "No pudimos reiniciar la contraseña. Inténtalo de nuevo." };
+  }
+}
+
+export async function hardDeleteUserAction(
+  _previous: HardDeleteUserActionState,
+  formData: FormData,
+): Promise<HardDeleteUserActionState> {
+  try {
+    const input = z
+      .object({
+        userId: z.string().uuid(),
+        confirmEmail: z.string().trim().email(),
+        expectedEmail: z.string().trim().email(),
+      })
+      .parse(Object.fromEntries(formData));
+
+    if (input.confirmEmail.toLowerCase() !== input.expectedEmail.toLowerCase()) {
+      return {
+        status: "error",
+        message: "El correo de confirmación no coincide con el de la cuenta.",
+      };
+    }
+
+    const session = await requireCurrentSession();
+    const organizationId = await resolveDefaultOrganizationId();
+
+    await hardDeleteUserAsAdmin({
+      actorUserId: session.user.id,
+      organizationId,
+      targetUserId: input.userId,
+    });
+
+    revalidatePath("/admin/usuarios");
+    revalidatePath("/admin");
+    return {
+      status: "success",
+      message: "Usuario eliminado permanentemente.",
+      deleted: true,
+    };
+  } catch (error) {
+    if (error instanceof ApplicationError) {
+      return { status: "error", message: error.message };
+    }
+    if (error instanceof z.ZodError) {
+      return { status: "error", message: "Escribe el correo exacto del usuario para confirmar." };
+    }
+    return { status: "error", message: "No pudimos eliminar la cuenta. Inténtalo de nuevo." };
   }
 }
