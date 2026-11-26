@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import { CountPill } from "@/components/count-pill";
 import { DataTable } from "@/components/data-table";
 import {
   FilterBar,
@@ -9,6 +10,7 @@ import {
   FilterSubmitButton,
 } from "@/components/filter-controls";
 import { ArrowRight } from "@/components/icons";
+import { SidebarUsuariosIcon } from "@/components/sidebar-icons";
 import { TablePagination } from "@/components/table-pagination";
 import { Avatar, StatusPill } from "@/components/ui";
 import { listPaginatedAdminUsers } from "@/modules/admin/user-service";
@@ -62,9 +64,12 @@ export default async function AdminUsersPage({
         <div>
           <div className="user-directory__title-row">
             <h1>Usuarios</h1>
-            <span className="user-directory__count">
-              {totalCount} {totalCount === 1 ? "cuenta" : "cuentas"}
-            </span>
+            <CountPill>
+              <SidebarUsuariosIcon />
+              <span>
+                {totalCount} {totalCount === 1 ? "cuenta" : "cuentas"}
+              </span>
+            </CountPill>
           </div>
           <p>Cuentas, roles e inscripciones de la organización.</p>
         </div>

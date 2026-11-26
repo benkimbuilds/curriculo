@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useState, type ComponentType } from "react";
 
+import { SidebarAccountFooter } from "./auth/account-menu";
 import { Compass, People, Shield } from "./icons";
 import { Logo } from "./logo";
 import { ProgramNavigation } from "./program-navigation";
@@ -117,6 +118,7 @@ export function AppSidebar({
           );
         })}
       </nav>
+      <SidebarAccountFooter />
     </aside>
   );
 }

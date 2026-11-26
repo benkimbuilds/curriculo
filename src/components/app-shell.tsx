@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { AccountMenu } from "./auth/account-menu";
+import { AccountMenu, AppTopbar } from "./auth/account-menu";
 import { AppSessionProvider } from "./session/app-session-provider";
 import { AppSidebar, type SidebarLink } from "./app-sidebar";
 import { Logo } from "./logo";
@@ -117,9 +117,7 @@ export async function AppShell({ children, userName }: { children: ReactNode; us
           </div>
         </header>
         <main className="app-main" id="contenido">
-          <header className="app-topbar">
-            <AccountMenu />
-          </header>
+          <AppTopbar />
           {children}
         </main>
       </div>
