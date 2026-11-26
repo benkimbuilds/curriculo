@@ -24,7 +24,7 @@ export default async function MentoringPage() {
   const assignableStudents = students.filter((student) => !mentorIds.has(student.id));
 
   return (
-      <div className="app-content mentoring-page">
+      <div className="app-content app-content--wide mentoring-page">
         <PageIntro
           description="Asigna acompañamiento individual a estudiantes que avanzan a su propio ritmo."
           eyebrow="Mentoría"

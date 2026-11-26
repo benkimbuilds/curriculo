@@ -32,7 +32,7 @@ export default async function StaffPage() {
   const attentionCohort = cohorts.find((cohort) => cohort.needingAttention > 0);
 
   return (
-      <div className="app-content staff-page">
+      <div className="app-content app-content--wide staff-page">
         <PageIntro
           action={
             <div className="button-row">

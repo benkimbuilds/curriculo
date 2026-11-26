@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { AccountMenu } from "./auth/account-menu";
+import { AccountMenu, AppTopbar } from "./auth/account-menu";
 import { AppSessionProvider } from "./session/app-session-provider";
 import { AppSidebar, type SidebarLink } from "./app-sidebar";
 import { Logo } from "./logo";
@@ -23,18 +23,18 @@ const studentLinks: SidebarLink[] = [
 ];
 
 const staffLinks: SidebarLink[] = [
-  { href: "/staff", label: "Resumen", icon: "grid" },
-  { href: "/staff/mentoria", label: "Mentoría", icon: "user" },
+  { href: "/staff", label: "Resumen", icon: "summary" },
+  { href: "/staff/mentoria", label: "Mentoría", icon: "message" },
   { href: "/staff/moderacion", label: "Moderación", icon: "shield" },
 ];
 
 const adminLinks: SidebarLink[] = [
-  { href: "/admin", label: "Resumen", icon: "grid" },
+  { href: "/admin", label: "Resumen", icon: "summary" },
   { href: "/staff", label: "Cohortes", icon: "people" },
-  { href: "/staff/mentoria", label: "Mentoría", icon: "user" },
+  { href: "/staff/mentoria", label: "Mentoría", icon: "message" },
   { href: "/staff/moderacion", label: "Moderación", icon: "shield" },
   { href: "/admin/curriculo", label: "Currículo", icon: "compass" },
-  { href: "/admin/usuarios", label: "Usuarios", icon: "user" },
+  { href: "/admin/usuarios", label: "Usuarios", icon: "users" },
 ];
 
 const editorLinks: SidebarLink[] = [{ href: "/admin/curriculo", label: "Currículo", icon: "compass" }];
@@ -117,9 +117,7 @@ export async function AppShell({ children, userName }: { children: ReactNode; us
           </div>
         </header>
         <main className="app-main" id="contenido">
-          <header className="app-topbar">
-            <AccountMenu />
-          </header>
+          <AppTopbar />
           {children}
         </main>
       </div>

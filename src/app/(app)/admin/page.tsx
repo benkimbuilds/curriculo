@@ -38,7 +38,7 @@ export default async function AdminPage() {
     ]);
 
   return (
-      <div className="app-content">
+      <div className="app-content app-content--wide">
         <PageIntro
           action={
             <Link className="button button--primary" href="/admin/usuarios">
